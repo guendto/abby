@@ -1,0 +1,23 @@
+
+
+                abby - for the command line fearing masses
+
+abby is a front-end for cclive video extraction utility. It is
+written in C++ and depends on the Qt 4.3+ framework.
+
+
+                Prerequisites
+
+- Qt 4.3+, if you are building abby from the source code, be sure
+to install the development files also.
+  
+- cclive 0.2.3+, from http://code.google.com/p/cclive/
+
+
+                Compiling abby
+
+Normally you can just do:
+  % qmake-qt4 && make
+
+This builds the 'abby' executable. Installing isn't currently supported
+but you can just as well copy the executable to your ~/bin directory.

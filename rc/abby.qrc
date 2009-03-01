@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>../i18n/abby_fi.qm</file>
+    <file>../rc/abby.png</file>
+</qresource>
+</RCC>

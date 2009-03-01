@@ -1,0 +1,542 @@
+<ui version="4.0" >
+ <author>Toni Gundogdu</author>
+ <class>PreferencesDialog</class>
+ <widget class="QDialog" name="PreferencesDialog" >
+  <property name="windowModality" >
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>437</width>
+    <height>237</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Preferences</string>
+  </property>
+  <property name="sizeGripEnabled" >
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5" >
+   <item row="0" column="0" >
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="whatsThis" >
+      <string/>
+     </property>
+     <property name="currentIndex" >
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab_4" >
+      <attribute name="title" >
+       <string>&amp;General</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_2" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_6" >
+         <item>
+          <widget class="QLabel" name="label" >
+           <property name="text" >
+            <string>&amp;Save videos to:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>savedirEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="savedirEdit" >
+           <property name="toolTip" >
+            <string>Save downloaded videos to this directory.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="savedirButton" >
+           <property name="text" >
+            <string>&amp;Browse</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_4" >
+         <item>
+          <widget class="QLabel" name="label_4" >
+           <property name="text" >
+            <string>E&amp;xternal command:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>commandEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="commandEdit" >
+           <property name="toolTip" >
+            <string>Command to be run after finishing downloading. You may
+use the "%i" specifier which will be replaced by the
+name of the downloaded video file.
+
+Example: /usr/local/bin/mplayer %i</string>
+           </property>
+           <property name="whatsThis" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="commandButton" >
+           <property name="text" >
+            <string>Bro&amp;wse</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_7" >
+         <item>
+          <widget class="QLabel" name="label_7" >
+           <property name="text" >
+            <string>&amp;Path to cclive:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>ccliveEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="ccliveEdit" >
+           <property name="toolTip" >
+            <string>Path to cclive command.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="ccliveBrowse" >
+           <property name="text" >
+            <string>Brows&amp;e</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_5" >
+         <item>
+          <widget class="QLabel" name="label_5" >
+           <property name="text" >
+            <string>&amp;Additional options:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>additionalEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="additionalEdit" >
+           <property name="toolTip" >
+            <string>Additional options to be passed to cclive.</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>&amp;Connection</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_3" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout" >
+         <item>
+          <widget class="QComboBox" name="proxyCombo" >
+           <property name="toolTip" >
+            <string>Whether use a HTTP proxy for connections.
+If unsure, leave to "No Proxy".</string>
+           </property>
+           <item>
+            <property name="text" >
+             <string>No Proxy</string>
+            </property>
+           </item>
+           <item>
+            <property name="text" >
+             <string>Use Proxy</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="proxyEdit" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_3" >
+         <item>
+          <widget class="QCheckBox" name="limitBox" >
+           <property name="toolTip" >
+            <string>Limit download transfer speed.</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Limit transfer rate:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="limitSpin" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="suffix" >
+            <string>KB/s</string>
+           </property>
+           <property name="minimum" >
+            <number>1</number>
+           </property>
+           <property name="maximum" >
+            <number>9999</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="2" column="0" >
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3" >
+      <attribute name="title" >
+       <string>&amp;Youtube</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_4" >
+       <item row="0" column="0" >
+        <widget class="QGroupBox" name="youtubeGroup" >
+         <property name="toolTip" >
+          <string>Usually needed only to download videos that have
+been flagged as mature content.</string>
+         </property>
+         <property name="title" >
+          <string>&amp;Log in</string>
+         </property>
+         <property name="checkable" >
+          <bool>true</bool>
+         </property>
+         <property name="checked" >
+          <bool>false</bool>
+         </property>
+         <layout class="QGridLayout" name="gridLayout" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_2" >
+            <property name="text" >
+             <string>&amp;Username:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>ytuserEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QLineEdit" name="ytuserEdit" >
+            <property name="toolTip" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_3" >
+            <property name="text" >
+             <string>&amp;Password:</string>
+            </property>
+            <property name="buddy" >
+             <cstring>ytpassEdit</cstring>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QLineEdit" name="ytpassEdit" >
+            <property name="toolTip" >
+             <string>Leave empty if you want abby to prompt for it.</string>
+            </property>
+            <property name="echoMode" >
+             <enum>QLineEdit::Password</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="1" column="0" >
+        <spacer name="verticalSpacer_2" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>&amp;Misc</string>
+      </attribute>
+      <layout class="QGridLayout" name="gridLayout_6" >
+       <item row="0" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_2" >
+         <item>
+          <widget class="QLabel" name="label_6" >
+           <property name="text" >
+            <string>&amp;Language:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>langCombo</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="langCombo" />
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_2" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="1" column="0" >
+        <spacer name="verticalSpacer_3" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>99</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>savedirEdit</tabstop>
+  <tabstop>savedirButton</tabstop>
+  <tabstop>commandEdit</tabstop>
+  <tabstop>commandButton</tabstop>
+  <tabstop>ccliveEdit</tabstop>
+  <tabstop>ccliveBrowse</tabstop>
+  <tabstop>additionalEdit</tabstop>
+  <tabstop>proxyCombo</tabstop>
+  <tabstop>proxyEdit</tabstop>
+  <tabstop>limitBox</tabstop>
+  <tabstop>limitSpin</tabstop>
+  <tabstop>youtubeGroup</tabstop>
+  <tabstop>ytuserEdit</tabstop>
+  <tabstop>ytpassEdit</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
+ <includes/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>257</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>325</x>
+     <y>188</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>proxyCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onProxyChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>67</x>
+     <y>90</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>188</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>limitBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onLimitStateChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>102</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>188</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>PreferencesDialog</sender>
+   <signal>finished(int)</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onFinished(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>188</x>
+     <y>98</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>188</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>savedirButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onBrowseSaveDir()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>319</x>
+     <y>57</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>188</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>commandButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onBrowseCommand()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>319</x>
+     <y>92</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>188</x>
+     <y>98</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>ccliveBrowse</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onBrowseCclive()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>319</x>
+     <y>127</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>188</x>
+     <y>116</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onProxyChanged(int)</slot>
+  <slot>onLimitStateChanged(int)</slot>
+  <slot>onYoutubeToggled(bool)</slot>
+  <slot>onFinished(int)</slot>
+  <slot>onBrowseSaveDir()</slot>
+  <slot>onBrowseCommand()</slot>
+  <slot>onBrowseCclive()</slot>
+  <slot>onLangChanged(int)</slot>
+ </slots>
+</ui>
