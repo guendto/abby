@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>504</width>
+    <width>396</width>
     <height>279</height>
    </rect>
   </property>
@@ -470,7 +470,7 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>504</width>
+     <width>396</width>
      <height>25</height>
     </rect>
    </property>
@@ -528,7 +528,6 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
   <tabstop>commandBox</tabstop>
   <tabstop>preferencesButton</tabstop>
  </tabstops>
- <includes/>
  <resources/>
  <connections>
   <connection>

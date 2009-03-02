@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>437</width>
-    <height>237</height>
+    <width>380</width>
+    <height>248</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -397,7 +397,6 @@ been flagged as mature content.</string>
   <tabstop>ytpassEdit</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <includes/>
  <resources/>
  <connections>
   <connection>
