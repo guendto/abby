@@ -496,6 +496,9 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
    <property name="text" >
     <string>&amp;Quit</string>
    </property>
+   <property name="statusTip" >
+    <string>Quit abby</string>
+   </property>
    <property name="shortcut" >
     <string>Ctrl+Q</string>
    </property>
@@ -507,6 +510,9 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
    <property name="text" >
     <string>Prefere&amp;nces...</string>
    </property>
+   <property name="statusTip" >
+    <string>Edit preferences</string>
+   </property>
    <property name="shortcut" >
     <string>Ctrl+E</string>
    </property>
@@ -514,6 +520,9 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
   <action name="action_About" >
    <property name="text" >
     <string>&amp;About...</string>
+   </property>
+   <property name="statusTip" >
+    <string>About abby</string>
    </property>
   </action>
  </widget>
