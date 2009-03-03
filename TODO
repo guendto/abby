@@ -1,6 +1,8 @@
 
 0.1.1
-* implement --stream-exec and --stream
+* add dynamic checks for options
+  - format should depend on url
+  - continue should depend on url
 
 0.1.x
 * create a proper window icon
