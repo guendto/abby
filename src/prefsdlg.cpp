@@ -59,6 +59,7 @@ PreferencesDialog::writeSettings() {
     s.setValue("pos",pos());
 
     s.setValue("savedirEdit",savedirEdit->text());
+    s.setValue("streamEdit",streamEdit->text());
     s.setValue("commandEdit",commandEdit->text());
     s.setValue("ccliveEdit",ccliveEdit->text());
     s.setValue("additionalEdit",additionalEdit->text());
@@ -87,6 +88,7 @@ PreferencesDialog::readSettings() {
     move(s.value("pos",QPoint(200,200)).toPoint());
 
     savedirEdit->setText(s.value("savedirEdit").toString());
+    streamEdit->setText(s.value("streamEdit").toString());
     commandEdit->setText(s.value("commandEdit").toString());
     ccliveEdit->setText(s.value("ccliveEdit").toString());
     additionalEdit->setText(s.value("additionalEdit").toString());
@@ -153,6 +155,13 @@ PreferencesDialog::onBrowseSaveDir() {
 
     if (dlg.exec())
         savedirEdit->setText(dlg.selectedFiles()[0]);
+}
+
+void
+PreferencesDialog::onBrowseStreamCommand() {
+    QString fname = QFileDialog::getOpenFileName(this,tr("Choose command"));
+    if (!fname.isEmpty())
+        streamEdit->setText(fname);
 }
 
 void

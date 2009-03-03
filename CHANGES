@@ -1,6 +1,8 @@
 0.1.1
 
-  * Added missing statusbar tips
+  User-visible:
+   * Added support for new cclive options --stream-exec and --stream (0.2.4+)
+   * Added missing statusbar tips
 
 
 0.1.0

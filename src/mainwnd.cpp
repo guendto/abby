@@ -93,13 +93,13 @@ MainWindow::onPreferences() {
 }
 
 void
-MainWindow::onCommandStateChanged(int state) {
-    preferencesButton->setEnabled(state != 0);
+MainWindow::onSaveasStateChanged(int state) {
+    saveasEdit->setEnabled(state != 0);
 }
 
 void
-MainWindow::onSaveasStateChanged(int state) {
-    saveasEdit->setEnabled(state != 0);
+MainWindow::onStreamStateChanged(int state) {
+    streamSpin->setEnabled(state != 0);
 }
 
 void
@@ -158,6 +158,12 @@ MainWindow::onStart() {
     QString s = prefs->additionalEdit->text();
     if (!s.isEmpty())
         args << s;
+
+    s = prefs->streamEdit->text();
+    if (!s.isEmpty() && streamBox->isChecked()) {
+        args << QString("--stream-exec=%1").arg(s);
+        args << QString("--stream=%1").arg(streamSpin->value());
+    }
 
     s = prefs->commandEdit->text();
     if (!s.isEmpty() && commandBox->isChecked()) {

@@ -35,15 +35,15 @@ private slots:
     void onCancel();
     void onAbout();
     void onSaveasStateChanged(int state);
-    void onCommandStateChanged(int state);
     void onSaveasBrowse();
+    void onStreamStateChanged(int state);
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
     void onProcStderrReady();
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
 private:
-    QProcess process;
     PreferencesDialog *prefs;
+    QProcess process;
     bool cancelled;
 private:
     void writeSettings();

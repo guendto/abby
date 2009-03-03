@@ -31,6 +31,7 @@ private slots:
     void onLimitStateChanged(int state);
     void onFinished(int result);
     void onBrowseSaveDir();
+    void onBrowseStreamCommand();
     void onBrowseCommand();
     void onBrowseCclive();
     void onLangChanged(int index);
