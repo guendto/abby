@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="fi">
+<defaultcodec></defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -352,22 +353,22 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>&amp;Lopeta</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="500"/>
+        <location filename="../rc/mainwnd.ui" line="503"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="508"/>
+        <location filename="../rc/mainwnd.ui" line="511"/>
         <source>Prefere&amp;nces...</source>
         <translation>&amp;Asetukset...</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="511"/>
+        <location filename="../rc/mainwnd.ui" line="517"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="516"/>
+        <location filename="../rc/mainwnd.ui" line="522"/>
         <source>&amp;About...</source>
         <translation>&amp;Tietoja...</translation>
     </message>
@@ -380,6 +381,21 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <location filename="../src/mainwnd.cpp" line="107"/>
         <source>Save as</source>
         <translation>Tallenna nimellä</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="500"/>
+        <source>Quit abby</source>
+        <translation>Lopeta ohjelma</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="514"/>
+        <source>Edit preferences</source>
+        <translation>Muokkaa asetuksia</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="525"/>
+        <source>About abby</source>
+        <translation>Tietoja ohjelmasta</translation>
     </message>
 </context>
 <context>
