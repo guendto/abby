@@ -257,7 +257,7 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
         <string>&amp;Options</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4" >
-        <item row="0" column="0" >
+        <item row="1" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_6" >
           <item>
            <widget class="QLabel" name="label_9" >
@@ -346,7 +346,7 @@ If unsure, choose flv which is supported by all websites.</string>
           </item>
          </layout>
         </item>
-        <item row="4" column="0" >
+        <item row="6" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_7" >
           <item>
            <widget class="QCheckBox" name="commandBox" >
@@ -384,7 +384,7 @@ download finishes.</string>
           </item>
          </layout>
         </item>
-        <item row="6" column="0" >
+        <item row="8" column="0" >
          <spacer name="verticalSpacer_2" >
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
@@ -425,7 +425,7 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
           </item>
          </layout>
         </item>
-        <item row="1" column="0" >
+        <item row="0" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_5" >
           <item>
            <widget class="QLabel" name="label_7" >
@@ -527,15 +527,18 @@ Do not use for Youtube or GoogleVideo flv videos.</string>
   </action>
  </widget>
  <tabstops>
+  <tabstop>tabWidget</tabstop>
   <tabstop>urlEdit</tabstop>
   <tabstop>startButton</tabstop>
-  <tabstop>logEdit</tabstop>
   <tabstop>tabWidget_2</tabstop>
+  <tabstop>cancelButton</tabstop>
   <tabstop>saveasEdit</tabstop>
   <tabstop>saveasButton</tabstop>
   <tabstop>formatCombo</tabstop>
+  <tabstop>continueBox</tabstop>
   <tabstop>commandBox</tabstop>
   <tabstop>preferencesButton</tabstop>
+  <tabstop>logEdit</tabstop>
  </tabstops>
  <resources/>
  <connections>
