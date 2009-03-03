@@ -11,7 +11,7 @@ written in C++ and depends on the Qt 4.3+ framework.
 - Qt 4.3+, if you are building abby from the source code, be sure
 to install the development files also.
   
-- cclive 0.2.3+, from http://code.google.com/p/cclive/
+- cclive 0.2.4+, from http://code.google.com/p/cclive/
 
 
                 Compiling abby
