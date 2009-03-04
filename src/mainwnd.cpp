@@ -235,6 +235,8 @@ MainWindow::onAbout() {
 void
 MainWindow::onURLEditingFinished() {
 
+    // Change format combobox contents dynamically based on the video URL.
+
     QString url = urlEdit->text();
     if (url.isEmpty())
         return;
@@ -264,6 +266,42 @@ MainWindow::onURLEditingFinished() {
 
     formatCombo->clear();
     formatCombo->addItems(formats);
+}
+
+void
+MainWindow::onFormatStateChanged(int) {
+
+    // Disable --continue for the specified hosts if format is "flv".
+    // Make changes based on the video URL.
+
+    QString url = urlEdit->text();
+    if (url.isEmpty())
+        return;
+
+    struct lookup_s {
+        const char *host;
+    };
+    static const struct lookup_s lookup[] = {
+        {"youtube.com"},
+        {"video.google."},
+    };
+
+    const int c = sizeof(lookup)/sizeof(struct lookup_s);
+    bool enable = true;
+
+    for (int i=0; i<c; ++i) {
+        if (url.contains(lookup[i].host)) {
+            if (formatCombo->currentText() == "flv") {
+                enable = false;
+                break;
+            }
+        }
+    }
+
+    continueBox->setEnabled(enable);
+
+    if (continueBox->isChecked() && !enable)
+        continueBox->setCheckState(Qt::Unchecked);
 }
 
 void

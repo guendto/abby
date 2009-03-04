@@ -665,6 +665,22 @@ download finishes.</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>formatCombo</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onFormatStateChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>116</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>253</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -675,5 +691,6 @@ download finishes.</string>
   <slot>onStreamStateChanged(int)</slot>
   <slot>onPreferences()</slot>
   <slot>onURLEditingFinished()</slot>
+  <slot>onFormatStateChanged(int)</slot>
  </slots>
 </ui>
