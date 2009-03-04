@@ -1,8 +1,8 @@
 
 0.1.1
 * add dynamic checks for options
-  - format should depend on url
   - continue should depend on url
+* add TRANSLATOR comments where needed
 
 0.1.x
 * create a proper window icon
