@@ -61,67 +61,67 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwnd.cpp" line="119"/>
+        <location filename="../src/mainwnd.cpp" line="125"/>
         <source>Enter a video link.</source>
         <translation>Syötä video-sivun linkki.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="133"/>
+        <location filename="../src/mainwnd.cpp" line="139"/>
         <source>Path to cclive command undefined. See preferences.</source>
         <translation>Määrittelemätön polku cclive-ohjelmaan. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="147"/>
+        <location filename="../src/mainwnd.cpp" line="153"/>
         <source>Save directory undefined. See preferences.</source>
         <translation>Määrittelemätön &quot;tallenna videot hakemistoon&quot; polku. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="323"/>
+        <location filename="../src/mainwnd.cpp" line="329"/>
         <source>error: failed to start process</source>
         <translation>virhe: prosessin käynnistäminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="336"/>
+        <location filename="../src/mainwnd.cpp" line="342"/>
         <source>Fetching link...</source>
         <translation>Haetaan tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="338"/>
+        <location filename="../src/mainwnd.cpp" line="344"/>
         <source>Verifying video link...</source>
         <translation>Tarkastetaan video tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="341"/>
+        <location filename="../src/mainwnd.cpp" line="347"/>
         <source>error: see log for details</source>
         <translation>virhe: katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="344"/>
+        <location filename="../src/mainwnd.cpp" line="350"/>
         <source>Extracting video...</source>
         <translation>Kopioidaan videota...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="378"/>
+        <location filename="../src/mainwnd.cpp" line="384"/>
         <source>Process exited with an error; see log</source>
         <translation>Prosessi päättyi virheeseen; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="380"/>
+        <location filename="../src/mainwnd.cpp" line="386"/>
         <source>Process exited normally</source>
         <translation>Prosessi päättyi normaalisti</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="384"/>
+        <location filename="../src/mainwnd.cpp" line="390"/>
         <source>Process terminated</source>
         <translation>Prosessi keskeytetty</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="384"/>
+        <location filename="../src/mainwnd.cpp" line="390"/>
         <source>Process crashed; see log</source>
         <translation>Prosessi kaatui; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="387"/>
+        <location filename="../src/mainwnd.cpp" line="393"/>
         <source>error:</source>
         <translation>virhe:</translation>
     </message>
@@ -288,7 +288,7 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>&amp;Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="107"/>
+        <location filename="../src/mainwnd.cpp" line="113"/>
         <source>Save as</source>
         <translation>Tallenna nimellä</translation>
     </message>
@@ -570,6 +570,15 @@ Esimerkki: /usr/local/bin/mplayer -really-quiet %i</translation>
         <location filename="../rc/prefsdlg.ui" line="99"/>
         <source>B&amp;rowse</source>
         <translation>Se&amp;laa</translation>
+    </message>
+</context>
+<context>
+    <name>The</name>
+    <message>
+        <location filename="../src/mainwnd.cpp" line="35"/>
+        <source></source>
+        <comment>word &quot;English&quot; is not meant to be translated. Instead, enter the name of the target language in native language. For example: Suomi, Deutsch, Svenska, Turkce, Francais, etc. The only purpose of this string is to be able to list the available languages in the Preferences dialog.</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
