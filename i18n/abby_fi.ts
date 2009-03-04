@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="fi">
-<defaultcodec></defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -77,52 +76,52 @@ p, li { white-space: pre-wrap; }
         <translation>Määrittelemätön &quot;tallenna videot hakemistoon&quot; polku. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="251"/>
+        <location filename="../src/mainwnd.cpp" line="323"/>
         <source>error: failed to start process</source>
         <translation>virhe: prosessin käynnistäminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="264"/>
+        <location filename="../src/mainwnd.cpp" line="336"/>
         <source>Fetching link...</source>
         <translation>Haetaan tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="266"/>
+        <location filename="../src/mainwnd.cpp" line="338"/>
         <source>Verifying video link...</source>
         <translation>Tarkastetaan video tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="269"/>
+        <location filename="../src/mainwnd.cpp" line="341"/>
         <source>error: see log for details</source>
         <translation>virhe: katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="272"/>
+        <location filename="../src/mainwnd.cpp" line="344"/>
         <source>Extracting video...</source>
         <translation>Kopioidaan videota...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="306"/>
+        <location filename="../src/mainwnd.cpp" line="378"/>
         <source>Process exited with an error; see log</source>
         <translation>Prosessi päättyi virheeseen; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="308"/>
+        <location filename="../src/mainwnd.cpp" line="380"/>
         <source>Process exited normally</source>
         <translation>Prosessi päättyi normaalisti</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="312"/>
+        <location filename="../src/mainwnd.cpp" line="384"/>
         <source>Process terminated</source>
         <translation>Prosessi keskeytetty</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="312"/>
+        <location filename="../src/mainwnd.cpp" line="384"/>
         <source>Process crashed; see log</source>
         <translation>Prosessi kaatui; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="315"/>
+        <location filename="../src/mainwnd.cpp" line="387"/>
         <source>error:</source>
         <translation>virhe:</translation>
     </message>
@@ -226,93 +225,14 @@ Esimerkki: http://youtube.com/watch?v=3HD220e0bx4</translation>
         <translation>Tie&amp;dostomuoto:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="321"/>
-        <source>Download format of the video. This is a website specific feature.
-
-Note that different formats often mean different video
-resolution. Also note that some formats may not be available
-for all videos. Listing only non-flv formats.
-
-DailyMotion: spark | spak-mini | vp6-hq | vp6-hd | vp6 | h264
-Youtube:     mp4 | xflv | 3gpp
-GoogleVideo: mp4
-
-If unsure, choose flv which is supported by all websites.</source>
-        <translation>Kopioi tiedostomuoto. Web-palvelusta riippuva asetus.
-
-Huomaa, että tiedostomuoto vaihtelee web-palvelusta riippuen,
-ja tarkoittaa useasti myös eroja kuvalaadussa. Huomaa myös, että
-tiedostomuoto ei ole aina välttämättä saatavilla. Alla oleva
-lista pitää sisällään ainoastaan flv:stä poikkeavat muodot.
-
-DailyMotion: spark | spak-mini | vp6-hq | vp6-hd | vp6 | h264
-￼Youtube:     mp4 | xflv | 3gpp￼
-GoogleVideo: mp4￼
-
-Valitse flv, jos olet epävarma. Kaikki web-palvelut tukevat sitä.</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="335"/>
-        <source>flv</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="340"/>
-        <source>mp4</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="345"/>
-        <source>xflv</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="350"/>
-        <source>3gpp</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="355"/>
-        <source>spak-mini</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="360"/>
-        <source>vp6-hq</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="365"/>
-        <source>vp6-hd</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="370"/>
-        <source>vp6</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="375"/>
-        <source>h264</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="469"/>
+        <location filename="../rc/mainwnd.ui" line="415"/>
         <source>Run the command specified in the preferences after
 download finishes.</source>
         <translation>Suorita asetuksissa määritelty komento kopioinnin
 jälkeen.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="383"/>
-        <source>Attempt to continue a partially downloaded video file.
-Do not use for Youtube or GoogleVideo flv videos.</source>
-        <translation>Yritä jatkaa osittain kopioitua tiedostoa.
-HUOM: Ei toimi Youtube eikä GoogleVideo flv-muotoisten
-tiedostojen kanssa.</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="387"/>
+        <location filename="../rc/mainwnd.ui" line="333"/>
         <source>&amp;Continue partially downloaded file</source>
         <translation>&amp;Jatka osittain kopioitua tiedostoa</translation>
     </message>
@@ -333,37 +253,37 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>&amp;Selaa</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="522"/>
+        <location filename="../rc/mainwnd.ui" line="468"/>
         <source>&amp;File</source>
         <translation>&amp;Tiedosto</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="530"/>
+        <location filename="../rc/mainwnd.ui" line="476"/>
         <source>&amp;Edit</source>
         <translation>&amp;Muokkaa</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="540"/>
+        <location filename="../rc/mainwnd.ui" line="486"/>
         <source>&amp;Quit</source>
         <translation>&amp;Lopeta</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="546"/>
+        <location filename="../rc/mainwnd.ui" line="492"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="554"/>
+        <location filename="../rc/mainwnd.ui" line="500"/>
         <source>Prefere&amp;nces...</source>
         <translation>&amp;Asetukset...</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="560"/>
+        <location filename="../rc/mainwnd.ui" line="506"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="565"/>
+        <location filename="../rc/mainwnd.ui" line="511"/>
         <source>&amp;About...</source>
         <translation>&amp;Tietoja...</translation>
     </message>
@@ -373,22 +293,22 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>Tallenna nimellä</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="543"/>
+        <location filename="../rc/mainwnd.ui" line="489"/>
         <source>Quit abby</source>
         <translation>Lopeta ohjelma</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="557"/>
+        <location filename="../rc/mainwnd.ui" line="503"/>
         <source>Edit preferences</source>
         <translation>Muokkaa asetuksia</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="568"/>
+        <location filename="../rc/mainwnd.ui" line="514"/>
         <source>About abby</source>
         <translation>Tietoja ohjelmasta</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="411"/>
+        <location filename="../rc/mainwnd.ui" line="357"/>
         <source>Run the stream command defined in the preferences when
 the file transfer reaches the specified percent done.
 
@@ -406,12 +326,12 @@ ominaisuuden käyttö on suositeltavaa vain laaja-
 kaistakäyttöön.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="420"/>
+        <location filename="../rc/mainwnd.ui" line="366"/>
         <source>&amp;Run stream command when transfer reaches:</source>
         <translation>S&amp;uorita stream-komento kun kopiointi saavuttaa:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="436"/>
+        <location filename="../rc/mainwnd.ui" line="382"/>
         <source>Stream command is started when file transfer
 reaches this percentage. Be sure to set it 
 high enough to make sure that there is enough
@@ -422,14 +342,30 @@ asettaa se tarpeeksi korkeaksi, varmistaaksesi
 keskeytymätön videon toisto.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="442"/>
+        <location filename="../rc/mainwnd.ui" line="388"/>
         <source>%</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="473"/>
+        <location filename="../rc/mainwnd.ui" line="419"/>
         <source>&amp;Run external command when transfer is finished</source>
         <translation>Suo&amp;rita komento kopioinnin jälkeen</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="321"/>
+        <source>Download format of the video. Note that different format
+typically means mean different video resolution. Also note
+that some formats may not always be available.</source>
+        <translation>Kopioitava tiedostomuoto. Huomaa, että tiedostomuoto
+useasti määrää kuvanlaadun riippuen web-palvelun tavasta
+tallentaa käyttäjien lähettämät videot. Huomaa myös, että
+kaikki tuetut tiedostomuodot eivät ole välttämättä aina
+saatavilla.</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="330"/>
+        <source>Continue a partially downloaded video file.</source>
+        <translation>Jatka osittain kopioitua tiedostoa.</translation>
     </message>
 </context>
 <context>
