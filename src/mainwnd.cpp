@@ -233,6 +233,40 @@ MainWindow::onAbout() {
 }
 
 void
+MainWindow::onURLEditingFinished() {
+
+    QString url = urlEdit->text();
+    if (url.isEmpty())
+        return;
+
+    struct lookup_s {
+        const char *host;
+        const char *formats;
+    };
+    static const struct lookup_s lookup[] = {
+        {"youtube.com",     "mp4|xflv|3gpp"},
+        {"video.google.",   "mp4"},
+        {"dailymotion.com", "spak-mini|vp6-hq|vp6-hd|vp6|h264"},
+    };
+
+    const int c = sizeof(lookup)/sizeof(struct lookup_s);
+
+    QStringList formats;
+    formats << "flv";
+
+    for (int i=0; i<c; ++i) {
+        if (url.contains(lookup[i].host)) {
+            QString s = lookup[i].formats;
+            formats << s.split("|");
+            break;
+        }
+    }
+
+    formatCombo->clear();
+    formatCombo->addItems(formats);
+}
+
+void
 MainWindow::onProcStarted() {
     statusBar() ->clearMessage();
     fileLabel   ->setText("-");

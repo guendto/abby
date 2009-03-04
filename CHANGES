@@ -1,6 +1,7 @@
 0.1.1
 
   User-visible:
+   * Video formats become now available dynamically based on the video URL
    * Added support for new cclive options --stream-exec and --stream (0.2.4+)
    * Added missing statusbar tips
 

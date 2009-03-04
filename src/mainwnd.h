@@ -37,6 +37,7 @@ private slots:
     void onSaveasStateChanged(int state);
     void onSaveasBrowse();
     void onStreamStateChanged(int state);
+    void onURLEditingFinished();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
     void onProcStderrReady();

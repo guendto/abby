@@ -330,51 +330,6 @@ GoogleVideo: mp4
 
 If unsure, choose flv which is supported by all websites.</string>
             </property>
-            <item>
-             <property name="text" >
-              <string>flv</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>mp4</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>xflv</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>3gpp</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>spak-mini</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>vp6-hq</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>vp6-hd</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>vp6</string>
-             </property>
-            </item>
-            <item>
-             <property name="text" >
-              <string>h264</string>
-             </property>
-            </item>
            </widget>
           </item>
           <item>
@@ -694,6 +649,22 @@ download finishes.</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>urlEdit</sender>
+   <signal>editingFinished()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onURLEditingFinished()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>252</x>
+     <y>82</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>253</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -703,5 +674,6 @@ download finishes.</string>
   <slot>onSaveasBrowse()</slot>
   <slot>onStreamStateChanged(int)</slot>
   <slot>onPreferences()</slot>
+  <slot>onURLEditingFinished()</slot>
  </slots>
 </ui>
