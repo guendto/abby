@@ -1,7 +1,5 @@
 
 0.1.1
-* add dynamic checks for options
-  - continue should depend on url
 * update tooltips for formatCombo and continueBox
 * add TRANSLATOR comments where needed
 
