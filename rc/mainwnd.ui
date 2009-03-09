@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>508</width>
+    <width>506</width>
     <height>279</height>
    </rect>
   </property>
@@ -22,7 +22,7 @@
       </property>
       <widget class="QWidget" name="tab" >
        <attribute name="title" >
-        <string>&amp;Download</string>
+        <string>&amp;Video</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3" >
         <item row="0" column="0" >
@@ -30,7 +30,7 @@
           <item>
            <widget class="QLabel" name="label" >
             <property name="text" >
-             <string>&amp;Video link:</string>
+             <string>Video &amp;Link:</string>
             </property>
             <property name="buddy" >
              <cstring>urlEdit</cstring>
@@ -233,7 +233,7 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
           </widget>
           <widget class="QWidget" name="tab_4" >
            <attribute name="title" >
-            <string>&amp;Log</string>
+            <string>Lo&amp;g</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2" >
             <item row="0" column="0" >
@@ -302,7 +302,7 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
              </sizepolicy>
             </property>
             <property name="text" >
-             <string>&amp;Format:</string>
+             <string>&amp;Download Video &amp;Format:</string>
             </property>
             <property name="buddy" >
              <cstring>formatCombo</cstring>
@@ -325,16 +325,6 @@ that some formats may not always be available.</string>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="continueBox" >
-            <property name="toolTip" >
-             <string>Continue a partially downloaded video file.</string>
-            </property>
-            <property name="text" >
-             <string>&amp;Continue partially downloaded file</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="horizontalSpacer_2" >
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -350,6 +340,16 @@ that some formats may not always be available.</string>
          </layout>
         </item>
         <item row="2" column="0" >
+         <widget class="QCheckBox" name="continueBox" >
+          <property name="toolTip" >
+           <string>Continue a partially downloaded video file.</string>
+          </property>
+          <property name="text" >
+           <string>&amp;Continue partially downloaded file</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_9" >
           <item>
            <widget class="QCheckBox" name="streamBox" >
@@ -363,7 +363,7 @@ state. It is recommended that you use this feature
 with broadband connections only.</string>
             </property>
             <property name="text" >
-             <string>&amp;Run stream command when transfer reaches:</string>
+             <string>S&amp;tart streaming at:</string>
             </property>
            </widget>
           </item>
@@ -407,7 +407,7 @@ video data for the command to process.</string>
           </item>
          </layout>
         </item>
-        <item row="3" column="0" >
+        <item row="4" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_7" >
           <item>
            <widget class="QCheckBox" name="commandBox" >
@@ -416,7 +416,7 @@ video data for the command to process.</string>
 download finishes.</string>
             </property>
             <property name="text" >
-             <string>&amp;Run external command when transfer is finished</string>
+             <string>&amp;Run external command when download finishes</string>
             </property>
            </widget>
           </item>
@@ -435,7 +435,7 @@ download finishes.</string>
           </item>
          </layout>
         </item>
-        <item row="4" column="0" >
+        <item row="5" column="0" >
          <spacer name="verticalSpacer_2" >
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
@@ -459,7 +459,7 @@ download finishes.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>508</width>
+     <width>506</width>
      <height>25</height>
     </rect>
    </property>
@@ -520,11 +520,15 @@ download finishes.</string>
   <tabstop>startButton</tabstop>
   <tabstop>tabWidget_2</tabstop>
   <tabstop>cancelButton</tabstop>
+  <tabstop>logEdit</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>saveasEdit</tabstop>
   <tabstop>saveasButton</tabstop>
   <tabstop>formatCombo</tabstop>
+  <tabstop>continueBox</tabstop>
+  <tabstop>streamBox</tabstop>
+  <tabstop>streamSpin</tabstop>
   <tabstop>commandBox</tabstop>
-  <tabstop>logEdit</tabstop>
  </tabstops>
  <resources/>
  <connections>

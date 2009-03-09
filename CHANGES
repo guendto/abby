@@ -1,12 +1,13 @@
 0.1.1
 
   User-visible changes:
-   * Change following widgets to reflect video link changes dynamically:
-     - Continue partially transferred file
-     - (Download video) Format
    * Add support for new cclive options (0.2.4+)
      - --stream-exec, --stream
    * Add missing statusbar messages for menu items
+   * Clean up widget texts
+   * Change following widgets to reflect video link changes dynamically:
+     - Continue partially transferred file
+     - (Download video) Format
 
 
 0.1.0
