@@ -30,16 +30,12 @@
 MainWindow::MainWindow():
     cancelled(false)
 {
-
-
-    /* TRANSLATOR
-
-    The word "English" is not meant to be translated. Instead,
-    enter the name of the target language in native language.
-    For example: Suomi, Deutsch, Svenska, Turkce, Francais, etc.
-
-    The only purpose of this string is to be able to list the
-    available languages in the Preferences dialog. */
+/*
+ The word "English" is not meant to be translated literally.
+ Replace the word "English" with target language, e.g. Suomi
+ or Deutsch. Note that the only purpose of this string is to
+ list it as an available language in the Preferences dialog.
+*/
     const QString lang = tr("English");
 
     setupUi(this);
