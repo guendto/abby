@@ -1,10 +1,12 @@
 0.1.1
 
-  User-visible:
-   * Continue checkbox is now enabled dynamically based on format and URL
-   * Video formats become now available dynamically based on the video URL
-   * Added support for new cclive options --stream-exec and --stream (0.2.4+)
-   * Added missing statusbar tips
+  User-visible changes:
+   * Change following widgets to reflect video link changes dynamically:
+     - Continue partially transferred file
+     - (Download video) Format
+   * Add support for new cclive options (0.2.4+)
+     - --stream-exec, --stream
+   * Add missing statusbar messages for menu items
 
 
 0.1.0
