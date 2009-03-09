@@ -1,45 +1,7 @@
 
 0.1.1
+* implement --title and --title-cclass
+  - check for support at start if path to cclive is set
 
 0.1.x
 * create a proper window icon
-
-planned
-* replace ui with
-  - menubar
-    - file
-      - add link...
-      - remove (selected) link(s)
-      - clear completed
-    - about...
-    - edit
-      - preferences...
-  - toolbar
-    - add
-    - remove
-    - clear
-    -- sep
-    - move up
-    - move down
-  - treeview
-    - used as a queue
-    - configurable columns
-    - id | proc_id | status | filename | ...
-  - window splitter
-  - tab widget
-    - general
-      - transfer details
-    - log
-      - cclive log
-  - statusbar
-
-* add AddDialog
-  - similar to 0.1.x "video link" combined with "options"
-* add "number of active transfers" to preferences
-* add "language" to preferences (req. restart)
-* improve "user-experience"
-  - autocheck --continue compatibility
-  - autocheck --exec expression
-  - autocheck --format compatibility
-* consider adding compatibility level for clive
-* integrated rss parsing feature
