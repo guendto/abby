@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="fi">
+<defaultcodec></defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -365,7 +366,7 @@ saatavilla.</translation>
     <message>
         <location filename="../rc/mainwnd.ui" line="325"/>
         <source>Video &amp;Format:</source>
-        <translation>Kopioitava video&amp;muoto:</translation>
+        <translation>Kopioitava tiedosto&amp;muoto:</translation>
     </message>
     <message>
         <location filename="../rc/mainwnd.ui" line="451"/>
