@@ -292,6 +292,14 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
          <layout class="QHBoxLayout" name="horizontalLayout_6" >
           <item>
            <widget class="QCheckBox" name="titleBox" >
+            <property name="toolTip" >
+             <string>Use video page title for naming downloaded files.
+See also the Preferences for the character-class
+used to clean up the video page titles.
+
+Note that cclive must be built WITH_PERL=yes for
+this to work.</string>
+            </property>
             <property name="text" >
              <string>&amp;Use video page title for naming</string>
             </property>
