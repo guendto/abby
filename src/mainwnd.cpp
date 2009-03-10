@@ -101,8 +101,13 @@ MainWindow::onPreferences() {
 
 void
 MainWindow::onSaveasStateChanged(int state) {
-    saveasEdit->setEnabled(state != 0);
+    saveasEdit  ->setEnabled(state != 0);
     saveasButton->setEnabled(state != 0);
+
+    if (state != 0 && titleBox->isChecked())
+        titleBox->setCheckState(Qt::Unchecked);
+
+    titleBox->setEnabled(state == 0);
 }
 
 void

@@ -261,6 +261,9 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
          <layout class="QHBoxLayout" name="horizontalLayout_5" >
           <item>
            <widget class="QCheckBox" name="saveasBox" >
+            <property name="toolTip" >
+             <string>Write video to file. Overrides default file naming.</string>
+            </property>
             <property name="text" >
              <string>&amp;Save video as:</string>
             </property>
@@ -270,9 +273,6 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
            <widget class="QLineEdit" name="saveasEdit" >
             <property name="enabled" >
              <bool>false</bool>
-            </property>
-            <property name="toolTip" >
-             <string>Write video to file. Overrides default file naming.</string>
             </property>
            </widget>
           </item>
