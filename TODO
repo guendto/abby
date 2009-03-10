@@ -1,7 +1,5 @@
 
 0.1.1
-* implement --title and --title-cclass
-  - check for support at start if path to cclive is set
 
 0.1.x
 * create a proper window icon
