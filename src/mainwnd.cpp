@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QIcon>
+#include <QDebug>
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
@@ -52,6 +53,30 @@ MainWindow::MainWindow():
         this, SLOT(onProcStderrReady()));
     connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)),
         this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
+
+    if (!ccliveSupports("--with-perl")) {
+        titleBox->setCheckState(Qt::Unchecked);
+        titleBox->hide();
+    }
+}
+
+bool
+MainWindow::ccliveSupports(QString buildOption) {
+    bool state = false;
+    QString cclivePath = prefs->ccliveEdit->text();
+    if (!cclivePath.isEmpty()) {
+        QProcess cclive;
+        cclive.setProcessChannelMode(QProcess::MergedChannels);
+        cclive.start(cclivePath, QStringList() << "--version");
+
+        if (!cclive.waitForFinished())
+            qDebug() << "cclive failed:" << cclive.errorString();
+        else {
+            QString output = QString::fromLocal8Bit(cclive.readAll());
+            return output.contains(buildOption);
+        }
+    }
+    return state;
 }
 
 void
@@ -97,6 +122,13 @@ MainWindow::updateLog(QString newText) {
 void
 MainWindow::onPreferences() {
     prefs->exec();
+
+    if (ccliveSupports("--with-perl"))
+        titleBox->show();
+    else {
+        titleBox->setCheckState(Qt::Unchecked);
+        titleBox->hide();
+    }
 }
 
 void
@@ -218,6 +250,13 @@ MainWindow::onStart() {
 
     if (continueBox->isChecked())
         args << "--continue";
+
+    if (titleBox->isChecked()) {
+        args << "--title";
+        s = prefs->cclassEdit->text();
+        if (!s.isEmpty())
+            args << QString("--title-cclass=%1").arg(s);
+    }
 
     args << QString("--download=%1").arg(formatCombo->currentText());
     args << QString("%1").arg(url);

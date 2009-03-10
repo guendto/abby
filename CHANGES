@@ -2,6 +2,7 @@
 
   User-visible changes:
    * Add support for new cclive options (0.2.4+)
+     - --title, --title-cclass
      - --stream-exec, --stream
    * Add missing statusbar messages for menu items
    * Change "Save video as" label to checkbox

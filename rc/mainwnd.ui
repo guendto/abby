@@ -291,17 +291,12 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
         <item row="1" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_6" >
           <item>
-           <widget class="QCheckBox" name="titleBox" >
+           <widget class="QCheckBox" name="continueBox" >
             <property name="toolTip" >
-             <string>Use video page title for naming downloaded files.
-See also the Preferences for the character-class
-used to clean up the video page titles.
-
-Note that cclive must be built WITH_PERL=yes for
-this to work.</string>
+             <string>Continue a partially downloaded video file.</string>
             </property>
             <property name="text" >
-             <string>&amp;Use video page title for naming</string>
+             <string>&amp;Continue partially downloaded file</string>
             </property>
            </widget>
           </item>
@@ -351,17 +346,7 @@ that some formats may not always be available.</string>
           </item>
          </layout>
         </item>
-        <item row="2" column="0" >
-         <widget class="QCheckBox" name="continueBox" >
-          <property name="toolTip" >
-           <string>Continue a partially downloaded video file.</string>
-          </property>
-          <property name="text" >
-           <string>&amp;Continue partially downloaded file</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0" >
+        <item row="5" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_9" >
           <item>
            <widget class="QCheckBox" name="streamBox" >
@@ -419,7 +404,7 @@ video data for the command to process.</string>
           </item>
          </layout>
         </item>
-        <item row="5" column="0" >
+        <item row="6" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_7" >
           <item>
            <widget class="QCheckBox" name="commandBox" >
@@ -447,7 +432,7 @@ download finishes.</string>
           </item>
          </layout>
         </item>
-        <item row="6" column="0" >
+        <item row="7" column="0" >
          <spacer name="verticalSpacer_2" >
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
@@ -459,6 +444,21 @@ download finishes.</string>
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="2" column="0" >
+         <widget class="QCheckBox" name="titleBox" >
+          <property name="toolTip" >
+           <string>Use video page title for naming downloaded files.
+See also the Preferences for the character-class
+used to clean up the video page titles.
+
+Note that cclive must be built WITH_PERL=yes for
+this to work.</string>
+          </property>
+          <property name="text" >
+           <string>&amp;Use video page title for naming</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -530,15 +530,15 @@ download finishes.</string>
  <tabstops>
   <tabstop>urlEdit</tabstop>
   <tabstop>startButton</tabstop>
-  <tabstop>cancelButton</tabstop>
   <tabstop>tabWidget_2</tabstop>
+  <tabstop>cancelButton</tabstop>
   <tabstop>logEdit</tabstop>
   <tabstop>saveasBox</tabstop>
   <tabstop>saveasEdit</tabstop>
   <tabstop>saveasButton</tabstop>
-  <tabstop>titleBox</tabstop>
-  <tabstop>formatCombo</tabstop>
   <tabstop>continueBox</tabstop>
+  <tabstop>formatCombo</tabstop>
+  <tabstop>titleBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>
   <tabstop>commandBox</tabstop>

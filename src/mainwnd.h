@@ -51,6 +51,7 @@ private:
     void writeSettings();
     void readSettings();
     void updateLog(QString text);
+    bool ccliveSupports(QString buildOption);
 protected:
     void closeEvent(QCloseEvent *event);
 };
