@@ -399,7 +399,7 @@ been flagged as mature content.</string>
          <item>
           <widget class="QLabel" name="label_9" >
            <property name="text" >
-            <string>&amp;Title character-class</string>
+            <string>&amp;Title character-class:</string>
            </property>
            <property name="buddy" >
             <cstring>cclassEdit</cstring>
