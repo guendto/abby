@@ -621,7 +621,7 @@ Lisää tietoja Perl-kielen tukemista merkki-luokista:
     <message>
         <location filename="../rc/prefsdlg.ui" line="402"/>
         <source>&amp;Title character-class:</source>
-        <translation>Otsikon siistimiseen käytetty merkki-luokka:</translation>
+        <translation type="unfinished">O&amp;tsikon siistimiseen käytetty merkki-luokka:</translation>
     </message>
 </context>
 </TS>
