@@ -316,8 +316,14 @@ MainWindow::onURLEditingFinished() {
         }
     }
 
+    QString last = formatCombo->currentText();
+
     formatCombo->clear();
     formatCombo->addItems(formats);
+
+    int n = formatCombo->findText(last);
+    if (n != -1)
+        formatCombo->setCurrentIndex(n);
 }
 
 void
