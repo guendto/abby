@@ -4,10 +4,11 @@
    * Add support for new cclive options (0.2.4+)
      - --stream-exec, --stream
    * Add missing statusbar messages for menu items
-   * Clean up widget texts
+   * Change "Save video as" label to checkbox
    * Change following widgets to reflect video link changes dynamically:
      - Continue partially transferred file
      - (Download video) Format
+   * Clean up widget texts
 
 
 0.1.0

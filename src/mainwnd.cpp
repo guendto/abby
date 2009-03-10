@@ -66,6 +66,7 @@ MainWindow::writeSettings() {
     s.beginGroup("MainWindow");
     s.setValue("size",size());
     s.setValue("pos",pos());
+    s.setValue("titleBox",titleBox->checkState());
     s.setValue("formatCombo",formatCombo->currentIndex());
     s.endGroup();
 }
@@ -76,6 +77,10 @@ MainWindow::readSettings() {
     s.beginGroup("MainWindow");
     resize(s.value("size",QSize(400,400)).toSize());
     move(s.value("pos",QPoint(200,200)).toPoint());
+    titleBox->setCheckState(
+        s.value("titleBox").toBool()
+        ? Qt::Checked
+        : Qt::Unchecked);
     formatCombo->setCurrentIndex(s.value("formatCombo").toInt());
     s.endGroup();
 }
@@ -97,6 +102,7 @@ MainWindow::onPreferences() {
 void
 MainWindow::onSaveasStateChanged(int state) {
     saveasEdit->setEnabled(state != 0);
+    saveasButton->setEnabled(state != 0);
 }
 
 void
@@ -202,7 +208,7 @@ MainWindow::onStart() {
     }
 
     s = saveasEdit->text();
-    if (!s.isEmpty())
+    if (!s.isEmpty() && saveasBox->isChecked())
         args << QString("--output-video=%1").arg(s);
 
     if (continueBox->isChecked())
