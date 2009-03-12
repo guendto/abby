@@ -47,6 +47,7 @@ private:
     PreferencesDialog *prefs;
     QProcess process;
     bool cancelled;
+    bool errorOccurred;
 private:
     void writeSettings();
     void readSettings();

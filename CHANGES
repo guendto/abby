@@ -1,6 +1,7 @@
 0.1.1
 
   User-visible changes:
+   * Improve cclive process output handling and parsing
    * Add support for new cclive options (0.2.4+)
      - --title, --title-cclass
      - --stream-exec, --stream

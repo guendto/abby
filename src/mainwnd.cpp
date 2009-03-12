@@ -272,7 +272,10 @@ MainWindow::onStart() {
             args << QString("--title-cclass=%1").arg(s);
     }
 
-    args << QString("--download=%1").arg(formatCombo->currentText());
+    s = formatCombo->currentText();
+    if (s.isEmpty())
+        s = "flv";
+    args << QString("--download=%1").arg(s);
     args << QString("%1").arg(url);
 
     // Prepare log
@@ -387,14 +390,16 @@ MainWindow::onProcStarted() {
 
     startButton ->setEnabled(false);
     cancelButton->setEnabled(true);
+
+    errorOccurred = false;
 }
 
 void
 MainWindow::onProcError(QProcess::ProcessError err) {
     if (err == QProcess::FailedToStart) {
         QString msg = tr("error: failed to start process");
-        updateLog(msg);
         statusBar()->showMessage(msg);
+        updateLog(msg);
     }
 }
 
@@ -403,63 +408,66 @@ MainWindow::onProcStderrReady() {
     QString newText =
         QString::fromLocal8Bit(process.readAllStandardError());
 
-    QString status;
-    if (newText.contains("fetch"))
+    QStringList tmp = newText.split("\n", QString::SkipEmptyParts);
+    if (tmp.isEmpty())
+        return;
+
+    QString status, last = tmp.last();
+    if (last.startsWith("fetch")) {
         status = tr("Fetching link...");
-    else if (newText.contains("verify"))
+    } else if (last.startsWith("verify")) {
         status = tr("Verifying video link...");
-    else if (newText.contains("error:")) {
-        // Probably better to connect finished etc. signal instead
-        status = tr("error: see log for details");
+    } else if (last.startsWith("error:")) {
+        errorOccurred = true;
     }
-    else if (newText.contains("file:")) {
+
+    if (newText.contains("file:")) {
         status = tr("Extracting video...");
-        QStringList lst = newText.split(" ",QString::SkipEmptyParts);
-        fileLabel->setText(lst[1].remove("\n"));
+        QStringList tmp = newText.split(" ", QString::SkipEmptyParts);
+        fileLabel->setText(tmp[1].remove("\n"));
     }
 
     if (!status.isEmpty())
         statusBar()->showMessage(status.remove("\n"));
 
-    if (newText.contains("%")) {
+    if (last.contains("%")) {
         newText.replace("\n", " ");
 
-        QStringList lst =
-            newText.split(" ",QString::SkipEmptyParts);
-
-        QString percent = lst[1].remove(QChar('%'));
-        QString now     = lst[2];
-        QString expected= lst[4];
-        QString rate    = lst[5];
-        QString eta     = lst[6];
+        QStringList tmp = newText.split(" ", QString::SkipEmptyParts);
+        QString percent = tmp[1].remove(QChar('%'));
+        QString now     = tmp[2];
+        QString expected= tmp[4];
+        QString rate    = tmp[5];
+        QString eta     = tmp[6];
 
         sizeLabel->setText(now +" / "+ expected);
+        progressBar->setValue(percent.toInt());
         rateLabel->setText(rate);
         etaLabel->setText(eta);
-        progressBar->setValue(percent.toInt());
-    } else {
-        updateLog(newText);
     }
+    else
+        updateLog(newText);
 }
 
 void
 MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     QString status;
-    if (exitStatus == QProcess::NormalExit) {
-        if (exitCode != 0)
-            status = tr("Process exited with an error; see log");
-        else
-            status = tr("Process exited normally");
-    } else {
-        status = cancelled
-            ? tr("Process terminated")
-            : tr("Process crashed; see log");
+    if (!errorOccurred) {
+        if (exitStatus == QProcess::NormalExit) {
+            status = exitCode != 0
+                ? tr("Process exited with an error; see log")
+                : tr("Process exited normally");
+        } else {
+            status = cancelled
+                ? tr("Process terminated")
+                : tr("Process crashed; see log");
+        }
+        updateLog(status + ".");
     }
+    else
+        status = tr("error: see log for details");
 
-    if (!statusBar()->currentMessage().contains(tr("error:")))
-        statusBar()->showMessage(status);
-
-    updateLog(status + ".");
+    statusBar()->showMessage(status);
 
     startButton ->setEnabled(true);
     cancelButton->setEnabled(false);
