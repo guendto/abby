@@ -54,10 +54,7 @@ MainWindow::MainWindow():
     connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)),
         this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
 
-    if (!ccliveSupports("--with-perl")) {
-        titleBox->setCheckState(Qt::Unchecked);
-        titleBox->hide();
-    }
+    updateWidgets();
 }
 
 bool
@@ -77,6 +74,29 @@ MainWindow::ccliveSupports(QString buildOption) {
         }
     }
     return state;
+}
+
+void
+MainWindow::updateWidgets() {
+    // Enable widgets based on preferences and other settings.
+    QString s;
+
+    s = prefs->streamEdit->text();
+    streamBox->setEnabled(!s.isEmpty());
+    if (s.isEmpty())
+        streamBox->setCheckState(Qt::Unchecked);
+
+    s = prefs->commandEdit->text();
+    commandBox->setEnabled(!s.isEmpty());
+    if (s.isEmpty())
+        commandBox->setCheckState(Qt::Unchecked);
+
+    if (ccliveSupports("--with-perl"))
+        titleBox->show();
+    else {
+        titleBox->setCheckState(Qt::Unchecked);
+        titleBox->hide();
+    }
 }
 
 void
@@ -122,13 +142,7 @@ MainWindow::updateLog(QString newText) {
 void
 MainWindow::onPreferences() {
     prefs->exec();
-
-    if (ccliveSupports("--with-perl"))
-        titleBox->show();
-    else {
-        titleBox->setCheckState(Qt::Unchecked);
-        titleBox->hide();
-    }
+    updateWidgets();
 }
 
 void
