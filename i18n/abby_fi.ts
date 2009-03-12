@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="fi">
-<defaultcodec></defaultcodec>
 <context>
     <name>AboutDialog</name>
     <message>
@@ -62,69 +61,64 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwnd.cpp" line="164"/>
+        <location filename="../src/mainwnd.cpp" line="178"/>
         <source>Enter a video link.</source>
         <translation>Syötä video-sivun linkki.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="178"/>
+        <location filename="../src/mainwnd.cpp" line="192"/>
         <source>Path to cclive command undefined. See preferences.</source>
         <translation>Määrittelemätön polku cclive-ohjelmaan. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="192"/>
+        <location filename="../src/mainwnd.cpp" line="206"/>
         <source>Save directory undefined. See preferences.</source>
         <translation>Määrittelemätön &quot;tallenna videot hakemistoon&quot; polku. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="375"/>
+        <location filename="../src/mainwnd.cpp" line="400"/>
         <source>error: failed to start process</source>
         <translation>virhe: prosessin käynnistäminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="388"/>
+        <location filename="../src/mainwnd.cpp" line="418"/>
         <source>Fetching link...</source>
         <translation>Haetaan tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="390"/>
+        <location filename="../src/mainwnd.cpp" line="420"/>
         <source>Verifying video link...</source>
         <translation>Tarkastetaan video tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="393"/>
+        <location filename="../src/mainwnd.cpp" line="468"/>
         <source>error: see log for details</source>
         <translation>virhe: katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="396"/>
+        <location filename="../src/mainwnd.cpp" line="427"/>
         <source>Extracting video...</source>
         <translation>Kopioidaan videota...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="430"/>
+        <location filename="../src/mainwnd.cpp" line="459"/>
         <source>Process exited with an error; see log</source>
         <translation>Prosessi päättyi virheeseen; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="432"/>
+        <location filename="../src/mainwnd.cpp" line="459"/>
         <source>Process exited normally</source>
         <translation>Prosessi päättyi normaalisti</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="436"/>
+        <location filename="../src/mainwnd.cpp" line="463"/>
         <source>Process terminated</source>
         <translation>Prosessi keskeytetty</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="436"/>
+        <location filename="../src/mainwnd.cpp" line="463"/>
         <source>Process crashed; see log</source>
         <translation>Prosessi kaatui; katso historia</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwnd.cpp" line="439"/>
-        <source>error:</source>
-        <translation>virhe:</translation>
     </message>
     <message>
         <location filename="../src/prefsdlg.cpp" line="132"/>
@@ -269,7 +263,7 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>&amp;Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="152"/>
+        <location filename="../src/mainwnd.cpp" line="166"/>
         <source>Save as</source>
         <translation>Tallenna nimellä</translation>
     </message>
