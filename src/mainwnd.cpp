@@ -413,18 +413,18 @@ MainWindow::onProcStderrReady() {
         return;
 
     QString status, last = tmp.last();
-    if (last.startsWith("fetch")) {
+
+    if (last.startsWith("fetch"))
         status = tr("Fetching link...");
-    } else if (last.startsWith("verify")) {
+    else if (last.startsWith("verify"))
         status = tr("Verifying video link...");
-    } else if (last.startsWith("error:")) {
+    else if (last.startsWith("error:"))
         errorOccurred = true;
-    }
 
     if (newText.contains("file:")) {
-        status = tr("Extracting video...");
         QStringList tmp = newText.split(" ", QString::SkipEmptyParts);
         fileLabel->setText(tmp[1].remove("\n"));
+        status = tr("Extracting video...");
     }
 
     if (!status.isEmpty())
