@@ -6,9 +6,14 @@
      - --stream-exec, --stream
    * Add missing statusbar messages for menu items
    * Change "Save video as" label to checkbox
-   * Change following widgets to reflect video link changes dynamically:
-     - Continue partially transferred file
-     - (Download video) Format
+   * Add more widget dynamics in Options
+     - "Start streaming at" stays hidden unless cclive was built WITH_PERL=yes
+     - If paths have been defined in Preferences
+        - "Start streaming at" is enabled if "Stream command" is defined
+        - "Run external command" is enabled if "External command" is defined
+     - When URL changes
+       - "Continue partially transferred file" checkbox is enabled/disabled
+       - "Video Format" combobox list is recreated based on URL
    * Clean up widget texts
 
 
