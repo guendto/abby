@@ -5,7 +5,6 @@
      - --title, --title-cclass
      - --stream-exec, --stream
    * Add missing statusbar messages for menu items
-   * Change "Save video as" label to checkbox
    * Add more widget dynamics in Options
      - "Start streaming at" stays hidden unless cclive was built WITH_PERL=yes
      - If paths have been defined in Preferences
@@ -14,6 +13,8 @@
      - When URL changes
        - "Continue partially transferred file" checkbox is enabled/disabled
        - "Video Format" combobox list is recreated based on URL
+   * Change default window sizes
+   * Change "Save video as" label to checkbox
    * Clean up widget texts
 
 

@@ -120,7 +120,7 @@ void
 MainWindow::readSettings() {
     QSettings s;
     s.beginGroup("MainWindow");
-    resize(s.value("size",QSize(400,400)).toSize());
+    resize(s.value("size",QSize(525,265)).toSize());
     move(s.value("pos",QPoint(200,200)).toPoint());
     titleBox->setCheckState(
         s.value("titleBox").toBool()

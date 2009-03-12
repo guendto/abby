@@ -84,7 +84,7 @@ PreferencesDialog::readSettings() {
 
     s.beginGroup("PreferencesDialog");
 
-    resize(s.value("size",QSize(400,400)).toSize());
+    resize(s.value("size",QSize(525,205)).toSize());
     move(s.value("pos",QPoint(200,200)).toPoint());
 
     savedirEdit->setText(s.value("savedirEdit").toString());
