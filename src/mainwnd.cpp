@@ -112,7 +112,6 @@ MainWindow::writeSettings() {
     s.setValue("size",size());
     s.setValue("pos",pos());
     s.setValue("titleBox",titleBox->checkState());
-    s.setValue("formatCombo",formatCombo->currentIndex());
     s.endGroup();
 }
 
@@ -126,7 +125,6 @@ MainWindow::readSettings() {
         s.value("titleBox").toBool()
         ? Qt::Checked
         : Qt::Unchecked);
-    formatCombo->setCurrentIndex(s.value("formatCombo").toInt());
     s.endGroup();
 }
 
