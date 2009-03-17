@@ -1,8 +1,6 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-0.1.1
-
 0.1.x
 * create a proper window icon to replace the current "TODO" icon
   - contributions welcome and appreciated, mad skillz or not
