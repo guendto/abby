@@ -336,7 +336,7 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
              </sizepolicy>
             </property>
             <property name="text" >
-             <string>Video &amp;Format:</string>
+             <string>V&amp;ideo Format:</string>
             </property>
             <property name="buddy" >
              <cstring>formatCombo</cstring>
