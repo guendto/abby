@@ -353,9 +353,14 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
             </property>
             <property name="toolTip" >
              <string>Download format of the video. Note that different format
-typically means mean different video resolution. Also note
+typically means different video resolution. Also note
 that some formats may not always be available.</string>
             </property>
+            <item>
+             <property name="text" >
+              <string>flv</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
