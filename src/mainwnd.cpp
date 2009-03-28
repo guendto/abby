@@ -135,6 +135,41 @@ MainWindow::updateLog(QString newText) {
     logEdit->setPlainText(text);
 }
 
+void
+MainWindow::updateFormats(QString url) {
+    struct lookup_s {
+        const char *host;
+        const char *formats;
+    };
+    static const struct lookup_s lookup[] = {
+        {"youtube.com",     "mp4|xflv|3gpp"},
+        {"video.google.",   "mp4"},
+        {"dailymotion.com", "spak-mini|vp6-hq|vp6-hd|vp6|h264"},
+    };
+
+    const int c = sizeof(lookup)/sizeof(struct lookup_s);
+
+    QStringList formats;
+    formats << "flv";
+
+    for (int i=0; i<c; ++i) {
+        if (url.contains(lookup[i].host)) {
+            QString s = lookup[i].formats;
+            formats << s.split("|");
+            break;
+        }
+    }
+
+    QString last = formatCombo->currentText();
+
+    formatCombo->clear();
+    formatCombo->addItems(formats);
+
+    int n = formatCombo->findText(last);
+    if (n != -1)
+        formatCombo->setCurrentIndex(n);
+}
+
 
 // Slots
 
@@ -303,43 +338,13 @@ MainWindow::onAbout() {
 void
 MainWindow::onURLEditingFinished() {
 
-    // Change format combobox contents dynamically based on the video URL.
+    // Alter widgets dynamically based on the video URL.
 
     QString url = urlEdit->text();
     if (url.isEmpty())
         return;
 
-    struct lookup_s {
-        const char *host;
-        const char *formats;
-    };
-    static const struct lookup_s lookup[] = {
-        {"youtube.com",     "mp4|xflv|3gpp"},
-        {"video.google.",   "mp4"},
-        {"dailymotion.com", "spak-mini|vp6-hq|vp6-hd|vp6|h264"},
-    };
-
-    const int c = sizeof(lookup)/sizeof(struct lookup_s);
-
-    QStringList formats;
-    formats << "flv";
-
-    for (int i=0; i<c; ++i) {
-        if (url.contains(lookup[i].host)) {
-            QString s = lookup[i].formats;
-            formats << s.split("|");
-            break;
-        }
-    }
-
-    QString last = formatCombo->currentText();
-
-    formatCombo->clear();
-    formatCombo->addItems(formats);
-
-    int n = formatCombo->findText(last);
-    if (n != -1)
-        formatCombo->setCurrentIndex(n);
+    updateFormats(url);
 }
 
 void
@@ -381,7 +386,9 @@ MainWindow::onFormatStateChanged(int) {
 void
 MainWindow::onPasteURL() {
     QClipboard *cb = QApplication::clipboard();
-    urlEdit->setText(cb->text());
+    QString url = cb->text();
+    urlEdit->setText(url);
+    updateFormats(url);
 }
 
 void

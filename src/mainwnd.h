@@ -55,6 +55,7 @@ private:
     void updateLog(QString text);
     bool ccliveSupports(QString buildOption);
     void updateWidgets();
+    void updateFormats(QString url);
 protected:
     void closeEvent(QCloseEvent *event);
 };
