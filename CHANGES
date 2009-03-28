@@ -1,3 +1,13 @@
+0.1.2
+
+  User-visible changes:
+   * Add paste button next to start button
+   * Fix various tooltips
+   * Fix duplicate mnemonics
+     - English (&File - Video &Format)
+     - Finnish (multiple)
+
+
 0.1.1
 (March 17, 2009)
 
