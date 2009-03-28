@@ -39,6 +39,7 @@ private slots:
     void onStreamStateChanged(int state);
     void onURLEditingFinished();
     void onFormatStateChanged(int state);
+    void onPasteURL();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
     void onProcStderrReady();

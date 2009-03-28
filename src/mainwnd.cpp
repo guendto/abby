@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QIcon>
+#include <QClipboard>
 #include <QDebug>
 
 #include "mainwnd.h"
@@ -375,6 +376,12 @@ MainWindow::onFormatStateChanged(int) {
 
     if (continueBox->isChecked() && !enable)
         continueBox->setCheckState(Qt::Unchecked);
+}
+
+void
+MainWindow::onPasteURL() {
+    QClipboard *cb = QApplication::clipboard();
+    urlEdit->setText(cb->text());
 }
 
 void
