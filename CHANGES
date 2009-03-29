@@ -9,6 +9,8 @@
    * Replace common button texts with icons
    * Preferences dialog should now open centered and over the main window
      - the dialog was position was saved previously and moved when restored
+   * Bind return key (video address)
+     - Hitting enter after entering an URL starts now the download process
 
 
 0.1.1

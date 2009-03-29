@@ -746,6 +746,22 @@ this to work.</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>urlEdit</sender>
+   <signal>returnPressed()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onURLReturnPressed()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>227</x>
+     <y>84</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>271</x>
+     <y>144</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -758,5 +774,6 @@ this to work.</string>
   <slot>onURLEditingFinished()</slot>
   <slot>onFormatStateChanged(int)</slot>
   <slot>onPasteURL()</slot>
+  <slot>onURLReturnPressed()</slot>
  </slots>
 </ui>

@@ -136,7 +136,14 @@ MainWindow::updateLog(QString newText) {
 }
 
 void
-MainWindow::updateFormats(QString url) {
+MainWindow::updateFormats() {
+
+    // Alter widgets dynamically based on the video URL.
+
+    QString url = urlEdit->text();
+    if (url.isEmpty())
+        return;
+
     struct lookup_s {
         const char *host;
         const char *formats;
@@ -337,14 +344,12 @@ MainWindow::onAbout() {
 
 void
 MainWindow::onURLEditingFinished() {
+    updateFormats();
+}
 
-    // Alter widgets dynamically based on the video URL.
-
-    QString url = urlEdit->text();
-    if (url.isEmpty())
-        return;
-
-    updateFormats(url);
+void
+MainWindow::onURLReturnPressed() {
+    onStart();
 }
 
 void
@@ -386,9 +391,8 @@ MainWindow::onFormatStateChanged(int) {
 void
 MainWindow::onPasteURL() {
     QClipboard *cb = QApplication::clipboard();
-    QString url = cb->text();
-    urlEdit->setText(url);
-    updateFormats(url);
+    urlEdit->setText(cb->text());
+    updateFormats();
 }
 
 void

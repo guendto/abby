@@ -38,6 +38,7 @@ private slots:
     void onSaveasBrowse();
     void onStreamStateChanged(int state);
     void onURLEditingFinished();
+    void onURLReturnPressed();
     void onFormatStateChanged(int state);
     void onPasteURL();
     void onProcStarted();
@@ -55,7 +56,7 @@ private:
     void updateLog(QString text);
     bool ccliveSupports(QString buildOption);
     void updateWidgets();
-    void updateFormats(QString url);
+    void updateFormats();
 protected:
     void closeEvent(QCloseEvent *event);
 };
