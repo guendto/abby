@@ -1,6 +1,8 @@
 0.1.2
 
   User-visible changes:
+   * Add support for clive 2.1.10+
+     - As of this release, abby can be used as a front-end for clive as well
    * Add paste button next to start button
    * Fix various tooltips
    * Fix duplicate mnemonics
