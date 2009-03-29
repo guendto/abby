@@ -23,16 +23,6 @@
         <translation>Versio:</translation>
     </message>
     <message>
-        <location filename="../rc/aboutdlg.ui" line="65"/>
-        <source>cclive</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="../rc/aboutdlg.ui" line="85"/>
-        <source>libcurl:</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../rc/aboutdlg.ui" line="110"/>
         <source>License</source>
         <translation>Lisenssi</translation>
@@ -57,66 +47,76 @@ p, li { white-space: pre-wrap; }
         <source>Qt:</source>
         <translation></translation>
     </message>
+    <message>
+        <location filename="../rc/aboutdlg.ui" line="65"/>
+        <source>cclive/clive</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../rc/aboutdlg.ui" line="85"/>
+        <source>libcurl/WWW::Curl:</source>
+        <translation></translation>
+    </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwnd.cpp" line="212"/>
+        <location filename="../src/mainwnd.cpp" line="224"/>
         <source>Enter a video link.</source>
         <translation>Syötä video-sivun linkki.</translation>
     </message>
     <message>
         <location filename="../src/mainwnd.cpp" line="226"/>
         <source>Path to cclive command undefined. See preferences.</source>
-        <translation>Määrittelemätön polku cclive-ohjelmaan. Muuta asetuksia.</translation>
+        <translation type="obsolete">Määrittelemätön polku cclive-ohjelmaan. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="240"/>
+        <location filename="../src/mainwnd.cpp" line="256"/>
         <source>Save directory undefined. See preferences.</source>
         <translation>Määrittelemätön &quot;tallenna videot hakemistoon&quot; polku. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="412"/>
+        <location filename="../src/mainwnd.cpp" line="443"/>
         <source>error: failed to start process</source>
         <translation>virhe: prosessin käynnistäminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="430"/>
+        <location filename="../src/mainwnd.cpp" line="462"/>
         <source>Fetching link...</source>
         <translation>Haetaan tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="432"/>
+        <location filename="../src/mainwnd.cpp" line="464"/>
         <source>Verifying video link...</source>
         <translation>Tarkastetaan video tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="480"/>
+        <location filename="../src/mainwnd.cpp" line="512"/>
         <source>error: see log for details</source>
         <translation>virhe: katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="439"/>
+        <location filename="../src/mainwnd.cpp" line="471"/>
         <source>Extracting video...</source>
         <translation>Kopioidaan videota...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="471"/>
+        <location filename="../src/mainwnd.cpp" line="503"/>
         <source>Process exited with an error; see log</source>
         <translation>Prosessi päättyi virheeseen; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="471"/>
+        <location filename="../src/mainwnd.cpp" line="503"/>
         <source>Process exited normally</source>
         <translation>Prosessi päättyi normaalisti</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="475"/>
+        <location filename="../src/mainwnd.cpp" line="507"/>
         <source>Process terminated</source>
         <translation>Prosessi keskeytetty</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="475"/>
+        <location filename="../src/mainwnd.cpp" line="507"/>
         <source>Process crashed; see log</source>
         <translation>Prosessi kaatui; katso historia</translation>
     </message>
@@ -239,7 +239,7 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>&amp;Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="200"/>
+        <location filename="../src/mainwnd.cpp" line="212"/>
         <source>Save as</source>
         <translation>Tallenna nimellä</translation>
     </message>
@@ -378,6 +378,11 @@ saatavilla.</translation>
         <source>Stop process.</source>
         <translation>Keskeytä kopiointi.</translation>
     </message>
+    <message>
+        <location filename="../src/mainwnd.cpp" line="239"/>
+        <source>Path to cclive (or clive) command undefined. See preferences.</source>
+        <translation>Määrittelemätön polku cclive/clive-ohjelmaan. Muuta asetuksia.</translation>
+    </message>
 </context>
 <context>
     <name>PasswordDialog</name>
@@ -437,12 +442,12 @@ saatavilla.</translation>
     <message>
         <location filename="../rc/prefsdlg.ui" line="177"/>
         <source>&amp;Path to cclive:</source>
-        <translation>Pol&amp;ku cclive-ohjelmaan:</translation>
+        <translation type="obsolete">Pol&amp;ku cclive-ohjelmaan:</translation>
     </message>
     <message>
         <location filename="../rc/prefsdlg.ui" line="187"/>
         <source>Path to cclive command.</source>
-        <translation>Polku cclive-ohjelmaan.</translation>
+        <translation type="obsolete">Polku cclive-ohjelmaan.</translation>
     </message>
     <message>
         <location filename="../rc/prefsdlg.ui" line="209"/>
@@ -452,7 +457,7 @@ saatavilla.</translation>
     <message>
         <location filename="../rc/prefsdlg.ui" line="219"/>
         <source>Additional options to be passed to cclive.</source>
-        <translation>Ylimääräiset, cclive-ohjelmalle välitettävät parametrit.</translation>
+        <translation type="obsolete">Ylimääräiset, cclive-ohjelmalle välitettävät parametrit.</translation>
     </message>
     <message>
         <location filename="../rc/prefsdlg.ui" line="250"/>
@@ -558,11 +563,6 @@ vaihtoehdoissa määritellyn prosentti-määrän.
 Esimerkki: /usr/local/bin/mplayer -really-quiet %i</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="169"/>
-        <source>&amp;cclive</source>
-        <translation></translation>
-    </message>
-    <message>
         <location filename="../rc/prefsdlg.ui" line="242"/>
         <source>Co&amp;nnection</source>
         <translation>Y&amp;hteys</translation>
@@ -592,6 +592,26 @@ Lisää tietoja Perl-kielen tukemista merkki-luokista:
         <location filename="../rc/prefsdlg.ui" line="418"/>
         <source>&amp;Title character-class:</source>
         <translation>O&amp;tsikon siistimiseen käytetty merkki-luokka:</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="169"/>
+        <source>&amp;cclive/clive</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="177"/>
+        <source>&amp;Path to cclive/clive:</source>
+        <translation>Pol&amp;ku cclive/clive-ohjelmaan:</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="187"/>
+        <source>Path to cclive/clive command.</source>
+        <translation>Polku cclive/clive-ohjelmaan.</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="219"/>
+        <source>Additional options to be passed to cclive/clive.</source>
+        <translation>Ylimääräiset, cclive/clive-ohjelmalle välitettävät parametrit.</translation>
     </message>
 </context>
 </TS>
