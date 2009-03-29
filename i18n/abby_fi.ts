@@ -131,134 +131,110 @@ p, li { white-space: pre-wrap; }
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="43"/>
-        <source>Link to the video page to download the video from.
-
-Example: http://youtube.com/watch?v=3HD220e0bx4</source>
-        <translation>Linkki video-sivulle.
-
-Esimerkki: http://youtube.com/watch?v=3HD220e0bx4</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="66"/>
-        <source>&amp;Start</source>
-        <translation>&amp;Käynnistä</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="95"/>
+        <location filename="../rc/mainwnd.ui" line="87"/>
         <source>&amp;Progress</source>
         <translation>Ti&amp;edot</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="109"/>
+        <location filename="../rc/mainwnd.ui" line="101"/>
         <source>File:</source>
         <translation>Tiedosto:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="122"/>
+        <location filename="../rc/mainwnd.ui" line="114"/>
         <source>-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="139"/>
+        <location filename="../rc/mainwnd.ui" line="131"/>
         <source>Size:</source>
         <translation>Koko:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="149"/>
+        <location filename="../rc/mainwnd.ui" line="141"/>
         <source>-- / --</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="162"/>
+        <location filename="../rc/mainwnd.ui" line="154"/>
         <source>Rate:</source>
         <translation>Nopeus:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="175"/>
+        <location filename="../rc/mainwnd.ui" line="167"/>
         <source>--.-</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="188"/>
+        <location filename="../rc/mainwnd.ui" line="180"/>
         <source>ETA:</source>
         <translation>Jäljellä:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="201"/>
+        <location filename="../rc/mainwnd.ui" line="193"/>
         <source>--:--</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="240"/>
-        <source>&amp;Cancel</source>
-        <translation>&amp;Keskeytä</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="271"/>
+        <location filename="../rc/mainwnd.ui" line="270"/>
         <source>&amp;Options</source>
         <translation>Va&amp;ihtoehdot</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="431"/>
+        <location filename="../rc/mainwnd.ui" line="434"/>
         <source>Run the command specified in the preferences after
 download finishes.</source>
         <translation>Suorita asetuksissa määritelty komento kopioinnin
 jälkeen.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="313"/>
+        <location filename="../rc/mainwnd.ui" line="316"/>
         <source>&amp;Continue partially downloaded file</source>
         <translation>&amp;Jatka osittain kopioitua tiedostoa</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="282"/>
+        <location filename="../rc/mainwnd.ui" line="281"/>
         <source>&amp;Save video as:</source>
         <translation>Ta&amp;llenna video nimellä:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="279"/>
+        <location filename="../rc/mainwnd.ui" line="278"/>
         <source>Write video to file. Overrides default file naming.</source>
         <translation>Tallenna video tiedostoon. Ohittaa tavanomaisen cclive-ohjelmassa
 käytetyn tiedostojen nimeämistavan.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="299"/>
-        <source>&amp;Browse</source>
-        <translation>&amp;Selaa</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="499"/>
+        <location filename="../rc/mainwnd.ui" line="502"/>
         <source>&amp;File</source>
         <translation>&amp;Tiedosto</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="507"/>
+        <location filename="../rc/mainwnd.ui" line="510"/>
         <source>&amp;Edit</source>
         <translation>&amp;Muokkaa</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="517"/>
+        <location filename="../rc/mainwnd.ui" line="520"/>
         <source>&amp;Quit</source>
         <translation>&amp;Lopeta</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="523"/>
+        <location filename="../rc/mainwnd.ui" line="526"/>
         <source>Ctrl+Q</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="531"/>
+        <location filename="../rc/mainwnd.ui" line="534"/>
         <source>Prefere&amp;nces...</source>
         <translation>&amp;Asetukset...</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="537"/>
+        <location filename="../rc/mainwnd.ui" line="540"/>
         <source>Ctrl+E</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="542"/>
+        <location filename="../rc/mainwnd.ui" line="545"/>
         <source>&amp;About...</source>
         <translation>&amp;Tietoja...</translation>
     </message>
@@ -268,22 +244,22 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>Tallenna nimellä</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="520"/>
+        <location filename="../rc/mainwnd.ui" line="523"/>
         <source>Quit abby</source>
         <translation>Lopeta ohjelma</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="534"/>
+        <location filename="../rc/mainwnd.ui" line="537"/>
         <source>Edit preferences</source>
         <translation>Muokkaa asetuksia</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="545"/>
+        <location filename="../rc/mainwnd.ui" line="548"/>
         <source>About abby</source>
         <translation>Tietoja ohjelmasta</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="373"/>
+        <location filename="../rc/mainwnd.ui" line="376"/>
         <source>Run the stream command defined in the preferences when
 the file transfer reaches the specified percent done.
 
@@ -301,7 +277,7 @@ ominaisuuden käyttö on suositeltavaa vain laaja-
 kaistakäyttöön.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="398"/>
+        <location filename="../rc/mainwnd.ui" line="401"/>
         <source>Stream command is started when file transfer
 reaches this percentage. Be sure to set it 
 high enough to make sure that there is enough
@@ -312,23 +288,12 @@ asettaa se tarpeeksi korkeaksi, varmistaaksesi
 keskeytymätön videon toisto.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="404"/>
+        <location filename="../rc/mainwnd.ui" line="407"/>
         <source>%</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="355"/>
-        <source>Download format of the video. Note that different format
-typically means mean different video resolution. Also note
-that some formats may not always be available.</source>
-        <translation type="obsolete">Kopioitava tiedostomuoto. Huomaa, että tiedostomuoto
-useasti määrää kuvanlaadun riippuen web-palvelun tavasta
-tallentaa käyttäjien lähettämät videot. Huomaa myös, että
-kaikki tuetut tiedostomuodot eivät ole välttämättä aina
-saatavilla.</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="310"/>
+        <location filename="../rc/mainwnd.ui" line="313"/>
         <source>Continue a partially downloaded video file.</source>
         <translation>Jatka osittain kopioitua tiedostoa.</translation>
     </message>
@@ -338,27 +303,22 @@ saatavilla.</translation>
         <translation>&amp;Video</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="33"/>
-        <source>Video &amp;Link:</source>
-        <translation>Video &amp;Linkki:</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="250"/>
+        <location filename="../rc/mainwnd.ui" line="249"/>
         <source>Lo&amp;g</source>
         <translation>&amp;Historia</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="382"/>
+        <location filename="../rc/mainwnd.ui" line="385"/>
         <source>S&amp;tart streaming at:</source>
         <translation>&amp;Aloita toisto:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="435"/>
+        <location filename="../rc/mainwnd.ui" line="438"/>
         <source>&amp;Run external command when download finishes</source>
         <translation>Suo&amp;rita komento kopioinnin jälkeen</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="470"/>
+        <location filename="../rc/mainwnd.ui" line="473"/>
         <source>Use video page title for naming downloaded files.
 See also the Preferences for the character-class
 used to clean up the video page titles.
@@ -373,22 +333,17 @@ Huomaa, että cclive-ohjelman täytyy olla käännetty
 WITH_PERL=yes asetuksilla.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="478"/>
+        <location filename="../rc/mainwnd.ui" line="481"/>
         <source>&amp;Use video page title for naming</source>
         <translation>&amp;Käytä video-sivun otsikkotietoja tiedostojen nimeämiseen</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="52"/>
-        <source>Paste</source>
-        <translation>Liitä</translation>
-    </message>
-    <message>
-        <location filename="../rc/mainwnd.ui" line="339"/>
+        <location filename="../rc/mainwnd.ui" line="342"/>
         <source>V&amp;ideo Format:</source>
         <translation>K&amp;opioitava tiedostomuoto:</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="355"/>
+        <location filename="../rc/mainwnd.ui" line="358"/>
         <source>Download format of the video. Note that different format
 typically means different video resolution. Also note
 that some formats may not always be available.</source>
@@ -399,9 +354,29 @@ kaikki tuetut tiedostomuodot eivät ole välttämättä aina
 saatavilla.</translation>
     </message>
     <message>
-        <location filename="../rc/mainwnd.ui" line="361"/>
+        <location filename="../rc/mainwnd.ui" line="364"/>
         <source>flv</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="33"/>
+        <source>Address to a video page.</source>
+        <translation>Osoite video sivulle.</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="40"/>
+        <source>Paste an address from the clipboard.</source>
+        <translation>Liitä osoite.</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="54"/>
+        <source>Download video from the address.</source>
+        <translation>Kopioi video osoitteesta.</translation>
+    </message>
+    <message>
+        <location filename="../rc/mainwnd.ui" line="232"/>
+        <source>Stop process.</source>
+        <translation>Keskeytä kopiointi.</translation>
     </message>
 </context>
 <context>
@@ -455,121 +430,106 @@ saatavilla.</translation>
         <translation>Tallenna kopioidut tiedostot tähän hakemistoon.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="81"/>
-        <source>&amp;Browse</source>
-        <translation>&amp;Selaa</translation>
-    </message>
-    <message>
-        <location filename="../rc/prefsdlg.ui" line="123"/>
+        <location filename="../rc/prefsdlg.ui" line="131"/>
         <source>E&amp;xternal command:</source>
         <translation>S&amp;uoritettava komento:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="147"/>
-        <source>Bro&amp;wse</source>
-        <translation>S&amp;elaa</translation>
-    </message>
-    <message>
-        <location filename="../rc/prefsdlg.ui" line="165"/>
+        <location filename="../rc/prefsdlg.ui" line="177"/>
         <source>&amp;Path to cclive:</source>
         <translation>Pol&amp;ku cclive-ohjelmaan:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="175"/>
+        <location filename="../rc/prefsdlg.ui" line="187"/>
         <source>Path to cclive command.</source>
         <translation>Polku cclive-ohjelmaan.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="182"/>
-        <source>Brows&amp;e</source>
-        <translation>Sel&amp;aa</translation>
-    </message>
-    <message>
-        <location filename="../rc/prefsdlg.ui" line="193"/>
+        <location filename="../rc/prefsdlg.ui" line="209"/>
         <source>&amp;Additional options:</source>
         <translation>Ylimääräiset &amp;parametrit:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="203"/>
+        <location filename="../rc/prefsdlg.ui" line="219"/>
         <source>Additional options to be passed to cclive.</source>
         <translation>Ylimääräiset, cclive-ohjelmalle välitettävät parametrit.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="234"/>
+        <location filename="../rc/prefsdlg.ui" line="250"/>
         <source>Whether use a HTTP proxy for connections.
 If unsure, leave to &quot;No Proxy&quot;.</source>
         <translation>Käytä HTTP proxy -välityspalvelinta.
 Valitse &quot;Ei välityspalvelinta&quot; jos olet epävarma.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="239"/>
+        <location filename="../rc/prefsdlg.ui" line="255"/>
         <source>No Proxy</source>
         <translation>Ei välityspalvelinta</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="244"/>
+        <location filename="../rc/prefsdlg.ui" line="260"/>
         <source>Use Proxy</source>
         <translation>Käytä välityspalvelinta</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="263"/>
+        <location filename="../rc/prefsdlg.ui" line="279"/>
         <source>Limit download transfer speed.</source>
         <translation>Rajoita siirtonopeutta.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="266"/>
+        <location filename="../rc/prefsdlg.ui" line="282"/>
         <source>&amp;Limit transfer rate:</source>
         <translation>&amp;Rajoita siirtonopeutta:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="276"/>
+        <location filename="../rc/prefsdlg.ui" line="292"/>
         <source>KB/s</source>
         <translation>KT/s</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="318"/>
+        <location filename="../rc/prefsdlg.ui" line="334"/>
         <source>&amp;Youtube</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="324"/>
+        <location filename="../rc/prefsdlg.ui" line="340"/>
         <source>Usually needed only to download videos that have
 been flagged as mature content.</source>
         <translation>Tarpeellinen ainoastaan kopioitaessa videoita, jotka ovat
 merkitty vain aikuisille sopiviksi.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="328"/>
+        <location filename="../rc/prefsdlg.ui" line="344"/>
         <source>&amp;Log in</source>
         <translation>&amp;Kirjaudu sisään</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="340"/>
+        <location filename="../rc/prefsdlg.ui" line="356"/>
         <source>&amp;Username:</source>
         <translation>Käyttä&amp;jä:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="357"/>
+        <location filename="../rc/prefsdlg.ui" line="373"/>
         <source>&amp;Password:</source>
         <translation>&amp;Salasana:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="367"/>
+        <location filename="../rc/prefsdlg.ui" line="383"/>
         <source>Leave empty if you want abby to prompt for it.</source>
         <translation>Jos tyhjä, abby kysyy salasanaa käynnistettäessä.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="394"/>
+        <location filename="../rc/prefsdlg.ui" line="410"/>
         <source>&amp;Misc</source>
         <translation>&amp;Muut</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="431"/>
+        <location filename="../rc/prefsdlg.ui" line="447"/>
         <source>&amp;Language:</source>
         <translation>&amp;Kieli:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="133"/>
+        <location filename="../rc/prefsdlg.ui" line="141"/>
         <source>Command to be run after finishing downloading. You may
 use the &quot;%i&quot; specifier which will be replaced by the
 name of the downloaded video file.
@@ -582,12 +542,12 @@ tiedoston nimen paikkaa komennossa.
 Esimerkki: /usr/local/bin/mplayer %i</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="92"/>
+        <location filename="../rc/prefsdlg.ui" line="96"/>
         <source>S&amp;tream command:</source>
         <translation>St&amp;ream-komento:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="102"/>
+        <location filename="../rc/prefsdlg.ui" line="106"/>
         <source>Command to be run when file transfer reaches the
 percentage specified in the options.
 
@@ -598,22 +558,17 @@ vaihtoehdoissa määritellyn prosentti-määrän.
 Esimerkki: /usr/local/bin/mplayer -really-quiet %i</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="112"/>
-        <source>B&amp;rowse</source>
-        <translation>Se&amp;laa</translation>
-    </message>
-    <message>
-        <location filename="../rc/prefsdlg.ui" line="157"/>
+        <location filename="../rc/prefsdlg.ui" line="169"/>
         <source>&amp;cclive</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="226"/>
+        <location filename="../rc/prefsdlg.ui" line="242"/>
         <source>Co&amp;nnection</source>
         <translation>Y&amp;hteys</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="412"/>
+        <location filename="../rc/prefsdlg.ui" line="428"/>
         <source>Character-class used to clean up video page
 titles before they are used for naming the
 downloaded video files.
@@ -634,7 +589,7 @@ Lisää tietoja Perl-kielen tukemista merkki-luokista:
   &lt;http://perldoc.perl.org/perlrequick.html&gt;</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="402"/>
+        <location filename="../rc/prefsdlg.ui" line="418"/>
         <source>&amp;Title character-class:</source>
         <translation>O&amp;tsikon siistimiseen käytetty merkki-luokka:</translation>
     </message>

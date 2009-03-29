@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>212</height>
+    <height>223</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -78,7 +78,11 @@
          <item>
           <widget class="QPushButton" name="savedirButton" >
            <property name="text" >
-            <string>&amp;Browse</string>
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
@@ -109,7 +113,11 @@ Example: /usr/local/bin/mplayer -really-quiet %i</string>
          <item>
           <widget class="QPushButton" name="streamButton" >
            <property name="text" >
-            <string>B&amp;rowse</string>
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
@@ -144,7 +152,11 @@ Example: /usr/local/bin/mplayer %i</string>
          <item>
           <widget class="QPushButton" name="commandButton" >
            <property name="text" >
-            <string>Bro&amp;wse</string>
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
@@ -179,7 +191,11 @@ Example: /usr/local/bin/mplayer %i</string>
          <item>
           <widget class="QPushButton" name="ccliveBrowse" >
            <property name="text" >
-            <string>Brows&amp;e</string>
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
@@ -494,7 +510,9 @@ For more on Perl character-classes:
   <tabstop>buttonBox</tabstop>
   <tabstop>tabWidget</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="abby.qrc" />
+ </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>

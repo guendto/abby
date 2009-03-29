@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>543</width>
-    <height>284</height>
+    <height>289</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -28,28 +28,16 @@
         <item row="0" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout" >
           <item>
-           <widget class="QLabel" name="label" >
-            <property name="text" >
-             <string>Video &amp;Link:</string>
-            </property>
-            <property name="buddy" >
-             <cstring>urlEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QLineEdit" name="urlEdit" >
             <property name="toolTip" >
-             <string>Link to the video page to download the video from.
-
-Example: http://youtube.com/watch?v=3HD220e0bx4</string>
+             <string>Address to a video page.</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="pasteButton" >
             <property name="toolTip" >
-             <string>Paste</string>
+             <string>Paste an address from the clipboard.</string>
             </property>
             <property name="text" >
              <string/>
@@ -62,8 +50,12 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
           </item>
           <item>
            <widget class="QPushButton" name="startButton" >
-            <property name="text" >
-             <string>&amp;Start</string>
+            <property name="toolTip" >
+             <string>Download video from the address.</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="abby.qrc" >
+              <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
             </property>
            </widget>
           </item>
@@ -236,8 +228,15 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
                   <verstretch>0</verstretch>
                  </sizepolicy>
                 </property>
+                <property name="toolTip" >
+                 <string>Stop process.</string>
+                </property>
                 <property name="text" >
-                 <string>&amp;Cancel</string>
+                 <string/>
+                </property>
+                <property name="icon" >
+                 <iconset resource="abby.qrc" >
+                  <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
                 </property>
                </widget>
               </item>
@@ -296,7 +295,11 @@ Example: http://youtube.com/watch?v=3HD220e0bx4</string>
              <bool>false</bool>
             </property>
             <property name="text" >
-             <string>&amp;Browse</string>
+             <string/>
+            </property>
+            <property name="icon" >
+             <iconset resource="abby.qrc" >
+              <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
             </property>
            </widget>
           </item>
