@@ -62,7 +62,7 @@
      <item>
       <widget class="QGroupBox" name="groupBox" >
        <property name="title" >
-        <string>cclive</string>
+        <string>cclive/clive</string>
        </property>
        <layout class="QGridLayout" name="gridLayout" >
         <item row="0" column="0" >
@@ -82,7 +82,7 @@
         <item row="1" column="0" >
          <widget class="QLabel" name="label" >
           <property name="text" >
-           <string>libcurl:</string>
+           <string>libcurl/WWW::Curl:</string>
           </property>
          </widget>
         </item>
@@ -145,7 +145,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <includes/>
  <resources/>
  <connections>
   <connection>

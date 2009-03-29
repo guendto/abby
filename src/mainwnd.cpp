@@ -41,10 +41,9 @@ MainWindow::MainWindow():
     const QString lang = tr("English");
 
     setupUi(this);
-    setWindowIcon(QIcon(":/rc/abby.png"));
     readSettings();
 
-    prefs = new PreferencesDialog(this);
+    setWindowIcon(QIcon(":/rc/abby.png"));
 
     connect(&process, SIGNAL(started()),
         this, SLOT(onProcStarted()));
@@ -55,20 +54,26 @@ MainWindow::MainWindow():
     connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)),
         this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
 
+    prefs = new PreferencesDialog(this);
     updateWidgets();
 }
 
 bool
 MainWindow::ccliveSupports(QString buildOption) {
-    bool state = false;
-    QString cclivePath = prefs->ccliveEdit->text();
-    if (!cclivePath.isEmpty()) {
+    bool state      = false;
+    QString path    = prefs->ccliveEdit->text();
+
+    QFileInfo fi(path);
+    if (fi.fileName() == "clive" && buildOption == "--with-perl")
+        return false; // To keep the titleBox hidden always
+
+    if (!path.isEmpty()) {
         QProcess cclive;
         cclive.setProcessChannelMode(QProcess::MergedChannels);
-        cclive.start(cclivePath, QStringList() << "--version");
+        cclive.start(path, QStringList() << "--version");
 
         if (!cclive.waitForFinished())
-            qDebug() << "cclive failed:" << cclive.errorString();
+            qDebug() << fi.fileName() << " failed:" << cclive.errorString();
         else {
             QString output = QString::fromLocal8Bit(cclive.readAll());
             return output.contains(buildOption);
@@ -230,10 +235,14 @@ MainWindow::onStart() {
     QString cclive = prefs->ccliveEdit->text();
     if (cclive.isEmpty()) {
         QMessageBox::information(this,QCoreApplication::applicationName(),
-            tr("Path to cclive command undefined. See preferences."));
+            tr("Path to cclive (or clive) command undefined. "
+                "See preferences."));
         onPreferences();
         return;
     }
+
+    QFileInfo fi(cclive);
+    const bool isCclive = fi.fileName() == "cclive";
 
     // Check video save directory
 
@@ -248,12 +257,22 @@ MainWindow::onStart() {
         onPreferences();
         return;
     }
+
+    // clive can use this same approach even if --savedir option exists.
     process.setWorkingDirectory(savedir);
 
     // Construct cclive args
 
     QStringList args;
-    args << "--print-fname";
+    QStringList env;
+    if (isCclive) {
+        args << "--print-fname";
+    } else {
+        args << "--renew" << "--stderr";
+        env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
+             // clive depends on $HOME variable
+             << QString("HOME=%1").arg(QDir::homePath());
+    }
 
     QString s = prefs->additionalEdit->text();
     if (!s.isEmpty())
@@ -280,9 +299,11 @@ MainWindow::onStart() {
             args << QString("--proxy=%1").arg(s);
     }
 
-    if (prefs->limitBox->checkState()) {
-        int n = prefs->limitSpin->value();
-        args << QString("--limit-rate=%1").arg(n);
+    if (isCclive) { // clive does not currently support this feature
+        if (prefs->limitBox->checkState()) {
+            int n = prefs->limitSpin->value();
+            args << QString("--limit-rate=%1").arg(n);
+        }
     }
 
     if (prefs->youtubeGroup->isChecked()) {
@@ -306,27 +327,33 @@ MainWindow::onStart() {
     if (continueBox->isChecked())
         args << "--continue";
 
-    if (titleBox->isChecked()) {
-        args << "--title";
+    if (isCclive) { // clive defaults to this
+        if (titleBox->isChecked()) {
+            args << "--title";
+            s = prefs->cclassEdit->text();
+                if (!s.isEmpty())
+            args << QString("--title-cclass=%1").arg(s);
+        }
+    } else { // this clive can use
         s = prefs->cclassEdit->text();
         if (!s.isEmpty())
-            args << QString("--title-cclass=%1").arg(s);
+            args << QString("--cclass=%1").arg(s);
     }
-
     s = formatCombo->currentText();
     if (s.isEmpty())
         s = "flv";
-    args << QString("--download=%1").arg(s);
+    args << QString("--%1=%2").arg(isCclive ? "download":"format").arg(s);
     args << QString("%1").arg(url);
 
     // Prepare log
 
     logEdit->clear();
-    updateLog("% cclive " +args.join(" ")+ "\n");
+    updateLog("% " +fi.fileName() +" "+ args.join(" ")+ "\n");
 
     // And finally start the process
 
     cancelled = false;
+    process.setEnvironment(env);
     process.start(cclive,args);
 }
 
@@ -429,10 +456,11 @@ MainWindow::onProcStderrReady() {
         return;
 
     QString status, last = tmp.last();
+    //qDebug() << last;
 
     if (last.startsWith("fetch"))
         status = tr("Fetching link...");
-    else if (last.startsWith("verify"))
+    else if (last.startsWith("verify") || last.startsWith("query length") )
         status = tr("Verifying video link...");
     else if (last.startsWith("error:"))
         errorOccurred = true;

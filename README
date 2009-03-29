@@ -2,8 +2,11 @@
 
                 abby - for the command line fearing masses
 
-abby is a front-end for cclive video extraction utility. It is
+abby is a front-end for cclive and clive video extraction utilities. It is
 written in C++ and depends on the Qt 4.3+ framework.
+
+abby was originally written for cclive but as of 0.1.2 works with clive
+(2.1.10+) as well.
 
 
                 Prerequisites
@@ -12,6 +15,8 @@ written in C++ and depends on the Qt 4.3+ framework.
 to install the development files also.
   
 - cclive 0.2.4+, from http://code.google.com/p/cclive/
+Or:
+- clive 2.1.10+, from http://code.google.com/p/clive/
 
 
                 Compiling abby

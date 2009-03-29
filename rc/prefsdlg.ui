@@ -166,7 +166,7 @@ Example: /usr/local/bin/mplayer %i</string>
      </widget>
      <widget class="QWidget" name="tab_5" >
       <attribute name="title" >
-       <string>&amp;cclive</string>
+       <string>&amp;cclive/clive</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_7" >
        <item row="0" column="0" >
@@ -174,7 +174,7 @@ Example: /usr/local/bin/mplayer %i</string>
          <item>
           <widget class="QLabel" name="label_7" >
            <property name="text" >
-            <string>&amp;Path to cclive:</string>
+            <string>&amp;Path to cclive/clive:</string>
            </property>
            <property name="buddy" >
             <cstring>ccliveEdit</cstring>
@@ -184,7 +184,7 @@ Example: /usr/local/bin/mplayer %i</string>
          <item>
           <widget class="QLineEdit" name="ccliveEdit" >
            <property name="toolTip" >
-            <string>Path to cclive command.</string>
+            <string>Path to cclive/clive command.</string>
            </property>
           </widget>
          </item>
@@ -216,7 +216,7 @@ Example: /usr/local/bin/mplayer %i</string>
          <item>
           <widget class="QLineEdit" name="additionalEdit" >
            <property name="toolTip" >
-            <string>Additional options to be passed to cclive.</string>
+            <string>Additional options to be passed to cclive/clive.</string>
            </property>
           </widget>
          </item>

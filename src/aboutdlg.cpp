@@ -18,6 +18,7 @@
 #include <QDialog>
 #include <QProcess>
 #include <QDebug>
+#include <QFileInfo>
 
 #include "aboutdlg.h"
 
@@ -35,8 +36,10 @@ AboutDialog::AboutDialog(QWidget *parent, QString cclivePath)
         cclive.setProcessChannelMode(QProcess::MergedChannels);
         cclive.start(cclivePath, QStringList() << "--version");
 
+        QFileInfo fi(cclivePath);
+
         if (!cclive.waitForFinished())
-            qDebug() << "cclive failed:" << cclive.errorString();
+            qDebug() << fi.fileName() << " failed:" << cclive.errorString();
         else {
             QString output = QString::fromLocal8Bit(cclive.readAll());
             QStringList lst = output.split(" ",QString::SkipEmptyParts);
