@@ -56,7 +56,7 @@ PreferencesDialog::writeSettings() {
     s.beginGroup("PreferencesDialog");
 
     s.setValue("size",size());
-    s.setValue("pos",pos());
+    //s.setValue("pos",pos());
 
     s.setValue("savedirEdit",savedirEdit->text());
     s.setValue("streamEdit",streamEdit->text());
@@ -85,7 +85,7 @@ PreferencesDialog::readSettings() {
     s.beginGroup("PreferencesDialog");
 
     resize(s.value("size",QSize(525,205)).toSize());
-    move(s.value("pos",QPoint(200,200)).toPoint());
+    //move(s.value("pos",QPoint(200,200)).toPoint());
 
     savedirEdit->setText(s.value("savedirEdit").toString());
     streamEdit->setText(s.value("streamEdit").toString());
