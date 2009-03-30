@@ -2,17 +2,18 @@
 
   User-visible changes:
    * Add support for clive 2.1.10+
-     - As of this release, abby can be used as a front-end for clive as well
+     - abby can now be used as a front-end for clive (2.1.10+) as well
    * Add paste button next to start button
    * Fix various tooltips
-   * Fix duplicate mnemonics
+     - Typos, missing, etc.
+   * Fix duplicate key shortcuts
      - English (&File - Video &Format)
      - Finnish (multiple)
    * Replace common button texts with icons
    * Preferences dialog should now open centered and over the main window
-     - the dialog was position was saved previously and moved when restored
-   * Bind return key (video address)
-     - Hitting enter after entering an URL starts now the download process
+     - Dialog position previously saved and restored
+   * Bind return key to address
+     - Hitting enter starts download
 
 
 0.1.1
