@@ -5,7 +5,7 @@
 abby is a front-end for cclive and clive video extraction utilities. It is
 written in C++ and depends on the Qt 4.3+ framework.
 
-abby was originally written for cclive but as of 0.1.2 works with clive
+abby was originally written for cclive but as of 0.2.0 works with clive
 (2.1.10+) as well.
 
 

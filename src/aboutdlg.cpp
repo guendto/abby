@@ -27,7 +27,7 @@ AboutDialog::AboutDialog(QWidget *parent, QString cclivePath)
 {
     setupUi(this);
 
-    abbyVersionLabel->setText("0.1.2");
+    abbyVersionLabel->setText("0.2.0");
     //QCoreApplication::applicationVersion()); // 4.4+
     qtVersionLabel->setText(qVersion());
 
