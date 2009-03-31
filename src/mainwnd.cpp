@@ -59,27 +59,31 @@ MainWindow::MainWindow():
 }
 
 bool
-MainWindow::ccliveSupports(QString buildOption) {
-    bool state      = false;
-    QString path    = prefs->ccliveEdit->text();
+MainWindow::isCclive(QString path, QString &output) {
+    QProcess process;
+    process.setProcessChannelMode(QProcess::MergedChannels);
+    process.start(path, QStringList() << "--version");
 
-    QFileInfo fi(path);
-    if (fi.fileName() == "clive" && buildOption == "--with-perl")
-        return false; // To keep the titleBox hidden always
-
-    if (!path.isEmpty()) {
-        QProcess cclive;
-        cclive.setProcessChannelMode(QProcess::MergedChannels);
-        cclive.start(path, QStringList() << "--version");
-
-        if (!cclive.waitForFinished())
-            qDebug() << fi.fileName() << " failed:" << cclive.errorString();
-        else {
-            QString output = QString::fromLocal8Bit(cclive.readAll());
-            return output.contains(buildOption);
-        }
+    bool state = false;
+    if (!process.waitForFinished())
+        qDebug() << path << ": " << process.errorString();
+    else {
+        output =  QString::fromLocal8Bit(process.readAll());
+        QStringList lst = output.split(" ", QString::SkipEmptyParts);
+        state = lst[0] == "cclive";
     }
     return state;
+}
+
+bool
+MainWindow::ccliveSupports(QString buildOption) {
+    QString output, path = prefs->ccliveEdit->text();
+    const bool _isCclive = isCclive(path,output);
+
+    if (!_isCclive && buildOption == "--with-perl")
+        return false; // To keep the titleBox hidden always 
+
+    return output.contains(buildOption);
 }
 
 void
@@ -97,9 +101,9 @@ MainWindow::updateWidgets() {
     if (s.isEmpty())
         commandBox->setCheckState(Qt::Unchecked);
 
-    if (ccliveSupports("--with-perl"))
+    if (ccliveSupports("--with-perl")) {
         titleBox->show();
-    else {
+    } else {
         titleBox->setCheckState(Qt::Unchecked);
         titleBox->hide();
     }
@@ -232,8 +236,8 @@ MainWindow::onStart() {
 
     // Check cclive
 
-    QString cclive = prefs->ccliveEdit->text();
-    if (cclive.isEmpty()) {
+    QString path = prefs->ccliveEdit->text();
+    if (path.isEmpty()) {
         QMessageBox::information(this,QCoreApplication::applicationName(),
             tr("Path to cclive (or clive) command undefined. "
                 "See preferences."));
@@ -241,8 +245,8 @@ MainWindow::onStart() {
         return;
     }
 
-    QFileInfo fi(cclive);
-    const bool isCclive = fi.fileName() == "cclive";
+    QString output;
+    const bool _isCclive = isCclive(path,output);
 
     // Check video save directory
 
@@ -265,7 +269,7 @@ MainWindow::onStart() {
 
     QStringList args;
     QStringList env;
-    if (isCclive) {
+    if (_isCclive) {
         args << "--print-fname";
     } else {
         args << "--renew" << "--stderr";
@@ -299,7 +303,7 @@ MainWindow::onStart() {
             args << QString("--proxy=%1").arg(s);
     }
 
-    if (isCclive) { // clive does not currently support this feature
+    if (_isCclive) { // clive does not currently support this feature
         if (prefs->limitBox->checkState()) {
             int n = prefs->limitSpin->value();
             args << QString("--limit-rate=%1").arg(n);
@@ -327,7 +331,7 @@ MainWindow::onStart() {
     if (continueBox->isChecked())
         args << "--continue";
 
-    if (isCclive) { // clive defaults to this
+    if (_isCclive) { // clive defaults to this
         if (titleBox->isChecked()) {
             args << "--title";
             s = prefs->cclassEdit->text();
@@ -342,19 +346,19 @@ MainWindow::onStart() {
     s = formatCombo->currentText();
     if (s.isEmpty())
         s = "flv";
-    args << QString("--%1=%2").arg(isCclive ? "download":"format").arg(s);
+    args << QString("--%1=%2").arg(_isCclive ? "download":"format").arg(s);
     args << QString("%1").arg(url);
 
     // Prepare log
 
     logEdit->clear();
-    updateLog("% " +fi.fileName() +" "+ args.join(" ")+ "\n");
+    updateLog("% " +path+ " " +args.join(" ")+ "\n");
 
     // And finally start the process
 
     cancelled = false;
     process.setEnvironment(env);
-    process.start(cclive,args);
+    process.start(path,args);
 }
 
 void

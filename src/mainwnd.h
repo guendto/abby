@@ -57,6 +57,7 @@ private:
     bool ccliveSupports(QString buildOption);
     void updateWidgets();
     void updateFormats();
+    bool isCclive(QString path, QString &output);
 protected:
     void closeEvent(QCloseEvent *event);
 };
