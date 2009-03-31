@@ -18,11 +18,10 @@
 #include <QDialog>
 #include <QProcess>
 #include <QDebug>
-#include <QFileInfo>
 
 #include "aboutdlg.h"
 
-AboutDialog::AboutDialog(QWidget *parent, QString cclivePath)
+AboutDialog::AboutDialog(QWidget *parent, QString path)
     : QDialog(parent)
 {
     setupUi(this);
@@ -31,17 +30,15 @@ AboutDialog::AboutDialog(QWidget *parent, QString cclivePath)
     //QCoreApplication::applicationVersion()); // 4.4+
     qtVersionLabel->setText(qVersion());
 
-    if (!cclivePath.isEmpty()) {
-        QProcess cclive;
-        cclive.setProcessChannelMode(QProcess::MergedChannels);
-        cclive.start(cclivePath, QStringList() << "--version");
+    if (!path.isEmpty()) {
+        QProcess process;
+        process.setProcessChannelMode(QProcess::MergedChannels);
+        process.start(path, QStringList() << "--version");
 
-        QFileInfo fi(cclivePath);
-
-        if (!cclive.waitForFinished())
-            qDebug() << fi.fileName() << " failed:" << cclive.errorString();
+        if (!process.waitForFinished())
+            qDebug() << path << ": " << process.errorString();
         else {
-            QString output = QString::fromLocal8Bit(cclive.readAll());
+            QString output = QString::fromLocal8Bit(process.readAll());
             QStringList lst = output.split(" ",QString::SkipEmptyParts);
             ccliveVersionLabel->setText(lst[2]);
             curlVersionLabel->setText(lst[6]);
