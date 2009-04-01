@@ -3,6 +3,7 @@
   User-visible changes:
    * Add support for clive 2.1.10+
      - abby can now be used as a front-end for clive (2.1.10+) as well
+   * Add support for Youtube HD (mp4_hd) format
    * Add paste button next to start button
    * Fix various tooltips
      - Typos, missing, etc.
