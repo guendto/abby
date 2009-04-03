@@ -4,17 +4,18 @@
    * Add support for clive 2.1.10+
      - abby can now be used as a front-end for clive (2.1.10+) as well
    * Add support for Youtube HD (mp4_hd) format
-   * Add paste button next to start button
-   * Fix various tooltips
+     - Added in cclive 0.3.1
+     - Added in clive 2.1.10
+   * Fix tooltips
      - Typos, missing, etc.
    * Fix duplicate key shortcuts
      - English (&File - Video &Format)
      - Finnish (multiple)
-   * Replace common button texts with icons
-   * Preferences dialog should now open centered and over the main window
+   * Add paste button next to start button
+   * Change common buttons to use icons instead of text
+   * Change address bar: bind return key to Start button
+   * Change Preferences dialog to open centered and over the main window
      - Dialog position previously saved and restored
-   * Bind return key to address
-     - Hitting enter starts download
 
 
 0.1.1
