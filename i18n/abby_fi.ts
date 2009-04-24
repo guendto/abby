@@ -61,67 +61,62 @@ p, li { white-space: pre-wrap; }
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="../src/mainwnd.cpp" line="224"/>
+        <location filename="../src/mainwnd.cpp" line="233"/>
         <source>Enter a video link.</source>
         <translation>Syötä video-sivun linkki.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="226"/>
-        <source>Path to cclive command undefined. See preferences.</source>
-        <translation type="obsolete">Määrittelemätön polku cclive-ohjelmaan. Muuta asetuksia.</translation>
-    </message>
-    <message>
-        <location filename="../src/mainwnd.cpp" line="256"/>
+        <location filename="../src/mainwnd.cpp" line="265"/>
         <source>Save directory undefined. See preferences.</source>
         <translation>Määrittelemätön &quot;tallenna videot hakemistoon&quot; polku. Muuta asetuksia.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="443"/>
+        <location filename="../src/mainwnd.cpp" line="460"/>
         <source>error: failed to start process</source>
         <translation>virhe: prosessin käynnistäminen epäonnistui</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="462"/>
+        <location filename="../src/mainwnd.cpp" line="480"/>
         <source>Fetching link...</source>
         <translation>Haetaan tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="464"/>
+        <location filename="../src/mainwnd.cpp" line="482"/>
         <source>Verifying video link...</source>
         <translation>Tarkastetaan video tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="512"/>
+        <location filename="../src/mainwnd.cpp" line="530"/>
         <source>error: see log for details</source>
         <translation>virhe: katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="471"/>
+        <location filename="../src/mainwnd.cpp" line="489"/>
         <source>Extracting video...</source>
         <translation>Kopioidaan videota...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="503"/>
+        <location filename="../src/mainwnd.cpp" line="521"/>
         <source>Process exited with an error; see log</source>
         <translation>Prosessi päättyi virheeseen; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="503"/>
+        <location filename="../src/mainwnd.cpp" line="521"/>
         <source>Process exited normally</source>
         <translation>Prosessi päättyi normaalisti</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="507"/>
+        <location filename="../src/mainwnd.cpp" line="525"/>
         <source>Process terminated</source>
         <translation>Prosessi keskeytetty</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="507"/>
+        <location filename="../src/mainwnd.cpp" line="525"/>
         <source>Process crashed; see log</source>
         <translation>Prosessi kaatui; katso historia</translation>
     </message>
     <message>
-        <location filename="../src/prefsdlg.cpp" line="132"/>
+        <location filename="../src/prefsdlg.cpp" line="144"/>
         <source>English</source>
         <translation>Suomi</translation>
     </message>
@@ -239,7 +234,7 @@ käytetyn tiedostojen nimeämistavan.</translation>
         <translation>&amp;Tietoja...</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="212"/>
+        <location filename="../src/mainwnd.cpp" line="221"/>
         <source>Save as</source>
         <translation>Tallenna nimellä</translation>
     </message>
@@ -379,7 +374,7 @@ saatavilla.</translation>
         <translation>Keskeytä kopiointi.</translation>
     </message>
     <message>
-        <location filename="../src/mainwnd.cpp" line="239"/>
+        <location filename="../src/mainwnd.cpp" line="248"/>
         <source>Path to cclive (or clive) command undefined. See preferences.</source>
         <translation>Määrittelemätön polku cclive/clive-ohjelmaan. Muuta asetuksia.</translation>
     </message>
@@ -400,17 +395,17 @@ saatavilla.</translation>
 <context>
     <name>PreferencesDialog</name>
     <message>
-        <location filename="../src/prefsdlg.cpp" line="169"/>
+        <location filename="../src/prefsdlg.cpp" line="181"/>
         <source>Choose command</source>
         <translation>Valitse polku komentoon</translation>
     </message>
     <message>
-        <location filename="../src/prefsdlg.cpp" line="176"/>
+        <location filename="../src/prefsdlg.cpp" line="188"/>
         <source>Choose cclive</source>
         <translation>Valitse polku cclive komentoon</translation>
     </message>
     <message>
-        <location filename="../src/prefsdlg.cpp" line="189"/>
+        <location filename="../src/prefsdlg.cpp" line="201"/>
         <source>You need to restart the application for the language change to take effect.</source>
         <translation>Käynnistä ohjelma uudelleen, jotta valittu kieli tulee käyttöön.</translation>
     </message>
@@ -440,24 +435,9 @@ saatavilla.</translation>
         <translation>S&amp;uoritettava komento:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="177"/>
-        <source>&amp;Path to cclive:</source>
-        <translation type="obsolete">Pol&amp;ku cclive-ohjelmaan:</translation>
-    </message>
-    <message>
-        <location filename="../rc/prefsdlg.ui" line="187"/>
-        <source>Path to cclive command.</source>
-        <translation type="obsolete">Polku cclive-ohjelmaan.</translation>
-    </message>
-    <message>
         <location filename="../rc/prefsdlg.ui" line="209"/>
         <source>&amp;Additional options:</source>
         <translation>Ylimääräiset &amp;parametrit:</translation>
-    </message>
-    <message>
-        <location filename="../rc/prefsdlg.ui" line="219"/>
-        <source>Additional options to be passed to cclive.</source>
-        <translation type="obsolete">Ylimääräiset, cclive-ohjelmalle välitettävät parametrit.</translation>
     </message>
     <message>
         <location filename="../rc/prefsdlg.ui" line="250"/>
@@ -492,44 +472,44 @@ Valitse &quot;Ei välityspalvelinta&quot; jos olet epävarma.</translation>
         <translation>KT/s</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="334"/>
+        <location filename="../rc/prefsdlg.ui" line="398"/>
         <source>&amp;Youtube</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="340"/>
+        <location filename="../rc/prefsdlg.ui" line="404"/>
         <source>Usually needed only to download videos that have
 been flagged as mature content.</source>
         <translation>Tarpeellinen ainoastaan kopioitaessa videoita, jotka ovat
 merkitty vain aikuisille sopiviksi.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="344"/>
+        <location filename="../rc/prefsdlg.ui" line="408"/>
         <source>&amp;Log in</source>
         <translation>&amp;Kirjaudu sisään</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="356"/>
+        <location filename="../rc/prefsdlg.ui" line="420"/>
         <source>&amp;Username:</source>
         <translation>Käyttä&amp;jä:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="373"/>
+        <location filename="../rc/prefsdlg.ui" line="437"/>
         <source>&amp;Password:</source>
         <translation>&amp;Salasana:</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="383"/>
+        <location filename="../rc/prefsdlg.ui" line="447"/>
         <source>Leave empty if you want abby to prompt for it.</source>
         <translation>Jos tyhjä, abby kysyy salasanaa käynnistettäessä.</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="410"/>
+        <location filename="../rc/prefsdlg.ui" line="474"/>
         <source>&amp;Misc</source>
         <translation>&amp;Muut</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="447"/>
+        <location filename="../rc/prefsdlg.ui" line="511"/>
         <source>&amp;Language:</source>
         <translation>&amp;Kieli:</translation>
     </message>
@@ -568,7 +548,7 @@ Esimerkki: /usr/local/bin/mplayer -really-quiet %i</translation>
         <translation>Y&amp;hteys</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="428"/>
+        <location filename="../rc/prefsdlg.ui" line="492"/>
         <source>Character-class used to clean up video page
 titles before they are used for naming the
 downloaded video files.
@@ -589,7 +569,7 @@ Lisää tietoja Perl-kielen tukemista merkki-luokista:
   &lt;http://perldoc.perl.org/perlrequick.html&gt;</translation>
     </message>
     <message>
-        <location filename="../rc/prefsdlg.ui" line="418"/>
+        <location filename="../rc/prefsdlg.ui" line="482"/>
         <source>&amp;Title character-class:</source>
         <translation>O&amp;tsikon siistimiseen käytetty merkki-luokka:</translation>
     </message>
@@ -612,6 +592,34 @@ Lisää tietoja Perl-kielen tukemista merkki-luokista:
         <location filename="../rc/prefsdlg.ui" line="219"/>
         <source>Additional options to be passed to cclive/clive.</source>
         <translation>Ylimääräiset, cclive/clive-ohjelmalle välitettävät parametrit.</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="328"/>
+        <source>Maximum time in seconds allowed the connection to the server to take.
+This limits only the connection phase.</source>
+        <translation>Suurin sallittu yhteydenmuodostamiseen käytettävä aika sekunteina.</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="332"/>
+        <source>&amp;Timeout after:</source>
+        <translation>R&amp;ajoita aikaa:</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="342"/>
+        <source>s</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="358"/>
+        <source>Works around the known CURL SOCKS proxy bug by using
+CURLOPT_TIMEOUT instead of CURLOPT_CONNECTIMEOUT.</source>
+        <translation>Käytä CURL_TIMEOUT asetusta CURLOPT_CONNECTIMEOUT:n sijaan.
+Suositellaan käytettäväksi SOCKS-välityspalvelimen kanssa.</translation>
+    </message>
+    <message>
+        <location filename="../rc/prefsdlg.ui" line="362"/>
+        <source>&amp;Use SOCKS proxy workaround</source>
+        <translation>Käytän SOCKS välityspalvelinta</translation>
     </message>
 </context>
 </TS>
