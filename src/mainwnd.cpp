@@ -49,8 +49,13 @@ MainWindow::MainWindow():
         this, SLOT(onProcStarted()));
     connect(&process, SIGNAL(error(QProcess::ProcessError)),
         this, SLOT(onProcError(QProcess::ProcessError)));
+
+    // NOTE: We read both channels stdout and stderr.
+    connect(&process, SIGNAL(readyReadStandardOutput()),
+        this, SLOT(onProcStdoutReady()));
     connect(&process, SIGNAL(readyReadStandardError()),
-        this, SLOT(onProcStderrReady()));
+        this, SLOT(onProcStdoutReady()));
+
     connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)),
         this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
 
@@ -309,6 +314,14 @@ MainWindow::onStart() {
         args << QString("--limit-rate=%1").arg(n);
     }
 
+    if (prefs->timeoutBox->checkState()) {
+        int n = prefs->timeoutSpin->value();
+        if (!prefs->socksBox->checkState())
+            args << QString("--connect-timeout=%1").arg(n);
+        else
+            args << QString("--connect-timeout-socks=%1").arg(n);
+    }
+
     if (prefs->youtubeGroup->isChecked()) {
         QString user = prefs->ytuserEdit->text();
         QString pass = prefs->ytpassEdit->text();
@@ -450,8 +463,11 @@ MainWindow::onProcError(QProcess::ProcessError err) {
 }
 
 void
-MainWindow::onProcStderrReady() {
+MainWindow::onProcStdoutReady() {
+    // NOTE: We read both channels stdout and stderr.
     QString newText =
+        QString::fromLocal8Bit(process.readAllStandardOutput());
+    newText +=
         QString::fromLocal8Bit(process.readAllStandardError());
 
     QStringList tmp = newText.split("\n", QString::SkipEmptyParts);

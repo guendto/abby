@@ -43,7 +43,7 @@ private slots:
     void onPasteURL();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
-    void onProcStderrReady();
+    void onProcStdoutReady();
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
 private:
     PreferencesDialog *prefs;

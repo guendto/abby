@@ -68,6 +68,9 @@ PreferencesDialog::writeSettings() {
     s.setValue("proxyEdit",proxyEdit->text());
     s.setValue("limitBox",limitBox->checkState());
     s.setValue("limitSpin",limitSpin->value());
+    s.setValue("timeoutBox",timeoutBox->checkState());
+    s.setValue("timeoutSpin",timeoutSpin->value());
+    s.setValue("socksBox",socksBox->checkState());
 
     s.setValue("youtubeGroup",youtubeGroup->isChecked());
     s.setValue("ytuserEdit",ytuserEdit->text());
@@ -100,6 +103,15 @@ PreferencesDialog::readSettings() {
         ? Qt::Checked
         : Qt::Unchecked);
     limitSpin->setValue(s.value("limitSpin").toInt());
+    timeoutBox->setCheckState(
+        s.value("timeoutBox").toBool()
+        ? Qt::Checked
+        : Qt::Unchecked);
+    timeoutSpin->setValue(s.value("timeoutSpin").toInt());
+    socksBox->setCheckState(
+        s.value("socksBox").toBool()
+        ? Qt::Checked
+        : Qt::Unchecked);
 
     youtubeGroup->setChecked(s.value("youtubeGroup").toBool());
     ytuserEdit->setText(s.value("ytuserEdit").toString());
@@ -187,4 +199,10 @@ PreferencesDialog::onLangChanged(int index) {
     QMessageBox::information(this, QCoreApplication::applicationName(),
         tr("You need to restart the application for the language change "
             "to take effect."));
+}
+
+void
+PreferencesDialog::onTimeoutStateChanged(int state) {
+    timeoutSpin->setEnabled(state != 0);
+    socksBox->setEnabled(state != 0);
 }

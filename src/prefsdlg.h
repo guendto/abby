@@ -35,6 +35,7 @@ private slots:
     void onBrowseCommand();
     void onBrowseCclive();
     void onLangChanged(int index);
+    void onTimeoutStateChanged(int state);
 private:
     void readSettings();
     void writeSettings();

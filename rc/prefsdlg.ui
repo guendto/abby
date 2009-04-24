@@ -315,6 +315,70 @@ If unsure, leave to "No Proxy".</string>
         </layout>
        </item>
        <item row="2" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_10" >
+         <item>
+          <widget class="QCheckBox" name="timeoutBox" >
+           <property name="minimumSize" >
+            <size>
+             <width>80</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="toolTip" >
+            <string>Maximum time in seconds allowed the connection to the server to take.
+This limits only the connection phase.</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Timeout after:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QSpinBox" name="timeoutSpin" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="suffix" >
+            <string>s</string>
+           </property>
+           <property name="minimum" >
+            <number>1</number>
+           </property>
+           <property name="maximum" >
+            <number>9999</number>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="socksBox" >
+           <property name="enabled" >
+            <bool>false</bool>
+           </property>
+           <property name="toolTip" >
+            <string>Works around the known CURL SOCKS proxy bug by using
+CURLOPT_TIMEOUT instead of CURLOPT_CONNECTIMEOUT.</string>
+           </property>
+           <property name="text" >
+            <string>&amp;Use SOCKS proxy workaround</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3" >
+           <property name="orientation" >
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0" >
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" >
         <spacer name="verticalSpacer" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -487,6 +551,8 @@ For more on Perl character-classes:
     </widget>
    </item>
   </layout>
+  <zorder>buttonBox</zorder>
+  <zorder>tabWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>savedirEdit</tabstop>
@@ -502,6 +568,9 @@ For more on Perl character-classes:
   <tabstop>proxyEdit</tabstop>
   <tabstop>limitBox</tabstop>
   <tabstop>limitSpin</tabstop>
+  <tabstop>timeoutBox</tabstop>
+  <tabstop>timeoutSpin</tabstop>
+  <tabstop>socksBox</tabstop>
   <tabstop>youtubeGroup</tabstop>
   <tabstop>ytuserEdit</tabstop>
   <tabstop>ytpassEdit</tabstop>
@@ -658,6 +727,22 @@ For more on Perl character-classes:
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>timeoutBox</sender>
+   <signal>stateChanged(int)</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onTimeoutStateChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>84</x>
+     <y>126</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>258</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onProxyChanged(int)</slot>
@@ -669,5 +754,6 @@ For more on Perl character-classes:
   <slot>onBrowseCclive()</slot>
   <slot>onLangChanged(int)</slot>
   <slot>onBrowseStreamCommand()</slot>
+  <slot>onTimeoutStateChanged(int)</slot>
  </slots>
 </ui>
