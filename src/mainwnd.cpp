@@ -304,11 +304,9 @@ MainWindow::onStart() {
             args << QString("--proxy=%1").arg(s);
     }
 
-    if (_isCclive) { // clive does not currently support this feature
-        if (prefs->limitBox->checkState()) {
-            int n = prefs->limitSpin->value();
-            args << QString("--limit-rate=%1").arg(n);
-        }
+    if (prefs->limitBox->checkState()) {
+        int n = prefs->limitSpin->value();
+        args << QString("--limit-rate=%1").arg(n);
     }
 
     if (prefs->youtubeGroup->isChecked()) {
