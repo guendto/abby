@@ -1,6 +1,7 @@
 0.2.1
 
   User-visible changes:
+   * Allow use of --limit-rate with clive
    * Fix Preferences: cclive/clive: Browse
      ** Missing connect
 
