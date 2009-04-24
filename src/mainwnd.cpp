@@ -265,17 +265,18 @@ MainWindow::onStart() {
     // clive can use this same approach even if --savedir option exists.
     process.setWorkingDirectory(savedir);
 
-    // Construct cclive args
+    // Construct cclive/clive args
 
     QStringList args;
     QStringList env;
+
     if (_isCclive) {
         args << "--print-fname";
     } else {
         args << "--renew" << "--stderr";
+        // Set environment variables for clive
         env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
-             // clive depends on $HOME variable
-             << QString("HOME=%1").arg(QDir::homePath());
+             << QString("HOME=%1").arg(QDir::homePath()); // $env{HOME}
     }
 
     QString s = prefs->additionalEdit->text();
