@@ -1,9 +1,11 @@
 0.2.1
 
   User-visible changes:
+   * Add support for --connect-timeout, --connect-timeout-socks
+     ** These were added in cclive 0.3.2 and clive 2.1.11
    * Allow use of --limit-rate with clive
    * Fix Preferences: cclive/clive: Browse
-     ** Missing connect
+     ** Was missing a connect
 
 0.2.0
 (April 4, 2009)
