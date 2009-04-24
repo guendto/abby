@@ -370,6 +370,7 @@ MainWindow::onStart() {
 
     cancelled = false;
     process.setEnvironment(env);
+    process.setProcessChannelMode(QProcess::MergedChannels);
     process.start(path,args);
 }
 
