@@ -40,7 +40,7 @@ private:
     void readSettings();
     void writeSettings();
     QStringList findQmFiles();
-    QString langName(const QString &qmFile);
+    QString langName(const QString& qmFile);
 private:
     QStringList qmFiles;
     QString qmFile;

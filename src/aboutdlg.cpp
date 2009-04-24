@@ -21,7 +21,7 @@
 
 #include "aboutdlg.h"
 
-AboutDialog::AboutDialog(QWidget *parent, QString path)
+AboutDialog::AboutDialog(QWidget *parent, const QString& path)
     : QDialog(parent)
 {
     setupUi(this);

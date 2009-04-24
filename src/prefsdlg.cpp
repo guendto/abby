@@ -138,7 +138,7 @@ PreferencesDialog::findQmFiles() {
 }
 
 QString
-PreferencesDialog::langName(const QString &qmFile) {
+PreferencesDialog::langName(const QString& qmFile) {
     QTranslator transl;
     transl.load(qmFile);
     return transl.translate("MainWindow","English");

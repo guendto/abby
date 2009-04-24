@@ -53,11 +53,11 @@ private:
 private:
     void writeSettings();
     void readSettings();
-    void updateLog(QString text);
-    bool ccliveSupports(QString buildOption);
+    void updateLog(const QString& text);
+    bool ccliveSupports(const QString& buildOption);
     void updateWidgets();
     void updateFormats();
-    bool isCclive(QString path, QString &output);
+    bool isCclive(const QString& path, QString& output);
 protected:
     void closeEvent(QCloseEvent *event);
 };

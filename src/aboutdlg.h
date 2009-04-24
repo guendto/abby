@@ -25,6 +25,6 @@ class QDialog;
 class AboutDialog : public QDialog, private Ui::AboutDialog {
     Q_OBJECT
 public:
-    AboutDialog(QWidget *parent, QString cclivePath);
+    AboutDialog(QWidget *parent, const QString& cclivePath);
 };
 #endif

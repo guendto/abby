@@ -64,7 +64,7 @@ MainWindow::MainWindow():
 }
 
 bool
-MainWindow::isCclive(QString path, QString &output) {
+MainWindow::isCclive(const QString& path, QString& output) {
     QProcess process;
     process.setProcessChannelMode(QProcess::MergedChannels);
     process.start(path, QStringList() << "--version");
@@ -73,7 +73,7 @@ MainWindow::isCclive(QString path, QString &output) {
     if (!process.waitForFinished())
         qDebug() << path << ": " << process.errorString();
     else {
-        output =  QString::fromLocal8Bit(process.readAll());
+        output = QString::fromLocal8Bit(process.readAll());
         QStringList lst = output.split(" ", QString::SkipEmptyParts);
         state = lst[0] == "cclive";
     }
@@ -81,7 +81,7 @@ MainWindow::isCclive(QString path, QString &output) {
 }
 
 bool
-MainWindow::ccliveSupports(QString buildOption) {
+MainWindow::ccliveSupports(const QString& buildOption) {
     QString output, path = prefs->ccliveEdit->text();
     const bool _isCclive = isCclive(path,output);
 
@@ -144,7 +144,7 @@ MainWindow::readSettings() {
 }
 
 void
-MainWindow::updateLog(QString newText) {
+MainWindow::updateLog(const QString& newText) {
     QString text = logEdit->toPlainText() + newText;
     logEdit->setPlainText(text);
 }
@@ -466,9 +466,7 @@ void
 MainWindow::onProcStdoutReady() {
     // NOTE: We read both channels stdout and stderr.
     QString newText =
-        QString::fromLocal8Bit(process.readAllStandardOutput());
-    newText +=
-        QString::fromLocal8Bit(process.readAllStandardError());
+        QString::fromLocal8Bit(process.readAll());
 
     QStringList tmp = newText.split("\n", QString::SkipEmptyParts);
     if (tmp.isEmpty())
