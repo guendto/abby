@@ -642,6 +642,22 @@ For more on Perl character-classes:
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>ccliveBrowse</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onBrowseCclive()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>476</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>258</x>
+     <y>111</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onProxyChanged(int)</slot>
