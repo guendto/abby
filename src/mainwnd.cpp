@@ -358,7 +358,7 @@ MainWindow::onStart() {
     s = formatCombo->currentText();
     if (s.isEmpty())
         s = "flv";
-    args << QString("--%1=%2").arg(_isCclive ? "download":"format").arg(s);
+    args << QString("--%1=%2").arg("format").arg(s);
     args << QString("%1").arg(url);
 
     // Prepare log
