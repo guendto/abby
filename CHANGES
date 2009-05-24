@@ -1,3 +1,13 @@
+0.2.2
+
+  User-visible changes:
+   * Change: --format IDs to reflect (c)clive changes
+
+  Developer-visible changes:
+   * Update: cclive prerequisite -> 0.4.3
+   * Change: use --format for both (c)clive (reflect cclive changes)
+
+
 0.2.1
 (April 29, 2009)
 
@@ -7,6 +17,7 @@
      ** clive 2.1.11+
    * Allow use of --limit-rate with clive
    * Fix: Preferences: cclive/clive: Browse (button)
+
 
 0.2.0
 (April 4, 2009)
