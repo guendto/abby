@@ -5,6 +5,7 @@
 
   Developer-visible changes:
    * Update: cclive prerequisite -> 0.4.3
+   * Update: clive prerequisite -> 2.1.14
    * Change: use --format for both (c)clive (reflect cclive changes)
 
 

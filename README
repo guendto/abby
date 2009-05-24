@@ -6,7 +6,7 @@ abby is a front-end for cclive and clive video extraction utilities. It is
 written in C++ and depends on the Qt 4.3+ framework.
 
 abby was originally written for cclive but as of 0.2.0 works with clive
-(2.1.10+) as well.
+(2.1.14+) as well.
 
 
                 Prerequisites
@@ -16,7 +16,7 @@ to install the development files also.
   
 - cclive 0.4.3+, from http://code.google.com/p/cclive/
 Or:
-- clive 2.1.10+, from http://code.google.com/p/clive/
+- clive 2.1.14+, from http://code.google.com/p/clive/
 
 
                 Compiling abby
