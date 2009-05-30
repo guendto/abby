@@ -163,7 +163,7 @@ MainWindow::updateFormats() {
         const char *formats;
     };
     static const struct lookup_s lookup[] = {
-        {"youtube.com",     "mp4|fmt35|fmt22|fmt17|fmt6"},
+        {"youtube.com",     "mp4|fmt35|fmt22|fmt17"},
         {"video.google.",   "mp4"},
         {"dailymotion.com", "spak-mini|vp6-hq|vp6-hd|vp6|h264"},
     };
