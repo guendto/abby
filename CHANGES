@@ -1,7 +1,9 @@
 0.2.2
 
   User-visible changes:
+   * Add: --format=best support
    * Change: --format IDs to reflect (c)clive changes
+   * Remove: mp4 support (Google) [broken in cclive 0.4.3]
 
   Developer-visible changes:
    * Update: cclive prerequisite -> 0.4.3
