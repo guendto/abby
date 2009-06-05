@@ -173,7 +173,7 @@ MainWindow::updateFormats() {
     QStringList formats;
     formats << "flv" << "best";
 
-    for (int i=0; i<c; ++i) {
+    for (register int i=0; i<c; ++i) {
         if (url.contains(lookup[i].host)) {
             QString s = lookup[i].formats;
             formats << s.split("|");
@@ -417,7 +417,7 @@ MainWindow::onFormatStateChanged(int) {
     const int c = sizeof(lookup)/sizeof(struct lookup_s);
     bool enable = true;
 
-    for (int i=0; i<c; ++i) {
+    for (register int i=0; i<c; ++i) {
         if (url.contains(lookup[i].host)) {
             if (formatCombo->currentText() == "flv") {
                 enable = false;
