@@ -163,15 +163,15 @@ MainWindow::updateFormats() {
         const char *formats;
     };
     static const struct lookup_s lookup[] = {
-        {"youtube.com",     "mp4|fmt35|fmt22|fmt17"},
-        {"video.google.",   "mp4"},
+        {"youtube.com",     "fmt17|fmt18|fmt22|fmt35"},
+//        {"video.google.",   "mp4"}, // missing in cclive 0.4.3+
         {"dailymotion.com", "spak-mini|vp6-hq|vp6-hd|vp6|h264"},
     };
 
     const int c = sizeof(lookup)/sizeof(struct lookup_s);
 
     QStringList formats;
-    formats << "flv";
+    formats << "flv" << "best";
 
     for (int i=0; i<c; ++i) {
         if (url.contains(lookup[i].host)) {
