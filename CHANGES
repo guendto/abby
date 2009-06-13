@@ -4,6 +4,7 @@
    * Add: --format=best support
    * Change: --format IDs to reflect (c)clive changes
    * Remove: mp4 support (Google) [broken in cclive 0.4.3]
+   * Remove: Youtube login support [at least until it gets fixed in (c)clive]
 
   Developer-visible changes:
    * Update: cclive prerequisite -> 0.4.3
