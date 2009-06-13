@@ -338,7 +338,7 @@ MainWindow::onStart() {
             args << "--title";
             s = prefs->cclassEdit->text();
                 if (!s.isEmpty())
-            args << QString("--title-cclass=%1").arg(s);
+            args << QString("--cclass=%1").arg(s);
         }
     } else { // this clive can use
         s = prefs->cclassEdit->text();
