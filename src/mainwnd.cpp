@@ -278,7 +278,7 @@ MainWindow::onStart() {
     if (_isCclive) {
         args << "--print-fname";
     } else {
-        args << "--renew" << "--stderr";
+        args << "--stderr";
         // Set environment variables for clive
         env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
              << QString("HOME=%1").arg(QDir::homePath()); // $env{HOME}
@@ -326,8 +326,12 @@ MainWindow::onStart() {
     if (!s.isEmpty() && saveasBox->isChecked())
         args << QString("--output-video=%1").arg(s);
 
+#ifdef MAKE_CONTINUE_CONDITIONAL
     if (continueBox->isChecked())
         args << "--continue";
+#else
+    args << "--continue";
+#endif
 
     if (_isCclive) { // clive defaults to this
         if (titleBox->isChecked()) {
@@ -341,10 +345,12 @@ MainWindow::onStart() {
         if (!s.isEmpty())
             args << QString("--cclass=%1").arg(s);
     }
+
     s = formatCombo->currentText();
     if (s.isEmpty())
         s = "flv";
-    args << QString("--%1=%2").arg("format").arg(s);
+
+    args << QString("--format=%1").arg(s);
     args << QString("%1").arg(url);
 
     // Prepare log
@@ -384,13 +390,15 @@ MainWindow::onURLReturnPressed() {
 
 void
 MainWindow::onFormatStateChanged(int) {
+    QString url = urlEdit->text();
+
+    if (url.isEmpty())
+        return;
+
+#ifdef FLV_CANNOT_RESUME
 
     // Disable --continue for the specified hosts if format is "flv".
     // Make changes based on the video URL.
-
-    QString url = urlEdit->text();
-    if (url.isEmpty())
-        return;
 
     struct lookup_s {
         const char *host;
@@ -416,6 +424,7 @@ MainWindow::onFormatStateChanged(int) {
 
     if (continueBox->isChecked() && !enable)
         continueBox->setCheckState(Qt::Unchecked);
+#endif // FLV_CANNOT_RESUME
 }
 
 void
