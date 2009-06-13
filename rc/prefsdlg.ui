@@ -393,82 +393,6 @@ CURLOPT_TIMEOUT instead of CURLOPT_CONNECTIMEOUT.</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_3" >
-      <attribute name="title" >
-       <string>&amp;Youtube</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_4" >
-       <item row="0" column="0" >
-        <widget class="QGroupBox" name="youtubeGroup" >
-         <property name="toolTip" >
-          <string>Usually needed only to download videos that have
-been flagged as mature content.</string>
-         </property>
-         <property name="title" >
-          <string>&amp;Log in</string>
-         </property>
-         <property name="checkable" >
-          <bool>true</bool>
-         </property>
-         <property name="checked" >
-          <bool>false</bool>
-         </property>
-         <layout class="QGridLayout" name="gridLayout" >
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label_2" >
-            <property name="text" >
-             <string>&amp;Username:</string>
-            </property>
-            <property name="buddy" >
-             <cstring>ytuserEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1" >
-           <widget class="QLineEdit" name="ytuserEdit" >
-            <property name="toolTip" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_3" >
-            <property name="text" >
-             <string>&amp;Password:</string>
-            </property>
-            <property name="buddy" >
-             <cstring>ytpassEdit</cstring>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" >
-           <widget class="QLineEdit" name="ytpassEdit" >
-            <property name="toolTip" >
-             <string>Leave empty if you want abby to prompt for it.</string>
-            </property>
-            <property name="echoMode" >
-             <enum>QLineEdit::Password</enum>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="1" column="0" >
-        <spacer name="verticalSpacer_2" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
        <string>&amp;Misc</string>
@@ -551,8 +475,6 @@ For more on Perl character-classes:
     </widget>
    </item>
   </layout>
-  <zorder>buttonBox</zorder>
-  <zorder>tabWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>savedirEdit</tabstop>
@@ -571,9 +493,6 @@ For more on Perl character-classes:
   <tabstop>timeoutBox</tabstop>
   <tabstop>timeoutSpin</tabstop>
   <tabstop>socksBox</tabstop>
-  <tabstop>youtubeGroup</tabstop>
-  <tabstop>ytuserEdit</tabstop>
-  <tabstop>ytpassEdit</tabstop>
   <tabstop>cclassEdit</tabstop>
   <tabstop>langCombo</tabstop>
   <tabstop>buttonBox</tabstop>

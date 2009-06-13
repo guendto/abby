@@ -72,10 +72,6 @@ PreferencesDialog::writeSettings() {
     s.setValue("timeoutSpin",timeoutSpin->value());
     s.setValue("socksBox",socksBox->checkState());
 
-    s.setValue("youtubeGroup",youtubeGroup->isChecked());
-    s.setValue("ytuserEdit",ytuserEdit->text());
-    s.setValue("ytpassEdit",ytpassEdit->text());
-
     s.setValue("qmFile",qmFile);
 
     s.endGroup();
@@ -112,10 +108,6 @@ PreferencesDialog::readSettings() {
         s.value("socksBox").toBool()
         ? Qt::Checked
         : Qt::Unchecked);
-
-    youtubeGroup->setChecked(s.value("youtubeGroup").toBool());
-    ytuserEdit->setText(s.value("ytuserEdit").toString());
-    ytpassEdit->setText(s.value("ytpassEdit").toString());
 
     qmFile = s.value("qmFile").toString();
 

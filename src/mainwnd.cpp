@@ -322,20 +322,6 @@ MainWindow::onStart() {
             args << QString("--connect-timeout-socks=%1").arg(n);
     }
 
-    if (prefs->youtubeGroup->isChecked()) {
-        QString user = prefs->ytuserEdit->text();
-        QString pass = prefs->ytpassEdit->text();
-        if (pass.isEmpty()) {
-            PasswordDialog pwd(this);
-            if (pwd.exec())
-                pass = pwd.passEdit->text();
-        }
-        if (!user.isEmpty() && !pass.isEmpty()) {
-            args << QString("--youtube-user=%1").arg(user);
-            args << QString("--youtube-pass=%1").arg(pass);
-        }
-    }
-
     s = saveasEdit->text();
     if (!s.isEmpty() && saveasBox->isChecked())
         args << QString("--output-video=%1").arg(s);
