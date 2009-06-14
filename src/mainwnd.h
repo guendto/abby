@@ -24,6 +24,7 @@
 
 class QMainWindow;
 class PreferencesDialog;
+class RSSDialog;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow {
     Q_OBJECT
@@ -38,6 +39,8 @@ private slots:
     void onURLEditingFinished();
     void onURLReturnPressed();
     void onFormatStateChanged(int state);
+    void onRSS();
+    void onScan();
     void onPasteURL();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
@@ -45,6 +48,7 @@ private slots:
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
 private:
     PreferencesDialog *prefs;
+    RSSDialog *rss;
     QProcess process;
     bool cancelled;
     bool errorOccurred;

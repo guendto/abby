@@ -26,6 +26,7 @@
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
+#include "rssdlg.h"
 #include "aboutdlg.h"
 
 MainWindow::MainWindow():
@@ -59,6 +60,8 @@ MainWindow::MainWindow():
         this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
 
     prefs = new PreferencesDialog(this);
+    rss = new RSSDialog(this);
+
     updateWidgets();
 }
 
@@ -406,6 +409,15 @@ MainWindow::onFormatStateChanged(int) {
 }
 
 void
+MainWindow::onRSS() {
+    rss->exec();
+}
+
+void
+MainWindow::onScan() {
+}
+
+void
 MainWindow::onPasteURL() {
     QClipboard *cb = QApplication::clipboard();
     urlEdit->setText(cb->text());
@@ -420,6 +432,7 @@ MainWindow::onProcStarted() {
     rateLabel   ->setText("--.-");
     etaLabel    ->setText("--:--");
     progressBar ->setValue(0);
+    totalProgressbar->setValue(0);
 
     startButton ->setEnabled(false);
     cancelButton->setEnabled(true);
