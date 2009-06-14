@@ -4,6 +4,10 @@
     <file>folder-saved-search.png</file>
     <file>go-next.png</file>
     <file>edit-paste.png</file>
+    <file>edit-find.png</file>
+    <file>document-save.png</file>
+    <file>address-book-new.png</file>
+    <file>feed-icon-28x28.png</file>
     <file>../i18n/abby_fi.qm</file>
     <file>../rc/abby.png</file>
   </qresource>
