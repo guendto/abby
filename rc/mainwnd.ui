@@ -33,7 +33,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout" >
             <item>
-             <widget class="QPushButton" name="pushButton" >
+             <widget class="QPushButton" name="rssButton" >
               <property name="toolTip" >
                <string>Parse video page links from RSS feeds</string>
               </property>
@@ -77,7 +77,7 @@
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_2" >
             <item>
-             <widget class="QPushButton" name="pushButton_2" >
+             <widget class="QPushButton" name="scanButton" >
               <property name="toolTip" >
                <string>Scan for video page links</string>
               </property>
@@ -537,8 +537,6 @@ this to work.</string>
      </widget>
     </item>
    </layout>
-   <zorder>tabWidget</zorder>
-   <zorder>pasteButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
@@ -756,6 +754,38 @@ this to work.</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>rssButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onRSS()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>392</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>271</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>scanButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onScan()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>480</x>
+     <y>89</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>271</x>
+     <y>164</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -769,5 +799,7 @@ this to work.</string>
   <slot>onFormatStateChanged(int)</slot>
   <slot>onPasteURL()</slot>
   <slot>onURLReturnPressed()</slot>
+  <slot>onRSS()</slot>
+  <slot>onScan()</slot>
  </slots>
 </ui>
