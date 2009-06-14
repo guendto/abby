@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>543</width>
-    <height>289</height>
+    <height>329</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -28,53 +28,99 @@
         <item row="0" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout" >
           <item>
-           <widget class="QLineEdit" name="urlEdit" >
-            <property name="toolTip" >
-             <string>Address to a video page.</string>
-            </property>
-           </widget>
+           <widget class="QTextEdit" name="urlEdit" />
           </item>
           <item>
-           <widget class="QPushButton" name="pasteButton" >
-            <property name="toolTip" >
-             <string>Paste an address from the clipboard.</string>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <property name="icon" >
-             <iconset resource="abby.qrc" >
-              <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout" >
+            <item>
+             <widget class="QPushButton" name="pushButton" >
+              <property name="toolTip" >
+               <string>Parse video page links from RSS feeds</string>
+              </property>
+              <property name="text" >
+               <string>&amp;RSS...</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="abby.qrc" >
+                <normaloff>:/feed-icon-28x28.png</normaloff>:/feed-icon-28x28.png</iconset>
+              </property>
+              <property name="iconSize" >
+               <size>
+                <width>16</width>
+                <height>16</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pasteButton" >
+              <property name="toolTip" >
+               <string>Paste video page links from clipboard</string>
+              </property>
+              <property name="text" >
+               <string>&amp;Paste</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="abby.qrc" >
+                <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
+              </property>
+              <property name="iconSize" >
+               <size>
+                <width>16</width>
+                <height>16</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QPushButton" name="startButton" >
-            <property name="toolTip" >
-             <string>Download video from the address.</string>
-            </property>
-            <property name="icon" >
-             <iconset resource="abby.qrc" >
-              <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
-            </property>
-           </widget>
+           <layout class="QVBoxLayout" name="verticalLayout_2" >
+            <item>
+             <widget class="QPushButton" name="pushButton_2" >
+              <property name="toolTip" >
+               <string>Scan for video page links</string>
+              </property>
+              <property name="text" >
+               <string>&amp;Scan...</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="abby.qrc" >
+                <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
+              </property>
+              <property name="iconSize" >
+               <size>
+                <width>16</width>
+                <height>16</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="startButton" >
+              <property name="toolTip" >
+               <string>Download videos from specified links</string>
+              </property>
+              <property name="text" >
+               <string>&amp;Download</string>
+              </property>
+              <property name="icon" >
+               <iconset resource="abby.qrc" >
+                <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
+              </property>
+              <property name="iconSize" >
+               <size>
+                <width>16</width>
+                <height>16</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
         <item row="1" column="0" >
-         <spacer name="verticalSpacer" >
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="0" >
          <widget class="QTabWidget" name="tabWidget_2" >
           <property name="tabPosition" >
            <enum>QTabWidget::South</enum>
@@ -84,7 +130,7 @@
           </property>
           <widget class="QWidget" name="tab_3" >
            <attribute name="title" >
-            <string>&amp;Progress</string>
+            <string>Pro&amp;gress</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout" >
             <item row="0" column="0" >
@@ -207,7 +253,20 @@
                  <bool>true</bool>
                 </property>
                 <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="value" >
+                 <number>0</number>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QProgressBar" name="totalProgressbar" >
+                <property name="sizePolicy" >
+                 <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                   <horstretch>0</horstretch>
                   <verstretch>0</verstretch>
                  </sizepolicy>
@@ -232,11 +291,17 @@
                  <string>Stop process.</string>
                 </property>
                 <property name="text" >
-                 <string/>
+                 <string>&amp;Abort</string>
                 </property>
                 <property name="icon" >
                  <iconset resource="abby.qrc" >
                   <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
+                </property>
+                <property name="iconSize" >
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
                 </property>
                </widget>
               </item>
@@ -246,7 +311,7 @@
           </widget>
           <widget class="QWidget" name="tab_4" >
            <attribute name="title" >
-            <string>Lo&amp;g</string>
+            <string>&amp;Log</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_2" >
             <item row="0" column="0" >
@@ -271,41 +336,6 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_4" >
         <item row="0" column="0" >
-         <layout class="QHBoxLayout" name="horizontalLayout_5" >
-          <item>
-           <widget class="QCheckBox" name="saveasBox" >
-            <property name="toolTip" >
-             <string>Write video to file. Overrides default file naming.</string>
-            </property>
-            <property name="text" >
-             <string>&amp;Save video as:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QLineEdit" name="saveasEdit" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="saveasButton" >
-            <property name="enabled" >
-             <bool>false</bool>
-            </property>
-            <property name="text" >
-             <string/>
-            </property>
-            <property name="icon" >
-             <iconset resource="abby.qrc" >
-              <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_6" >
           <item>
            <widget class="QLabel" name="label_9" >
@@ -316,7 +346,7 @@
              </sizepolicy>
             </property>
             <property name="text" >
-             <string>V&amp;ideo Format:</string>
+             <string>&amp;Download format:</string>
             </property>
             <property name="buddy" >
              <cstring>formatCombo</cstring>
@@ -357,21 +387,6 @@ that some formats may not always be available.</string>
            </spacer>
           </item>
           <item>
-           <widget class="QCheckBox" name="titleBox" >
-            <property name="toolTip" >
-             <string>Use video page title for naming downloaded files.
-See also the Preferences for the character-class
-used to clean up the video page titles.
-
-Note that cclive must be built WITH_PERL=yes for
-this to work.</string>
-            </property>
-            <property name="text" >
-             <string>&amp;Use video page title for naming</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <spacer name="horizontalSpacer_2" >
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -386,7 +401,7 @@ this to work.</string>
           </item>
          </layout>
         </item>
-        <item row="5" column="0" >
+        <item row="2" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_9" >
           <item>
            <widget class="QCheckBox" name="streamBox" >
@@ -444,7 +459,7 @@ video data for the command to process.</string>
           </item>
          </layout>
         </item>
-        <item row="6" column="0" >
+        <item row="3" column="0" >
          <layout class="QHBoxLayout" name="horizontalLayout_7" >
           <item>
            <widget class="QCheckBox" name="commandBox" >
@@ -472,7 +487,7 @@ download finishes.</string>
           </item>
          </layout>
         </item>
-        <item row="7" column="0" >
+        <item row="5" column="0" >
          <spacer name="verticalSpacer_2" >
           <property name="orientation" >
            <enum>Qt::Vertical</enum>
@@ -485,11 +500,45 @@ download finishes.</string>
           </property>
          </spacer>
         </item>
+        <item row="4" column="0" >
+         <layout class="QHBoxLayout" name="horizontalLayout_5" >
+          <item>
+           <widget class="QCheckBox" name="titleBox" >
+            <property name="toolTip" >
+             <string>Use video page title for naming downloaded files.
+See also the Preferences for the character-class
+used to clean up the video page titles.
+
+Note that cclive must be built WITH_PERL=yes for
+this to work.</string>
+            </property>
+            <property name="text" >
+             <string>&amp;Use video page title for output filename</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5" >
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0" >
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
        </layout>
       </widget>
      </widget>
     </item>
    </layout>
+   <zorder>tabWidget</zorder>
+   <zorder>pasteButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar" >
    <property name="geometry" >
@@ -505,6 +554,9 @@ download finishes.</string>
      <string>&amp;File</string>
     </property>
     <addaction name="action_About" />
+    <addaction name="separator" />
+    <addaction name="action_RSS" />
+    <addaction name="action_Scan" />
     <addaction name="separator" />
     <addaction name="action_Quit" />
    </widget>
@@ -551,18 +603,21 @@ download finishes.</string>
     <string>About abby</string>
    </property>
   </action>
+  <action name="action_RSS" >
+   <property name="text" >
+    <string>&amp;RSS...</string>
+   </property>
+  </action>
+  <action name="action_Scan" >
+   <property name="text" >
+    <string>&amp;Scan...</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
-  <tabstop>urlEdit</tabstop>
-  <tabstop>pasteButton</tabstop>
   <tabstop>startButton</tabstop>
   <tabstop>tabWidget_2</tabstop>
-  <tabstop>cancelButton</tabstop>
-  <tabstop>saveasBox</tabstop>
-  <tabstop>saveasEdit</tabstop>
-  <tabstop>saveasButton</tabstop>
   <tabstop>formatCombo</tabstop>
-  <tabstop>titleBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>
   <tabstop>commandBox</tabstop>
@@ -654,22 +709,6 @@ download finishes.</string>
    </hints>
   </connection>
   <connection>
-   <sender>saveasButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onSaveasBrowse()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>521</x>
-     <y>95</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>244</x>
-     <y>160</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>action_Preferences</sender>
    <signal>activated()</signal>
    <receiver>MainWindow</receiver>
@@ -678,22 +717,6 @@ download finishes.</string>
     <hint type="sourcelabel" >
      <x>-1</x>
      <y>-1</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>253</x>
-     <y>139</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>urlEdit</sender>
-   <signal>editingFinished()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onURLEditingFinished()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>252</x>
-     <y>82</y>
     </hint>
     <hint type="destinationlabel" >
      <x>253</x>
@@ -718,22 +741,6 @@ download finishes.</string>
    </hints>
   </connection>
   <connection>
-   <sender>saveasBox</sender>
-   <signal>stateChanged(int)</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onSaveasStateChanged(int)</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>81</x>
-     <y>82</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>271</x>
-     <y>139</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>pasteButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
@@ -746,22 +753,6 @@ download finishes.</string>
     <hint type="destinationlabel" >
      <x>271</x>
      <y>141</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>urlEdit</sender>
-   <signal>returnPressed()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onURLReturnPressed()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>227</x>
-     <y>84</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>271</x>
-     <y>144</y>
     </hint>
    </hints>
   </connection>
