@@ -1,0 +1,201 @@
+<ui version="4.0" >
+ <class>RSSDialog</class>
+ <widget class="QDialog" name="RSSDialog" >
+  <property name="windowModality" >
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>510</width>
+    <height>240</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>RSS</string>
+  </property>
+  <property name="sizeGripEnabled" >
+   <bool>true</bool>
+  </property>
+  <layout class="QGridLayout" name="gridLayout" >
+   <item row="0" column="0" >
+    <layout class="QHBoxLayout" name="horizontalLayout" >
+     <item>
+      <widget class="QTextEdit" name="linkEdit" />
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout" >
+       <item>
+        <widget class="QPushButton" name="pushButton_3" >
+         <property name="text" >
+          <string>List Manager...</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="abby.qrc" >
+           <normaloff>:/address-book-new.png</normaloff>:/address-book-new.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="fetchButton" >
+         <property name="text" >
+          <string>&amp;Fetch</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="abby.qrc" >
+           <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="abortButton" >
+         <property name="text" >
+          <string>&amp;Abort</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="abby.qrc" >
+           <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QTreeWidget" name="itemsTree" >
+     <column>
+      <property name="text" >
+       <string>Title</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Download</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Link</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="3" column="0" >
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="abby.qrc" />
+ </resources>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>RSSDialog</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>RSSDialog</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>fetchButton</sender>
+   <signal>clicked()</signal>
+   <receiver>RSSDialog</receiver>
+   <slot>onFetch()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>431</x>
+     <y>57</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>254</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>abortButton</sender>
+   <signal>clicked()</signal>
+   <receiver>RSSDialog</receiver>
+   <slot>onAbort()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>431</x>
+     <y>90</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>254</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>onFetch()</slot>
+  <slot>onAbort()</slot>
+ </slots>
+</ui>
