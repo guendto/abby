@@ -26,7 +26,6 @@
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
-#include "passdlg.h"
 #include "aboutdlg.h"
 
 MainWindow::MainWindow():
@@ -154,7 +153,8 @@ MainWindow::updateFormats() {
 
     // Alter widgets dynamically based on the video URL.
 
-    QString url = urlEdit->text();
+    QString url = urlEdit->toPlainText();
+
     if (url.isEmpty())
         return;
 
@@ -201,33 +201,15 @@ MainWindow::onPreferences() {
 }
 
 void
-MainWindow::onSaveasStateChanged(int state) {
-    saveasEdit  ->setEnabled(state != 0);
-    saveasButton->setEnabled(state != 0);
-
-    if (state != 0 && titleBox->isChecked())
-        titleBox->setCheckState(Qt::Unchecked);
-
-    titleBox->setEnabled(state == 0);
-}
-
-void
 MainWindow::onStreamStateChanged(int state) {
     streamSpin->setEnabled(state != 0);
-}
-
-void
-MainWindow::onSaveasBrowse() {
-    QString fname = QFileDialog::getSaveFileName(this,tr("Save as")); 
-    if (!fname.isEmpty())
-        saveasEdit->setText(fname);
 }
 
 void
 MainWindow::onStart() {
     // Check video URL
 
-    QString url = urlEdit->text();
+    QString url = urlEdit->toPlainText();
 
     if (url.isEmpty()) {
         statusBar()->showMessage(tr("Enter a video link."));
@@ -322,10 +304,6 @@ MainWindow::onStart() {
             args << QString("--connect-timeout-socks=%1").arg(n);
     }
 
-    s = saveasEdit->text();
-    if (!s.isEmpty() && saveasBox->isChecked())
-        args << QString("--output-video=%1").arg(s);
-
 #ifdef MAKE_CONTINUE_CONDITIONAL
     if (continueBox->isChecked())
         args << "--continue";
@@ -390,7 +368,7 @@ MainWindow::onURLReturnPressed() {
 
 void
 MainWindow::onFormatStateChanged(int) {
-    QString url = urlEdit->text();
+    QString url = urlEdit->toPlainText();
 
     if (url.isEmpty())
         return;

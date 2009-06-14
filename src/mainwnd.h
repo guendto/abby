@@ -34,8 +34,6 @@ private slots:
     void onStart();
     void onCancel();
     void onAbout();
-    void onSaveasStateChanged(int state);
-    void onSaveasBrowse();
     void onStreamStateChanged(int state);
     void onURLEditingFinished();
     void onURLReturnPressed();
