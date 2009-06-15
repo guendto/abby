@@ -9,7 +9,7 @@
     <x>0</x>
     <y>0</y>
     <width>510</width>
-    <height>240</height>
+    <height>348</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -20,28 +20,11 @@
   </property>
   <layout class="QGridLayout" name="gridLayout" >
    <item row="0" column="0" >
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+    <layout class="QVBoxLayout" name="verticalLayout" >
      <item>
-      <widget class="QTextEdit" name="linkEdit" />
-     </item>
-     <item>
-      <layout class="QVBoxLayout" name="verticalLayout" >
+      <layout class="QHBoxLayout" name="horizontalLayout_2" >
        <item>
-        <widget class="QPushButton" name="pushButton_3" >
-         <property name="text" >
-          <string>List Manager...</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
-           <normaloff>:/address-book-new.png</normaloff>:/address-book-new.png</iconset>
-         </property>
-         <property name="iconSize" >
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
+        <widget class="QLineEdit" name="linkEdit" />
        </item>
        <item>
         <widget class="QPushButton" name="fetchButton" >
@@ -60,6 +43,40 @@
          </property>
         </widget>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout" >
+       <item>
+        <widget class="QPushButton" name="loadButton" >
+         <property name="text" >
+          <string>From list...</string>
+         </property>
+         <property name="icon" >
+          <iconset resource="abby.qrc" >
+           <normaloff>:/document-open.png</normaloff>:/document-open.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0" >
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
        <item>
         <widget class="QPushButton" name="abortButton" >
          <property name="text" >
@@ -77,33 +94,36 @@
          </property>
         </widget>
        </item>
-       <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
       </layout>
      </item>
     </layout>
    </item>
    <item row="1" column="0" >
     <widget class="QTreeWidget" name="itemsTree" >
+     <property name="sizePolicy" >
+      <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoExpandDelay" >
+      <number>-1</number>
+     </property>
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
+     <property name="uniformRowHeights" >
+      <bool>false</bool>
+     </property>
+     <property name="sortingEnabled" >
+      <bool>false</bool>
+     </property>
+     <property name="headerHidden" >
+      <bool>false</bool>
+     </property>
      <column>
       <property name="text" >
        <string>Title</string>
-      </property>
-     </column>
-     <column>
-      <property name="text" >
-       <string>Download</string>
       </property>
      </column>
      <column>
@@ -113,7 +133,7 @@
      </column>
     </widget>
    </item>
-   <item row="3" column="0" >
+   <item row="2" column="0" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>

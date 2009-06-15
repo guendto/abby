@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>543</width>
-    <height>329</height>
+    <width>520</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -26,276 +26,92 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3" >
         <item row="0" column="0" >
-         <layout class="QHBoxLayout" name="horizontalLayout" >
-          <item>
-           <widget class="QTextEdit" name="urlEdit" />
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout" >
-            <item>
-             <widget class="QPushButton" name="rssButton" >
-              <property name="toolTip" >
-               <string>Parse video page links from RSS feeds</string>
-              </property>
-              <property name="text" >
-               <string>&amp;RSS...</string>
-              </property>
-              <property name="icon" >
-               <iconset resource="abby.qrc" >
-                <normaloff>:/feed-icon-28x28.png</normaloff>:/feed-icon-28x28.png</iconset>
-              </property>
-              <property name="iconSize" >
-               <size>
-                <width>16</width>
-                <height>16</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pasteButton" >
-              <property name="toolTip" >
-               <string>Paste video page links from clipboard</string>
-              </property>
-              <property name="text" >
-               <string>&amp;Paste</string>
-              </property>
-              <property name="icon" >
-               <iconset resource="abby.qrc" >
-                <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
-              </property>
-              <property name="iconSize" >
-               <size>
-                <width>16</width>
-                <height>16</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="verticalLayout_2" >
-            <item>
-             <widget class="QPushButton" name="scanButton" >
-              <property name="toolTip" >
-               <string>Scan for video page links</string>
-              </property>
-              <property name="text" >
-               <string>&amp;Scan...</string>
-              </property>
-              <property name="icon" >
-               <iconset resource="abby.qrc" >
-                <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
-              </property>
-              <property name="iconSize" >
-               <size>
-                <width>16</width>
-                <height>16</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="startButton" >
-              <property name="toolTip" >
-               <string>Download videos from specified links</string>
-              </property>
-              <property name="text" >
-               <string>&amp;Download</string>
-              </property>
-              <property name="icon" >
-               <iconset resource="abby.qrc" >
-                <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
-              </property>
-              <property name="iconSize" >
-               <size>
-                <width>16</width>
-                <height>16</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </item>
-        <item row="1" column="0" >
-         <widget class="QTabWidget" name="tabWidget_2" >
-          <property name="tabPosition" >
-           <enum>QTabWidget::South</enum>
+         <widget class="QSplitter" name="splitter" >
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
           </property>
-          <property name="currentIndex" >
-           <number>0</number>
-          </property>
-          <widget class="QWidget" name="tab_3" >
-           <attribute name="title" >
-            <string>Pro&amp;gress</string>
-           </attribute>
-           <layout class="QGridLayout" name="gridLayout" >
-            <item row="0" column="0" >
-             <layout class="QHBoxLayout" name="horizontalLayout_2" >
-              <item>
-               <widget class="QLabel" name="label_2" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text" >
-                 <string>File:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="fileLabel" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text" >
-                 <string>-</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
+          <widget class="QWidget" name="" >
+           <layout class="QHBoxLayout" name="horizontalLayout" >
+            <item>
+             <widget class="QTextEdit" name="urlEdit" />
             </item>
-            <item row="1" column="0" >
-             <layout class="QHBoxLayout" name="horizontalLayout_3" >
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout" >
               <item>
-               <widget class="QLabel" name="label_3" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text" >
-                 <string>Size:</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="sizeLabel" >
-                <property name="enabled" >
-                 <bool>true</bool>
-                </property>
-                <property name="text" >
-                 <string>-- / --</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_4" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text" >
-                 <string>Rate:</string>
-                </property>
-                <property name="alignment" >
-                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="rateLabel" >
-                <property name="enabled" >
-                 <bool>true</bool>
-                </property>
-                <property name="text" >
-                 <string>--.-</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_5" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text" >
-                 <string>ETA:</string>
-                </property>
-                <property name="alignment" >
-                 <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="etaLabel" >
-                <property name="enabled" >
-                 <bool>true</bool>
-                </property>
-                <property name="text" >
-                 <string>--:--</string>
-                </property>
-                <property name="alignment" >
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="2" column="0" >
-             <layout class="QHBoxLayout" name="horizontalLayout_4" >
-              <item>
-               <widget class="QProgressBar" name="progressBar" >
-                <property name="enabled" >
-                 <bool>true</bool>
-                </property>
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="value" >
-                 <number>0</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QProgressBar" name="totalProgressbar" >
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="value" >
-                 <number>0</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="cancelButton" >
-                <property name="enabled" >
-                 <bool>false</bool>
-                </property>
-                <property name="sizePolicy" >
-                 <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
+               <widget class="QPushButton" name="rssButton" >
                 <property name="toolTip" >
-                 <string>Stop process.</string>
+                 <string>Parse video page links from RSS feeds</string>
                 </property>
                 <property name="text" >
-                 <string>&amp;Abort</string>
+                 <string>&amp;RSS...</string>
                 </property>
                 <property name="icon" >
                  <iconset resource="abby.qrc" >
-                  <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
+                  <normaloff>:/feed-icon-28x28.png</normaloff>:/feed-icon-28x28.png</iconset>
+                </property>
+                <property name="iconSize" >
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pasteButton" >
+                <property name="toolTip" >
+                 <string>Paste video page links from clipboard</string>
+                </property>
+                <property name="text" >
+                 <string>&amp;Paste</string>
+                </property>
+                <property name="icon" >
+                 <iconset resource="abby.qrc" >
+                  <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
+                </property>
+                <property name="iconSize" >
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_2" >
+              <item>
+               <widget class="QPushButton" name="scanButton" >
+                <property name="toolTip" >
+                 <string>Scan for video page links</string>
+                </property>
+                <property name="text" >
+                 <string>&amp;Scan...</string>
+                </property>
+                <property name="icon" >
+                 <iconset resource="abby.qrc" >
+                  <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
+                </property>
+                <property name="iconSize" >
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="startButton" >
+                <property name="toolTip" >
+                 <string>Download videos from specified links</string>
+                </property>
+                <property name="text" >
+                 <string>&amp;Download</string>
+                </property>
+                <property name="icon" >
+                 <iconset resource="abby.qrc" >
+                  <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
                 </property>
                 <property name="iconSize" >
                  <size>
@@ -309,26 +125,217 @@
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="tab_4" >
-           <attribute name="title" >
-            <string>&amp;Log</string>
-           </attribute>
-           <layout class="QGridLayout" name="gridLayout_2" >
-            <item row="0" column="0" >
-             <widget class="QTextEdit" name="logEdit" >
-              <property name="enabled" >
-               <bool>true</bool>
-              </property>
-              <property name="readOnly" >
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
+          <widget class="QTabWidget" name="tabWidget_2" >
+           <property name="tabPosition" >
+            <enum>QTabWidget::South</enum>
+           </property>
+           <property name="currentIndex" >
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="tab_3" >
+            <attribute name="title" >
+             <string>Pro&amp;gress</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout" >
+             <item row="0" column="0" >
+              <layout class="QHBoxLayout" name="horizontalLayout_2" >
+               <item>
+                <widget class="QLabel" name="label_2" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text" >
+                  <string>File:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="fileLabel" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text" >
+                  <string>-</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0" >
+              <layout class="QHBoxLayout" name="horizontalLayout_3" >
+               <item>
+                <widget class="QLabel" name="label_3" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text" >
+                  <string>Size:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="sizeLabel" >
+                 <property name="enabled" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="text" >
+                  <string>-- / --</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_4" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text" >
+                  <string>Rate:</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="rateLabel" >
+                 <property name="enabled" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="text" >
+                  <string>--.-</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_5" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text" >
+                  <string>ETA:</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="etaLabel" >
+                 <property name="enabled" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="text" >
+                  <string>--:--</string>
+                 </property>
+                 <property name="alignment" >
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="2" column="0" >
+              <layout class="QHBoxLayout" name="horizontalLayout_4" >
+               <item>
+                <widget class="QProgressBar" name="progressBar" >
+                 <property name="enabled" >
+                  <bool>true</bool>
+                 </property>
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="value" >
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QProgressBar" name="totalProgressbar" >
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="value" >
+                  <number>0</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="cancelButton" >
+                 <property name="enabled" >
+                  <bool>false</bool>
+                 </property>
+                 <property name="sizePolicy" >
+                  <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="toolTip" >
+                  <string>Stop process.</string>
+                 </property>
+                 <property name="text" >
+                  <string>&amp;Abort</string>
+                 </property>
+                 <property name="icon" >
+                  <iconset resource="abby.qrc" >
+                   <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
+                 </property>
+                 <property name="iconSize" >
+                  <size>
+                   <width>16</width>
+                   <height>16</height>
+                  </size>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="tab_4" >
+            <attribute name="title" >
+             <string>&amp;Log</string>
+            </attribute>
+            <layout class="QGridLayout" name="gridLayout_2" >
+             <item row="0" column="0" >
+              <widget class="QTextEdit" name="logEdit" >
+               <property name="enabled" >
+                <bool>true</bool>
+               </property>
+               <property name="readOnly" >
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
           </widget>
          </widget>
         </item>
        </layout>
+       <zorder>tabWidget_2</zorder>
+       <zorder>splitter</zorder>
       </widget>
       <widget class="QWidget" name="tab_2" >
        <attribute name="title" >
@@ -543,7 +550,7 @@ this to work.</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>543</width>
+     <width>520</width>
      <height>25</height>
     </rect>
    </property>
