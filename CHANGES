@@ -1,7 +1,17 @@
-0.2.2
+0.4.0
+
+FOREWORD
+
+This release is aimed to replace clive-utils completely sometime
+in the near future. RSS parsing (clivefeed) and scan (clivescan)
+features have become new features in abby and are now integrated
+to the GUI. This should be a welcome change to abby users and
+those wondering why clivefeed and clivescan try to be both
+CLI and GUI programs.
 
   User-visible changes:
    * Add: --format=best support
+   * Add: RSS parsing (obsoletes clivefeed in clive-utils)
    * Fix: Tab order (main window: paste button)
    * Change: --format IDs to reflect (c)clive changes
    * Remove: mp4 support (Google) [broken in cclive 0.4.3]
