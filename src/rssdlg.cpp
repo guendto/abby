@@ -17,6 +17,7 @@
  */
 #include <QDialog>
 #include <QDebug>
+#include <QMessageBox>
 
 #include "rssdlg.h"
 
@@ -24,16 +25,22 @@ RSSDialog::RSSDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
+    mgr = createManager();
+    itemsTree->setColumnHidden(1, true);
 }
 
 void
 RSSDialog::onFetch() {
-    QString links = linkEdit->toPlainText();
+    QString links = linkEdit->text();
 
     if (links.isEmpty())
         return;
 
+    itemsTree->clear();
     xml.clear();
+
+    QNetworkRequest req(links);
+    mgr->get(req);
 }
 
 void
@@ -41,38 +48,96 @@ RSSDialog::onAbort() {
 }
 
 void
+RSSDialog::replyFinished(QNetworkReply* reply) {
+    if (reply->error() == QNetworkReply::NoError) {
+        QVariant tmp =
+            reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+
+        redirectUrl = 
+            redirect(tmp.toUrl(), redirectUrl);
+
+        if (!redirectUrl.isEmpty())
+            mgr->get(QNetworkRequest(redirectUrl));
+        else {
+            redirectUrl.clear();
+            xml.addData(reply->readAll());
+            parseRSS();
+        }
+        reply->deleteLater();
+    }
+    else {
+        QMessageBox mb;
+        mb.setText("Network error occurred.");
+        mb.setInformativeText(reply->errorString());
+        mb.setStandardButtons(QMessageBox::Ok);
+        mb.setDefaultButton(QMessageBox::Ok);
+        mb.setIcon(QMessageBox::Critical);
+        mb.exec();
+    }
+}
+
+void
 RSSDialog::parseRSS() {
+    QString rssTitle, link, tag, title, pubdate;
     while (!xml.atEnd()) {
         xml.readNext();
         if (xml.isStartElement()) {
             if (xml.name() == "item")
-                linkString = xml.attributes().value("rss::about").toString();
-            currentTag = xml.name().toString();
+                link = xml.attributes().value("rss::about").toString();
+            tag = xml.name().toString();
         } else if (xml.isEndElement()) {
             if (xml.name() == "item") {
-                QTreeWidgetItem *item = new QTreeWidgetItem;
-                item->setText(0, titleString);
-                item->setText(1, "");
-                item->setText(2, linkString);
-                itemsTree->addTopLevelItem(item);
-
-                titleString.clear();
-                linkString.clear();
+                if (!rssTitle.isEmpty()) {
+                    QTreeWidgetItem *item = new QTreeWidgetItem;
+                    item->setCheckState(0, Qt::Unchecked);
+                    item->setText(0, title);
+                    item->setText(1, link);
+                    itemsTree->addTopLevelItem(item);
+                }
+                else
+                    rssTitle = title;
+                title.clear();
+                link.clear();
+                pubdate.clear();
             }
         } else if (xml.isCharacters() && !xml.isWhitespace()) {
-            if (currentTag == "title")
-                titleString += xml.text().toString();
-            else if (currentTag == "link") 
-                linkString += xml.text().toString();
+            if (tag == "title")
+                title += xml.text().toString();
+            else if (tag == "link") 
+                link += xml.text().toString();
+            else if (tag == "pubDate")
+                pubdate += xml.text().toString();
         }
     }
 
     if (xml.error()
         && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
     {
-        qWarning() << "xml error: "
-                   << xml.lineNumber()
-                   << ": "
-                   << xml.errorString();
+        QMessageBox mb;
+        mb.setText("XML parsing error");
+        mb.setInformativeText(xml.lineNumber() +":"+ xml.errorString());
+        mb.setStandardButtons(QMessageBox::Ok);
+        mb.setDefaultButton(QMessageBox::Ok);
+        mb.setIcon(QMessageBox::Critical);
+        mb.exec();
     }
+}
+
+QNetworkAccessManager*
+RSSDialog::createManager() {
+    QNetworkAccessManager *p = new QNetworkAccessManager(this);
+
+    connect(p, SIGNAL(finished(QNetworkReply*)),
+        this, SLOT(replyFinished(QNetworkReply*)));
+
+    return p;
+}
+
+QUrl
+RSSDialog::redirect(const QUrl& to, const QUrl& from) const {
+    QUrl redirectTo;
+    if (!to.isEmpty() && to != from) {
+        redirectTo = to;
+    }
+    return redirectTo;
 }

@@ -22,6 +22,12 @@
 
 #include <QXmlStreamReader>
 
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
+#include <QNetworkReply>
+
+#include <QPointer>
+
 class RSSDialog : public QDialog, public Ui::RSSDialog {
     Q_OBJECT
 public:
@@ -29,12 +35,14 @@ public:
 private slots:
     void onFetch();
     void onAbort();
+    void replyFinished(QNetworkReply*);
 private:
     void parseRSS();
+    QNetworkAccessManager *createManager();
+    QUrl redirect(const QUrl& to, const QUrl& from) const;
 private:
     QXmlStreamReader xml;
-    QString linkString;
-    QString currentTag;
-    QString titleString;
+    QPointer<QNetworkAccessManager> mgr;
+    QUrl redirectUrl;
 };
 #endif

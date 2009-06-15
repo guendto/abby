@@ -210,19 +210,6 @@ MainWindow::onStreamStateChanged(int state) {
 
 void
 MainWindow::onStart() {
-    // Check video URL
-
-    QString url = urlEdit->toPlainText();
-
-    if (url.isEmpty()) {
-        statusBar()->showMessage(tr("Enter a video link."));
-        return;
-    }
-
-    url = url.trimmed();
-
-    if (!url.startsWith("http://",Qt::CaseInsensitive))
-        url.insert(0,"http://");
 
     // Check cclive
 
@@ -234,9 +221,6 @@ MainWindow::onStart() {
         onPreferences();
         return;
     }
-
-    QString output;
-    const bool _isCclive = isCclive(path,output);
 
     // Check video save directory
 
@@ -251,6 +235,19 @@ MainWindow::onStart() {
         onPreferences();
         return;
     }
+
+    // Process input
+    QString input = urlEdit->toPlainText();
+    if (input.isEmpty()) {
+        statusBar()->showMessage(tr("Enter a video link"));
+        return;
+    }
+
+    QStringList links = input.split("\n");
+    totalProgressbar->setRange(0,links.size());
+
+    QString output;
+    const bool _isCclive = isCclive(path,output);
 
     // clive can use this same approach even if --savedir option exists.
     process.setWorkingDirectory(savedir);
@@ -307,12 +304,7 @@ MainWindow::onStart() {
             args << QString("--connect-timeout-socks=%1").arg(n);
     }
 
-#ifdef MAKE_CONTINUE_CONDITIONAL
-    if (continueBox->isChecked())
-        args << "--continue";
-#else
-    args << "--continue";
-#endif
+    args << "--continue"; // default to continue
 
     if (_isCclive) { // clive defaults to this
         if (titleBox->isChecked()) {
@@ -321,7 +313,7 @@ MainWindow::onStart() {
                 if (!s.isEmpty())
             args << QString("--cclass=%1").arg(s);
         }
-    } else { // this clive can use
+    } else { // clive can use this
         s = prefs->cclassEdit->text();
         if (!s.isEmpty())
             args << QString("--cclass=%1").arg(s);
@@ -332,7 +324,13 @@ MainWindow::onStart() {
         s = "flv";
 
     args << QString("--format=%1").arg(s);
-    args << QString("%1").arg(url);
+
+    for (register int i=0; i<links.size(); ++i) {
+        QString url = links[i].trimmed();
+        if (!url.startsWith("http://",Qt::CaseInsensitive))
+            url.insert(0,"http://");
+        args << QString("%1").arg(url);
+    }
 
     // Prepare log
 
@@ -410,7 +408,15 @@ MainWindow::onFormatStateChanged(int) {
 
 void
 MainWindow::onRSS() {
-    rss->exec();
+    if (rss->exec() == QDialog::Accepted) {
+        QTreeWidgetItemIterator iter(rss->itemsTree);
+        while (*iter) {
+            if ((*iter)->checkState(0) == Qt::Checked) {
+                urlEdit->append((*iter)->text(1));
+            }
+            ++iter;
+        }
+    }
 }
 
 void
@@ -462,8 +468,10 @@ MainWindow::onProcStdoutReady() {
     QString status, last = tmp.last();
     //qDebug() << last;
 
-    if (last.startsWith("fetch"))
+    if (last.startsWith("fetch http://")) {
         status = tr("Fetching link...");
+        totalProgressbar->setValue(totalProgressbar->value()+1);
+    }
     else if (last.startsWith("verify") || last.startsWith("query length") )
         status = tr("Verifying video link...");
     else if (last.startsWith("error:"))
@@ -513,7 +521,7 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
         updateLog(status + ".");
     }
     else
-        status = tr("error: see log for details");
+        status = tr("Error(s) occurred. See Log for details.");
 
     statusBar()->showMessage(status);
 
