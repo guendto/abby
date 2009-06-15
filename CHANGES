@@ -9,6 +9,9 @@ to the GUI. This should be a welcome change to abby users and
 those wondering why clivefeed and clivescan try to be both
 CLI and GUI programs.
 
+abby now also allows entering more than only one video link to
+the input box. Each link must be separated by a newline.
+
   User-visible changes:
    * Add: --format=best support
    * Add: RSS parsing (obsoletes clivefeed in clive-utils)
