@@ -38,10 +38,11 @@ private slots:
     void onStreamStateChanged(int state);
     void onURLEditingFinished();
     void onURLReturnPressed();
-    void onFormatStateChanged(int state);
     void onRSS();
     void onScan();
     void onPasteURL();
+    void onAdd();
+    void onRemove();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
     void onProcStdoutReady();
@@ -53,6 +54,7 @@ private:
     bool cancelled;
     bool errorOccurred;
 private:
+    void addPageLink(QString lnk);
     void writeSettings();
     void readSettings();
     void updateLog(const QString& text);

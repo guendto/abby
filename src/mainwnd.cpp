@@ -23,6 +23,7 @@
 #include <QIcon>
 #include <QClipboard>
 #include <QDebug>
+#include <QInputDialog>
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
@@ -154,9 +155,11 @@ MainWindow::updateLog(const QString& newText) {
 void
 MainWindow::updateFormats() {
 
+    // TODO: See TODO file.
+
     // Alter widgets dynamically based on the video URL.
 
-    QString url = urlEdit->toPlainText();
+    QString url; // = urlEdit->toPlainText();
 
     if (url.isEmpty())
         return;
@@ -236,15 +239,8 @@ MainWindow::onStart() {
         return;
     }
 
-    // Process input
-    QString input = urlEdit->toPlainText();
-    if (input.isEmpty()) {
-        statusBar()->showMessage(tr("Enter a video link"));
+    if (linksList->count() == 0)
         return;
-    }
-
-    QStringList links = input.split("\n");
-    totalProgressbar->setRange(0,links.size());
 
     QString output;
     const bool _isCclive = isCclive(path,output);
@@ -325,12 +321,10 @@ MainWindow::onStart() {
 
     args << QString("--format=%1").arg(s);
 
-    for (register int i=0; i<links.size(); ++i) {
-        QString url = links[i].trimmed();
-        if (!url.startsWith("http://",Qt::CaseInsensitive))
-            url.insert(0,"http://");
-        args << QString("%1").arg(url);
-    }
+    for (register int i=0; i<linksList->count(); ++i)
+        args << QString("%1").arg(linksList->item(i)->text());
+
+    totalProgressbar->setMaximum(linksList->count());
 
     // Prepare log
 
@@ -368,51 +362,12 @@ MainWindow::onURLReturnPressed() {
 }
 
 void
-MainWindow::onFormatStateChanged(int) {
-    QString url = urlEdit->toPlainText();
-
-    if (url.isEmpty())
-        return;
-
-#ifdef FLV_CANNOT_RESUME
-
-    // Disable --continue for the specified hosts if format is "flv".
-    // Make changes based on the video URL.
-
-    struct lookup_s {
-        const char *host;
-    };
-    static const struct lookup_s lookup[] = {
-        {"youtube.com"},
-        {"video.google."},
-    };
-
-    const int c = sizeof(lookup)/sizeof(struct lookup_s);
-    bool enable = true;
-
-    for (register int i=0; i<c; ++i) {
-        if (url.contains(lookup[i].host)) {
-            if (formatCombo->currentText() == "flv") {
-                enable = false;
-                break;
-            }
-        }
-    }
-
-    continueBox->setEnabled(enable);
-
-    if (continueBox->isChecked() && !enable)
-        continueBox->setCheckState(Qt::Unchecked);
-#endif // FLV_CANNOT_RESUME
-}
-
-void
 MainWindow::onRSS() {
     if (rss->exec() == QDialog::Accepted) {
         QTreeWidgetItemIterator iter(rss->itemsTree);
         while (*iter) {
             if ((*iter)->checkState(0) == Qt::Checked) {
-                urlEdit->append((*iter)->text(1));
+                addPageLink((*iter)->text(1));
             }
             ++iter;
         }
@@ -425,9 +380,41 @@ MainWindow::onScan() {
 
 void
 MainWindow::onPasteURL() {
+    // TODO: split by \n and append to list
     QClipboard *cb = QApplication::clipboard();
-    urlEdit->setText(cb->text());
+    //urlEdit->setText(cb->text());
     updateFormats();
+}
+
+void
+MainWindow::onAdd() {
+    QString lnk = QInputDialog::getText(this,
+        tr("Add new video page link"), tr("Enter link:"));
+    if (!lnk.isEmpty())
+        addPageLink(lnk);
+}
+
+void
+MainWindow::onRemove() {
+    QList<QListWidgetItem*> sel = linksList->selectedItems();
+    for (register int i=0; i<sel.size(); ++i) {
+        const int row = linksList->row(sel[i]);
+        delete linksList->takeItem(row);
+    }
+}
+
+void
+MainWindow::addPageLink(QString lnk) {
+    lnk = lnk.trimmed();
+
+    if (!lnk.startsWith("http://",Qt::CaseInsensitive))
+        lnk.insert(0,"http://");
+
+    QList<QListWidgetItem *> found
+        = linksList->findItems(lnk, Qt::MatchExactly);
+
+    if (found.size() == 0)
+        linksList->addItem(lnk);
 }
 
 void
