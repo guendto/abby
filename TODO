@@ -1,6 +1,16 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
+* make input box a list box?
+* multi-link system
+  - auto-format list building cannot be used
+  - possible workaround is to check if all links belong to same host
+  - if yes, then provide a list of host specific formats
+  - otherwise, show flv only
+* merge clivefeed and clivescan into abby
+* allow multi-link use
+  - new clive-utils will require this
+
 Please Santa, bring us...
   * a proper application icon to replace the current "TODO" icon
     - 32x32 or higher (24bit preferably)
