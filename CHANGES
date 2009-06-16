@@ -6,7 +6,7 @@ This release is a step closer to merge the clive-utils programs
 into abby as RSS feed parsing (clivefeed) and link scanning
 (clivescan). Note that link scanning is not implemented yet.
 
-abby now also allows downloading multiple videos at one go.
+It is now also possible to download multiple videos on one go.
 
   User-visible changes:
    * Add: --format=best support

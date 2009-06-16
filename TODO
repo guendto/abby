@@ -1,16 +1,25 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-* implement link scanning (scandlg.*)
-* verify added links against --host output
-* implement proxy (rss and scan)
-* multi-link system
-  - video format combo contents must be generated differently
+0.3.0
+-----
+* implement proxy (rss)
+* options: download (video) format combobox
+  - auto-fill combo requires changes due to the added multi-link support
   - one possible workaround is to check if all links are of the same host
     - if yes, then provide a list of host specific formats
     - otherwise, show flv only
+  - use "default" instead of "flv" in the formats combo
+  - add "best" to the formats combo
+* verify added links against --host output
+  - clive and cclive now support different hosts (and formats)
 * remove existing translations
-  - keep support at code level
+  - keep the existing code (hide, disable whatever is needed)
+
+0.4.x
+-----
+* implement link scanning (scandlg.*)
+* implement proxy (scan)
 
 Please Santa, bring us...
   * a proper application icon to replace the current "TODO" icon
