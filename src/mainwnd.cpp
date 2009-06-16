@@ -20,10 +20,11 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QFileDialog>
-#include <QIcon>
+//#include <QIcon>
 #include <QClipboard>
 #include <QDebug>
 #include <QInputDialog>
+#include <QNetworkProxy>
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
@@ -45,7 +46,7 @@ MainWindow::MainWindow():
     setupUi(this);
     readSettings();
 
-    setWindowIcon(QIcon(":/rc/abby.png"));
+//    setWindowIcon(QIcon(":/rc/abby.png"));
 
     connect(&process, SIGNAL(started()),
         this, SLOT(onProcStarted()));
@@ -66,6 +67,7 @@ MainWindow::MainWindow():
     scan = new ScanDialog(this);
 
     updateWidgets();
+    setProxy();
 }
 
 bool
@@ -205,7 +207,30 @@ MainWindow::updateFormats() {
 void
 MainWindow::onPreferences() {
     prefs->exec();
+    setProxy();
     updateWidgets();
+}
+
+void
+MainWindow::setProxy() {
+    if (!prefs->proxyEdit->text().isEmpty()
+        && prefs->proxyCombo->currentIndex() > 0)
+    {
+        QNetworkProxy proxy;
+
+        proxy.setType(QNetworkProxy::HttpProxy);
+
+        QString tmp = prefs->proxyEdit->text();
+        tmp.replace("http://", "");
+
+        QStringList tokens = tmp.split(":");
+        proxy.setHostName(tokens[0]);
+
+        if (tokens.size() == 2)
+            proxy.setPort(tokens[1].toInt());
+
+        QNetworkProxy::setApplicationProxy(proxy);
+    }
 }
 
 void
@@ -350,7 +375,7 @@ MainWindow::onCancel() {
 
 void
 MainWindow::onAbout() {
-    AboutDialog about(this,prefs->ccliveEdit->text());
+    AboutDialog about(this, prefs->ccliveEdit->text());
     about.exec();
 }
 

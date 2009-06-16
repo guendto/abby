@@ -62,6 +62,7 @@ private:
     void updateWidgets();
     void updateFormats();
     bool isCclive(const QString& path, QString& output);
+    void setProxy();
 protected:
     void closeEvent(QCloseEvent *event);
 };

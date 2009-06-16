@@ -3,7 +3,6 @@ web : http://repo.or.cz/w/abby.git
 
 0.3.0
 -----
-* implement proxy (rss)
 * options: download (video) format combobox
   - auto-fill combo requires changes due to the added multi-link support
   - one possible workaround is to check if all links are of the same host
