@@ -36,8 +36,6 @@ private slots:
     void onCancel();
     void onAbout();
     void onStreamStateChanged(int state);
-    void onURLEditingFinished();
-    void onURLReturnPressed();
     void onRSS();
     void onScan();
     void onPasteURL();

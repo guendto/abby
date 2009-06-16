@@ -13,6 +13,10 @@
   <property name="windowTitle" >
    <string>abby</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="abby.qrc" >
+    <normaloff>:/abby.png</normaloff>:/abby.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget" >
    <layout class="QGridLayout" name="gridLayout_5" >
     <item row="0" column="0" >
@@ -37,6 +41,9 @@
               <item>
                <widget class="QPushButton" name="addButton" >
                 <property name="toolTip" >
+                 <string/>
+                </property>
+                <property name="statusTip" >
                  <string>Add video page link</string>
                 </property>
                 <property name="text" >
@@ -57,6 +64,9 @@
               <item>
                <widget class="QPushButton" name="pasteButton" >
                 <property name="toolTip" >
+                 <string/>
+                </property>
+                <property name="statusTip" >
                  <string>Paste video page links from clipboard</string>
                 </property>
                 <property name="text" >
@@ -77,6 +87,9 @@
               <item>
                <widget class="QPushButton" name="removeButton" >
                 <property name="toolTip" >
+                 <string/>
+                </property>
+                <property name="statusTip" >
                  <string>Remove selected video page links</string>
                 </property>
                 <property name="text" >
@@ -111,6 +124,9 @@
               <item>
                <widget class="QPushButton" name="rssButton" >
                 <property name="toolTip" >
+                 <string/>
+                </property>
+                <property name="statusTip" >
                  <string>Add video links from RSS feeds</string>
                 </property>
                 <property name="text" >
@@ -131,6 +147,9 @@
               <item>
                <widget class="QPushButton" name="scanButton" >
                 <property name="toolTip" >
+                 <string/>
+                </property>
+                <property name="statusTip" >
                  <string>Add video links from scanned web pages</string>
                 </property>
                 <property name="text" >
@@ -151,6 +170,9 @@
               <item>
                <widget class="QPushButton" name="startButton" >
                 <property name="toolTip" >
+                 <string/>
+                </property>
+                <property name="statusTip" >
                  <string>Download videos from the listed page links</string>
                 </property>
                 <property name="text" >
@@ -419,7 +441,7 @@
                 </sizepolicy>
                </property>
                <property name="toolTip" >
-                <string>Downloaded video format</string>
+                <string/>
                </property>
                <property name="text" >
                 <string>&amp;Download format:</string>
@@ -438,9 +460,8 @@
                 </sizepolicy>
                </property>
                <property name="toolTip" >
-                <string>Download format of the video. Note that different format
-typically means different video resolution. Also note
-that some formats may not always be available.</string>
+                <string>Downloaded video format. This option is video
+host specific.</string>
                </property>
                <item>
                 <property name="text" >
@@ -630,6 +651,7 @@ download finishes.</string>
     <property name="title" >
      <string>&amp;File</string>
     </property>
+    <addaction name="action_RSS" />
     <addaction name="separator" />
     <addaction name="action_Quit" />
    </widget>
@@ -641,7 +663,7 @@ download finishes.</string>
    </widget>
    <widget class="QMenu" name="menuHelp" >
     <property name="title" >
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="action_About" />
    </widget>
@@ -687,10 +709,20 @@ download finishes.</string>
    <property name="text" >
     <string>&amp;RSS...</string>
    </property>
-  </action>
-  <action name="action_Scan" >
-   <property name="text" >
-    <string>&amp;Scan...</string>
+   <property name="iconText" >
+    <string>RSS</string>
+   </property>
+   <property name="toolTip" >
+    <string>RSS</string>
+   </property>
+   <property name="statusTip" >
+    <string>Add video links from RSS feeds</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+R</string>
+   </property>
+   <property name="shortcutContext" >
+    <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
  </widget>
@@ -877,6 +909,22 @@ download finishes.</string>
     <hint type="sourcelabel" >
      <x>36</x>
      <y>146</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>259</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_RSS</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onRSS()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel" >
      <x>259</x>

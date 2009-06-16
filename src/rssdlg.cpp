@@ -18,37 +18,54 @@
 #include <QDialog>
 #include <QDebug>
 #include <QMessageBox>
+#include <QSettings>
 
 #include "rssdlg.h"
+#include "feedmgrdlg.h"
 
 RSSDialog::RSSDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
+    readSettings();
     mgr = createManager();
     itemsTree->setColumnHidden(1, true);
 }
 
 void
 RSSDialog::onFetch() {
-    QString links = linkEdit->text();
+    QString lnk = linkEdit->text();
 
-    if (links.isEmpty())
+    if (lnk.isEmpty())
         return;
 
     itemsTree->clear();
     xml.clear();
 
-    QNetworkRequest req(links);
+    fetchButton->setEnabled(false);
+    buttonBox->setEnabled(false);
+
+    QNetworkRequest req(lnk);
+
+    req.setRawHeader("User-Agent", "Mozilla/5.0");
+
     mgr->get(req);
 }
 
 void
-RSSDialog::onAbort() {
+RSSDialog::onFeedMgr() {
+    FeedMgrDialog *p = new FeedMgrDialog(this);
+    if (p->exec() == QDialog::Accepted) {
+        QList<QListWidgetItem*> sel = p->feedsList->selectedItems();
+        if (sel.size() > 0)
+            linkEdit->setText(sel[0]->text());
+        p->writeSettings();
+    }
 }
 
 void
 RSSDialog::replyFinished(QNetworkReply* reply) {
+
     if (reply->error() == QNetworkReply::NoError) {
         QVariant tmp =
             reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
@@ -67,13 +84,16 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
     }
     else {
         QMessageBox mb;
-        mb.setText("Network error occurred.");
+        mb.setText("Network error occurred");
         mb.setInformativeText(reply->errorString());
         mb.setStandardButtons(QMessageBox::Ok);
         mb.setDefaultButton(QMessageBox::Ok);
         mb.setIcon(QMessageBox::Critical);
         mb.exec();
     }
+
+    fetchButton->setEnabled(true);
+    buttonBox->setEnabled(true);
 }
 
 void
@@ -140,4 +160,20 @@ RSSDialog::redirect(const QUrl& to, const QUrl& from) const {
         redirectTo = to;
     }
     return redirectTo;
+}
+
+void
+RSSDialog::writeSettings() {
+    QSettings s;
+    s.beginGroup("RSSDialog");
+    s.setValue("size", size());
+    s.endGroup();
+}
+
+void
+RSSDialog::readSettings() {
+    QSettings s;
+    s.beginGroup("RSSDialog");
+    resize( s.value("size", QSize(514,295)).toSize() );
+    s.endGroup();
 }

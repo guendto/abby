@@ -127,9 +127,9 @@ void
 MainWindow::writeSettings() {
     QSettings s;
     s.beginGroup("MainWindow");
-    s.setValue("size",size());
-    s.setValue("pos",pos());
-    s.setValue("titleBox",titleBox->checkState());
+    s.setValue("size", size());
+    s.setValue("pos", pos());
+    s.setValue("titleBox", titleBox->checkState());
     s.endGroup();
 }
 
@@ -137,8 +137,8 @@ void
 MainWindow::readSettings() {
     QSettings s;
     s.beginGroup("MainWindow");
-    resize(s.value("size",QSize(525,265)).toSize());
-    move(s.value("pos",QPoint(200,200)).toPoint());
+    resize( s.value("size", QSize(525,265)).toSize() );
+    move( s.value("pos", QPoint(200,200)).toPoint() );
     titleBox->setCheckState(
         s.value("titleBox").toBool()
         ? Qt::Checked
@@ -219,8 +219,8 @@ MainWindow::onStart() {
     QString path = prefs->ccliveEdit->text();
     if (path.isEmpty()) {
         QMessageBox::information(this,QCoreApplication::applicationName(),
-            tr("Path to cclive (or clive) command undefined. "
-                "See preferences."));
+            tr("Specify path to either clive or cclive command in the "
+                "Preferences."));
         onPreferences();
         return;
     }
@@ -234,7 +234,8 @@ MainWindow::onStart() {
     QString savedir = prefs->savedirEdit->text();
     if (savedir.isEmpty()) {
         QMessageBox::information(this,QCoreApplication::applicationName(),
-            tr("Save directory undefined. See preferences."));
+            tr("Specify path to save directory for the downloaded videos "
+                "in the Preferences."));
         onPreferences();
         return;
     }
@@ -352,26 +353,16 @@ MainWindow::onAbout() {
 }
 
 void
-MainWindow::onURLEditingFinished() {
-    updateFormats();
-}
-
-void
-MainWindow::onURLReturnPressed() {
-    onStart();
-}
-
-void
 MainWindow::onRSS() {
     if (rss->exec() == QDialog::Accepted) {
         QTreeWidgetItemIterator iter(rss->itemsTree);
         while (*iter) {
-            if ((*iter)->checkState(0) == Qt::Checked) {
+            if ((*iter)->checkState(0) == Qt::Checked)
                 addPageLink((*iter)->text(1));
-            }
             ++iter;
         }
     }
+    rss->writeSettings();
 }
 
 void
@@ -380,18 +371,17 @@ MainWindow::onScan() {
 
 void
 MainWindow::onPasteURL() {
-    // TODO: split by \n and append to list
     QClipboard *cb = QApplication::clipboard();
-    //urlEdit->setText(cb->text());
-    updateFormats();
+    QStringList lst = cb->text().split("\n");
+    for (register int i=0; i<lst.size(); ++i)
+        addPageLink(lst[i]);
 }
 
 void
 MainWindow::onAdd() {
     QString lnk = QInputDialog::getText(this,
         tr("Add new video page link"), tr("Enter link:"));
-    if (!lnk.isEmpty())
-        addPageLink(lnk);
+    addPageLink(lnk);
 }
 
 void
@@ -405,6 +395,9 @@ MainWindow::onRemove() {
 
 void
 MainWindow::addPageLink(QString lnk) {
+    if (lnk.isEmpty())
+        return;
+
     lnk = lnk.trimmed();
 
     if (!lnk.startsWith("http://",Qt::CaseInsensitive))
@@ -415,6 +408,8 @@ MainWindow::addPageLink(QString lnk) {
 
     if (found.size() == 0)
         linksList->addItem(lnk);
+
+    updateFormats();
 }
 
 void
@@ -436,7 +431,7 @@ MainWindow::onProcStarted() {
 void
 MainWindow::onProcError(QProcess::ProcessError err) {
     if (err == QProcess::FailedToStart) {
-        QString msg = tr("error: failed to start process");
+        QString msg = tr("Error: Failed to start the process.");
         statusBar()->showMessage(msg);
         updateLog(msg);
     }
@@ -498,12 +493,12 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (!errorOccurred) {
         if (exitStatus == QProcess::NormalExit) {
             status = exitCode != 0
-                ? tr("Process exited with an error; see log")
-                : tr("Process exited normally");
+                ? tr("Process exited with an error. See Log for details.")
+                : tr("Process exited normally.");
         } else {
             status = cancelled
-                ? tr("Process terminated")
-                : tr("Process crashed; see log");
+                ? tr("Process terminated.")
+                : tr("Process crashed. See Log for details.");
         }
         updateLog(status + ".");
     }

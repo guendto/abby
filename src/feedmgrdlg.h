@@ -15,37 +15,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef rssdlg_h
-#define rssdlg_h
+#ifndef feedmgrdlg_h
+#define feedmgrdlg_h
 
-#include "ui_rssdlg.h"
+#include "ui_feedmgrdlg.h"
 
-#include <QXmlStreamReader>
+class QDialog;
 
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-
-#include <QPointer>
-
-class RSSDialog : public QDialog, public Ui::RSSDialog {
+class FeedMgrDialog : public QDialog, public Ui::FeedMgrDialog {
     Q_OBJECT
 public:
-    RSSDialog(QWidget *parent=0);
-private slots:
-    void onFetch();
-    void onFeedMgr();
-    void replyFinished(QNetworkReply*);
+    FeedMgrDialog(QWidget *parent);
 public:
     void writeSettings();
-private:
     void readSettings();
-    void parseRSS();
-    QNetworkAccessManager *createManager();
-    QUrl redirect(const QUrl& to, const QUrl& from) const;
-private:
-    QXmlStreamReader xml;
-    QPointer<QNetworkAccessManager> mgr;
-    QUrl redirectUrl;
+private slots:
+    void onAdd();
+    void onRemove();
 };
+
 #endif
+
