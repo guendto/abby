@@ -2,20 +2,21 @@
 
 FOREWORD
 
-This release is aimed to replace clive-utils completely sometime
-in the near future. RSS parsing (clivefeed) and scan (clivescan)
-features have become new features in abby and are now integrated
-to the GUI. This should be a welcome change to abby users and
-those wondering why clivefeed and clivescan try to be both
-CLI and GUI programs.
+This release is a step closer to replace the clive-utils project
+completely. The RSS feed parsing (clivefeed) and link scanning
+(clivescan) features have now been integrated to abby which
+should be a welcome change to anyone looking for a compact
+lovechild with the above essential features.
 
-abby now also allows entering more than only one video link to
-the input box. Each link must be separated by a newline.
+Another significant difference to the earlier versions of abby
+is that the users may now enter multiple video page links to
+be downloaded.
 
   User-visible changes:
    * Add: --format=best support
    * Add: RSS parsing (obsoletes clivefeed in clive-utils)
    * Fix: Tab order (main window: paste button)
+   * Change: users may now enter multiple video page links instead of only one
    * Change: --format IDs to reflect (c)clive changes
    * Remove: mp4 support (Google) [broken in cclive 0.4.3]
    * Remove: Youtube login support [at least until it gets fixed in (c)clive]
