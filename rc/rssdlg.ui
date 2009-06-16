@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>RSSDialog</class>
- <widget class="QDialog" name="RSSDialog" >
+ <class>rssDialog</class>
+ <widget class="QDialog" name="rssDialog" >
   <property name="windowModality" >
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -14,6 +14,10 @@
   </property>
   <property name="windowTitle" >
    <string>RSS</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="abby.qrc" >
+    <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
   </property>
   <property name="sizeGripEnabled" >
    <bool>true</bool>
@@ -110,6 +114,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>feedmgrButton</tabstop>
+  <tabstop>linkEdit</tabstop>
+  <tabstop>fetchButton</tabstop>
+  <tabstop>itemsTree</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="abby.qrc" />
  </resources>
@@ -117,7 +128,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>RSSDialog</receiver>
+   <receiver>rssDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -133,7 +144,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>RSSDialog</receiver>
+   <receiver>rssDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -149,7 +160,7 @@
   <connection>
    <sender>fetchButton</sender>
    <signal>clicked()</signal>
-   <receiver>RSSDialog</receiver>
+   <receiver>rssDialog</receiver>
    <slot>onFetch()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -165,7 +176,7 @@
   <connection>
    <sender>feedmgrButton</sender>
    <signal>clicked()</signal>
-   <receiver>RSSDialog</receiver>
+   <receiver>rssDialog</receiver>
    <slot>onFeedMgr()</slot>
    <hints>
     <hint type="sourcelabel" >

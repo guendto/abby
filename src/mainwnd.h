@@ -25,6 +25,7 @@
 class QMainWindow;
 class PreferencesDialog;
 class RSSDialog;
+class ScanDialog;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow {
     Q_OBJECT
@@ -48,6 +49,7 @@ private slots:
 private:
     PreferencesDialog *prefs;
     RSSDialog *rss;
+    ScanDialog *scan;
     QProcess process;
     bool cancelled;
     bool errorOccurred;

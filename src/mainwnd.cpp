@@ -28,6 +28,7 @@
 #include "mainwnd.h"
 #include "prefsdlg.h"
 #include "rssdlg.h"
+#include "scandlg.h"
 #include "aboutdlg.h"
 
 MainWindow::MainWindow():
@@ -62,6 +63,7 @@ MainWindow::MainWindow():
 
     prefs = new PreferencesDialog(this);
     rss = new RSSDialog(this);
+    scan = new ScanDialog(this);
 
     updateWidgets();
 }
@@ -367,6 +369,13 @@ MainWindow::onRSS() {
 
 void
 MainWindow::onScan() {
+    // TODO: implement link scanning.
+    QMessageBox::information(this, QCoreApplication::applicationName(),
+        "TODO: Implement link scanning.");
+    return;
+    if (scan->exec() == QDialog::Accepted) {
+    }
+    scan->writeSettings();
 }
 
 void

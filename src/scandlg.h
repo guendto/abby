@@ -15,12 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef rssdlg_h
-#define rssdlg_h
+#ifndef scandlg_h
+#define scandlg_h
 
-#include "ui_rssdlg.h"
-
-#include <QXmlStreamReader>
+#include "ui_scandlg.h"
 
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
@@ -28,24 +26,26 @@
 
 #include <QPointer>
 
-class RSSDialog : public QDialog, public Ui::rssDialog {
+class QDialog;
+
+class ScanDialog : public QDialog, public Ui::scanDialog {
     Q_OBJECT
 public:
-    RSSDialog(QWidget *parent=0);
+    ScanDialog(QWidget *parent);
 private slots:
-    void onFetch();
-    void onFeedMgr();
+    void onScan();
     void replyFinished(QNetworkReply*);
 public:
     void writeSettings();
 private:
     void readSettings();
-    void parseRSS();
+    void scanHTML(QString html);
     QNetworkAccessManager *createManager();
     QUrl redirect(const QUrl& to, const QUrl& from) const;
 private:
-    QXmlStreamReader xml;
     QPointer<QNetworkAccessManager> mgr;
     QUrl redirectUrl;
 };
+
 #endif
+

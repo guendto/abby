@@ -1,16 +1,12 @@
-0.4.0
+0.3.0
 
 FOREWORD
 
-This release is a step closer to replace the clive-utils project
-completely. The RSS feed parsing (clivefeed) and link scanning
-(clivescan) features have now been integrated to abby which
-should be a welcome change to anyone looking for a compact
-lovechild with the above essential features.
+This release is a step closer to merge the clive-utils programs
+into abby as RSS feed parsing (clivefeed) and link scanning
+(clivescan). Note that link scanning is not implemented yet.
 
-Another significant difference to the earlier versions of abby
-is that the users may now enter multiple video page links to
-be downloaded.
+abby now also allows downloading multiple videos at one go.
 
   User-visible changes:
    * Add: --format=best support

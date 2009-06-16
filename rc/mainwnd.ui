@@ -651,7 +651,6 @@ download finishes.</string>
     <property name="title" >
      <string>&amp;File</string>
     </property>
-    <addaction name="action_RSS" />
     <addaction name="separator" />
     <addaction name="action_Quit" />
    </widget>
@@ -659,6 +658,17 @@ download finishes.</string>
     <property name="title" >
      <string>&amp;Edit</string>
     </property>
+    <widget class="QMenu" name="menu_Add" >
+     <property name="title" >
+      <string>&amp;Add</string>
+     </property>
+     <addaction name="action_Link" />
+     <addaction name="action_RSS" />
+     <addaction name="action_Scan" />
+    </widget>
+    <addaction name="menu_Add" />
+    <addaction name="action_Remove_selected" />
+    <addaction name="separator" />
     <addaction name="action_Preferences" />
    </widget>
    <widget class="QMenu" name="menuHelp" >
@@ -687,6 +697,10 @@ download finishes.</string>
    <property name="enabled" >
     <bool>true</bool>
    </property>
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/preferences-desktop.png</normaloff>:/preferences-desktop.png</iconset>
+   </property>
    <property name="text" >
     <string>Prefere&amp;nces...</string>
    </property>
@@ -706,6 +720,10 @@ download finishes.</string>
    </property>
   </action>
   <action name="action_RSS" >
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
+   </property>
    <property name="text" >
     <string>&amp;RSS...</string>
    </property>
@@ -725,16 +743,69 @@ download finishes.</string>
     <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
+  <action name="action_Scan" >
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
+   </property>
+   <property name="text" >
+    <string>&amp;Scan...</string>
+   </property>
+   <property name="statusTip" >
+    <string>Add video links from scanned web pages</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="action_Link" >
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Link...</string>
+   </property>
+   <property name="statusTip" >
+    <string>Add video page link</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="action_Remove_selected" >
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
+   </property>
+   <property name="text" >
+    <string>&amp;Remove selected</string>
+   </property>
+   <property name="statusTip" >
+    <string>Remove selected video page links</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+X</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
+  <tabstop>addButton</tabstop>
+  <tabstop>pasteButton</tabstop>
+  <tabstop>removeButton</tabstop>
+  <tabstop>rssButton</tabstop>
+  <tabstop>scanButton</tabstop>
   <tabstop>startButton</tabstop>
+  <tabstop>linksList</tabstop>
   <tabstop>tabWidget_2</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>logEdit</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>formatCombo</tabstop>
+  <tabstop>titleBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>
   <tabstop>commandBox</tabstop>
-  <tabstop>tabWidget</tabstop>
-  <tabstop>logEdit</tabstop>
  </tabstops>
  <resources>
   <include location="abby.qrc" />
@@ -921,6 +992,54 @@ download finishes.</string>
    <signal>activated()</signal>
    <receiver>MainWindow</receiver>
    <slot>onRSS()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>259</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Scan</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onScan()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>259</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Remove_selected</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onRemove()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>259</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Link</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onAdd()</slot>
    <hints>
     <hint type="sourcelabel" >
      <x>-1</x>

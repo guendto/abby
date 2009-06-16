@@ -16,14 +16,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QDialog>
+#include <QSettings>
 #include <QDebug>
 #include <QMessageBox>
-#include <QSettings>
+#include <QRegExp>
 
-#include "rssdlg.h"
-#include "feedmgrdlg.h"
+#include "scandlg.h"
 
-RSSDialog::RSSDialog(QWidget *parent)
+ScanDialog::ScanDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
@@ -33,7 +33,7 @@ RSSDialog::RSSDialog(QWidget *parent)
 }
 
 void
-RSSDialog::onFetch() {
+ScanDialog::onScan() {
     QString lnk = linkEdit->text();
 
     if (lnk.isEmpty())
@@ -41,7 +41,7 @@ RSSDialog::onFetch() {
 
     itemsTree->clear();
 
-    fetchButton->setEnabled(false);
+    scanButton->setEnabled(false);
     buttonBox->setEnabled(false);
 
     QNetworkRequest req(lnk);
@@ -50,19 +50,7 @@ RSSDialog::onFetch() {
 }
 
 void
-RSSDialog::onFeedMgr() {
-    FeedMgrDialog *p = new FeedMgrDialog(this);
-    if (p->exec() == QDialog::Accepted) {
-        QList<QListWidgetItem*> sel = p->feedsList->selectedItems();
-        if (sel.size() > 0)
-            linkEdit->setText(sel[0]->text());
-        p->writeSettings();
-    }
-}
-
-void
-RSSDialog::replyFinished(QNetworkReply* reply) {
-
+ScanDialog::replyFinished(QNetworkReply* reply) {
     if (reply->error() == QNetworkReply::NoError) {
         QVariant tmp =
             reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
@@ -77,8 +65,7 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
         }
         else {
             redirectUrl.clear();
-            xml.addData(reply->readAll());
-            parseRSS();
+            scanHTML(reply->readAll());
         }
         reply->deleteLater();
     }
@@ -92,60 +79,16 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
         mb.exec();
     }
 
-    fetchButton->setEnabled(true);
+    scanButton->setEnabled(true);
     buttonBox->setEnabled(true);
 }
 
 void
-RSSDialog::parseRSS() {
-    QString rssTitle, link, tag, title, pubdate;
-    while (!xml.atEnd()) {
-        xml.readNext();
-        if (xml.isStartElement()) {
-            if (xml.name() == "item")
-                link = xml.attributes().value("rss::about").toString();
-            tag = xml.name().toString();
-        } else if (xml.isEndElement()) {
-            if (xml.name() == "item") {
-                if (!rssTitle.isEmpty()) {
-                    QTreeWidgetItem *item = new QTreeWidgetItem;
-                    item->setCheckState(0, Qt::Unchecked);
-                    item->setText(0, title);
-                    item->setText(1, link);
-                    itemsTree->addTopLevelItem(item);
-                }
-                else
-                    rssTitle = title;
-                title.clear();
-                link.clear();
-                pubdate.clear();
-            }
-        } else if (xml.isCharacters() && !xml.isWhitespace()) {
-            if (tag == "title")
-                title += xml.text().toString();
-            else if (tag == "link") 
-                link += xml.text().toString();
-            else if (tag == "pubDate")
-                pubdate += xml.text().toString();
-        }
-    }
-
-    if (xml.error()
-        && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
-    {
-        QMessageBox mb(this);
-        mb.setText("XML parsing error");
-        mb.setInformativeText(xml.lineNumber() +":"+ xml.errorString());
-        mb.setStandardButtons(QMessageBox::Ok);
-        mb.setDefaultButton(QMessageBox::Ok);
-        mb.setIcon(QMessageBox::Critical);
-        mb.exec();
-    }
-    xml.clear();
+ScanDialog::scanHTML(QString html) {
 }
 
 QNetworkAccessManager*
-RSSDialog::createManager() {
+ScanDialog::createManager() {
     QNetworkAccessManager *p = new QNetworkAccessManager(this);
 
     connect(p, SIGNAL(finished(QNetworkReply*)),
@@ -155,7 +98,7 @@ RSSDialog::createManager() {
 }
 
 QUrl
-RSSDialog::redirect(const QUrl& to, const QUrl& from) const {
+ScanDialog::redirect(const QUrl& to, const QUrl& from) const {
     QUrl redirectTo;
     if (!to.isEmpty() && to != from)
         redirectTo = to;
@@ -163,17 +106,17 @@ RSSDialog::redirect(const QUrl& to, const QUrl& from) const {
 }
 
 void
-RSSDialog::writeSettings() {
+ScanDialog::writeSettings() {
     QSettings s;
-    s.beginGroup("RSSDialog");
+    s.beginGroup("ScanDialog");
     s.setValue("size", size());
     s.endGroup();
 }
 
 void
-RSSDialog::readSettings() {
+ScanDialog::readSettings() {
     QSettings s;
-    s.beginGroup("RSSDialog");
+    s.beginGroup("ScanDialog");
     resize( s.value("size", QSize(514,295)).toSize() );
     s.endGroup();
 }

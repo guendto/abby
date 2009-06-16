@@ -17,7 +17,6 @@
  */
 #include <QDialog>
 #include <QSettings>
-#include <QDebug>
 #include <QInputDialog>
 
 #include "feedmgrdlg.h"

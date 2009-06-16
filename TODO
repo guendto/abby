@@ -1,15 +1,16 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-* make input box a list box?
+* implement link scanning (scandlg.*)
+* verify added links against --host output
+* implement proxy (rss and scan)
 * multi-link system
-  - auto-format list building cannot be used
-  - possible workaround is to check if all links belong to same host
-  - if yes, then provide a list of host specific formats
-  - otherwise, show flv only
-* merge clivefeed and clivescan into abby
-* allow multi-link use
-  - new clive-utils will require this
+  - video format combo contents must be generated differently
+  - one possible workaround is to check if all links are of the same host
+    - if yes, then provide a list of host specific formats
+    - otherwise, show flv only
+* remove existing translations
+  - keep support at code level
 
 Please Santa, bring us...
   * a proper application icon to replace the current "TODO" icon

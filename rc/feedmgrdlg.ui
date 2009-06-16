@@ -15,6 +15,10 @@
   <property name="windowTitle" >
    <string>Feed Manager</string>
   </property>
+  <property name="windowIcon" >
+   <iconset resource="abby.qrc" >
+    <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
+  </property>
   <property name="sizeGripEnabled" >
    <bool>true</bool>
   </property>
@@ -81,6 +85,12 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>feedsList</tabstop>
+  <tabstop>addButton</tabstop>
+  <tabstop>removeButton</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
   <include location="abby.qrc" />
  </resources>

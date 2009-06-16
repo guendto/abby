@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>ScanDialog</class>
- <widget class="QDialog" name="ScanDialog" >
+ <class>scanDialog</class>
+ <widget class="QDialog" name="scanDialog" >
   <property name="windowModality" >
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -8,12 +8,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>496</width>
-    <height>277</height>
+    <width>513</width>
+    <height>239</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Scan</string>
+  </property>
+  <property name="windowIcon" >
+   <iconset resource="../../../../../../usr/home/legatvs/proj/git/abby/rc/abby.qrc" >
+    <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
   </property>
   <property name="sizeGripEnabled" >
    <bool>true</bool>
@@ -22,63 +26,29 @@
    <item row="0" column="0" >
     <layout class="QHBoxLayout" name="horizontalLayout" >
      <item>
-      <widget class="QTextEdit" name="textEdit" />
+      <widget class="QLineEdit" name="linkEdit" />
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout" >
-       <item>
-        <widget class="QPushButton" name="pushButton" >
-         <property name="text" >
-          <string>&amp;Scan</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
-           <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
-         </property>
-         <property name="iconSize" >
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2" >
-         <property name="text" >
-          <string>&amp;Abort</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
-           <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
-         </property>
-         <property name="iconSize" >
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
+      <widget class="QPushButton" name="scanButton" >
+       <property name="text" >
+        <string>&amp;Scan</string>
+       </property>
+       <property name="icon" >
+        <iconset resource="../../../../../../usr/home/legatvs/proj/git/abby/rc/abby.qrc" >
+         <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
+       </property>
+       <property name="iconSize" >
+        <size>
+         <width>16</width>
+         <height>16</height>
+        </size>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
    <item row="1" column="0" >
-    <widget class="QTreeWidget" name="treeWidget" >
+    <widget class="QTreeWidget" name="itemsTree" >
      <column>
       <property name="text" >
        <string>Title</string>
@@ -86,7 +56,7 @@
      </column>
      <column>
       <property name="text" >
-       <string>Download</string>
+       <string>Link</string>
       </property>
      </column>
     </widget>
@@ -103,14 +73,20 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>linkEdit</tabstop>
+  <tabstop>scanButton</tabstop>
+  <tabstop>itemsTree</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources>
-  <include location="abby.qrc" />
+  <include location="../../../../../../usr/home/legatvs/proj/git/abby/rc/abby.qrc" />
  </resources>
  <connections>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>ScanDialog</receiver>
+   <receiver>scanDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -126,7 +102,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>ScanDialog</receiver>
+   <receiver>scanDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -139,5 +115,24 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>scanButton</sender>
+   <signal>clicked()</signal>
+   <receiver>scanDialog</receiver>
+   <slot>onScan()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>462</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>256</x>
+     <y>119</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>onScan()</slot>
+ </slots>
 </ui>
