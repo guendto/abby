@@ -3,15 +3,8 @@ web : http://repo.or.cz/w/abby.git
 
 0.3.0
 -----
-* options: download (video) format combobox
-  - auto-fill combo requires changes due to the added multi-link support
-  - one possible workaround is to check if all links are of the same host
-    - if yes, then provide a list of host specific formats
-    - otherwise, show flv only
-  - use "default" instead of "flv" in the formats combo
-  - add "best" to the formats combo
-* verify added links against --host output
-  - clive and cclive now support different hosts (and formats)
+* Re-implement --format
+* Change: use QUrl for parsing proxy address (host, port)
 * remove existing translations
   - keep the existing code (hide, disable whatever is needed)
 

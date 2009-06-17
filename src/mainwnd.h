@@ -26,6 +26,7 @@ class QMainWindow;
 class PreferencesDialog;
 class RSSDialog;
 class ScanDialog;
+class FormatDialog;
 
 class MainWindow : public QMainWindow, private Ui::MainWindow {
     Q_OBJECT
@@ -42,6 +43,7 @@ private slots:
     void onPasteURL();
     void onAdd();
     void onRemove();
+    void onFormats();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
     void onProcStdoutReady();
@@ -51,16 +53,18 @@ private:
     PreferencesDialog *prefs;
     RSSDialog *rss;
     ScanDialog *scan;
+    FormatDialog *format;
     QProcess process;
     bool cancelled;
     bool errorOccurred;
+    QString ccliveVersion;
+    QString curlVersion;
 private:
     void addPageLink(QString lnk);
     void writeSettings();
     void readSettings();
     void updateLog(const QString& text);
-    void updateWidgets();
-    void updateFormats();
+    void updateWidgets(const bool updateCcliveDepends);
     void setProxy();
     bool isCclive(QString& output);
     bool ccliveSupportsFeature(const QString& buildOption);

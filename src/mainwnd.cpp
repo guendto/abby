@@ -30,6 +30,7 @@
 #include "prefsdlg.h"
 #include "rssdlg.h"
 #include "scandlg.h"
+#include "formatdlg.h"
 #include "aboutdlg.h"
 
 MainWindow::MainWindow():
@@ -60,11 +61,12 @@ MainWindow::MainWindow():
     connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)),
         this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
 
-    prefs = new PreferencesDialog(this);
-    rss = new RSSDialog(this);
-    scan = new ScanDialog(this);
+    prefs   = new PreferencesDialog(this);
+    rss     = new RSSDialog(this);
+    scan    = new ScanDialog(this);
+    format  = new FormatDialog(this);
 
-    updateWidgets();
+    updateWidgets(true);
     parseCcliveHostsOutput();
     setProxy();
 }
@@ -84,6 +86,8 @@ MainWindow::isCclive(QString& output) {
         output = QString::fromLocal8Bit(process.readAll());
         QStringList lst = output.split(" ", QString::SkipEmptyParts);
         state = lst[0] == "cclive";
+        ccliveVersion = lst[2];
+        curlVersion = lst[6];
     }
     return state;
 }
@@ -131,7 +135,7 @@ MainWindow::ccliveSupportsHost(const QString& lnk) {
 }
 
 void
-MainWindow::updateWidgets() {
+MainWindow::updateWidgets(const bool updateCcliveDepends) {
     // Enable widgets based on preferences and other settings.
     QString s;
 
@@ -145,11 +149,15 @@ MainWindow::updateWidgets() {
     if (s.isEmpty())
         commandBox->setCheckState(Qt::Unchecked);
 
-    if (ccliveSupportsFeature("--with-perl")) {
-        titleBox->show();
-    } else {
-        titleBox->setCheckState(Qt::Unchecked);
-        titleBox->hide();
+    if (updateCcliveDepends) {
+        // The most time consuming check is to run (c)clive.
+        // Run it only when we cannot work around it.
+        if (ccliveSupportsFeature("--with-perl"))
+            titleBox->show();
+        else {
+            titleBox->setCheckState(Qt::Unchecked);
+            titleBox->hide();
+        }
     }
 }
 
@@ -188,59 +196,17 @@ MainWindow::updateLog(const QString& newText) {
     logEdit->setPlainText(text);
 }
 
-void
-MainWindow::updateFormats() {
-
-    // TODO: See TODO file.
-
-    // Alter widgets dynamically based on the video URL.
-
-    QString url; // = urlEdit->toPlainText();
-
-    if (url.isEmpty())
-        return;
-
-    struct lookup_s {
-        const char *host;
-        const char *formats;
-    };
-    static const struct lookup_s lookup[] = {
-        {"youtube.com",     "fmt17|fmt18|fmt22|fmt35"},
-//        {"video.google.",   "mp4"}, // missing in cclive 0.4.3+
-        {"dailymotion.com", "spak-mini|vp6-hq|vp6-hd|vp6|h264"},
-    };
-
-    const int c = sizeof(lookup)/sizeof(struct lookup_s);
-
-    QStringList formats;
-    formats << "flv" << "best";
-
-    for (register int i=0; i<c; ++i) {
-        if (url.contains(lookup[i].host)) {
-            QString s = lookup[i].formats;
-            formats << s.split("|");
-            break;
-        }
-    }
-
-    QString last = formatCombo->currentText();
-
-    formatCombo->clear();
-    formatCombo->addItems(formats);
-
-    int n = formatCombo->findText(last);
-    if (n != -1)
-        formatCombo->setCurrentIndex(n);
-}
-
 
 // Slots
 
 void
 MainWindow::onPreferences() {
+    QString old = prefs->ccliveEdit->text();
     prefs->exec();
-    updateWidgets();
-    parseCcliveHostsOutput();
+    QString _new = prefs->ccliveEdit->text();
+    updateWidgets(old != _new);
+    if (old != _new)
+        parseCcliveHostsOutput();
     setProxy();
 }
 
@@ -376,10 +342,11 @@ MainWindow::onStart() {
             args << QString("--cclass=%1").arg(s);
     }
 
-    s = formatCombo->currentText();
-    if (s.isEmpty())
-        s = "flv";
-
+    // TODO: format
+    // * check if all links are of the same host
+    // * if yes, use "flv" or host specific settings from format dialog
+    // * otherwise, default to "flv"
+    s = "flv";
     args << QString("--format=%1").arg(s);
 
     for (register int i=0; i<linksList->count(); ++i)
@@ -408,8 +375,7 @@ MainWindow::onCancel() {
 
 void
 MainWindow::onAbout() {
-    AboutDialog about(this, prefs->ccliveEdit->text());
-    about.exec();
+    AboutDialog(this, ccliveVersion, curlVersion).exec();
 }
 
 void
@@ -481,8 +447,12 @@ MainWindow::addPageLink(QString lnk) {
 
     if (found.size() == 0)
         linksList->addItem(lnk);
+}
 
-    updateFormats();
+void
+MainWindow::onFormats() {
+    format->exec();
+    // formats->writeSettings();
 }
 
 void
