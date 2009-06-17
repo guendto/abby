@@ -47,6 +47,7 @@ private slots:
     void onProcStdoutReady();
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
 private:
+    QStringList hostsOutput;
     PreferencesDialog *prefs;
     RSSDialog *rss;
     ScanDialog *scan;
@@ -58,11 +59,13 @@ private:
     void writeSettings();
     void readSettings();
     void updateLog(const QString& text);
-    bool ccliveSupports(const QString& buildOption);
     void updateWidgets();
     void updateFormats();
-    bool isCclive(const QString& path, QString& output);
     void setProxy();
+    bool isCclive(QString& output);
+    bool ccliveSupportsFeature(const QString& buildOption);
+    bool ccliveSupportsHost(const QString &lnk);
+    void parseCcliveHostsOutput();
 protected:
     void closeEvent(QCloseEvent *event);
 };

@@ -20,11 +20,11 @@
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QFileDialog>
-//#include <QIcon>
 #include <QClipboard>
 #include <QDebug>
 #include <QInputDialog>
 #include <QNetworkProxy>
+#include <QRegExp>
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
@@ -46,8 +46,6 @@ MainWindow::MainWindow():
     setupUi(this);
     readSettings();
 
-//    setWindowIcon(QIcon(":/rc/abby.png"));
-
     connect(&process, SIGNAL(started()),
         this, SLOT(onProcStarted()));
     connect(&process, SIGNAL(error(QProcess::ProcessError)),
@@ -67,11 +65,14 @@ MainWindow::MainWindow():
     scan = new ScanDialog(this);
 
     updateWidgets();
+    parseCcliveHostsOutput();
     setProxy();
 }
 
 bool
-MainWindow::isCclive(const QString& path, QString& output) {
+MainWindow::isCclive(QString& output) {
+    QString path = prefs->ccliveEdit->text();
+
     QProcess process;
     process.setProcessChannelMode(QProcess::MergedChannels);
     process.start(path, QStringList() << "--version");
@@ -87,15 +88,46 @@ MainWindow::isCclive(const QString& path, QString& output) {
     return state;
 }
 
+void
+MainWindow::parseCcliveHostsOutput() {
+    QString path = prefs->ccliveEdit->text();
+
+    QProcess proc;
+    proc.setProcessChannelMode(QProcess::MergedChannels);
+    proc.start(path, QStringList() << "--hosts");
+
+    if (!proc.waitForFinished())
+        qDebug() << path << ": " << proc.errorString();
+    else {
+        hostsOutput.clear();
+        QString output = QString::fromLocal8Bit(proc.readAll());
+        hostsOutput = output.split("\n", QString::SkipEmptyParts);
+    }
+}
+
 bool
-MainWindow::ccliveSupports(const QString& buildOption) {
-    QString output, path = prefs->ccliveEdit->text();
-    const bool _isCclive = isCclive(path,output);
+MainWindow::ccliveSupportsFeature(const QString& buildOption) {
+    QString output;
+    const bool _isCclive = isCclive(output);
 
     if (!_isCclive && buildOption == "--with-perl")
         return false; // To keep the titleBox hidden always 
 
     return output.contains(buildOption);
+}
+
+bool
+MainWindow::ccliveSupportsHost(const QString& lnk) {
+
+    const QString host = QUrl(lnk).host();
+    const int size = hostsOutput.size();
+
+    for (register int i=0; i<size; ++i) {
+        QRegExp re(hostsOutput[i]);
+        if (re.indexIn(host) != -1)
+            return true;
+    }
+    return false;
 }
 
 void
@@ -113,7 +145,7 @@ MainWindow::updateWidgets() {
     if (s.isEmpty())
         commandBox->setCheckState(Qt::Unchecked);
 
-    if (ccliveSupports("--with-perl")) {
+    if (ccliveSupportsFeature("--with-perl")) {
         titleBox->show();
     } else {
         titleBox->setCheckState(Qt::Unchecked);
@@ -207,8 +239,9 @@ MainWindow::updateFormats() {
 void
 MainWindow::onPreferences() {
     prefs->exec();
-    setProxy();
     updateWidgets();
+    parseCcliveHostsOutput();
+    setProxy();
 }
 
 void
@@ -271,7 +304,7 @@ MainWindow::onStart() {
         return;
 
     QString output;
-    const bool _isCclive = isCclive(path,output);
+    const bool _isCclive = isCclive(output);
 
     // clive can use this same approach even if --savedir option exists.
     process.setWorkingDirectory(savedir);
@@ -434,8 +467,14 @@ MainWindow::addPageLink(QString lnk) {
 
     lnk = lnk.trimmed();
 
-    if (!lnk.startsWith("http://",Qt::CaseInsensitive))
+    if (!lnk.startsWith("http://", Qt::CaseInsensitive))
         lnk.insert(0,"http://");
+
+    if (!ccliveSupportsHost(lnk)) {
+        QMessageBox::critical(this, QCoreApplication::applicationName(),
+            QString(tr("%1: unsupported")).arg(QUrl(lnk).host()));
+        return;
+    }
 
     QList<QListWidgetItem *> found
         = linksList->findItems(lnk, Qt::MatchExactly);
