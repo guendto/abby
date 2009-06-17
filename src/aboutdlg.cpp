@@ -16,12 +16,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <QDialog>
-#include <QProcess>
-#include <QDebug>
 
 #include "aboutdlg.h"
 
-AboutDialog::AboutDialog(QWidget *parent, const QString& path)
+AboutDialog::AboutDialog(QWidget *parent,
+    const QString& ccliveVersion, const QString& curlVersion)
     : QDialog(parent)
 {
     setupUi(this);
@@ -30,18 +29,6 @@ AboutDialog::AboutDialog(QWidget *parent, const QString& path)
     //QCoreApplication::applicationVersion()); // 4.4+
     qtVersionLabel->setText(qVersion());
 
-    if (!path.isEmpty()) {
-        QProcess process;
-        process.setProcessChannelMode(QProcess::MergedChannels);
-        process.start(path, QStringList() << "--version");
-
-        if (!process.waitForFinished())
-            qDebug() << path << ": " << process.errorString();
-        else {
-            QString output = QString::fromLocal8Bit(process.readAll());
-            QStringList lst = output.split(" ",QString::SkipEmptyParts);
-            ccliveVersionLabel->setText(lst[2]);
-            curlVersionLabel->setText(lst[6]);
-        }
-    }
+    ccliveVersionLabel->setText(ccliveVersion);
+    curlVersionLabel->setText(curlVersion);
 }
