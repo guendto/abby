@@ -83,13 +83,8 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
         reply->deleteLater();
     }
     else {
-        QMessageBox mb(this);
-        mb.setText("Network error occurred");
-        mb.setInformativeText(reply->errorString());
-        mb.setStandardButtons(QMessageBox::Ok);
-        mb.setDefaultButton(QMessageBox::Ok);
-        mb.setIcon(QMessageBox::Critical);
-        mb.exec();
+        QMessageBox::critical(this, QCoreApplication::applicationName(),
+            QString(tr("Network error: %1")).arg(reply->errorString()));
     }
 
     fetchButton->setEnabled(true);
@@ -133,13 +128,10 @@ RSSDialog::parseRSS() {
     if (xml.error()
         && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
     {
-        QMessageBox mb(this);
-        mb.setText("XML parsing error");
-        mb.setInformativeText(xml.lineNumber() +":"+ xml.errorString());
-        mb.setStandardButtons(QMessageBox::Ok);
-        mb.setDefaultButton(QMessageBox::Ok);
-        mb.setIcon(QMessageBox::Critical);
-        mb.exec();
+        QMessageBox::critical(this, QCoreApplication::applicationName(),
+            QString(tr("XML parsing error:%1:%1"))
+                .arg(xml.lineNumber())
+                .arg(xml.errorString()));
     }
     xml.clear();
 }
