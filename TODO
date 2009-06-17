@@ -4,7 +4,6 @@ web : http://repo.or.cz/w/abby.git
 0.3.0
 -----
 * Re-implement --format
-* Change: use QUrl for parsing proxy address (host, port)
 * remove existing translations
   - keep the existing code (hide, disable whatever is needed)
 
@@ -13,6 +12,6 @@ web : http://repo.or.cz/w/abby.git
 * implement link scanning (scandlg.*)
 * implement proxy (scan)
 
-Please Santa, bring us...
+Dear Santa, bring us...
   * a proper application icon to replace the current "TODO" icon
     - 32x32 or higher (24bit preferably)
