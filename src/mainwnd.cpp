@@ -219,14 +219,10 @@ MainWindow::setProxy() {
 
         proxy.setType(QNetworkProxy::HttpProxy);
 
-        QString tmp = prefs->proxyEdit->text();
-        tmp.replace("http://", "");
+        QUrl url(prefs->proxyEdit->text());
 
-        QStringList tokens = tmp.split(":");
-        proxy.setHostName(tokens[0]);
-
-        if (tokens.size() == 2)
-            proxy.setPort(tokens[1].toInt());
+        proxy.setHostName(url.host());
+        proxy.setPort(url.port());
 
         QNetworkProxy::setApplicationProxy(proxy);
     }
