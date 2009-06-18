@@ -70,6 +70,7 @@ private:
     bool ccliveSupportsFeature(const QString& buildOption);
     bool ccliveSupportsHost(const QString &lnk);
     void parseCcliveHostsOutput();
+    bool checkCclivePath();
 protected:
     void closeEvent(QCloseEvent *event);
 };

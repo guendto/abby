@@ -66,14 +66,30 @@ MainWindow::MainWindow():
     scan    = new ScanDialog(this);
     format  = new FormatDialog(this);
 
+    checkCclivePath();
     updateWidgets(true);
     parseCcliveHostsOutput();
     setProxy();
 }
 
 bool
+MainWindow::checkCclivePath() {
+    if (prefs->ccliveEdit->text().isEmpty()) {
+        QMessageBox::information(this, QCoreApplication::applicationName(),
+            tr("abby requires either `clive' or `cclive'.\n"
+                "Please define a path to either command."));
+        onPreferences();
+        return false;
+    }
+    return true;
+}
+
+bool
 MainWindow::isCclive(QString& output) {
     QString path = prefs->ccliveEdit->text();
+
+    if (path.isEmpty())
+        return false;
 
     QProcess process;
     process.setProcessChannelMode(QProcess::MergedChannels);
@@ -95,6 +111,9 @@ MainWindow::isCclive(QString& output) {
 void
 MainWindow::parseCcliveHostsOutput() {
     QString path = prefs->ccliveEdit->text();
+
+    if (path.isEmpty())
+        return;
 
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
@@ -236,40 +255,36 @@ MainWindow::onStreamStateChanged(int state) {
 void
 MainWindow::onStart() {
 
-    // Check cclive
-
-    QString path = prefs->ccliveEdit->text();
-    if (path.isEmpty()) {
-        QMessageBox::information(this,QCoreApplication::applicationName(),
-            tr("Specify path to either clive or cclive command in the "
-                "Preferences."));
-        onPreferences();
+    if (linksList->count() == 0) {
+        QMessageBox::information(this, QCoreApplication::applicationName(),
+            tr("Add video page links to the list."));
         return;
     }
+
+    // Check cclive
+    if (!checkCclivePath())
+        return;
+
+    QString path = prefs->ccliveEdit->text();
 
     // Check video save directory
 
-    // NOTE: cclive itself does not support this concept so we
-    // work around it by changing the working directory to the
-    // save directory.
+    // cclive does not support this concept at command line option level.
+    // We work around this by changing the working directory instead.
 
     QString savedir = prefs->savedirEdit->text();
     if (savedir.isEmpty()) {
-        QMessageBox::information(this,QCoreApplication::applicationName(),
-            tr("Specify path to save directory for the downloaded videos "
-                "in the Preferences."));
+        QMessageBox::information(this, QCoreApplication::applicationName(),
+            tr("Please specify a directory to which the downloaded videos\n"
+                "should be saved to."));
         onPreferences();
         return;
     }
 
-    if (linksList->count() == 0)
-        return;
+    process.setWorkingDirectory(savedir);
 
     QString output;
     const bool _isCclive = isCclive(output);
-
-    // clive can use this same approach even if --savedir option exists.
-    process.setWorkingDirectory(savedir);
 
     // Construct cclive/clive args
 
@@ -285,11 +300,7 @@ MainWindow::onStart() {
              << QString("HOME=%1").arg(QDir::homePath()); // $env{HOME}
     }
 
-    QString s = prefs->additionalEdit->text();
-    if (!s.isEmpty())
-        args << s;
-
-    s = prefs->streamEdit->text();
+    QString s = prefs->streamEdit->text();
     if (!s.isEmpty() && streamBox->isChecked()) {
         args << QString("--stream-exec=%1").arg(s);
         args << QString("--stream=%1").arg(streamSpin->value());
@@ -487,7 +498,6 @@ MainWindow::onProcStdoutReady() {
         return;
 
     QString status, last = tmp.last();
-    //qDebug() << last;
 
     if (last.startsWith("fetch http://")) {
         status = tr("Fetching link...");

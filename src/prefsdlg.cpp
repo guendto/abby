@@ -62,7 +62,6 @@ PreferencesDialog::writeSettings() {
     s.setValue("streamEdit",streamEdit->text());
     s.setValue("commandEdit",commandEdit->text());
     s.setValue("ccliveEdit",ccliveEdit->text());
-    s.setValue("additionalEdit",additionalEdit->text());
 
     s.setValue("proxyCombo",proxyCombo->currentIndex());
     s.setValue("proxyEdit",proxyEdit->text());
@@ -90,7 +89,6 @@ PreferencesDialog::readSettings() {
     streamEdit->setText(s.value("streamEdit").toString());
     commandEdit->setText(s.value("commandEdit").toString());
     ccliveEdit->setText(s.value("ccliveEdit").toString());
-    additionalEdit->setText(s.value("additionalEdit").toString());
 
     proxyCombo->setCurrentIndex(s.value("proxyCombo").toInt());
     proxyEdit->setText(s.value("proxyEdit").toString());
