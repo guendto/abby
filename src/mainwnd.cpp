@@ -25,6 +25,7 @@
 #include <QInputDialog>
 #include <QNetworkProxy>
 #include <QRegExp>
+#include <QMap>
 
 #include "mainwnd.h"
 #include "prefsdlg.h"
@@ -349,11 +350,44 @@ MainWindow::onStart() {
             args << QString("--cclass=%1").arg(s);
     }
 
-    // TODO: format
-    // * check if all links are of the same host
-    // * if yes, use "flv" or host specific settings from format dialog
-    // * otherwise, default to "flv"
+    // Check if all video page links are of the same host.
+
+    QUrl first(linksList->item(0)->text());
+    bool allSame = true;
+    for (register int i=0; i<linksList->count(); ++i) {
+        QUrl url(linksList->item(i)->text());
+        if (url.host() != first.host()) {
+            allSame = false;
+            break;
+        }
+    }
+
     s = "flv";
+
+    if (allSame) {
+
+        // Use format dialog setting for the host.
+        // Otherwise we will use "flv" as default for all.
+
+        QMap<QString, QComboBox*> map;
+
+        map["youtube.com"]      = format->youtubeBox;
+        map["video.google."]    = format->googleBox;
+        map["dailymotion.com"]  = format->dailymotionBox;
+        map["vimeo.com"]        = format->vimeoBox;
+
+        for (QMap<QString, QComboBox*>::const_iterator iter=map.begin();
+            iter != map.end(); ++iter)
+        {
+            QRegExp re(iter.key());
+            if (re.indexIn(first.host()) != -1) {
+                s = iter.value()->currentText()
+                    .split(" ", QString::SkipEmptyParts)[0];
+                break;
+            }
+        }
+    }
+
     args << QString("--format=%1").arg(s);
 
     for (register int i=0; i<linksList->count(); ++i)
