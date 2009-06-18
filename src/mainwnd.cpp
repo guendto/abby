@@ -459,7 +459,7 @@ MainWindow::addPageLink(QString lnk) {
 void
 MainWindow::onFormats() {
     format->exec();
-    // formats->writeSettings();
+    format->writeSettings();
 }
 
 void

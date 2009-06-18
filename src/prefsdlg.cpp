@@ -55,23 +55,22 @@ PreferencesDialog::writeSettings() {
 
     s.beginGroup("PreferencesDialog");
 
-    s.setValue("size",size());
-    //s.setValue("pos",pos());
+    s.setValue("size", size());
 
-    s.setValue("savedirEdit",savedirEdit->text());
-    s.setValue("streamEdit",streamEdit->text());
-    s.setValue("commandEdit",commandEdit->text());
-    s.setValue("ccliveEdit",ccliveEdit->text());
+    s.setValue("savedirEdit", savedirEdit->text());
+    s.setValue("streamEdit", streamEdit->text());
+    s.setValue("commandEdit", commandEdit->text());
+    s.setValue("ccliveEdit", ccliveEdit->text());
 
-    s.setValue("proxyCombo",proxyCombo->currentIndex());
-    s.setValue("proxyEdit",proxyEdit->text());
-    s.setValue("limitBox",limitBox->checkState());
-    s.setValue("limitSpin",limitSpin->value());
-    s.setValue("timeoutBox",timeoutBox->checkState());
-    s.setValue("timeoutSpin",timeoutSpin->value());
-    s.setValue("socksBox",socksBox->checkState());
+    s.setValue("proxyCombo", proxyCombo->currentIndex());
+    s.setValue("proxyEdit", proxyEdit->text());
+    s.setValue("limitBox", limitBox->checkState());
+    s.setValue("limitSpin", limitSpin->value());
+    s.setValue("timeoutBox", timeoutBox->checkState());
+    s.setValue("timeoutSpin", timeoutSpin->value());
+    s.setValue("socksBox", socksBox->checkState());
 
-    s.setValue("qmFile",qmFile);
+    s.setValue("qmFile", qmFile);
 
     s.endGroup();
 }
@@ -82,26 +81,25 @@ PreferencesDialog::readSettings() {
 
     s.beginGroup("PreferencesDialog");
 
-    resize(s.value("size",QSize(525,205)).toSize());
-    //move(s.value("pos",QPoint(200,200)).toPoint());
+    resize( s.value("size", QSize(525,205)).toSize() );
 
-    savedirEdit->setText(s.value("savedirEdit").toString());
-    streamEdit->setText(s.value("streamEdit").toString());
-    commandEdit->setText(s.value("commandEdit").toString());
-    ccliveEdit->setText(s.value("ccliveEdit").toString());
+    savedirEdit->setText( s.value("savedirEdit").toString() );
+    streamEdit->setText( s.value("streamEdit").toString() );
+    commandEdit->setText( s.value("commandEdit").toString() );
+    ccliveEdit->setText( s.value("ccliveEdit").toString() );
 
-    proxyCombo->setCurrentIndex(s.value("proxyCombo").toInt());
-    proxyEdit->setText(s.value("proxyEdit").toString());
+    proxyCombo->setCurrentIndex( s.value("proxyCombo").toInt() );
+    proxyEdit->setText( s.value("proxyEdit").toString() );
     limitBox->setCheckState(
         s.value("limitBox").toBool()
         ? Qt::Checked
         : Qt::Unchecked);
-    limitSpin->setValue(s.value("limitSpin").toInt());
+    limitSpin->setValue( s.value("limitSpin").toInt() );
     timeoutBox->setCheckState(
         s.value("timeoutBox").toBool()
         ? Qt::Checked
         : Qt::Unchecked);
-    timeoutSpin->setValue(s.value("timeoutSpin").toInt());
+    timeoutSpin->setValue( s.value("timeoutSpin").toInt() );
     socksBox->setCheckState(
         s.value("socksBox").toBool()
         ? Qt::Checked

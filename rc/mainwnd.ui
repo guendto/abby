@@ -435,7 +435,7 @@
              <item>
               <widget class="QPushButton" name="formatsButton" >
                <property name="text" >
-                <string>Video &amp;Formats...</string>
+                <string>&amp;Choose Formats...</string>
                </property>
               </widget>
              </item>

@@ -26,6 +26,10 @@ class FormatDialog : public QDialog, public Ui::formatDialog {
     Q_OBJECT
 public:
     FormatDialog(QWidget *parent);
+public:
+    void writeSettings();
+private:
+    void readSettings();
 };
 
 #endif

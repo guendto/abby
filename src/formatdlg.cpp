@@ -24,4 +24,37 @@ FormatDialog::FormatDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
+    readSettings();
+}
+
+void
+FormatDialog::writeSettings() {
+    QSettings s;
+
+    s.beginGroup("FormatDialog");
+
+    s.setValue("size", size());
+
+    s.setValue("youtubeBox", youtubeBox->currentIndex());
+    s.setValue("googleBox", googleBox->currentIndex());
+    s.setValue("dailymotionBox", dailymotionBox->currentIndex());
+    s.setValue("vimeoBox", vimeoBox->currentIndex());
+
+    s.endGroup();
+}
+
+void
+FormatDialog::readSettings() {
+    QSettings s;
+
+    s.beginGroup("FormatDialog");
+
+    resize( s.value("size", QSize(400,140)).toSize() );
+
+    youtubeBox->setCurrentIndex( s.value("youtubeBox").toInt() );
+    googleBox->setCurrentIndex( s.value("googleBox").toInt() );
+    dailymotionBox->setCurrentIndex( s.value("dailymotionBox").toInt() );
+    vimeoBox->setCurrentIndex( s.value("vimeoBox").toInt() );
+
+    s.endGroup();
 }
