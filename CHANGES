@@ -11,6 +11,7 @@ It is now also possible to download multiple videos on one go.
   User-visible changes:
    * Add: --format=best support
    * Add: RSS parsing (obsoletes clivefeed in clive-utils)
+   * Add: New keyboard shortcuts (e.g. add link, start download)
    * Fix: Tab order (main window: paste button)
    * Change: How downloaded video format is selected
      # Hosts that support multiple formats, can be configured via a dialog
