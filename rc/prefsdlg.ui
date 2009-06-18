@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>223</height>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -43,132 +43,6 @@
        <string>&amp;General</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2" >
-       <item row="3" column="0" >
-        <spacer name="verticalSpacer_5" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_6" >
-         <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
-            <string>&amp;Save videos to:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>savedirEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="savedirEdit" >
-           <property name="toolTip" >
-            <string>Save downloaded videos to this directory.</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="savedirButton" >
-           <property name="text" >
-            <string/>
-           </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
-             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_8" >
-         <item>
-          <widget class="QLabel" name="label_8" >
-           <property name="text" >
-            <string>S&amp;tream command:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>streamEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="streamEdit" >
-           <property name="toolTip" >
-            <string>Command to be run when file transfer reaches the
-percentage specified in the options.
-
-Example: /usr/local/bin/mplayer -really-quiet %i</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="streamButton" >
-           <property name="text" >
-            <string/>
-           </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
-             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_4" >
-         <item>
-          <widget class="QLabel" name="label_4" >
-           <property name="text" >
-            <string>E&amp;xternal command:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>commandEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="commandEdit" >
-           <property name="toolTip" >
-            <string>Command to be run after finishing downloading. You may
-use the "%i" specifier which will be replaced by the
-name of the downloaded video file.
-
-Example: /usr/local/bin/mplayer %i</string>
-           </property>
-           <property name="whatsThis" >
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="commandButton" >
-           <property name="text" >
-            <string/>
-           </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
-             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="tab_5" >
-      <attribute name="title" >
-       <string>&amp;cclive/clive</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_7" >
        <item row="0" column="0" >
         <layout class="QHBoxLayout" name="horizontalLayout_7" >
          <item>
@@ -202,35 +76,46 @@ Example: /usr/local/bin/mplayer %i</string>
         </layout>
        </item>
        <item row="1" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_5" >
+        <layout class="QHBoxLayout" name="horizontalLayout_6" >
          <item>
-          <widget class="QLabel" name="label_5" >
+          <widget class="QLabel" name="label" >
            <property name="text" >
-            <string>&amp;Additional options:</string>
+            <string>&amp;Save videos to:</string>
            </property>
            <property name="buddy" >
-            <cstring>additionalEdit</cstring>
+            <cstring>savedirEdit</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="additionalEdit" >
+          <widget class="QLineEdit" name="savedirEdit" >
            <property name="toolTip" >
-            <string>Additional options to be passed to cclive/clive.</string>
+            <string>Save downloaded videos to this directory.</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="savedirButton" >
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
         </layout>
        </item>
        <item row="2" column="0" >
-        <spacer name="verticalSpacer_4" >
+        <spacer name="verticalSpacer_5" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0" >
           <size>
            <width>20</width>
-           <height>34</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
@@ -397,7 +282,7 @@ CURLOPT_TIMEOUT instead of CURLOPT_CONNECTIMEOUT.</string>
       <attribute name="title" >
        <string>&amp;Misc</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_6" >
+      <layout class="QGridLayout" name="gridLayout" >
        <item row="0" column="0" >
         <layout class="QHBoxLayout" name="horizontalLayout_9" >
          <item>
@@ -458,6 +343,80 @@ For more on Perl character-classes:
         </layout>
        </item>
        <item row="2" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_8" >
+         <item>
+          <widget class="QLabel" name="label_8" >
+           <property name="text" >
+            <string>S&amp;tream command:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>streamEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="streamEdit" >
+           <property name="toolTip" >
+            <string>Command to be run when file transfer reaches the
+percentage specified in the options.
+
+Example: /usr/local/bin/mplayer -really-quiet %i</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="streamButton" >
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0" >
+        <layout class="QHBoxLayout" name="horizontalLayout_4" >
+         <item>
+          <widget class="QLabel" name="label_4" >
+           <property name="text" >
+            <string>E&amp;xternal command:</string>
+           </property>
+           <property name="buddy" >
+            <cstring>commandEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="commandEdit" >
+           <property name="toolTip" >
+            <string>Command to be run after finishing downloading. You may
+use the "%i" specifier which will be replaced by the
+name of the downloaded video file.
+
+Example: /usr/local/bin/mplayer %i</string>
+           </property>
+           <property name="whatsThis" >
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="commandButton" >
+           <property name="text" >
+            <string/>
+           </property>
+           <property name="icon" >
+            <iconset resource="abby.qrc" >
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="4" column="0" >
         <spacer name="verticalSpacer_3" >
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -471,21 +430,19 @@ For more on Perl character-classes:
         </spacer>
        </item>
       </layout>
+      <zorder>layoutWidget_2</zorder>
+      <zorder>layoutWidget_3</zorder>
+      <zorder>label_4</zorder>
      </widget>
     </widget>
    </item>
   </layout>
+  <zorder>buttonBox</zorder>
+  <zorder>tabWidget</zorder>
  </widget>
  <tabstops>
   <tabstop>savedirEdit</tabstop>
   <tabstop>savedirButton</tabstop>
-  <tabstop>streamEdit</tabstop>
-  <tabstop>streamButton</tabstop>
-  <tabstop>commandEdit</tabstop>
-  <tabstop>commandButton</tabstop>
-  <tabstop>ccliveEdit</tabstop>
-  <tabstop>ccliveBrowse</tabstop>
-  <tabstop>additionalEdit</tabstop>
   <tabstop>proxyCombo</tabstop>
   <tabstop>proxyEdit</tabstop>
   <tabstop>limitBox</tabstop>
@@ -595,54 +552,6 @@ For more on Perl character-classes:
     <hint type="destinationlabel" >
      <x>188</x>
      <y>98</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>commandButton</sender>
-   <signal>clicked()</signal>
-   <receiver>PreferencesDialog</receiver>
-   <slot>onBrowseCommand()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>319</x>
-     <y>92</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>188</x>
-     <y>98</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>streamButton</sender>
-   <signal>clicked()</signal>
-   <receiver>PreferencesDialog</receiver>
-   <slot>onBrowseStreamCommand()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>332</x>
-     <y>92</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>196</x>
-     <y>135</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>ccliveBrowse</sender>
-   <signal>clicked()</signal>
-   <receiver>PreferencesDialog</receiver>
-   <slot>onBrowseCclive()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>476</x>
-     <y>59</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>258</x>
-     <y>111</y>
     </hint>
    </hints>
   </connection>
