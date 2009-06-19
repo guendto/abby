@@ -16,7 +16,7 @@
    <string>Scan</string>
   </property>
   <property name="windowIcon" >
-   <iconset resource="../../../../../../usr/home/legatvs/proj/git/abby/rc/abby.qrc" >
+   <iconset resource="abby.qrc" >
     <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
   </property>
   <property name="sizeGripEnabled" >
@@ -34,7 +34,7 @@
         <string>&amp;Scan</string>
        </property>
        <property name="icon" >
-        <iconset resource="../../../../../../usr/home/legatvs/proj/git/abby/rc/abby.qrc" >
+        <iconset resource="abby.qrc" >
          <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
        </property>
        <property name="iconSize" >
@@ -80,7 +80,7 @@
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="../../../../../../usr/home/legatvs/proj/git/abby/rc/abby.qrc" />
+  <include location="abby.qrc" />
  </resources>
  <connections>
   <connection>

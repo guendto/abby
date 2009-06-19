@@ -430,19 +430,18 @@ Example: /usr/local/bin/mplayer %i</string>
         </spacer>
        </item>
       </layout>
-      <zorder>layoutWidget_2</zorder>
-      <zorder>layoutWidget_3</zorder>
-      <zorder>label_4</zorder>
      </widget>
     </widget>
    </item>
   </layout>
-  <zorder>buttonBox</zorder>
-  <zorder>tabWidget</zorder>
  </widget>
  <tabstops>
+  <tabstop>ccliveEdit</tabstop>
+  <tabstop>ccliveBrowse</tabstop>
   <tabstop>savedirEdit</tabstop>
   <tabstop>savedirButton</tabstop>
+  <tabstop>buttonBox</tabstop>
+  <tabstop>tabWidget</tabstop>
   <tabstop>proxyCombo</tabstop>
   <tabstop>proxyEdit</tabstop>
   <tabstop>limitBox</tabstop>
@@ -452,8 +451,10 @@ Example: /usr/local/bin/mplayer %i</string>
   <tabstop>socksBox</tabstop>
   <tabstop>cclassEdit</tabstop>
   <tabstop>langCombo</tabstop>
-  <tabstop>buttonBox</tabstop>
-  <tabstop>tabWidget</tabstop>
+  <tabstop>streamEdit</tabstop>
+  <tabstop>streamButton</tabstop>
+  <tabstop>commandEdit</tabstop>
+  <tabstop>commandButton</tabstop>
  </tabstops>
  <resources>
   <include location="abby.qrc" />

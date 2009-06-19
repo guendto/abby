@@ -764,10 +764,11 @@ download finishes.</string>
   <tabstop>scanButton</tabstop>
   <tabstop>startButton</tabstop>
   <tabstop>linksList</tabstop>
-  <tabstop>tabWidget_2</tabstop>
-  <tabstop>cancelButton</tabstop>
   <tabstop>logEdit</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>tabWidget_2</tabstop>
   <tabstop>tabWidget</tabstop>
+  <tabstop>formatsButton</tabstop>
   <tabstop>titleBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>

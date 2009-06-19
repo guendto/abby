@@ -182,6 +182,13 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>youtubeBox</tabstop>
+  <tabstop>googleBox</tabstop>
+  <tabstop>dailymotionBox</tabstop>
+  <tabstop>vimeoBox</tabstop>
+  <tabstop>buttonBox</tabstop>
+ </tabstops>
  <resources/>
  <connections>
   <connection>
