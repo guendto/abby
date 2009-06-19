@@ -2,18 +2,19 @@
 
 FOREWORD
 
-This release is a step closer to merge the clive-utils programs
-into abby as RSS feed parsing (clivefeed) and link scanning
-(clivescan). Note that link scanning is not implemented yet.
-
 It is now also possible to download multiple videos on one go.
+This was previously limited by design.
+
+We are in the process of merging clive-utils into abby. RSS
+feed parsing (clivefeed) has already been implemented. Video
+link scan (clivescan) should follow by 0.4.0.
 
   User-visible changes:
    * Add: --format=best support
    * Add: RSS parsing (obsoletes clivefeed in clive-utils)
    * Add: New keyboard shortcuts (e.g. add link, start download)
    * Fix: Tab order (main window: paste button)
-   * Change: How downloaded video format is selected
+   * Change: Video format selection
      # Hosts that support multiple formats, can be configured via a dialog
      # All others default to "flv"
    * Change: Less lag when closing Preferences while using clive
