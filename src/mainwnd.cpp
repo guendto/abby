@@ -434,9 +434,8 @@ MainWindow::onRSS() {
 
 void
 MainWindow::onScan() {
-    // TODO: implement link scanning.
     QMessageBox::information(this, QCoreApplication::applicationName(),
-        "TODO: Implement link scanning.");
+        "TODO: Implement video link scan");
     return;
     if (scan->exec() == QDialog::Accepted) {
     }
