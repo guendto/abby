@@ -686,7 +686,7 @@ download finishes.</string>
     <string>Add video links from RSS feeds</string>
    </property>
    <property name="shortcut" >
-    <string>Ctrl+R</string>
+    <string>Alt+R</string>
    </property>
    <property name="shortcutContext" >
     <enum>Qt::WindowShortcut</enum>
@@ -704,7 +704,7 @@ download finishes.</string>
     <string>Add video links from scanned web pages</string>
    </property>
    <property name="shortcut" >
-    <string>Ctrl+S</string>
+    <string>Alt+S</string>
    </property>
   </action>
   <action name="action_Link" >
@@ -719,7 +719,7 @@ download finishes.</string>
     <string>Add video page link</string>
    </property>
    <property name="shortcut" >
-    <string>Ctrl+A</string>
+    <string>Alt+A</string>
    </property>
   </action>
   <action name="action_Remove_selected" >
@@ -752,7 +752,7 @@ download finishes.</string>
     <string>Download videos from the listed page links</string>
    </property>
    <property name="shortcut" >
-    <string>Ctrl+D</string>
+    <string>Alt+D</string>
    </property>
   </action>
  </widget>
