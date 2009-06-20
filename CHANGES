@@ -15,8 +15,8 @@ link scan (clivescan) should follow by 0.4.0.
    * Add: New keyboard shortcuts (e.g. add link, start download)
    * Fix: Tab order (main window: paste button)
    * Change: Video format selection
-     # Hosts that support multiple formats, can be configured via a dialog
-     # All others default to "flv"
+     1. Hosts that support multiple formats, can be configured via a dialog
+     2. All others default to "flv"
    * Change: Less lag when closing Preferences while using clive
    * Change: Users may now enter multiple video page links instead of only one
    * Change: --format IDs to reflect (c)clive changes
