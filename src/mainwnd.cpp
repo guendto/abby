@@ -71,6 +71,8 @@ MainWindow::MainWindow():
     updateWidgets(true);
     parseCcliveHostsOutput();
     setProxy();
+
+    scanButton->setVisible(false);
 }
 
 bool
