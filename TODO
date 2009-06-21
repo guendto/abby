@@ -1,11 +1,6 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-0.3.0
------
-* remove existing translations
-  - keep the existing code (hide, disable whatever is needed)
-
 0.4.x
 -----
 * implement link scanning (scandlg.*)
