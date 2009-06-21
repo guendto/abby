@@ -1,37 +1,40 @@
 0.3.0
+(June 21, 2009)
 
 FOREWORD
 
 It is now also possible to download multiple videos on one go.
 This was previously limited by design.
 
-We are in the process of merging clive-utils into abby. RSS
-feed parsing (clivefeed) has already been implemented. Video
-link scan (clivescan) should follow by 0.4.0.
+We are in the process of merging clive-utils into abby. RSS feed
+parsing (clivefeed) has already been implemented. Video link scan
+(clivescan) should be implemented in abby by 0.4.0.
 
   User-visible changes:
    * Add: --format=best support
    * Add: RSS parsing (obsoletes clivefeed in clive-utils)
-   * Add: New keyboard shortcuts (e.g. add link, start download)
-   * Fix: Tab order (main window: paste button)
-   * Change: Users may now enter multiple video page links instead of only one
+   * Add: Keyboard shortcuts (e.g. add link, start download)
+   * Fix: Tab orders (e.g. main window: paste button)
+   * Change: Multi-link support
    * Change: Video format selection
-     1. Hosts that support multiple formats, can be configured via a dialog
-     2. All others default to "flv"
-   * Change: Less lag when closing Preferences while using clive
-   * Change: --format IDs to reflect (c)clive changes
+     1. Format dialog for hosts that support multiple video formats
+     2. All other hosts default to "flv"
+   * Change: More responsive UI when closing Preferences while using clive
+     1. invoke (c)clive after closing the preferences only if path was changed
+   * Change: Reflect --format ID changes to match recent (c)clive additions
    * Remove: Youtube login support
      1. Until fixed in (c)clive
    * Remove: Finnish translation
-     1. Reintroduce translations after reaching dev status "stable"
+     1. Reintroduce translations when we are "stable"
    * Remove: Continue partially downloaded file [box]
-     1. This is now default behaviour
-     2. It is now possible to resume Youtube/Google (flv) videos
+     1. Default to use --continue with all transfers
+     2. Recent changes to Youtube and Google services allow flvs to be cont'd
 
   Developer-visible changes:
    * Change: cclive prerequisite -> 0.4.4
    * Change: clive prerequisite -> 2.2.1
    * Change: use --format for both (c)clive (reflect cclive changes)
+     1. cclive previously used --download=format
 
   Known-issues:
    * Format dialog displays "mp4" for Google when using cclive
