@@ -58,7 +58,7 @@
          <item>
           <widget class="QLineEdit" name="ccliveEdit" >
            <property name="toolTip" >
-            <string>Path to cclive/clive command.</string>
+            <string>Path to either cclive or clive command</string>
            </property>
           </widget>
          </item>
@@ -90,7 +90,7 @@
          <item>
           <widget class="QLineEdit" name="savedirEdit" >
            <property name="toolTip" >
-            <string>Save downloaded videos to this directory.</string>
+            <string>Save downloaded videos to this directory</string>
            </property>
           </widget>
          </item>
@@ -132,8 +132,7 @@
          <item>
           <widget class="QComboBox" name="proxyCombo" >
            <property name="toolTip" >
-            <string>Whether use a HTTP proxy for connections.
-If unsure, leave to "No Proxy".</string>
+            <string>Whether a proxy should be used for the HTTP connections</string>
            </property>
            <item>
             <property name="text" >
@@ -161,7 +160,7 @@ If unsure, leave to "No Proxy".</string>
          <item>
           <widget class="QCheckBox" name="limitBox" >
            <property name="toolTip" >
-            <string>Limit download transfer speed.</string>
+            <string/>
            </property>
            <property name="text" >
             <string>&amp;Limit transfer rate:</string>
@@ -210,8 +209,7 @@ If unsure, leave to "No Proxy".</string>
             </size>
            </property>
            <property name="toolTip" >
-            <string>Maximum time in seconds allowed the connection to the server to take.
-This limits only the connection phase.</string>
+            <string>Maximum time in seconds allowed the connection to the server to take</string>
            </property>
            <property name="text" >
             <string>&amp;Timeout after:</string>
@@ -240,8 +238,8 @@ This limits only the connection phase.</string>
             <bool>false</bool>
            </property>
            <property name="toolTip" >
-            <string>Works around the known CURL SOCKS proxy bug by using
-CURLOPT_TIMEOUT instead of CURLOPT_CONNECTIMEOUT.</string>
+            <string>Workaround the CURL SOCKS proxy bug by using
+CURLOPT_TIMEOUT instead of CURLOPT_CONNECTTIMEOUT</string>
            </property>
            <property name="text" >
             <string>&amp;Use SOCKS proxy workaround</string>
@@ -298,15 +296,10 @@ CURLOPT_TIMEOUT instead of CURLOPT_CONNECTIMEOUT.</string>
          <item>
           <widget class="QLineEdit" name="cclassEdit" >
            <property name="toolTip" >
-            <string>Character-class used to clean up video page
-titles before they are used for naming the
-downloaded video files.
+            <string>Character-class to be used to clean up the video page
+titles before they are used for file naming.
 
-Leave empty if unsure. This causes the default
-\w character-class to be used.
-
-For more on Perl character-classes:
-  &lt;http://perldoc.perl.org/perlrequick.html></string>
+[See clive and cclive manual pages for more info on this]</string>
            </property>
           </widget>
          </item>
@@ -357,8 +350,8 @@ For more on Perl character-classes:
          <item>
           <widget class="QLineEdit" name="streamEdit" >
            <property name="toolTip" >
-            <string>Command to be run when file transfer reaches the
-percentage specified in the options.
+            <string>Stream command to be invoked when file transfer reaches
+a certain percentage defined in the Options tab.
 
 Example: /usr/local/bin/mplayer -really-quiet %i</string>
            </property>
@@ -392,9 +385,9 @@ Example: /usr/local/bin/mplayer -really-quiet %i</string>
          <item>
           <widget class="QLineEdit" name="commandEdit" >
            <property name="toolTip" >
-            <string>Command to be run after finishing downloading. You may
-use the "%i" specifier which will be replaced by the
-name of the downloaded video file.
+            <string>The command to be invoked when download finishes.
+Any "%i" specifiers will be replaced by the name
+of the downloaded video file.
 
 Example: /usr/local/bin/mplayer %i</string>
            </property>

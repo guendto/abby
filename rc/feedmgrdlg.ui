@@ -36,6 +36,9 @@
       <layout class="QVBoxLayout" name="verticalLayout" >
        <item>
         <widget class="QPushButton" name="addButton" >
+         <property name="toolTip" >
+          <string>Add new link</string>
+         </property>
          <property name="text" >
           <string/>
          </property>
@@ -47,6 +50,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="removeButton" >
+         <property name="toolTip" >
+          <string>Remove selected links</string>
+         </property>
          <property name="text" >
           <string/>
          </property>

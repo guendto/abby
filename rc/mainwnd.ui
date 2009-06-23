@@ -434,8 +434,14 @@
             <layout class="QHBoxLayout" name="horizontalLayout_5" >
              <item>
               <widget class="QPushButton" name="formatsButton" >
+               <property name="toolTip" >
+                <string/>
+               </property>
+               <property name="statusTip" >
+                <string>Choose host specific formats</string>
+               </property>
                <property name="text" >
-                <string>&amp;Choose Formats...</string>
+                <string>&amp;Choose formats...</string>
                </property>
               </widget>
              </item>
@@ -455,12 +461,10 @@
              <item>
               <widget class="QCheckBox" name="titleBox" >
                <property name="toolTip" >
-                <string>Use video page title for naming downloaded files.
-See also the Preferences for the character-class
-used to clean up the video page titles.
-
-Note that cclive must be built WITH_PERL=yes for
-this to work.</string>
+                <string/>
+               </property>
+               <property name="statusTip" >
+                <string>Use video page title for naming the downloaded file</string>
                </property>
                <property name="text" >
                 <string>&amp;Use video page title for output filename</string>
@@ -483,13 +487,8 @@ this to work.</string>
              <item>
               <widget class="QCheckBox" name="streamBox" >
                <property name="toolTip" >
-                <string>Run the stream command defined in the preferences when
-the file transfer reaches the specified percent done.
-
-Note that if the started command runs out of downloaded
-video data, abby does not attempt to restore the last
-state. It is recommended that you use this feature
-with broadband connections only.</string>
+                <string>Invoke the stream command defined in the preferences when
+the download reches the specified percent complete</string>
                </property>
                <property name="text" >
                 <string>S&amp;tart streaming at:</string>
@@ -506,12 +505,6 @@ with broadband connections only.</string>
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
-               </property>
-               <property name="toolTip" >
-                <string>Stream command is started when file transfer
-reaches this percentage. Be sure to set it 
-high enough to make sure that there is enough
-video data for the command to process.</string>
                </property>
                <property name="suffix" >
                 <string>%</string>
@@ -541,8 +534,7 @@ video data for the command to process.</string>
              <item>
               <widget class="QCheckBox" name="commandBox" >
                <property name="toolTip" >
-                <string>Run the command specified in the preferences after
-download finishes.</string>
+                <string>Invoke the command defined in the preferences when download finishes</string>
                </property>
                <property name="text" >
                 <string>&amp;Run external command when download finishes</string>
