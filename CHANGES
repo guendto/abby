@@ -1,4 +1,11 @@
-0.3.0
+Version 0.3.1
+
+  User-visible changes:
+   * Add: Edit / Add / Paste (+key shortcut)
+   * Change: use 16x16 for all icons
+
+
+Version 0.3.0
 (June 21, 2009)
 
 FOREWORD
@@ -41,7 +48,7 @@ parsing (clivefeed) has already been implemented. Video link scan
      1. mp4 support has been broken in cclive since 0.4.x
 
 
-0.2.1
+Version 0.2.1
 (April 29, 2009)
 
   User-visible changes:
@@ -52,7 +59,7 @@ parsing (clivefeed) has already been implemented. Video link scan
    * Fix: Preferences: cclive/clive: Browse (button)
 
 
-0.2.0
+Version 0.2.0
 (April 4, 2009)
 
   User-visible changes:
@@ -73,7 +80,7 @@ parsing (clivefeed) has already been implemented. Video link scan
      - Dialog position previously saved and restored
 
 
-0.1.1
+Version 0.1.1
 (March 17, 2009)
 
   User-visible changes:
@@ -95,7 +102,7 @@ parsing (clivefeed) has already been implemented. Video link scan
    * Clean up widget texts
 
 
-0.1.0
+Version 0.1.0
 (March 1, 2009)
 
   * Initial release
