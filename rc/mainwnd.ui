@@ -606,6 +606,7 @@ the download reches the specified percent complete</string>
      <addaction name="action_Link" />
      <addaction name="action_RSS" />
      <addaction name="action_Scan" />
+     <addaction name="action_Paste" />
     </widget>
     <addaction name="menu_Add" />
     <addaction name="action_Remove_selected" />
@@ -745,6 +746,18 @@ the download reches the specified percent complete</string>
    </property>
    <property name="shortcut" >
     <string>Alt+D</string>
+   </property>
+  </action>
+  <action name="action_Paste" >
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Paste</string>
+   </property>
+   <property name="shortcut" >
+    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>
@@ -1031,6 +1044,22 @@ the download reches the specified percent complete</string>
    <signal>activated()</signal>
    <receiver>MainWindow</receiver>
    <slot>onStart()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>272</x>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Paste</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onPasteURL()</slot>
    <hints>
     <hint type="sourcelabel" >
      <x>-1</x>
