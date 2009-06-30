@@ -1,9 +1,8 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-* change: enable/disable controls when download begins/ends
-  - is it possible to disable or hide the options tab altogether
-* change: allow dropping links to the list
+0.3.1
+-----
 * change: enable/disable download button based on count of items
 * change: allow editing links (double click on item)
 * add: select (all/none/invert) items to menu
@@ -11,7 +10,7 @@ web : http://repo.or.cz/w/abby.git
 0.4.x
 -----
 * implement link scanning (scandlg.*)
-* implement proxy (scan)
+* change: allow dropping links to the list
 
 Dear Santa, bring us...
   * a proper application icon to replace the current "TODO" icon

@@ -3,6 +3,7 @@ Version 0.3.1
   User-visible changes:
    * Add: Edit / Add / Paste (+key shortcut)
    * Add: Clear list (button +menu item)
+   * Change: Enable/disable misc. widgets at start and end
    * Change: use 16x16 for all icons
    * Change: misc. tooltip messages
 

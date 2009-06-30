@@ -537,8 +537,26 @@ MainWindow::onProcStarted() {
     progressBar ->setValue(0);
     totalProgressbar->setValue(0);
 
+    addButton   ->setEnabled(false);
+    pasteButton ->setEnabled(false);
+    removeButton->setEnabled(false);
+    clearButton ->setEnabled(false);
+    rssButton   ->setEnabled(false);
+    scanButton  ->setEnabled(false);
     startButton ->setEnabled(false);
     cancelButton->setEnabled(true);
+
+    action_Download_videos->setEnabled(false);
+
+    action_Link ->setEnabled(false);
+    action_RSS  ->setEnabled(false);
+    action_Scan ->setEnabled(false);
+    action_Paste->setEnabled(false);
+
+    action_Remove_selected->setEnabled(false);
+    action_Clear_list->setEnabled(false);
+
+    tabWidget->setTabEnabled(1, false);
 
     errorOccurred = false;
 }
@@ -607,12 +625,12 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     if (!errorOccurred) {
         if (exitStatus == QProcess::NormalExit) {
             status = exitCode != 0
-                ? tr("Process exited with an error. See Log for details.")
-                : tr("Process exited normally.");
+                ? tr("Process exited with an error. See Log for details")
+                : tr("Process exited normally");
         } else {
             status = cancelled
-                ? tr("Process terminated.")
-                : tr("Process crashed. See Log for details.");
+                ? tr("Process terminated")
+                : tr("Process crashed. See Log for details");
         }
         updateLog(status + ".");
     }
@@ -621,6 +639,24 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
 
     statusBar()->showMessage(status);
 
+    addButton   ->setEnabled(true);
+    pasteButton ->setEnabled(true);
+    removeButton->setEnabled(true);
+    clearButton ->setEnabled(true);
+    rssButton   ->setEnabled(true);
+    scanButton  ->setEnabled(true);
     startButton ->setEnabled(true);
     cancelButton->setEnabled(false);
+
+    action_Download_videos->setEnabled(true);
+
+    action_Link ->setEnabled(true);
+    action_RSS  ->setEnabled(true);
+    action_Scan ->setEnabled(true);
+    action_Paste->setEnabled(true);
+
+    action_Remove_selected->setEnabled(true);
+    action_Clear_list->setEnabled(true);
+
+    tabWidget   ->setTabEnabled(1, true);
 }
