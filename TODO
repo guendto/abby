@@ -1,7 +1,6 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-* add: clear list
 * change: enable/disable controls when download begins/ends
   - is it possible to disable or hide the options tab altogether
 * change: allow dropping links to the list

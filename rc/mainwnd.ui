@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>545</width>
-    <height>344</height>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -67,7 +67,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Paste video page links from clipboard</string>
+                 <string>Paste links from clipboard</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -90,7 +90,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Remove selected video page links</string>
+                 <string>Remove selected links</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -98,6 +98,26 @@
                 <property name="icon" >
                  <iconset resource="abby.qrc" >
                   <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
+                </property>
+                <property name="iconSize" >
+                 <size>
+                  <width>16</width>
+                  <height>16</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="clearButton" >
+                <property name="statusTip" >
+                 <string>Clear list</string>
+                </property>
+                <property name="text" >
+                 <string/>
+                </property>
+                <property name="icon" >
+                 <iconset resource="abby.qrc" >
+                  <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
                 </property>
                 <property name="iconSize" >
                  <size>
@@ -127,7 +147,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Add video links from RSS feeds</string>
+                 <string>Add links from RSS feeds</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -150,7 +170,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Add video links from scanned web pages</string>
+                 <string>Scan links for video links</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -186,7 +206,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Download videos from the listed page links</string>
+                 <string>Download videos</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -623,6 +643,7 @@ the download reches the specified percent complete</string>
     </widget>
     <addaction name="menu_Add" />
     <addaction name="action_Remove_selected" />
+    <addaction name="action_Clear_list" />
     <addaction name="separator" />
     <addaction name="action_Preferences" />
    </widget>
@@ -773,18 +794,31 @@ the download reches the specified percent complete</string>
     <string>Ctrl+V</string>
    </property>
   </action>
+  <action name="action_Clear_list" >
+   <property name="icon" >
+    <iconset resource="abby.qrc" >
+     <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
+   </property>
+   <property name="text" >
+    <string>Clear list</string>
+   </property>
+   <property name="statusTip" >
+    <string>Clear list</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>addButton</tabstop>
   <tabstop>pasteButton</tabstop>
   <tabstop>removeButton</tabstop>
+  <tabstop>clearButton</tabstop>
   <tabstop>rssButton</tabstop>
   <tabstop>scanButton</tabstop>
   <tabstop>startButton</tabstop>
   <tabstop>linksList</tabstop>
-  <tabstop>logEdit</tabstop>
-  <tabstop>cancelButton</tabstop>
   <tabstop>tabWidget_2</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>logEdit</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>formatsButton</tabstop>
   <tabstop>titleBox</tabstop>
@@ -1084,6 +1118,38 @@ the download reches the specified percent complete</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onClear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>36</x>
+     <y>178</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>272</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Clear_list</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onClear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>272</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -1102,5 +1168,6 @@ the download reches the specified percent complete</string>
   <slot>onAdd()</slot>
   <slot>onRemove()</slot>
   <slot>onFormats()</slot>
+  <slot>onClear()</slot>
  </slots>
 </ui>

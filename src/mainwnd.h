@@ -43,6 +43,7 @@ private slots:
     void onPasteURL();
     void onAdd();
     void onRemove();
+    void onClear();
     void onFormats();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);

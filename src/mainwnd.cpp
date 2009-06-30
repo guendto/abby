@@ -461,11 +461,41 @@ MainWindow::onAdd() {
 
 void
 MainWindow::onRemove() {
+
     QList<QListWidgetItem*> sel = linksList->selectedItems();
+
+    if (sel.size() == 0)
+        return;
+
+    if (QMessageBox::warning(this, tr("Remove links"),
+        tr("Really remove the selected links?"),
+        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
+        == QMessageBox::No)
+    {
+        return;
+    }
+
     for (register int i=0; i<sel.size(); ++i) {
         const int row = linksList->row(sel[i]);
         delete linksList->takeItem(row);
     }
+}
+
+void
+MainWindow::onClear() {
+
+    if (linksList->count() == 0)
+        return;
+
+    if (QMessageBox::warning(this, tr("Clear list"),
+        tr("Really clear list?"),
+        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
+        == QMessageBox::No)
+    {
+        return;
+    }
+
+    linksList->clear();
 }
 
 void
