@@ -49,6 +49,7 @@ private slots:
     void onProcError(QProcess::ProcessError);
     void onProcStdoutReady();
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
+    void onItemDoubleClicked(QListWidgetItem *item);
 private:
     QStringList hostsOutput;
     PreferencesDialog *prefs;

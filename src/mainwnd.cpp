@@ -73,6 +73,9 @@ MainWindow::MainWindow():
     setProxy();
 
     scanButton->setVisible(false);
+
+    connect(linksList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+        this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
 }
 
 bool
@@ -454,9 +457,7 @@ MainWindow::onPasteURL() {
 
 void
 MainWindow::onAdd() {
-    QString lnk = QInputDialog::getText(this,
-        tr("Add new video page link"), tr("Enter link:"));
-    addPageLink(lnk);
+    addPageLink(QInputDialog::getText(this, tr("Enter link"), ""));
 }
 
 void
@@ -659,4 +660,15 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     action_Clear_list->setEnabled(true);
 
     tabWidget   ->setTabEnabled(1, true);
+}
+
+void
+MainWindow::onItemDoubleClicked(QListWidgetItem *item) {
+    bool ok;
+
+    QString lnk = QInputDialog::getText(this,
+        tr("Edit link"), "", QLineEdit::Normal, item->text(), &ok);
+
+    if (ok && !lnk.isEmpty())
+        item->setText(lnk);
 }
