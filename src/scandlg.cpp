@@ -45,6 +45,7 @@ ScanDialog::onScan() {
 
     titleMode = false;
 
+    linkEdit->setEnabled    (false);
     scanButton->setEnabled  (false);
     titlesBox->setEnabled   (false);
     buttonBox->setEnabled   (false);
@@ -87,6 +88,7 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         mb.exec();
     }
 
+    linkEdit->setEnabled    (true);
     scanButton->setEnabled  (true);
     titlesBox->setEnabled   (true);
     buttonBox->setEnabled   (true);
