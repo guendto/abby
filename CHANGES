@@ -3,9 +3,8 @@ Version 0.4.0
   User-visible changes:
    * Add: Scan feature to scan *any* web pages for video links
      1. Supports regular Youtube links and embedded ones
-     2. Above means also that it can be used to grab videos
-        from Youtube playlists
-     3. Intended to replace clivescan utility
+     2. Above means that it can be used to grab videos from Youtube playlists
+     3. Intended to replace clivescan utility (of the clive-utils project)
    * Add: Edit / Add / Paste (+key shortcut)
    * Add: Clear list (button +menu item)
    * Fix: RSS/Scan: Check for URL scheme in input link; insert if missing
