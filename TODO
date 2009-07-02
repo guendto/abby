@@ -3,8 +3,9 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* fix: rss/scan: proxy settings: ineffective when changed
-  - only restart fixes this at the moment
+* fix: rss/scan: check for url scheme; insert if missing
+* change: rss/scan: add macro where we transfer selected urls to list
+* change: rss/scan: disable lineedit along with the rest when "scan" is hit
 * change: allow dropping links to the list
 
 Dear Santa, bring us...
