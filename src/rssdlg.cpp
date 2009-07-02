@@ -23,6 +23,8 @@
 #include "rssdlg.h"
 #include "feedmgrdlg.h"
 
+#define USERAGENT "Mozilla/5.0"
+
 RSSDialog::RSSDialog(QWidget *parent)
     : QDialog(parent)
 {
@@ -45,7 +47,7 @@ RSSDialog::onFetch() {
     buttonBox->setEnabled(false);
 
     QNetworkRequest req(lnk);
-    req.setRawHeader("User-Agent", "Mozilla/5.0");
+    req.setRawHeader("User-Agent", USERAGENT);
     mgr->get(req);
 }
 
@@ -72,7 +74,7 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
 
         if (!redirectUrl.isEmpty()) {
             QNetworkRequest req(redirectUrl);
-            req.setRawHeader("User-Agent", "Mozilla/5.0");
+            req.setRawHeader("User-Agent", USERAGENT);
             mgr->get(req);
         }
         else {

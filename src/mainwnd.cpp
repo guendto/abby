@@ -238,17 +238,18 @@ MainWindow::setProxy() {
     if (!prefs->proxyEdit->text().isEmpty()
         && prefs->proxyCombo->currentIndex() > 0)
     {
-        QNetworkProxy proxy;
-
-        proxy.setType(QNetworkProxy::HttpProxy);
-
         QUrl url(prefs->proxyEdit->text());
 
-        proxy.setHostName(url.host());
-        proxy.setPort(url.port());
+        QNetworkProxy proxy(
+            QNetworkProxy::HttpProxy,
+            url.host(),
+            url.port()
+        );
 
         QNetworkProxy::setApplicationProxy(proxy);
     }
+    else
+        QNetworkProxy::setApplicationProxy(QNetworkProxy::NoProxy);
 }
 
 void
