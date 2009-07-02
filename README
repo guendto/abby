@@ -10,6 +10,45 @@ abby was originally intended for cclive but additional support for
 clive was added later in the 0.2.0 release.
 
 
+Using abby as a front-end
+-------------------------
+
+* abby requires a path to either clive(1) or cclive(1) command.
+This can be defined in the program preferences. abby will also
+prompt for the path if it is undefined.
+
+* The RSS feed parsing feature which was added in abby 0.3.0
+is intended to replace the clivefeed utility in the clive-utils
+project.
+
+* The video scan feature (or "scan feature") which was added
+in abby 0.4.0 is intended to replace the clivescan utility
+in the clive-utils project.
+
+  1. Scan currently detects Youtube videos only
+
+     * It is uncertain if the support will be expanded
+       to cover other hosts
+
+     * If there is need for additional support, please
+       contact the author
+
+  2. Video links can be either "regular" or embedded ones
+
+  3. Little known facts:
+
+     * clive previously supported --scan option in 0.1.x - 1.x
+
+     * the feature was removed in clive 2.x and re-implemented
+       as `clivescan' utility as part of the clive-utils project
+
+     * abby's scan feature is now the third iteration of the same
+       scan feature that originated in clive 0.1.x
+
+     * the scan feature has been able to scan videos from Youtube
+       playlists as early as in clive 0.1.x
+
+
 Prerequisites
 -------------
 
