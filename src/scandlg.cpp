@@ -147,7 +147,7 @@ ScanDialog::scanContent(const QString& content) {
 
     register int i;
     for (i=0; i<IDs.size(); ++i)
-        links << "http://youtube.com/watch?v="+IDs[i];
+        links << "http://www.youtube.com/watch?v="+IDs[i];
 
     if (titlesBox->checkState()) {
         titleMode = true;
