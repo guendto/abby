@@ -423,15 +423,20 @@ MainWindow::onAbout() {
     AboutDialog(this, ccliveVersion, curlVersion).exec();
 }
 
+#define fillList(dlg) \
+    do { \
+        QTreeWidgetItemIterator iter(dlg->itemsTree); \
+        while  (*iter) { \
+            if ((*iter)->checkState(0) == Qt::Checked) \
+                addPageLink((*iter)->text(1)); \
+            ++iter; \
+        } \
+    } while (0)
+
 void
 MainWindow::onRSS() {
     if (rss->exec() == QDialog::Accepted) {
-        QTreeWidgetItemIterator iter(rss->itemsTree);
-        while (*iter) {
-            if ((*iter)->checkState(0) == Qt::Checked)
-                addPageLink((*iter)->text(1));
-            ++iter;
-        }
+        fillList(rss);
     }
     rss->writeSettings();
 }
@@ -439,12 +444,7 @@ MainWindow::onRSS() {
 void
 MainWindow::onScan() {
     if (scan->exec() == QDialog::Accepted) {
-        QTreeWidgetItemIterator iter(scan->itemsTree);
-        while (*iter) {
-            if ((*iter)->checkState(0) == Qt::Checked)
-                addPageLink((*iter)->text(1));
-            ++iter;
-        }
+        fillList(scan);
     }
     scan->writeSettings();
 }
