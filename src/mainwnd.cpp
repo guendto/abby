@@ -73,6 +73,7 @@ MainWindow::MainWindow():
     setProxy();
 
     scanButton->setVisible(false);
+    action_Scan->setVisible(false);
 
     connect(linksList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
         this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
@@ -82,7 +83,7 @@ bool
 MainWindow::checkCclivePath() {
     if (prefs->ccliveEdit->text().isEmpty()) {
         QMessageBox::information(this, QCoreApplication::applicationName(),
-            tr("abby requires either `clive' or `cclive'.\n"
+            tr("abby requires `clive' or `cclive'.\n"
                 "Please define a path to either command."));
         onPreferences();
         return false;
@@ -547,15 +548,15 @@ MainWindow::onProcStarted() {
     startButton ->setEnabled(false);
     cancelButton->setEnabled(true);
 
-    action_Download_videos->setEnabled(false);
+    action_Download->setEnabled(false);
 
     action_Link ->setEnabled(false);
     action_RSS  ->setEnabled(false);
     action_Scan ->setEnabled(false);
     action_Paste->setEnabled(false);
 
-    action_Remove_selected->setEnabled(false);
-    action_Clear_list->setEnabled(false);
+    action_Remove->setEnabled(false);
+    action_Clear->setEnabled(false);
 
     tabWidget->setTabEnabled(1, false);
 
@@ -649,15 +650,15 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     startButton ->setEnabled(true);
     cancelButton->setEnabled(false);
 
-    action_Download_videos->setEnabled(true);
+    action_Download->setEnabled(true);
 
     action_Link ->setEnabled(true);
     action_RSS  ->setEnabled(true);
     action_Scan ->setEnabled(true);
     action_Paste->setEnabled(true);
 
-    action_Remove_selected->setEnabled(true);
-    action_Clear_list->setEnabled(true);
+    action_Remove->setEnabled(true);
+    action_Clear->setEnabled(true);
 
     tabWidget   ->setTabEnabled(1, true);
 }

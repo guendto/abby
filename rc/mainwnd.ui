@@ -500,7 +500,7 @@
                 <string>Use video page title for naming the downloaded file</string>
                </property>
                <property name="text" >
-                <string>&amp;Use video page title for output filename</string>
+                <string>&amp;Name downloaded video after video page title</string>
                </property>
               </widget>
              </item>
@@ -624,7 +624,7 @@ the download reches the specified percent complete</string>
     <property name="title" >
      <string>&amp;File</string>
     </property>
-    <addaction name="action_Download_videos" />
+    <addaction name="action_Download" />
     <addaction name="separator" />
     <addaction name="action_Quit" />
    </widget>
@@ -642,8 +642,9 @@ the download reches the specified percent complete</string>
      <addaction name="action_Paste" />
     </widget>
     <addaction name="menu_Add" />
-    <addaction name="action_Remove_selected" />
-    <addaction name="action_Clear_list" />
+    <addaction name="separator" />
+    <addaction name="action_Remove" />
+    <addaction name="action_Clear" />
     <addaction name="separator" />
     <addaction name="action_Preferences" />
    </widget>
@@ -749,13 +750,13 @@ the download reches the specified percent complete</string>
     <string>Alt+A</string>
    </property>
   </action>
-  <action name="action_Remove_selected" >
+  <action name="action_Remove" >
    <property name="icon" >
     <iconset resource="abby.qrc" >
      <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
    </property>
    <property name="text" >
-    <string>&amp;Remove selected</string>
+    <string>&amp;Remove</string>
    </property>
    <property name="statusTip" >
     <string>Remove selected video page links</string>
@@ -764,7 +765,7 @@ the download reches the specified percent complete</string>
     <string>Ctrl+X</string>
    </property>
   </action>
-  <action name="action_Download_videos" >
+  <action name="action_Download" >
    <property name="icon" >
     <iconset resource="abby.qrc" >
      <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
@@ -776,7 +777,7 @@ the download reches the specified percent complete</string>
     <string>Download videos</string>
    </property>
    <property name="statusTip" >
-    <string>Download videos from the listed page links</string>
+    <string>Download videos</string>
    </property>
    <property name="shortcut" >
     <string>Alt+D</string>
@@ -794,7 +795,7 @@ the download reches the specified percent complete</string>
     <string>Ctrl+V</string>
    </property>
   </action>
-  <action name="action_Clear_list" >
+  <action name="action_Clear" >
    <property name="icon" >
     <iconset resource="abby.qrc" >
      <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
@@ -804,6 +805,30 @@ the download reches the specified percent complete</string>
    </property>
    <property name="statusTip" >
     <string>Clear list</string>
+   </property>
+  </action>
+  <action name="action_Select_all" >
+   <property name="text" >
+    <string>All</string>
+   </property>
+   <property name="statusTip" >
+    <string>Select all</string>
+   </property>
+  </action>
+  <action name="action_Invert_selection" >
+   <property name="text" >
+    <string>Invert selection</string>
+   </property>
+   <property name="statusTip" >
+    <string>Invert selection</string>
+   </property>
+  </action>
+  <action name="action_Select_none" >
+   <property name="text" >
+    <string>None</string>
+   </property>
+   <property name="statusTip" >
+    <string>Clear selection</string>
    </property>
   </action>
  </widget>
@@ -1039,7 +1064,7 @@ the download reches the specified percent complete</string>
    </hints>
   </connection>
   <connection>
-   <sender>action_Remove_selected</sender>
+   <sender>action_Remove</sender>
    <signal>activated()</signal>
    <receiver>MainWindow</receiver>
    <slot>onRemove()</slot>
@@ -1087,7 +1112,7 @@ the download reches the specified percent complete</string>
    </hints>
   </connection>
   <connection>
-   <sender>action_Download_videos</sender>
+   <sender>action_Download</sender>
    <signal>activated()</signal>
    <receiver>MainWindow</receiver>
    <slot>onStart()</slot>
@@ -1135,7 +1160,7 @@ the download reches the specified percent complete</string>
    </hints>
   </connection>
   <connection>
-   <sender>action_Clear_list</sender>
+   <sender>action_Clear</sender>
    <signal>activated()</signal>
    <receiver>MainWindow</receiver>
    <slot>onClear()</slot>
