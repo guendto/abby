@@ -23,7 +23,8 @@ project.
 
 * The video scan feature (or "scan feature") which was added
 in abby 0.4.0 is intended to replace the clivescan utility
-in the clive-utils project.
+in the clive-utils project. The scan feature can be used
+to scan *any* web page for video links.
 
   1. Scan currently detects Youtube videos only
 
