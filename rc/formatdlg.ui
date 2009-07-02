@@ -1,4 +1,5 @@
 <ui version="4.0" >
+ <author>Toni Gundogdu</author>
  <class>formatDialog</class>
  <widget class="QDialog" name="formatDialog" >
   <property name="windowModality" >
@@ -189,6 +190,7 @@
   <tabstop>vimeoBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
+ <includes/>
  <resources/>
  <connections>
   <connection>

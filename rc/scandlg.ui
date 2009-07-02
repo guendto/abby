@@ -1,4 +1,5 @@
 <ui version="4.0" >
+ <author>Toni Gundogdu</author>
  <class>scanDialog</class>
  <widget class="QDialog" name="scanDialog" >
   <property name="windowModality" >
@@ -9,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>513</width>
-    <height>239</height>
+    <height>279</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -48,10 +49,37 @@
     </layout>
    </item>
    <item row="1" column="0" >
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Options</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout" >
+      <item row="0" column="0" >
+       <widget class="QCheckBox" name="titlesBox" >
+        <property name="toolTip" >
+         <string>Have abby fetch video page titles for the found
+video page links. This will cause the scan process
+to take more time and bandwidth. </string>
+        </property>
+        <property name="text" >
+         <string>Fetch video page titles</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" >
     <widget class="QTreeWidget" name="itemsTree" >
+     <property name="rootIsDecorated" >
+      <bool>false</bool>
+     </property>
      <column>
       <property name="text" >
-       <string>Title</string>
+       <string>Title / Link</string>
       </property>
      </column>
      <column>
@@ -61,7 +89,7 @@
      </column>
     </widget>
    </item>
-   <item row="2" column="0" >
+   <item row="3" column="0" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
@@ -77,6 +105,7 @@
   <tabstop>linkEdit</tabstop>
   <tabstop>scanButton</tabstop>
   <tabstop>itemsTree</tabstop>
+  <tabstop>titlesBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>

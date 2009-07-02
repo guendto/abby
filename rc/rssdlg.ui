@@ -1,4 +1,5 @@
 <ui version="4.0" >
+ <author>Toni Gundogdu</author>
  <class>rssDialog</class>
  <widget class="QDialog" name="rssDialog" >
   <property name="windowModality" >
@@ -121,6 +122,7 @@
   <tabstop>itemsTree</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
+ <includes/>
  <resources>
   <include location="abby.qrc" />
  </resources>

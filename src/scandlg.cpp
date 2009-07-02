@@ -23,8 +23,10 @@
 
 #include "scandlg.h"
 
+#define USERAGENT "Mozilla/5.0"
+
 ScanDialog::ScanDialog(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(parent), titleMode(false)
 {
     setupUi(this);
     readSettings();
@@ -41,11 +43,14 @@ ScanDialog::onScan() {
 
     itemsTree->clear();
 
-    scanButton->setEnabled(false);
-    buttonBox->setEnabled(false);
+    titleMode = false;
+
+    scanButton->setEnabled  (false);
+    titlesBox->setEnabled   (false);
+    buttonBox->setEnabled   (false);
 
     QNetworkRequest req(lnk);
-    req.setRawHeader("User-Agent", "Mozilla/5.0");
+    req.setRawHeader("User-Agent", USERAGENT);
     mgr->get(req);
 }
 
@@ -60,12 +65,15 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
 
         if (!redirectUrl.isEmpty()) {
             QNetworkRequest req(redirectUrl);
-            req.setRawHeader("User-Agent", "Mozilla/5.0");
+            req.setRawHeader("User-Agent", USERAGENT);
             mgr->get(req);
         }
         else {
+            if (!titleMode)
+                scanContent(reply->readAll());
+            else
+                parseHtmlTitle(reply->readAll(), reply->url().toString());
             redirectUrl.clear();
-            scanHTML(reply->readAll());
         }
         reply->deleteLater();
     }
@@ -79,12 +87,92 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         mb.exec();
     }
 
-    scanButton->setEnabled(true);
-    buttonBox->setEnabled(true);
+    scanButton->setEnabled  (true);
+    titlesBox->setEnabled   (true);
+    buttonBox->setEnabled   (true);
+}
+
+static QStringList
+matchScanContent (const QStringList& lst, QRegExp& re, const QString& content) {
+
+    re.setCaseSensitivity(Qt::CaseInsensitive);
+    re.setMinimal(true);
+
+    QStringList matches;
+
+    int pos = 0;
+    while ((pos = re.indexIn(content, pos)) != -1) {
+        if (!matches.contains(re.cap(1)) && !lst.contains(re.cap(1)))
+            matches << re.cap(1);
+        pos += re.matchedLength();
+    }
+    return matches;
+}
+
+static void
+dumpScanMatches (const QStringList& lst) {
+    for (register int i=0; i<lst.size(); ++i)
+        qDebug() << lst[i];
+    qDebug() << "total: " << lst.size();
+}
+
+static void
+scanYoutubeEmbed(QStringList& lst, const QString& content) {
+    QRegExp re("\\/v\\/(.*)[\"&]");
+    QStringList matches = matchScanContent(lst, re, content);
+    //dumpScanMatches(matches);
+    lst << matches;
+}
+
+static void
+scanYoutubeRegular(QStringList& lst, const QString& content) {
+    QRegExp re("\\/watch\\?v=(.*)[\"&]");
+    QStringList matches = matchScanContent(lst, re, content);
+    //dumpScanMatches(matches);
+    lst << matches;
 }
 
 void
-ScanDialog::scanHTML(QString html) {
+ScanDialog::scanContent(const QString& content) {
+    QStringList IDs, links;
+    scanYoutubeEmbed    (IDs, content);
+    scanYoutubeRegular  (IDs, content);
+
+    register int i;
+    for (i=0; i<IDs.size(); ++i)
+        links << "http://youtube.com/watch?v="+IDs[i];
+
+    if (titlesBox->checkState()) {
+        titleMode = true;
+        for (i=0; i<links.size(); ++i) {
+            QNetworkRequest req(links[i]);
+            req.setRawHeader("User-Agent", USERAGENT);
+            mgr->get(req);
+        }
+    }
+    else {
+        for (i=0; i<links.size(); ++i) {
+            QTreeWidgetItem *item = new QTreeWidgetItem;
+            item->setCheckState(0, Qt::Unchecked);
+            item->setText(0, links[i]);
+            item->setText(1, links[i]);
+            itemsTree->addTopLevelItem(item);
+        }
+    }
+}
+
+void
+ScanDialog::parseHtmlTitle(const QString& content, const QString& link) {
+    QRegExp re("<title>(.*)<\\/title>"); // TODO: improve.
+    re.setCaseSensitivity(Qt::CaseInsensitive);
+    re.setMinimal(true);
+    re.indexIn(content);
+
+    QTreeWidgetItem *item = new QTreeWidgetItem;
+    item->setCheckState(0, Qt::Unchecked);
+    item->setText(0, re.cap(1));
+    item->setText(1, link);
+    itemsTree->addTopLevelItem(item);
 }
 
 QNetworkAccessManager*

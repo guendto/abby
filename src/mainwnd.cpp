@@ -72,9 +72,6 @@ MainWindow::MainWindow():
     parseCcliveHostsOutput();
     setProxy();
 
-    scanButton->setVisible(false);
-    action_Scan->setVisible(false);
-
     connect(linksList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
         this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
 }
@@ -440,10 +437,13 @@ MainWindow::onRSS() {
 
 void
 MainWindow::onScan() {
-    QMessageBox::information(this, QCoreApplication::applicationName(),
-        "TODO: Implement video link scan");
-    return;
     if (scan->exec() == QDialog::Accepted) {
+        QTreeWidgetItemIterator iter(scan->itemsTree);
+        while (*iter) {
+            if ((*iter)->checkState(0) == Qt::Checked)
+                addPageLink((*iter)->text(1));
+            ++iter;
+        }
     }
     scan->writeSettings();
 }

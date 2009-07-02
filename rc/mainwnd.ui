@@ -131,9 +131,6 @@
             </item>
             <item>
              <widget class="QListWidget" name="linksList" >
-              <property name="toolTip" >
-               <string>Video page links to download videos from</string>
-              </property>
               <property name="selectionMode" >
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
