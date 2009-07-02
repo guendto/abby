@@ -3,8 +3,8 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* implement link scanning (scandlg.*)
-  - limit support to youtube first
+* fix: rss/scan: proxy settings: ineffective when changed
+  - only restart fixes this at the moment
 * change: allow dropping links to the list
 
 Dear Santa, bring us...
