@@ -4,8 +4,7 @@ web : http://repo.or.cz/w/abby.git
 0.4.x
 -----
 * implement link scanning (scandlg.*)
-  - support youtube first
-  - use "youtube playlist" for more attraction
+  - limit support to youtube first
 * change: allow dropping links to the list
 
 Dear Santa, bring us...
