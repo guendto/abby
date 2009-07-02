@@ -8,6 +8,7 @@ Version 0.4.0
      3. Intended to replace clivescan utility
    * Add: Edit / Add / Paste (+key shortcut)
    * Add: Clear list (button +menu item)
+   * Fix: RSS/Scan: Check for URL scheme in input link; insert if missing
    * Fix: RSS/Scan: Disabling HTTP proxy is now respected
    * Enable editing links (double-click on link)
    * Enable/disable misc. widgets at start and end
