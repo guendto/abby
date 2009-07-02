@@ -1,13 +1,11 @@
 repo: git://repo.or.cz/abby.git
 web : http://repo.or.cz/w/abby.git
 
-0.3.1
------
-* add: select (all/none/invert) items to menu
-
 0.4.x
 -----
 * implement link scanning (scandlg.*)
+  - support youtube first
+  - use "youtube playlist" for more attraction
 * change: allow dropping links to the list
 
 Dear Santa, bring us...
