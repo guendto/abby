@@ -38,8 +38,14 @@ void
 RSSDialog::onFetch() {
     QString lnk = linkEdit->text();
 
+    lnk = lnk.trimmed();
+
     if (lnk.isEmpty())
         return;
+
+    if (!lnk.startsWith("http://", Qt::CaseInsensitive))
+        lnk.insert(0,"http://");
+
 
     itemsTree->clear();
 

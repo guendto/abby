@@ -503,10 +503,11 @@ MainWindow::onClear() {
 
 void
 MainWindow::addPageLink(QString lnk) {
-    if (lnk.isEmpty())
-        return;
 
     lnk = lnk.trimmed();
+
+    if (lnk.isEmpty())
+        return;
 
     if (!lnk.startsWith("http://", Qt::CaseInsensitive))
         lnk.insert(0,"http://");
