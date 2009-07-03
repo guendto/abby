@@ -280,8 +280,7 @@ MainWindow::onStart() {
     QString savedir = prefs->savedirEdit->text();
     if (savedir.isEmpty()) {
         QMessageBox::information(this, QCoreApplication::applicationName(),
-            tr("Please specify a directory to which the downloaded videos\n"
-                "should be saved to."));
+            tr("Please define a save directory for the\ndownloaded videos."));
         onPreferences();
         return;
     }
