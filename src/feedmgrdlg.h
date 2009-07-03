@@ -26,6 +26,8 @@ class FeedMgrDialog : public QDialog, public Ui::FeedMgrDialog {
     Q_OBJECT
 public:
     FeedMgrDialog(QWidget *parent);
+private slots:
+    void onItemDoubleClicked(QListWidgetItem *item);
 public:
     void writeSettings();
     void readSettings();

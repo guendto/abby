@@ -26,6 +26,9 @@ FeedMgrDialog::FeedMgrDialog(QWidget *parent)
 {
     setupUi(this);
     readSettings();
+
+    connect(feedsList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
+        this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
 }
 
 void
@@ -88,4 +91,15 @@ FeedMgrDialog::readSettings() {
     }
     s.endArray();
     s.endGroup();
+}
+
+void
+FeedMgrDialog::onItemDoubleClicked(QListWidgetItem *item) {
+    bool ok;
+
+    QString lnk = QInputDialog::getText(this,
+        tr("Edit link"), "", QLineEdit::Normal, item->text(), &ok);
+
+    if (ok && !lnk.isEmpty())
+        item->setText(lnk);
 }
