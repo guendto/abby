@@ -497,7 +497,7 @@
                 <string>Use video page title for naming the downloaded file</string>
                </property>
                <property name="text" >
-                <string>&amp;Name downloaded video after video page title</string>
+                <string>&amp;Use video page title for output filename</string>
                </property>
               </widget>
              </item>
