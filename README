@@ -3,51 +3,35 @@
 README for abby
 ---------------
 
-abby is a front-end for cclive and clive video extraction utilities. It is
-written in C++ and depends on the Qt framework.
+abby is a front-end (or a graphical user interface) for cclive
+and clive that can be used to download videos from Youtube and
+similar video hosting services.
 
-abby was originally intended for cclive but additional support for
-clive was added later in the 0.2.0 release.
+For a complete list of the supported hosts, please refer to the
+documentation of c/clive utilities.
+
+abby is written in C++ and depends on the Qt framework.
+
+abby originally could only be used as a front-end for cclive
+but this changed in release 0.2.0 when the support for clive
+was added to the application.
+
+As of 0.3.0 the project has started to merge the clive-utils
+features into abby. As a result of this, abby can now be used
+to parse RSS feeds and scan URLs for video links. Please note
+that the scan feature currently only supports Youtube videos.
 
 
-Using abby as a front-end
--------------------------
+Using abby
+----------
 
 * abby requires a path to either clive(1) or cclive(1) command.
 This can be defined in the program preferences. abby will also
 prompt for the path if it is undefined.
 
-* The RSS feed parsing feature which was added in abby 0.3.0
-is intended to replace the clivefeed utility in the clive-utils
-project.
-
-* The video scan feature (or "scan feature") which was added
-in abby 0.4.0 is intended to replace the clivescan utility
-in the clive-utils project. The scan feature can be used
-to scan *any* web page for video links.
-
-  1. Scan currently detects Youtube videos only
-
-     * It is uncertain if the support will be expanded
-       to cover other hosts
-
-     * If there is need for additional support, please
-       contact the author
-
-  2. Video links can be either "regular" or embedded ones
-
-  3. Little known facts:
-
-     * clive previously supported --scan option in 0.1.x - 1.x
-
-     * the feature was removed in clive 2.x and re-implemented
-       as `clivescan' utility as part of the clive-utils project
-
-     * abby's scan feature is now the third iteration of the same
-       scan feature that originated in clive 0.1.x
-
-     * the scan feature has been able to scan videos from Youtube
-       playlists as early as in clive 0.1.x
+* Scan feature currently only supports Youtube video links,
+both regular and embedded. It can be used to scan *any* URL
+(or web page) for video links -- e.g. Youtube playlists.
 
 
 Prerequisites
@@ -68,5 +52,8 @@ Building abby
 Normally:
   qmake-qt4 "QT+=network xml" && make
 
-Installation is not currently supported but you may just as well copy
-the 'abby' executable to your ~/bin directory, for example.
+The executable is built to the source top directory, e.g.:
+  ./abby
+
+You may manually copy the executable to your ~/bin directory,
+for example.
