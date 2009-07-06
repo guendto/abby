@@ -52,7 +52,7 @@
          </item>
          <item>
           <property name="text" >
-           <string>flv   (     320x180) [default]</string>
+           <string>flv   (flv, 320x180) [default]</string>
           </property>
          </item>
          <item>
@@ -190,7 +190,6 @@
   <tabstop>vimeoBox</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <includes/>
  <resources/>
  <connections>
   <connection>
