@@ -25,7 +25,7 @@ AboutDialog::AboutDialog(QWidget *parent,
 {
     setupUi(this);
 
-    abbyVersionLabel->setText("0.4.0");
+    abbyVersionLabel->setText("0.4.1");
     //QCoreApplication::applicationVersion()); // 4.4+
     qtVersionLabel->setText(qVersion());
 
