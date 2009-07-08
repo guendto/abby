@@ -80,8 +80,8 @@ bool
 MainWindow::checkCclivePath() {
     if (prefs->ccliveEdit->text().isEmpty()) {
         QMessageBox::information(this, QCoreApplication::applicationName(),
-            tr("abby requires `clive' or `cclive'.\n"
-                "Please define a path to either command."));
+            tr("abby requires `clive' or `cclive'. "
+                "Please define path to either executable."));
         onPreferences();
         return false;
     }
@@ -280,7 +280,7 @@ MainWindow::onStart() {
     QString savedir = prefs->savedirEdit->text();
     if (savedir.isEmpty()) {
         QMessageBox::information(this, QCoreApplication::applicationName(),
-            tr("Please define a save directory for the\ndownloaded videos."));
+            tr("Please define a directory for downloaded videos."));
         onPreferences();
         return;
     }
