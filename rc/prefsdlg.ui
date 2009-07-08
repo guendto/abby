@@ -80,7 +80,7 @@
          <item>
           <widget class="QLabel" name="label" >
            <property name="text" >
-            <string>&amp;Save videos to:</string>
+            <string>&amp;Download videos to:</string>
            </property>
            <property name="buddy" >
             <cstring>savedirEdit</cstring>
