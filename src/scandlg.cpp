@@ -116,12 +116,14 @@ matchScanContent (const QStringList& lst, QRegExp& re, const QString& content) {
     return matches;
 }
 
+#ifdef _1_
 static void
 dumpScanMatches (const QStringList& lst) {
     for (register int i=0; i<lst.size(); ++i)
         qDebug() << lst[i];
     qDebug() << "total: " << lst.size();
 }
+#endif
 
 static void
 scanYoutubeEmbed(QStringList& lst, const QString& content) {
