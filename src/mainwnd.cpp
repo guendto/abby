@@ -150,7 +150,7 @@ MainWindow::ccliveSupportsHost(const QString& lnk) {
     const int size = hostsOutput.size();
 
     for (register int i=0; i<size; ++i) {
-        QRegExp re(hostsOutput[i]);
+        QRegExp re(hostsOutput[i].remove("\r"));
         if (re.indexIn(host) != -1)
             return true;
     }
