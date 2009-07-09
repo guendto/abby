@@ -261,8 +261,7 @@ void
 MainWindow::onStart() {
 
     if (linksList->count() == 0) {
-        QMessageBox::information(this, QCoreApplication::applicationName(),
-            tr("Add video page links to the list."));
+        onAdd();
         return;
     }
 
