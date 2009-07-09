@@ -44,7 +44,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Add video page link</string>
+                 <string>Add link</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -67,7 +67,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Paste links from clipboard</string>
+                 <string>Paste from clipboard</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -90,7 +90,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Remove selected links</string>
+                 <string>Remove from list</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -144,7 +144,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Add links from RSS feeds</string>
+                 <string>Add from RSS feeds</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -167,7 +167,7 @@
                  <string/>
                 </property>
                 <property name="statusTip" >
-                 <string>Scan links for video links</string>
+                 <string>Scan for video links</string>
                 </property>
                 <property name="text" >
                  <string/>
@@ -708,7 +708,7 @@ the download reches the specified percent complete</string>
     <string>RSS</string>
    </property>
    <property name="statusTip" >
-    <string>Add video links from RSS feeds</string>
+    <string>Add from RSS feeds</string>
    </property>
    <property name="shortcut" >
     <string>Alt+R</string>
@@ -726,7 +726,7 @@ the download reches the specified percent complete</string>
     <string>&amp;Scan...</string>
    </property>
    <property name="statusTip" >
-    <string>Add video links from scanned web pages</string>
+    <string>Scan for video linsk</string>
    </property>
    <property name="shortcut" >
     <string>Alt+S</string>
@@ -741,7 +741,7 @@ the download reches the specified percent complete</string>
     <string>Link...</string>
    </property>
    <property name="statusTip" >
-    <string>Add video page link</string>
+    <string>Add link</string>
    </property>
    <property name="shortcut" >
     <string>Alt+A</string>
@@ -756,7 +756,7 @@ the download reches the specified percent complete</string>
     <string>&amp;Remove</string>
    </property>
    <property name="statusTip" >
-    <string>Remove selected video page links</string>
+    <string>Remove from list</string>
    </property>
    <property name="shortcut" >
     <string>Ctrl+X</string>
@@ -788,6 +788,9 @@ the download reches the specified percent complete</string>
    <property name="text" >
     <string>Paste</string>
    </property>
+   <property name="statusTip" >
+    <string>Paste from clipboard</string>
+   </property>
    <property name="shortcut" >
     <string>Ctrl+V</string>
    </property>
@@ -802,30 +805,6 @@ the download reches the specified percent complete</string>
    </property>
    <property name="statusTip" >
     <string>Clear list</string>
-   </property>
-  </action>
-  <action name="action_Select_all" >
-   <property name="text" >
-    <string>All</string>
-   </property>
-   <property name="statusTip" >
-    <string>Select all</string>
-   </property>
-  </action>
-  <action name="action_Invert_selection" >
-   <property name="text" >
-    <string>Invert selection</string>
-   </property>
-   <property name="statusTip" >
-    <string>Invert selection</string>
-   </property>
-  </action>
-  <action name="action_Select_none" >
-   <property name="text" >
-    <string>None</string>
-   </property>
-   <property name="statusTip" >
-    <string>Clear selection</string>
    </property>
   </action>
  </widget>
