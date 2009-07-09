@@ -458,7 +458,8 @@ MainWindow::onPasteURL() {
 
 void
 MainWindow::onAdd() {
-    addPageLink(QInputDialog::getText(this, tr("Enter link"), ""));
+    addPageLink(QInputDialog::getText(this,
+        QCoreApplication::applicationName(), tr("Add link:")));
 }
 
 void
@@ -468,8 +469,8 @@ MainWindow::onRemove() {
 
     if (sel.size() == 0)
         return;
-
-    if (QMessageBox::warning(this, tr("Remove links"),
+ 
+    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
         tr("Really remove the selected links?"),
         QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
         == QMessageBox::No)
@@ -489,7 +490,7 @@ MainWindow::onClear() {
     if (linksList->count() == 0)
         return;
 
-    if (QMessageBox::warning(this, tr("Clear list"),
+    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
         tr("Really clear list?"),
         QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
         == QMessageBox::No)
