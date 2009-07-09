@@ -559,6 +559,8 @@ MainWindow::onProcStarted() {
     action_Remove->setEnabled(false);
     action_Clear->setEnabled(false);
 
+    linksList   ->setEnabled(false);
+
     tabWidget->setTabEnabled(1, false);
 
     errorOccurred = false;
@@ -660,6 +662,8 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
 
     action_Remove->setEnabled(true);
     action_Clear->setEnabled(true);
+
+    linksList   ->setEnabled(true);
 
     tabWidget   ->setTabEnabled(1, true);
 }

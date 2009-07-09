@@ -1,6 +1,7 @@
 Version 0.4.1
 
   User-visible changes:
+   * Enable/disable link list dynamically
    * Tweak various messages
    * Fix: Preferences: various browse buttons
      1. These were mysteriously missing signal-slot details in prefs.ui (again)
