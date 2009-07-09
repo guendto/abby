@@ -9,6 +9,9 @@ Version 0.4.1
    * Fix: Preferences: various browse buttons
      1. These were mysteriously missing signal-slot details in prefs.ui (again)
 
+  Developer-visible changes:
+   * src/scandlg.cpp: Use static messagebox function instead
+
 
 Version 0.4.0
 (July 5, 2009)

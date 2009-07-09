@@ -84,13 +84,8 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         reply->deleteLater();
     }
     else {
-        QMessageBox mb(this);
-        mb.setText("Network error occurred");
-        mb.setInformativeText(reply->errorString());
-        mb.setStandardButtons(QMessageBox::Ok);
-        mb.setDefaultButton(QMessageBox::Ok);
-        mb.setIcon(QMessageBox::Critical);
-        mb.exec();
+        QMessageBox::critical(this, QCoreApplication::applicationName(),
+            QString(tr("Network error: %1")).arg(reply->errorString()));
     }
 
     linkEdit->setEnabled    (true);
