@@ -1,8 +1,11 @@
 Version 0.4.1
 
   User-visible changes:
+   * Tweak messagebox texts
    * Enable/disable link list dynamically
    * Tweak various messages
+   * Change: Open "Add link" dialog if list is empty and "Download" is clicked
+     1. This previously showed a messagebox telling user to add a link
    * Fix: Preferences: various browse buttons
      1. These were mysteriously missing signal-slot details in prefs.ui (again)
 
