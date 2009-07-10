@@ -4,8 +4,9 @@ Version 0.4.1
    * Fix: Preferences: various browse buttons
    * Tweak:
      1. Various messagebox texts
-     2. Various status tips
-     3. Scan dialog
+     2. Various status/tool tips
+     3. Scan dialog (+new functions)
+     4. RSS dialog
    * Enable/disable link list when download begins/ends
    * Change: Open "Add link" dialog if list is empty and "Download" is clicked
      1. This previously showed a messagebox telling user to add a link
