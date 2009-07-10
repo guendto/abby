@@ -5,6 +5,7 @@ web : http://repo.or.cz/w/abby.git
 -----
 * add: support for dropping links to list
 * clean up: remove excess code
+  - common code -> src/util.(cpp|h)
 
 Dear Santa, bring us...
   * a proper application icon to replace the current "TODO" icon
