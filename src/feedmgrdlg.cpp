@@ -18,6 +18,8 @@
 #include <QDialog>
 #include <QSettings>
 #include <QInputDialog>
+#include <QMessageBox>
+#include <QClipboard>
 
 #include "feedmgrdlg.h"
 
@@ -35,28 +37,49 @@ void
 FeedMgrDialog::onAdd() {
     QString lnk = QInputDialog::getText(this,
         tr("Add new RSS feed link"), tr("Enter link:"));
+    addLink(lnk);
+}
 
-    if (lnk.isEmpty())
-        return;
-
-    lnk = lnk.trimmed();
-
-    if (!lnk.startsWith("http://",Qt::CaseInsensitive))
-        lnk.insert(0,"http://");
-
-    QList<QListWidgetItem *> found
-        = feedsList->findItems(lnk, Qt::MatchExactly);
-
-    if (found.size() == 0)
-        feedsList->addItem(lnk);
+void
+FeedMgrDialog::onPaste() {
+    QClipboard *cb = QApplication::clipboard();
+    addLink( cb->text().split("\n")[0] );
 }
 
 void
 FeedMgrDialog::onRemove() {
+
     QList<QListWidgetItem*> sel = feedsList->selectedItems();
+
+    if (sel.size() == 0)
+        return;
+ 
+    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
+        tr("Really remove the selected links?"),
+        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
+        == QMessageBox::No)
+    {
+        return;
+    }
+
     for (register int i=0; i<sel.size(); ++i) {
         const int row = feedsList->row(sel[i]);
         delete feedsList->takeItem(row);
+    }
+}
+
+void
+FeedMgrDialog::onClear() {
+
+    if (feedsList->count() == 0)
+        return;
+
+    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
+        tr("Really clear list?"),
+        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
+        == QMessageBox::No)
+    {
+        return;
     }
 }
 
@@ -102,4 +125,22 @@ FeedMgrDialog::onItemDoubleClicked(QListWidgetItem *item) {
 
     if (ok && !lnk.isEmpty())
         item->setText(lnk);
+}
+
+void
+FeedMgrDialog::addLink(QString& lnk) {
+
+    if (lnk.isEmpty())
+        return;
+
+    lnk = lnk.trimmed();
+
+    if (!lnk.startsWith("http://",Qt::CaseInsensitive))
+        lnk.insert(0,"http://");
+
+    QList<QListWidgetItem *> found
+        = feedsList->findItems(lnk, Qt::MatchExactly);
+
+    if (found.size() == 0)
+        feedsList->addItem(lnk);
 }

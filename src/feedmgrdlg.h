@@ -28,12 +28,15 @@ public:
     FeedMgrDialog(QWidget *parent);
 private slots:
     void onItemDoubleClicked(QListWidgetItem *item);
+    void onAdd();
+    void onPaste();
+    void onRemove();
+    void onClear();
 public:
     void writeSettings();
     void readSettings();
-private slots:
-    void onAdd();
-    void onRemove();
+private:
+    void addLink(QString& lnk);
 };
 
 #endif

@@ -10,11 +10,11 @@
     <x>0</x>
     <y>0</y>
     <width>501</width>
-    <height>230</height>
+    <height>252</height>
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>Feed Manager</string>
+   <string>Feed manager</string>
   </property>
   <property name="windowIcon" >
    <iconset resource="abby.qrc" >
@@ -38,7 +38,7 @@
        <item>
         <widget class="QPushButton" name="addButton" >
          <property name="toolTip" >
-          <string>Add new link</string>
+          <string>Add new</string>
          </property>
          <property name="text" >
           <string/>
@@ -47,19 +47,31 @@
           <iconset resource="abby.qrc" >
            <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
          </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="removeButton" >
+        <widget class="QPushButton" name="pasteButton" >
          <property name="toolTip" >
-          <string>Remove selected links</string>
+          <string>Paste from clipboard</string>
          </property>
          <property name="text" >
           <string/>
          </property>
          <property name="icon" >
           <iconset resource="abby.qrc" >
-           <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
+           <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -76,11 +88,58 @@
          </property>
         </spacer>
        </item>
+       <item>
+        <widget class="QPushButton" name="removeButton" >
+         <property name="toolTip" >
+          <string>Remove selected</string>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+         <property name="icon" >
+          <iconset resource="abby.qrc" >
+           <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="clearButton" >
+         <property name="toolTip" >
+          <string>Clear list</string>
+         </property>
+         <property name="text" >
+          <string/>
+         </property>
+         <property name="icon" >
+          <iconset resource="abby.qrc" >
+           <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
+         </property>
+         <property name="iconSize" >
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
    </item>
    <item row="1" column="0" >
+    <widget class="QLabel" name="label" >
+     <property name="text" >
+      <string>Tip: Select a link from list and click OK.</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
     <widget class="QDialogButtonBox" name="buttonBox" >
      <property name="orientation" >
       <enum>Qt::Horizontal</enum>
@@ -95,10 +154,8 @@
  <tabstops>
   <tabstop>feedsList</tabstop>
   <tabstop>addButton</tabstop>
-  <tabstop>removeButton</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <includes/>
  <resources>
   <include location="abby.qrc" />
  </resources>
@@ -110,12 +167,12 @@
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>248</x>
-     <y>254</y>
+     <x>257</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel" >
      <x>157</x>
-     <y>274</y>
+     <y>251</y>
     </hint>
    </hints>
   </connection>
@@ -126,12 +183,12 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>316</x>
-     <y>260</y>
+     <x>325</x>
+     <y>242</y>
     </hint>
     <hint type="destinationlabel" >
      <x>286</x>
-     <y>274</y>
+     <y>251</y>
     </hint>
    </hints>
   </connection>
@@ -158,8 +215,8 @@
    <slot>onRemove()</slot>
    <hints>
     <hint type="sourcelabel" >
-     <x>470</x>
-     <y>64</y>
+     <x>489</x>
+     <y>147</y>
     </hint>
     <hint type="destinationlabel" >
      <x>250</x>
@@ -167,9 +224,43 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pasteButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FeedMgrDialog</receiver>
+   <slot>onPaste()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>474</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>250</x>
+     <y>125</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FeedMgrDialog</receiver>
+   <slot>onClear()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>474</x>
+     <y>166</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>250</x>
+     <y>125</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onAdd()</slot>
   <slot>onRemove()</slot>
+  <slot>onPaste()</slot>
+  <slot>onClear()</slot>
  </slots>
 </ui>
