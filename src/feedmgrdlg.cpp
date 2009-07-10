@@ -36,7 +36,7 @@ FeedMgrDialog::FeedMgrDialog(QWidget *parent)
 void
 FeedMgrDialog::onAdd() {
     QString lnk = QInputDialog::getText(this,
-        tr("Add new RSS feed link"), tr("Enter link:"));
+        QCoreApplication::applicationName(), tr("Add link:"));
     addLink(lnk);
 }
 
@@ -121,7 +121,8 @@ FeedMgrDialog::onItemDoubleClicked(QListWidgetItem *item) {
     bool ok;
 
     QString lnk = QInputDialog::getText(this,
-        tr("Edit link"), "", QLineEdit::Normal, item->text(), &ok);
+        QCoreApplication::applicationName(), tr("Edit link:"),
+        QLineEdit::Normal, item->text(), &ok);
 
     if (ok && !lnk.isEmpty())
         item->setText(lnk);
