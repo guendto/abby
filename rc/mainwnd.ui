@@ -506,13 +506,26 @@
           </layout>
          </widget>
         </item>
+        <item row="2" column="0" >
+         <spacer name="verticalSpacer" >
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>502</width>
+            <height>46</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="1" column="0" >
          <widget class="QGroupBox" name="groupBox_2" >
           <property name="title" >
            <string>Advanced</string>
           </property>
           <layout class="QFormLayout" name="formLayout" >
-           <item row="0" column="0" >
+           <item row="1" column="0" >
             <layout class="QHBoxLayout" name="horizontalLayout_9" >
              <item>
               <widget class="QCheckBox" name="streamBox" >
@@ -559,7 +572,7 @@ the download reches the specified percent complete</string>
              </item>
             </layout>
            </item>
-           <item row="1" column="0" >
+           <item row="0" column="0" >
             <layout class="QHBoxLayout" name="horizontalLayout_7" >
              <item>
               <widget class="QCheckBox" name="commandBox" >
@@ -589,20 +602,9 @@ the download reches the specified percent complete</string>
           </layout>
          </widget>
         </item>
-        <item row="2" column="0" >
-         <spacer name="verticalSpacer" >
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>502</width>
-            <height>46</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
+       <zorder>groupBox</zorder>
+       <zorder>groupBox_2</zorder>
       </widget>
      </widget>
     </item>
@@ -813,19 +815,19 @@ the download reches the specified percent complete</string>
   <tabstop>pasteButton</tabstop>
   <tabstop>removeButton</tabstop>
   <tabstop>clearButton</tabstop>
+  <tabstop>linksList</tabstop>
   <tabstop>rssButton</tabstop>
   <tabstop>scanButton</tabstop>
   <tabstop>startButton</tabstop>
-  <tabstop>linksList</tabstop>
-  <tabstop>tabWidget_2</tabstop>
-  <tabstop>cancelButton</tabstop>
   <tabstop>logEdit</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>tabWidget_2</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>formatsButton</tabstop>
   <tabstop>titleBox</tabstop>
+  <tabstop>commandBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>
-  <tabstop>commandBox</tabstop>
  </tabstops>
  <resources>
   <include location="abby.qrc" />

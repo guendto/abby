@@ -338,7 +338,7 @@ titles before they are used for file naming.
        <item row="2" column="0" >
         <layout class="QHBoxLayout" name="horizontalLayout_8" >
          <item>
-          <widget class="QLabel" name="label_8" >
+          <widget class="QLabel" name="streamLabel" >
            <property name="text" >
             <string>S&amp;tream command:</string>
            </property>
