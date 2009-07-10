@@ -1,6 +1,7 @@
 Version 0.4.1
 
   User-visible changes:
+   * Rollout experimental win32 binaries
    * Fix: Preferences: various browse buttons
    * Tweak:
      1. Various messagebox texts
