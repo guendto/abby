@@ -42,7 +42,7 @@
      <item>
       <widget class="QPushButton" name="feedmgrButton" >
        <property name="toolTip" >
-        <string>Manage feed links</string>
+        <string>Saved feeds</string>
        </property>
        <property name="text" >
         <string/>
