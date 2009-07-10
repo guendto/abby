@@ -42,6 +42,12 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
     connect(langCombo, SIGNAL(currentIndexChanged(int)),
         this, SLOT(onLangChanged(int)));
+
+#ifdef WIN32
+    streamLabel ->setHidden(true);
+    streamEdit  ->setHidden(true);
+    streamButton->setHidden(true);
+#endif
 }
 
 void

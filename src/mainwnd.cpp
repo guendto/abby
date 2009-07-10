@@ -74,6 +74,11 @@ MainWindow::MainWindow():
 
     connect(linksList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
         this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
+
+#ifdef WIN32
+    streamBox ->setHidden(true);
+    streamSpin->setHidden(true);
+#endif
 }
 
 bool
