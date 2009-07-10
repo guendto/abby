@@ -72,7 +72,7 @@ video page links. This will cause the scan process
 to take more time and bandwidth. </string>
         </property>
         <property name="text" >
-         <string>&amp;Fetch video page titles</string>
+         <string>&amp;Fetch video title</string>
         </property>
         <property name="checked" >
          <bool>true</bool>
