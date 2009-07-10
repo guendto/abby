@@ -3,8 +3,8 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* change: allow dropping links to the list
-* clean up code; remove duplicate code or otherwise excessive code
+* add: support for dropping links to list
+* clean up: remove excess code
 
 Dear Santa, bring us...
   * a proper application icon to replace the current "TODO" icon
