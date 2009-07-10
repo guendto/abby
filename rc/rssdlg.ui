@@ -27,6 +27,19 @@
    <item row="0" column="0" >
     <layout class="QHBoxLayout" name="horizontalLayout_2" >
      <item>
+      <widget class="QLabel" name="label" >
+       <property name="text" >
+        <string>&amp;Link:</string>
+       </property>
+       <property name="buddy" >
+        <cstring>linkEdit</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="linkEdit" />
+     </item>
+     <item>
       <widget class="QPushButton" name="feedmgrButton" >
        <property name="toolTip" >
         <string>Manage feed links</string>
@@ -45,9 +58,6 @@
         </size>
        </property>
       </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="linkEdit" />
      </item>
      <item>
       <widget class="QPushButton" name="fetchButton" >
@@ -116,13 +126,12 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>feedmgrButton</tabstop>
   <tabstop>linkEdit</tabstop>
+  <tabstop>feedmgrButton</tabstop>
   <tabstop>fetchButton</tabstop>
   <tabstop>itemsTree</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
- <includes/>
  <resources>
   <include location="abby.qrc" />
  </resources>
