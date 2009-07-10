@@ -1,15 +1,14 @@
 Version 0.4.1
 
   User-visible changes:
+   * Fix: Preferences: various browse buttons
    * Tweak:
      1. Various messagebox texts
      2. Various status tips
      3. Scan dialog
-   * Enable/disable link list dynamically
+   * Enable/disable link list when download begins/ends
    * Change: Open "Add link" dialog if list is empty and "Download" is clicked
      1. This previously showed a messagebox telling user to add a link
-   * Fix: Preferences: various browse buttons
-     1. These were mysteriously missing signal-slot details in prefs.ui (again)
 
   Developer-visible changes:
    * src/scandlg.cpp: Use static messagebox function instead
