@@ -543,7 +543,7 @@ MainWindow::onSupportedHosts() {
     for (register int i=0; i<size; ++i)
         hosts += hostsOutput[i] + "\n";
 
-    QMessageBox mb;
+    QMessageBox mb(this);
     mb.setText(tr("c/clive supports the following hosts:"));
     mb.setDetailedText(hosts);
     mb.setStandardButtons(QMessageBox::Ok);
