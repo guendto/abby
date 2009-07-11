@@ -451,6 +451,19 @@
         <string>&amp;Options</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6" >
+        <item row="2" column="0" >
+         <spacer name="verticalSpacer" >
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0" >
+           <size>
+            <width>502</width>
+            <height>46</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
         <item row="0" column="0" >
          <widget class="QGroupBox" name="groupBox" >
           <property name="title" >
@@ -505,19 +518,6 @@
            </item>
           </layout>
          </widget>
-        </item>
-        <item row="2" column="0" >
-         <spacer name="verticalSpacer" >
-          <property name="orientation" >
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0" >
-           <size>
-            <width>502</width>
-            <height>46</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item row="1" column="0" >
          <widget class="QGroupBox" name="groupBox_2" >
@@ -603,8 +603,6 @@ the download reches the specified percent complete</string>
          </widget>
         </item>
        </layout>
-       <zorder>groupBox</zorder>
-       <zorder>groupBox_2</zorder>
       </widget>
      </widget>
     </item>
@@ -652,6 +650,7 @@ the download reches the specified percent complete</string>
      <string>&amp;Help</string>
     </property>
     <addaction name="action_About" />
+    <addaction name="action_Supported_hosts" />
    </widget>
    <addaction name="menu_File" />
    <addaction name="menu_Edit" />
@@ -807,6 +806,11 @@ the download reches the specified percent complete</string>
    </property>
    <property name="statusTip" >
     <string>Clear list</string>
+   </property>
+  </action>
+  <action name="action_Supported_hosts" >
+   <property name="text" >
+    <string>&amp;Supported hosts...</string>
    </property>
   </action>
  </widget>
@@ -1153,6 +1157,22 @@ the download reches the specified percent complete</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Supported_hosts</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onSupportedHosts()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>272</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -1172,5 +1192,6 @@ the download reches the specified percent complete</string>
   <slot>onRemove()</slot>
   <slot>onFormats()</slot>
   <slot>onClear()</slot>
+  <slot>onSupportedHosts()</slot>
  </slots>
 </ui>

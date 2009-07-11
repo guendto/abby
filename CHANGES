@@ -2,6 +2,7 @@ Version 0.4.1
 
   User-visible changes:
    * Rollout experimental win32 binaries
+   * Add: Help / Supported hosts
    * Fix: Preferences: various browse buttons
    * Tweak:
      1. Various messagebox texts

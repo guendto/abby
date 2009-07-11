@@ -536,6 +536,21 @@ MainWindow::onFormats() {
 }
 
 void
+MainWindow::onSupportedHosts() {
+    QString hosts;
+
+    const int size = hostsOutput.size();
+    for (register int i=0; i<size; ++i)
+        hosts += hostsOutput[i] + "\n";
+
+    QMessageBox mb;
+    mb.setText(tr("c/clive supports the following hosts:"));
+    mb.setDetailedText(hosts);
+    mb.setStandardButtons(QMessageBox::Ok);
+    mb.exec();
+}
+
+void
 MainWindow::onProcStarted() {
     statusBar() ->clearMessage();
     fileLabel   ->setText("-");
