@@ -12,15 +12,6 @@ documentation of c/clive utilities.
 
 abby is written in C++ and depends on the Qt framework.
 
-abby originally could only be used as a front-end for cclive
-but this changed in release 0.2.0 when the support for clive
-was added to the application.
-
-As of 0.3.0 the project has started to merge the clive-utils
-features into abby. As a result of this, abby can now be used
-to parse RSS feeds and scan URLs for video links. Please note
-that the scan feature currently only supports Youtube videos.
-
 
 Using abby
 ----------
@@ -49,11 +40,8 @@ Or:
 Building abby
 -------------
 
-Normally:
-  qmake-qt4 "QT+=network xml" && make
+Typically:
+  qmake-qt4 && make
 
-The executable is built to the source top directory, e.g.:
-  ./abby
-
-You may manually copy the executable to your ~/bin directory,
-for example.
+The executable is self-contained, all of the icons etc.
+are embedded to the executable file.

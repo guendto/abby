@@ -1,3 +1,10 @@
+Version 0.4.2
+
+  Developer-visible changes:
+   * abby.pro: include "QT += network xml"
+     1. See README for the changed build instructions
+
+
 Version 0.4.1
 (July 11, 2009)
 
