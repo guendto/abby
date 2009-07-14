@@ -1,6 +1,9 @@
 Version 0.4.2
 
   Developer-visible changes:
+   * Cleanup README
+     1. Better description
+     2. Misc. other tweaks
    * abby.pro: include "QT += network xml"
      1. See README for the changed build instructions
 
