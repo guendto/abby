@@ -3,12 +3,8 @@
 README for abby
 ---------------
 
-abby is a front-end (or a graphical user interface) for cclive
-and clive that can be used to download videos from Youtube and
-similar video hosting services.
-
-For a complete list of the supported hosts, please refer to the
-documentation of c/clive utilities.
+abby is a front-end for cclive and clive which are used to
+download videos from Youtube and other similar video hosts.
 
 abby is written in C++ and depends on the Qt framework.
 
@@ -16,25 +12,37 @@ abby is written in C++ and depends on the Qt framework.
 Using abby
 ----------
 
-* abby requires a path to either clive(1) or cclive(1) command.
-This can be defined in the program preferences. abby will also
-prompt for the path if it is undefined.
+* abby requires path to either clive(1) or cclive(1) command
 
-* Scan feature currently only supports Youtube video links,
-both regular and embedded. It can be used to scan *any* URL
-(or web page) for video links -- e.g. Youtube playlists.
+  This is defined in the program preferences (Edit / Preferences).
+
+* abby can parse RSS feeds for video links
+
+  The links can be tranferred to the download list after this.
+
+* abby can scan for video links from any web source
+
+  The scan feature currently supports only Youtube links ("regular"
+  and embedded). It can be used to scan Youtube playlists, for example.
 
 
 Prerequisites
 -------------
 
-- Qt 4.4+, if you are building abby from the source code, be sure
-to install the development files
+- Qt 4.4+
+
+  Make sure that the Qt development files can be found
+  if you are trying to build abby from the source code.
   
 Either:
-- cclive 0.4.4+, from http://code.google.com/p/cclive/
+- cclive 0.4.4+
+
+  http://code.google.com/p/cclive/
+
 Or:
-- clive 2.2.1+, from http://code.google.com/p/clive/
+- clive 2.2.1+
+
+  http://code.google.com/p/clive/
 
 
 Building abby
@@ -43,5 +51,5 @@ Building abby
 Typically:
   qmake-qt4 && make
 
-The executable is self-contained, all of the icons etc.
-are embedded to the executable file.
+The executable (`abby') is self-contained, all of the resource
+files (e.g. icons etc.) are embedded into the executable file.
