@@ -8,6 +8,8 @@ download videos from Youtube and other similar video hosts.
 
 abby is written in C++ and depends on the Qt framework.
 
+    http://abby.googlecode.com/
+
 
 Using abby
 ----------
@@ -39,12 +41,12 @@ Prerequisites
 Either:
 - cclive 0.4.6+
 
-  http://code.google.com/p/cclive/
+  http://cclive.googlecode.com/
 
 Or:
 - clive 2.2.3+
 
-  http://code.google.com/p/clive/
+  http://clive.googlecode.com/
 
 
 Building abby
