@@ -3,6 +3,11 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
+* reimplement: format dialog
+  - make completely dynamic what gets shown
+  - use parsed --hosts output containing host string and formats
+* implement --exec-run
+--
 * add: support for dropping links to list
 * clean up: remove excess code
   - common code -> src/util.(cpp|h)
