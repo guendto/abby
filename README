@@ -16,9 +16,11 @@ Using abby
 
   This is defined in the program preferences (Edit / Preferences).
 
+
 * abby can parse RSS feeds for video links
 
   The links can be tranferred to the download list after this.
+
 
 * abby can scan for video links from any web source
 
@@ -35,12 +37,12 @@ Prerequisites
   if you are trying to build abby from the source code.
   
 Either:
-- cclive 0.4.4+
+- cclive 0.4.6+
 
   http://code.google.com/p/cclive/
 
 Or:
-- clive 2.2.1+
+- clive 2.2.3+
 
   http://code.google.com/p/clive/
 
