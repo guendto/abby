@@ -132,8 +132,14 @@ MainWindow::parseCcliveHostsOutput() {
         qDebug() << path << ": " << proc.errorString();
     else {
         hostsOutput.clear();
+
         QString output = QString::fromLocal8Bit(proc.readAll());
-        hostsOutput = output.split("\n", QString::SkipEmptyParts);
+        QStringList lst = output.split("\n", QString::SkipEmptyParts);
+
+        for (register int i=0; i<lst.size(); ++i)
+            hostsOutput << lst[i].split("\t")[0];
+
+        hostsOutput.removeLast(); // Contains the video format note.
     }
 }
 
