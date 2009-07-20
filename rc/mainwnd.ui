@@ -423,6 +423,9 @@
                   </sizepolicy>
                  </property>
                  <property name="toolTip" >
+                  <string/>
+                 </property>
+                 <property name="statusTip" >
                   <string>Abort download</string>
                  </property>
                  <property name="text" >
