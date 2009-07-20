@@ -1,5 +1,8 @@
 Version 0.4.2
 
+  User-visible changes:
+   * Change: abort button to show statustip instead of tooltip
+
   Developer-visible changes:
    * Tweak --hosts support
      1. c/clive 0.4.6+/2.2.3+ print supported formats with --hosts
