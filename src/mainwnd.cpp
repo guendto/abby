@@ -131,15 +131,18 @@ MainWindow::parseCcliveHostsOutput() {
     if (!proc.waitForFinished())
         qDebug() << path << ": " << proc.errorString();
     else {
-        hostsOutput.clear();
+        hosts.clear();
 
         QString output = QString::fromLocal8Bit(proc.readAll());
         QStringList lst = output.split("\n", QString::SkipEmptyParts);
+        lst.removeLast(); // Note line.
 
-        for (register int i=0; i<lst.size(); ++i)
-            hostsOutput << lst[i].split("\t")[0];
+        for (register int i=0; i<lst.size(); ++i) {
+            QStringList tmp = lst[i].split("\t");
+            hosts[tmp[0]] = tmp[1].remove("\r");
+        }
 
-        hostsOutput.removeLast(); // Contains the video format note.
+        format->parseHosts(hosts);
     }
 }
 
@@ -158,10 +161,11 @@ bool
 MainWindow::ccliveSupportsHost(const QString& lnk) {
 
     const QString host = QUrl(lnk).host();
-    const int size = hostsOutput.size();
 
-    for (register int i=0; i<size; ++i) {
-        QRegExp re(hostsOutput[i].remove("\r"));
+    for (QStringMap::const_iterator iter = hosts.begin();
+        iter != hosts.end(); ++iter)
+    {
+        QRegExp re( hosts[ iter.key() ] );
         if (re.indexIn(host) != -1)
             return true;
     }
@@ -376,7 +380,7 @@ MainWindow::onStart() {
     }
 
     s = "flv";
-
+/*
     if (allSame) {
 
         // Use format dialog setting for the host.
@@ -399,7 +403,7 @@ MainWindow::onStart() {
                 break;
             }
         }
-    }
+    }*/
 
     args << QString("--format=%1").arg(s);
 
@@ -543,15 +547,17 @@ MainWindow::onFormats() {
 
 void
 MainWindow::onSupportedHosts() {
-    QString hosts;
+    QString tmp;
 
-    const int size = hostsOutput.size();
-    for (register int i=0; i<size; ++i)
-        hosts += hostsOutput[i] + "\n";
+    for (QStringMap::const_iterator iter = hosts.begin();
+        iter != hosts.end(); ++iter) 
+    {
+        tmp += iter.key() + "\n";
+    }
 
     QMessageBox mb(this);
     mb.setText(tr("c/clive supports the following hosts:"));
-    mb.setDetailedText(hosts);
+    mb.setDetailedText(tmp);
     mb.setStandardButtons(QMessageBox::Ok);
     mb.exec();
 }

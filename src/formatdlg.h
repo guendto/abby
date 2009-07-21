@@ -22,14 +22,25 @@
 
 class QDialog;
 
+typedef QMap<QString,QString> QStringMap;
+
 class FormatDialog : public QDialog, public Ui::formatDialog {
     Q_OBJECT
 public:
     FormatDialog(QWidget *parent);
 public:
+    void parseHosts(const QStringMap& hosts);
     void writeSettings();
 private:
     void readSettings();
+    void updateFormats();
+    void saveCurrent();
+private slots:
+    void onHostChanged(const QString& host);
+private:
+    QMap<QString, int> selN;
+    QStringMap hosts, sel;
+    QString lastHost;
 };
 
 #endif

@@ -17,6 +17,7 @@
  */
 #include <QDialog>
 #include <QSettings>
+#include <QDebug>
 
 #include "formatdlg.h"
 
@@ -28,6 +29,61 @@ FormatDialog::FormatDialog(QWidget *parent)
 }
 
 void
+FormatDialog::parseHosts(const QStringMap& hosts) {
+
+    hostBox->clear();
+
+    this->hosts = hosts;
+
+    for (QStringMap::const_iterator iter = hosts.begin();
+        iter != hosts.end(); ++iter)
+    {
+        // Fill host combo with supported hosts.
+        hostBox->addItem(iter.key());
+    }
+
+    updateFormats();
+}
+
+void
+FormatDialog::updateFormats() {
+    formatBox->clear();
+
+    QString curr        = hostBox->currentText();
+    QStringList formats = hosts[curr].split("|");
+
+    for (register int i=0; i<formats.size(); ++i)
+        formatBox->addItem(formats[i]);
+
+    if (!sel[curr].isEmpty()) {
+        // Qt should provide setCurrentText for QComboBox.
+        // Instead we have to use a workaround in its absence.
+        if (selN[curr] == -1)
+            selN[curr] = 0;
+        formatBox->setCurrentIndex(selN[curr]);
+    }
+}
+
+void
+FormatDialog::saveCurrent() {
+    QString fmt = formatBox->currentText();
+    if (fmt.isEmpty())
+        fmt = "flv";
+    if (lastHost.isEmpty())
+        lastHost = hosts.begin().key();
+    sel[lastHost]  = fmt;
+    selN[lastHost] = formatBox->currentIndex();
+    qDebug() << "saved:" << lastHost << sel[lastHost] << selN[lastHost];
+}
+
+void
+FormatDialog::onHostChanged(const QString& host) {
+    saveCurrent();
+    updateFormats();
+    lastHost = host;
+}
+
+void
 FormatDialog::writeSettings() {
     QSettings s;
 
@@ -35,10 +91,10 @@ FormatDialog::writeSettings() {
 
     s.setValue("size", size());
 
-    s.setValue("youtubeBox", youtubeBox->currentIndex());
+/*    s.setValue("youtubeBox", youtubeBox->currentIndex());
     s.setValue("googleBox", googleBox->currentIndex());
     s.setValue("dailymotionBox", dailymotionBox->currentIndex());
-    s.setValue("vimeoBox", vimeoBox->currentIndex());
+    s.setValue("vimeoBox", vimeoBox->currentIndex());*/
 
     s.endGroup();
 }
@@ -51,10 +107,10 @@ FormatDialog::readSettings() {
 
     resize( s.value("size", QSize(400,140)).toSize() );
 
-    youtubeBox->setCurrentIndex( s.value("youtubeBox").toInt() );
+/*    youtubeBox->setCurrentIndex( s.value("youtubeBox").toInt() );
     googleBox->setCurrentIndex( s.value("googleBox").toInt() );
     dailymotionBox->setCurrentIndex( s.value("dailymotionBox").toInt() );
-    vimeoBox->setCurrentIndex( s.value("vimeoBox").toInt() );
+    vimeoBox->setCurrentIndex( s.value("vimeoBox").toInt() );*/
 
     s.endGroup();
 }

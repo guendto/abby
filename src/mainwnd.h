@@ -28,6 +28,8 @@ class RSSDialog;
 class ScanDialog;
 class FormatDialog;
 
+typedef QMap<QString,QString> QStringMap;
+
 class MainWindow : public QMainWindow, private Ui::MainWindow {
     Q_OBJECT
 public:
@@ -52,7 +54,7 @@ private slots:
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
     void onItemDoubleClicked(QListWidgetItem *item);
 private:
-    QStringList hostsOutput;
+    QStringMap hosts;
     PreferencesDialog *prefs;
     RSSDialog *rss;
     ScanDialog *scan;
