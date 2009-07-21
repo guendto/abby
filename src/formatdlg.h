@@ -30,11 +30,11 @@ public:
     FormatDialog(QWidget *parent);
 public:
     void parseHosts(const QStringMap& hosts);
+    void saveCurrent();
     void writeSettings();
 private:
     void readSettings();
     void updateFormats();
-    void saveCurrent();
 private slots:
     void onHostChanged(const QString& host);
 private:
