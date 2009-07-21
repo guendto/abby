@@ -55,6 +55,9 @@ FormatDialog::updateFormats() {
     for (register int i=0; i<formats.size(); ++i)
         formatBox->addItem(formats[i]);
 
+    if (formats.size() > 1)
+        formatBox->addItem("best");
+
     if (!sel[curr].isEmpty()) {
         // Qt should provide setCurrentText for QComboBox.
         // Instead we have to use a workaround in its absence.
