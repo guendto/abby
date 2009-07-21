@@ -47,7 +47,6 @@ private slots:
     void onRemove();
     void onClear();
     void onFormats();
-    void onSupportedHosts();
     void onProcStarted();
     void onProcError(QProcess::ProcessError);
     void onProcStdoutReady();

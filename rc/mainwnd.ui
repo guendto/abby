@@ -679,7 +679,6 @@ the download reches the specified percent complete</string>
      <string>&amp;Help</string>
     </property>
     <addaction name="action_About" />
-    <addaction name="action_Supported_hosts" />
    </widget>
    <addaction name="menu_File" />
    <addaction name="menu_Edit" />
@@ -1186,22 +1185,6 @@ the download reches the specified percent complete</string>
     </hint>
    </hints>
   </connection>
-  <connection>
-   <sender>action_Supported_hosts</sender>
-   <signal>activated()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>onSupportedHosts()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>272</x>
-     <y>184</y>
-    </hint>
-   </hints>
-  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -1221,6 +1204,5 @@ the download reches the specified percent complete</string>
   <slot>onRemove()</slot>
   <slot>onFormats()</slot>
   <slot>onClear()</slot>
-  <slot>onSupportedHosts()</slot>
  </slots>
 </ui>
