@@ -8,6 +8,7 @@ Version 0.4.2
   Developer-visible changes:
    * Tweak --hosts support
      1. c/clive 0.4.6+/2.2.3+ print supported formats with --hosts
+     2. Bump prerequisites, see README
    * Cleanup README
      1. Better description
      2. Misc. other tweaks
