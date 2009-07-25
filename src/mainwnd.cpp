@@ -109,9 +109,11 @@ MainWindow::isCclive(QString& output) {
         qDebug() << path << ": " << process.errorString();
     else {
         output = QString::fromLocal8Bit(process.readAll());
-        QStringList lst = output.split(" ", QString::SkipEmptyParts);
+        QStringList tmp = output.split("\n", QString::SkipEmptyParts);
+        QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
         state = lst[0] == "cclive";
         ccliveVersion = lst[2];
+        qDebug() << lst[6];
         curlVersion = lst[6];
     }
     return state;
