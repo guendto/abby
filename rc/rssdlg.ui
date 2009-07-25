@@ -99,7 +99,7 @@
       <bool>false</bool>
      </property>
      <property name="headerHidden" >
-      <bool>false</bool>
+      <bool>true</bool>
      </property>
      <column>
       <property name="text" >
