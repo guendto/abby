@@ -49,9 +49,10 @@ RSSDialog::onFetch() {
 
     itemsTree->clear();
 
-    linkEdit->setEnabled    (false);
-    fetchButton->setEnabled (false);
-    buttonBox->setEnabled   (false);
+    linkEdit->setEnabled     (false);
+    feedmgrButton->setEnabled(false);
+    fetchButton->setEnabled  (false);
+    buttonBox->setEnabled    (false);
 
     QNetworkRequest req(lnk);
     req.setRawHeader("User-Agent", USERAGENT);
@@ -96,9 +97,10 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
             QString(tr("Network error: %1")).arg(reply->errorString()));
     }
 
-    linkEdit->setEnabled    (true);
-    fetchButton->setEnabled (true);
-    buttonBox->setEnabled   (true);
+    linkEdit->setEnabled     (true);
+    feedmgrButton->setEnabled(true);
+    fetchButton->setEnabled  (true);
+    buttonBox->setEnabled    (true);
 }
 
 void
