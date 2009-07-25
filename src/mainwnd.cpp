@@ -113,7 +113,6 @@ MainWindow::isCclive(QString& output) {
         QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
         state = lst[0] == "cclive";
         ccliveVersion = lst[2];
-        qDebug() << lst[6];
         curlVersion = lst[6];
     }
     return state;
