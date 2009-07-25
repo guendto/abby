@@ -1,7 +1,9 @@
 Version 0.4.2
 
   User-visible changes:
-   * Change: abort button to show statustip instead of tooltip
+   * Change:
+     1. Abort button to show statustip instead of tooltip
+     2. Dynamically changing format dialog based on c/clive --hosts output
 
   Developer-visible changes:
    * Tweak --hosts support

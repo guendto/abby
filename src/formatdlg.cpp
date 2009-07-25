@@ -17,9 +17,20 @@
  */
 #include <QDialog>
 #include <QSettings>
-#include <QDebug>
 
 #include "formatdlg.h"
+
+/* The contents of this dialog changes dynamically based
+ * on c/clive --hosts output. abby tries to make switching
+ * between cclive and clive as transparent as possible
+ * as there are some differences in supported websites. */
+ 
+/* Because QComboBox does not have setCurrentText in Qt 4.4
+ * we have to use two maps to keep track of the selections
+ * instead of only one. See sel and selN. The former stores
+ * selected "format ID", and the latter the matching QComboBox
+ * index for that ID -- currently only needed for setCurrentIndex,
+ * since setCurrentText is missing. */
 
 FormatDialog::FormatDialog(QWidget *parent)
     : QDialog(parent)
@@ -32,7 +43,6 @@ void
 FormatDialog::parseHosts(const QStringMap& hosts) {
 
     hostBox->clear();
-
     this->hosts = hosts;
 
     for (QStringMap::const_iterator iter = hosts.begin();
@@ -42,11 +52,13 @@ FormatDialog::parseHosts(const QStringMap& hosts) {
         hostBox->addItem(iter.key());
     }
 
+    readFormatSettings();
     updateFormats();
 }
 
 void
 FormatDialog::updateFormats() {
+
     formatBox->clear();
 
     QString curr        = hostBox->currentText();
@@ -69,6 +81,7 @@ FormatDialog::updateFormats() {
 
 void
 FormatDialog::saveCurrent() {
+
     if (hostBox->count() == 0)
         return;
 
@@ -82,7 +95,7 @@ FormatDialog::saveCurrent() {
     sel[lastHost]  = fmt;
     selN[lastHost] = formatBox->currentIndex();
 
-    qDebug() << "saved:" << lastHost << sel[lastHost] << selN[lastHost];
+//    qDebug() << "saved:" << lastHost << sel[lastHost] << selN[lastHost];
 }
 
 void
@@ -95,31 +108,66 @@ FormatDialog::onHostChanged(const QString& host) {
 void
 FormatDialog::writeSettings() {
     QSettings s;
-
     s.beginGroup("FormatDialog");
-
     s.setValue("size", size());
+    writeFormatSettings(s);
+    s.endGroup();
+}
 
-/*    s.setValue("youtubeBox", youtubeBox->currentIndex());
-    s.setValue("googleBox", googleBox->currentIndex());
-    s.setValue("dailymotionBox", dailymotionBox->currentIndex());
-    s.setValue("vimeoBox", vimeoBox->currentIndex());*/
-
+void
+FormatDialog::writeFormatSettings(QSettings& s) {
+    s.beginGroup("hosts");
+    for (QStringMap::const_iterator iter = sel.begin();
+        iter != sel.end(); ++iter)
+    {
+        const QString curr = iter.key();
+        s.setValue(iter.key(),
+            QString("%1|%2").arg(sel[curr]).arg(selN[curr]));
+    }
     s.endGroup();
 }
 
 void
 FormatDialog::readSettings() {
     QSettings s;
+    s.beginGroup("FormatDialog");
+    resize( s.value("size", QSize(400,140)).toSize() );
+    s.endGroup();
+}
+
+void
+FormatDialog::readFormatSettings() {
+    QSettings s;
 
     s.beginGroup("FormatDialog");
+    s.beginGroup("hosts");
 
-    resize( s.value("size", QSize(400,140)).toSize() );
+    for (QStringMap::const_iterator iter = hosts.begin();
+        iter != hosts.end(); ++iter)
+    {
+        const QString curr    = iter.key();
+        const QString v       = s.value(iter.key()).toString();
+        const QStringList tmp = v.split("|");
 
-/*    youtubeBox->setCurrentIndex( s.value("youtubeBox").toInt() );
-    googleBox->setCurrentIndex( s.value("googleBox").toInt() );
-    dailymotionBox->setCurrentIndex( s.value("dailymotionBox").toInt() );
-    vimeoBox->setCurrentIndex( s.value("vimeoBox").toInt() );*/
+        if (tmp.size() == 2) {
+            sel[curr] = tmp[0];  // format string
+            selN[curr] = tmp[1].toInt(); // last known index in combobox
+        }
+    }
 
     s.endGroup();
+    s.endGroup();
+}
+
+const QString
+FormatDialog::getFormatSetting(const QString& url) const {
+    for (QStringMap::const_iterator iter = sel.begin();
+        iter != sel.end(); ++iter)
+    {
+        QRegExp re(iter.key());
+
+        if (re.indexIn(url) != -1)
+            return sel[iter.key()];
+    }
+    return "flv";
 }

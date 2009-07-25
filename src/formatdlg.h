@@ -21,6 +21,7 @@
 #include "ui_formatdlg.h"
 
 class QDialog;
+class QSettings;
 
 typedef QMap<QString,QString> QStringMap;
 
@@ -32,8 +33,11 @@ public:
     void parseHosts(const QStringMap& hosts);
     void saveCurrent();
     void writeSettings();
+    const QString getFormatSetting(const QString& url) const;
 private:
     void readSettings();
+    void readFormatSettings();
+    void writeFormatSettings(QSettings& s);
     void updateFormats();
 private slots:
     void onHostChanged(const QString& host);
