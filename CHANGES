@@ -4,6 +4,7 @@ Version 0.4.2
    * Change:
      1. Abort button to show statustip instead of tooltip
      2. Dynamically changing format dialog based on c/clive --hosts output
+     3. Scan: hide column header
 
   Developer-visible changes:
    * Tweak --hosts support

@@ -87,6 +87,9 @@ to take more time and bandwidth. </string>
      <property name="rootIsDecorated" >
       <bool>false</bool>
      </property>
+     <property name="headerHidden" >
+      <bool>true</bool>
+     </property>
      <column>
       <property name="text" >
        <string>Found</string>
