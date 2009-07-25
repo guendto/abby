@@ -166,7 +166,7 @@ MainWindow::ccliveSupportsHost(const QString& lnk) {
     for (QStringMap::const_iterator iter = hosts.begin();
         iter != hosts.end(); ++iter)
     {
-        QRegExp re( hosts[ iter.key() ] );
+        QRegExp re( iter.key());
         if (re.indexIn(host) != -1)
             return true;
     }
@@ -381,30 +381,10 @@ MainWindow::onStart() {
     }
 
     s = "flv";
-/*
-    if (allSame) {
 
-        // Use format dialog setting for the host.
-        // Otherwise we will use "flv" as default for all.
-
-        QMap<QString, QComboBox*> map;
-
-        map["youtube.com"]      = format->youtubeBox;
-        map["video.google."]    = format->googleBox;
-        map["dailymotion.com"]  = format->dailymotionBox;
-        map["vimeo.com"]        = format->vimeoBox;
-
-        for (QMap<QString, QComboBox*>::const_iterator iter=map.begin();
-            iter != map.end(); ++iter)
-        {
-            QRegExp re(iter.key());
-            if (re.indexIn(first.host()) != -1) {
-                s = iter.value()->currentText()
-                    .split(" ", QString::SkipEmptyParts)[0];
-                break;
-            }
-        }
-    }*/
+    // Use format dialog setting for the host.
+    if (allSame)
+        s = format->getFormatSetting(first.host());
 
     args << QString("--format=%1").arg(s);
 
