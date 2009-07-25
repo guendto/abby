@@ -69,13 +69,19 @@ FormatDialog::updateFormats() {
 
 void
 FormatDialog::saveCurrent() {
+    if (hostBox->count() == 0)
+        return;
+
     QString fmt = formatBox->currentText();
     if (fmt.isEmpty())
         fmt = "flv";
+
     if (lastHost.isEmpty())
         lastHost = hosts.begin().key();
+
     sel[lastHost]  = fmt;
     selN[lastHost] = formatBox->currentIndex();
+
     qDebug() << "saved:" << lastHost << sel[lastHost] << selN[lastHost];
 }
 
