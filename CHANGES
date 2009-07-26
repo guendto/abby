@@ -8,6 +8,7 @@ Version 0.4.2
      4. RSS: ditto
 
   Developer-visible changes:
+   * Add: support for --exec-run (c/clive 0.4.6+/2.2.3+)
    * Tweak --hosts support
      1. c/clive 0.4.6+/2.2.3+ print supported formats with --hosts
      2. Bump prerequisites, see README

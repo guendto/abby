@@ -330,6 +330,7 @@ MainWindow::onStart() {
         if (!s.endsWith(";"))
             s += ";";
         args << QString("--exec=%1").arg(s);
+        args << QString("--exec-run");
     }
 
     if (prefs->proxyCombo->currentIndex() == 0)
