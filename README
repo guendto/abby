@@ -29,6 +29,18 @@ Using abby
   The scan feature currently supports only Youtube links ("regular"
   and embedded). It can be used to scan Youtube playlists, for example.
 
+* If you are an avid user of Youtube RSS feeds, see here:
+    http://www.youtube.com/rssls
+
+  And note that the previously supported:
+    http://youtube.com/rss/user/(username)/videos.rss
+
+  No longer work with abby, due to some HTTP redirecting voodoo Google
+  has decided to use. Instead use:
+    http://gdata.youtube.com/feeds/base/users/(username)/uploads?alt=rss
+
+  You may also want to append "&orderby=updated" to the URL.
+
 
 Prerequisites
 -------------
