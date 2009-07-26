@@ -66,6 +66,3 @@ Building abby
 
 Typically:
   qmake-qt4 && make
-
-The executable (`abby') is self-contained, all of the resource
-files (e.g. icons etc.) are embedded into the executable file.
