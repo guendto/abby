@@ -3,8 +3,6 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* implement --exec-run
---
 * allow use of link "titles/names" in feedmgr
 * add: support for dropping links to list
 * clean up: remove excess code
