@@ -23,14 +23,15 @@
 #include "rssdlg.h"
 #include "feedmgrdlg.h"
 
-#define USERAGENT "Mozilla/5.0"
-
 RSSDialog::RSSDialog(QWidget *parent)
     : QDialog(parent)
 {
     setupUi(this);
+
     readSettings();
+
     mgr = createManager();
+
     itemsTree->setColumnHidden(1, true);
 }
 
@@ -46,7 +47,6 @@ RSSDialog::onFetch() {
     if (!lnk.startsWith("http://", Qt::CaseInsensitive))
         lnk.insert(0,"http://");
 
-
     itemsTree->clear();
 
     linkEdit->setEnabled     (false);
@@ -54,18 +54,21 @@ RSSDialog::onFetch() {
     fetchButton->setEnabled  (false);
     buttonBox->setEnabled    (false);
 
-    QNetworkRequest req(lnk);
-    req.setRawHeader("User-Agent", USERAGENT);
-    mgr->get(req);
+    mgr->get(QNetworkRequest(lnk));
 }
 
 void
 RSSDialog::onFeedMgr() {
     FeedMgrDialog *p = new FeedMgrDialog(this);
+
     if (p->exec() == QDialog::Accepted) {
-        QList<QListWidgetItem*> sel = p->feedsList->selectedItems();
+
+        QList<QListWidgetItem*> sel =
+            p->feedsList->selectedItems();
+
         if (sel.size() > 0)
             linkEdit->setText(sel[0]->text());
+
         p->writeSettings();
     }
 }
@@ -73,47 +76,60 @@ RSSDialog::onFeedMgr() {
 void
 RSSDialog::replyFinished(QNetworkReply* reply) {
 
+    bool state = false;
+
     if (reply->error() == QNetworkReply::NoError) {
-        QVariant tmp =
-            reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 
-        redirectUrl = 
-            redirect(tmp.toUrl(), redirectUrl);
+        handleRedirect(reply);
 
-        if (!redirectUrl.isEmpty()) {
-            QNetworkRequest req(redirectUrl);
-            req.setRawHeader("User-Agent", USERAGENT);
-            mgr->get(req);
+        if (!redirectedToURL.isEmpty()) {
+            mgr->get(QNetworkRequest(redirectedToURL));
         }
         else {
-            redirectUrl.clear();
-            xml.addData(reply->readAll());
-            parseRSS();
+            parseRSS(reply);
+            redirectedToURL.clear();
+            state = true;
         }
-        reply->deleteLater();
     }
     else {
         QMessageBox::critical(this, QCoreApplication::applicationName(),
             QString(tr("Network error: %1")).arg(reply->errorString()));
+        state = true;
     }
 
-    linkEdit->setEnabled     (true);
-    feedmgrButton->setEnabled(true);
-    fetchButton->setEnabled  (true);
-    buttonBox->setEnabled    (true);
+    if (state) {
+        linkEdit->setEnabled     (state);
+        feedmgrButton->setEnabled(state);
+        fetchButton->setEnabled  (state);
+        buttonBox->setEnabled    (state);
+    }
+    
+    reply->deleteLater();
 }
 
 void
-RSSDialog::parseRSS() {
-    QString rssTitle, link, tag, title, pubdate;
+RSSDialog::parseRSS(QNetworkReply *reply) {
+
+    QString rssTitle, link, tag, title;//, pubdate;
+
+    xml.clear();
+    xml.addData(reply->readAll());
+
     while (!xml.atEnd()) {
+
         xml.readNext();
+
         if (xml.isStartElement()) {
+
             if (xml.name() == "item")
                 link = xml.attributes().value("rss::about").toString();
+
             tag = xml.name().toString();
+
         } else if (xml.isEndElement()) {
+
             if (xml.name() == "item") {
+
                 if (!rssTitle.isEmpty()) {
                     QTreeWidgetItem *item = new QTreeWidgetItem;
                     item->setCheckState(0, Qt::Unchecked);
@@ -123,17 +139,21 @@ RSSDialog::parseRSS() {
                 }
                 else
                     rssTitle = title;
-                title.clear();
-                link.clear();
-                pubdate.clear();
+
+                title  .clear();
+                link   .clear();
+                //pubdate.clear();
             }
         } else if (xml.isCharacters() && !xml.isWhitespace()) {
+
             if (tag == "title")
                 title += xml.text().toString();
+
             else if (tag == "link") 
                 link += xml.text().toString();
+/*
             else if (tag == "pubDate")
-                pubdate += xml.text().toString();
+                pubdate += xml.text().toString();*/
         }
     }
 
@@ -145,25 +165,31 @@ RSSDialog::parseRSS() {
                 .arg(xml.lineNumber())
                 .arg(xml.errorString()));
     }
-    xml.clear();
 }
 
 QNetworkAccessManager*
 RSSDialog::createManager() {
     QNetworkAccessManager *p = new QNetworkAccessManager(this);
 
-    connect(p, SIGNAL(finished(QNetworkReply*)),
-        this, SLOT(replyFinished(QNetworkReply*)));
+    connect(p, SIGNAL(finished(QNetworkReply *)),
+        this, SLOT(replyFinished(QNetworkReply *)));
 
     return p;
 }
 
-QUrl
-RSSDialog::redirect(const QUrl& to, const QUrl& from) const {
-    QUrl redirectTo;
-    if (!to.isEmpty() && to != from)
-        redirectTo = to;
-    return redirectTo;
+void
+RSSDialog::handleRedirect(QNetworkReply *reply) {
+
+//    QUrl location =
+//      reply->header(QNetworkRequest::LocationHeader).toUrl();
+
+    QUrl location =
+        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+
+    if (!location.isEmpty() && location != redirectedToURL)
+        redirectedToURL = location;
+    else
+        redirectedToURL.clear();
 }
 
 void

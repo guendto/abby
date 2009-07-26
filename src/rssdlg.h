@@ -39,13 +39,13 @@ private slots:
 public:
     void writeSettings();
 private:
-    void readSettings();
-    void parseRSS();
     QNetworkAccessManager *createManager();
-    QUrl redirect(const QUrl& to, const QUrl& from) const;
+    void handleRedirect(QNetworkReply *reply);
+    void readSettings();
+    void parseRSS(QNetworkReply *reply);
 private:
     QXmlStreamReader xml;
     QPointer<QNetworkAccessManager> mgr;
-    QUrl redirectUrl;
+    QUrl redirectedToURL;
 };
 #endif
