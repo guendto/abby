@@ -17,6 +17,10 @@ Version 0.4.2
    * abby.pro: include "QT += network xml"
      1. See README for the changed build instructions
 
+  Known-issues:
+    * http://youtube.com/rss/user/(username)/videos.rss
+      Links no longer work. Please see README ("Using abby").
+
 
 Version 0.4.1
 (July 11, 2009)
