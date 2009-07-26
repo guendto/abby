@@ -48,32 +48,34 @@ MainWindow::MainWindow():
     setupUi(this);
     readSettings();
 
-    connect(&process, SIGNAL(started()),
-        this, SLOT(onProcStarted()));
-    connect(&process, SIGNAL(error(QProcess::ProcessError)),
-        this, SLOT(onProcError(QProcess::ProcessError)));
+    connect(&process, SIGNAL( started() ),
+        this, SLOT( onProcStarted() ));
 
-    // NOTE: We read both channels stdout and stderr.
-    connect(&process, SIGNAL(readyReadStandardOutput()),
-        this, SLOT(onProcStdoutReady()));
-    connect(&process, SIGNAL(readyReadStandardError()),
-        this, SLOT(onProcStdoutReady()));
+    connect(&process, SIGNAL( error(QProcess::ProcessError) ),
+        this, SLOT( onProcError(QProcess::ProcessError) ));
 
-    connect(&process, SIGNAL(finished(int,QProcess::ExitStatus)),
-        this, SLOT(onProcFinished(int,QProcess::ExitStatus)));
+    // NOTE: Merge stdout/stderr from c/clive
+    connect(&process, SIGNAL( readyReadStandardOutput() ),
+        this, SLOT( onProcStdoutReady() ));
 
-    prefs   = new PreferencesDialog(this);
-    rss     = new RSSDialog(this);
-    scan    = new ScanDialog(this);
-    format  = new FormatDialog(this);
+    connect(&process, SIGNAL( readyReadStandardError() ),
+        this, SLOT( onProcStdoutReady() ));
 
-    checkCclivePath();
-    updateWidgets(true);
+    connect(&process, SIGNAL( finished(int, QProcess::ExitStatus) ),
+        this, SLOT( onProcFinished(int, QProcess::ExitStatus) ));
+
+    prefs   = new PreferencesDialog (this);
+    rss     = new RSSDialog         (this);
+    scan    = new ScanDialog        (this);
+    format  = new FormatDialog      (this);
+
+    checkCclivePath       ();
+    updateWidgets         (true);
     parseCcliveHostsOutput();
-    setProxy();
+    setProxy              ();
 
-    connect(linksList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
-        this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
+    connect(linksList, SIGNAL( itemDoubleClicked(QListWidgetItem *) ),
+        this, SLOT( onItemDoubleClicked(QListWidgetItem *) ));
 
 #ifdef WIN32
     streamBox ->setHidden(true);
@@ -84,10 +86,16 @@ MainWindow::MainWindow():
 bool
 MainWindow::checkCclivePath() {
     if (prefs->ccliveEdit->text().isEmpty()) {
-        QMessageBox::information(this, QCoreApplication::applicationName(),
+
+        QMessageBox::information(
+            this,
+            QCoreApplication::applicationName(),
             tr("abby requires `clive' or `cclive'. "
-                "Please define path to either executable."));
+                "Please define path to either executable.")
+        );
+
         onPreferences();
+
         return false;
     }
     return true;
@@ -95,25 +103,34 @@ MainWindow::checkCclivePath() {
 
 bool
 MainWindow::isCclive(QString& output) {
+
     QString path = prefs->ccliveEdit->text();
+
+    ccliveVersion.clear();
+    curlVersion.clear();
 
     if (path.isEmpty())
         return false;
 
-    QProcess process;
-    process.setProcessChannelMode(QProcess::MergedChannels);
-    process.start(path, QStringList() << "--version");
+    QProcess proc;
+
+    proc.setProcessChannelMode(QProcess::MergedChannels);
+    proc.start(path, QStringList() << "--version");
 
     bool state = false;
-    if (!process.waitForFinished())
-        qDebug() << path << ": " << process.errorString();
+
+    if (!proc.waitForFinished())
+        qDebug() << path << ": " << proc.errorString();
     else {
-        output = QString::fromLocal8Bit(process.readAll());
+        output = QString::fromLocal8Bit(proc.readAll());
+
         QStringList tmp = output.split("\n", QString::SkipEmptyParts);
         QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
+
         state = lst[0] == "cclive";
+
         ccliveVersion = lst[2];
-        curlVersion = lst[6];
+        curlVersion   = lst[6];
     }
     return state;
 }
@@ -126,6 +143,7 @@ MainWindow::parseCcliveHostsOutput() {
         return;
 
     QProcess proc;
+
     proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start(path, QStringList() << "--hosts");
 
@@ -140,7 +158,7 @@ MainWindow::parseCcliveHostsOutput() {
 
         for (register int i=0; i<lst.size(); ++i) {
             QStringList tmp = lst[i].split("\t");
-            hosts[tmp[0]] = tmp[1].remove("\r");
+            hosts[tmp[0]]   = tmp[1].remove("\r");
         }
 
         format->parseHosts(hosts);
@@ -149,6 +167,7 @@ MainWindow::parseCcliveHostsOutput() {
 
 bool
 MainWindow::ccliveSupportsFeature(const QString& buildOption) {
+
     QString output;
     const bool _isCclive = isCclive(output);
 
@@ -167,9 +186,11 @@ MainWindow::ccliveSupportsHost(const QString& lnk) {
         iter != hosts.end(); ++iter)
     {
         QRegExp re( iter.key());
+
         if (re.indexIn(host) != -1)
             return true;
     }
+
     return false;
 }
 
@@ -240,12 +261,23 @@ MainWindow::updateLog(const QString& newText) {
 
 void
 MainWindow::onPreferences() {
+
     QString old = prefs->ccliveEdit->text();
+
     prefs->exec();
+
     QString _new = prefs->ccliveEdit->text();
+
     updateWidgets(old != _new);
-    if (old != _new)
+
+    if (old != _new) {
+
+        QString output;
+        isCclive(output);
+
         parseCcliveHostsOutput();
+    }
+
     setProxy();
 }
 
