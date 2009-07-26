@@ -62,6 +62,9 @@ ScanDialog::onScan() {
 
 void
 ScanDialog::replyFinished(QNetworkReply* reply) {
+
+    bool state = false;
+
     if (reply->error() == QNetworkReply::NoError) {
         QVariant tmp =
             reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
@@ -80,18 +83,22 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
             else
                 parseHtmlTitle(reply->readAll(), reply->url().toString());
             redirectUrl.clear();
+            state = true;
         }
         reply->deleteLater();
     }
     else {
         QMessageBox::critical(this, QCoreApplication::applicationName(),
             QString(tr("Network error: %1")).arg(reply->errorString()));
+        state = true;
     }
 
-    linkEdit->setEnabled    (true);
-    scanButton->setEnabled  (true);
-    titlesBox->setEnabled   (true);
-    buttonBox->setEnabled   (true);
+    if (state) {
+        linkEdit->setEnabled    (state);
+        scanButton->setEnabled  (state);
+        titlesBox->setEnabled   (state);
+        buttonBox->setEnabled   (state);
+    }
 }
 
 static QStringList
