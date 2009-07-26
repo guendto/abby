@@ -157,8 +157,12 @@ MainWindow::parseCcliveHostsOutput() {
         lst.removeLast(); // Note line.
 
         for (register int i=0; i<lst.size(); ++i) {
-            QStringList tmp = lst[i].split("\t");
-            hosts[tmp[0]]   = tmp[1].remove("\r");
+
+            QString ln      = lst[i].remove("\r");
+            QStringList tmp = ln.split("\t");
+
+            if (!tmp[0].isEmpty() && !tmp[1].isEmpty())
+                hosts[tmp[0]]   = tmp[1];
         }
 
         format->parseHosts(hosts);
