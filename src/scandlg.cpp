@@ -23,14 +23,15 @@
 
 #include "scandlg.h"
 
-#define USERAGENT "Mozilla/5.0"
-
 ScanDialog::ScanDialog(QWidget *parent)
     : QDialog(parent), titleMode(false)
 {
     setupUi(this);
+
     readSettings();
+
     mgr = createManager();
+
     itemsTree->setColumnHidden(1, true);
 }
 
@@ -55,9 +56,7 @@ ScanDialog::onScan() {
     titlesBox->setEnabled   (false);
     buttonBox->setEnabled   (false);
 
-    QNetworkRequest req(lnk);
-    req.setRawHeader("User-Agent", USERAGENT);
-    mgr->get(req);
+    mgr->get(QNetworkRequest(lnk));
 }
 
 void
@@ -66,26 +65,19 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
     bool state = false;
 
     if (reply->error() == QNetworkReply::NoError) {
-        QVariant tmp =
-            reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
 
-        redirectUrl = 
-            redirect(tmp.toUrl(), redirectUrl);
+        handleRedirect(reply);
 
-        if (!redirectUrl.isEmpty()) {
-            QNetworkRequest req(redirectUrl);
-            req.setRawHeader("User-Agent", USERAGENT);
-            mgr->get(req);
-        }
+        if (!redirectedToURL.isEmpty())
+            mgr->get( QNetworkRequest(redirectedToURL) );
         else {
             if (!titleMode)
-                scanContent(reply->readAll());
+                scanContent(reply);
             else
-                parseHtmlTitle(reply->readAll(), reply->url().toString());
-            redirectUrl.clear();
+                parseHtmlTitle(reply);
+            redirectedToURL.clear();
             state = true;
         }
-        reply->deleteLater();
     }
     else {
         QMessageBox::critical(this, QCoreApplication::applicationName(),
@@ -99,6 +91,8 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         titlesBox->setEnabled   (state);
         buttonBox->setEnabled   (state);
     }
+
+    reply->deleteLater();
 }
 
 static QStringList
@@ -144,8 +138,12 @@ scanYoutubeRegular(QStringList& lst, const QString& content) {
 }
 
 void
-ScanDialog::scanContent(const QString& content) {
+ScanDialog::scanContent(QNetworkReply *reply) {
+
+    const QString content = reply->readAll();
+
     QStringList IDs, links;
+
     scanYoutubeEmbed    (IDs, content);
     scanYoutubeRegular  (IDs, content);
 
@@ -155,11 +153,8 @@ ScanDialog::scanContent(const QString& content) {
 
     if (titlesBox->checkState()) {
         titleMode = true;
-        for (i=0; i<links.size(); ++i) {
-            QNetworkRequest req(links[i]);
-            req.setRawHeader("User-Agent", USERAGENT);
-            mgr->get(req);
-        }
+        for (i=0; i<links.size(); ++i)
+            mgr->get( QNetworkRequest(links[i]) );
     }
     else {
         for (i=0; i<links.size(); ++i) {
@@ -173,7 +168,11 @@ ScanDialog::scanContent(const QString& content) {
 }
 
 void
-ScanDialog::parseHtmlTitle(const QString& content, const QString& link) {
+ScanDialog::parseHtmlTitle(QNetworkReply *reply) {
+
+    const QString content = reply->readAll();
+    const QString link = reply->url().toString();
+
     QRegExp re("<title>(.*)<\\/title>"); // TODO: improve.
     re.setCaseSensitivity(Qt::CaseInsensitive);
     re.setMinimal(true);
@@ -196,12 +195,19 @@ ScanDialog::createManager() {
     return p;
 }
 
-QUrl
-ScanDialog::redirect(const QUrl& to, const QUrl& from) const {
-    QUrl redirectTo;
-    if (!to.isEmpty() && to != from)
-        redirectTo = to;
-    return redirectTo;
+void
+ScanDialog::handleRedirect(const QNetworkReply *reply) {
+
+//    QUrl location =
+//      reply->header(QNetworkRequest::LocationHeader).toUrl();
+
+    QUrl location =
+        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+
+    if (!location.isEmpty() && location != redirectedToURL)
+        redirectedToURL = location;
+    else
+        redirectedToURL.clear();
 }
 
 void

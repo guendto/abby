@@ -38,14 +38,16 @@ private slots:
 public:
     void writeSettings();
 private:
-    void parseHtmlTitle(const QString& content, const QString& link);
     void readSettings();
-    void scanContent(const QString& content);
+
     QNetworkAccessManager *createManager();
-    QUrl redirect(const QUrl& to, const QUrl& from) const;
+    void handleRedirect(const QNetworkReply *reply);
+
+    void parseHtmlTitle(QNetworkReply *reply);
+    void scanContent(QNetworkReply *reply);
 private:
     QPointer<QNetworkAccessManager> mgr;
-    QUrl redirectUrl;
+    QUrl redirectedToURL;
     bool titleMode;
 };
 
