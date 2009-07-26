@@ -82,9 +82,8 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
 
         handleRedirect(reply);
 
-        if (!redirectedToURL.isEmpty()) {
-            mgr->get(QNetworkRequest(redirectedToURL));
-        }
+        if (!redirectedToURL.isEmpty())
+            mgr->get( QNetworkRequest(redirectedToURL) );
         else {
             parseRSS(reply);
             redirectedToURL.clear();
