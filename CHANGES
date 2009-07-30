@@ -2,21 +2,22 @@ Version 0.4.2
 
   User-visible changes:
    * Change:
-     1. Abort button to show statustip instead of tooltip
-     2. Dynamically changing format dialog based on c/clive --hosts output
-     3. Scan: hide column header
-     4. RSS: ditto
+     # Abort button to show statustip instead of tooltip
+     # Dynamically changing format dialog based on c/clive --hosts output
+     # Total progressbar: use "%current / %total" instead of "%percentage"
+     # Scan: hide column header
+     # RSS: ditto
 
   Developer-visible changes:
    * Add: support for --exec-run (c/clive 0.4.6+/2.2.3+)
    * Tweak --hosts support
-     1. c/clive 0.4.6+/2.2.3+ print supported formats with --hosts
-     2. Bump prerequisites, see README
+     # c/clive 0.4.6+/2.2.3+ print supported formats with --hosts
+     # Bump prerequisites, see README
    * Cleanup README
-     1. Better description
-     2. Misc. other tweaks
+     # Better description
+     # Misc. other tweaks
    * abby.pro: include "QT += network xml"
-     1. See README for the changed build instructions
+     # See README for the changed build instructions
 
   Known-issues:
     * http://youtube.com/rss/user/(username)/videos.rss
