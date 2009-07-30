@@ -48,6 +48,9 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
     streamEdit  ->setHidden(true);
     streamButton->setHidden(true);
 #endif
+
+    langLabel->setHidden(true);
+    langCombo->setHidden(true);
 }
 
 void

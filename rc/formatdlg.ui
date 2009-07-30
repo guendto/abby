@@ -24,7 +24,7 @@
        <item>
         <widget class="QLabel" name="label" >
          <property name="text" >
-          <string>&amp;Host:</string>
+          <string>&amp;Website:</string>
          </property>
          <property name="buddy" >
           <cstring>hostBox</cstring>
@@ -41,7 +41,7 @@
        <item>
         <widget class="QLabel" name="label_2" >
          <property name="text" >
-          <string>&amp;Format:</string>
+          <string>&amp;Download format:</string>
          </property>
          <property name="buddy" >
           <cstring>formatBox</cstring>
