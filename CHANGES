@@ -7,8 +7,12 @@ Version 0.4.2
      # Total progressbar: use "%current / %total" instead of "%percentage"
      # Scan: hide column header
      # RSS: ditto
+     # Improve c/clive executable checking (1)
+       * Display dialogbox where suitable
 
   Developer-visible changes:
+   * Improve c/clive executable checking (1)
+     # Remove excess code and unnecessary checks
    * Add: support for --exec-run (c/clive 0.4.6+/2.2.3+)
    * Tweak --hosts support
      # c/clive 0.4.6+/2.2.3+ print supported formats with --hosts

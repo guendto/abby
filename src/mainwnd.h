@@ -61,6 +61,8 @@ private:
     QProcess process;
     bool cancelled;
     bool errorOccurred;
+    bool isCclive;
+    QString versionOutput;
     QString ccliveVersion;
     QString curlVersion;
 private:
@@ -70,11 +72,10 @@ private:
     void updateLog(const QString& text);
     void updateWidgets(const bool updateCcliveDepends);
     void setProxy();
-    bool isCclive(QString& output);
     bool ccliveSupportsFeature(const QString& buildOption);
     bool ccliveSupportsHost(const QString &lnk);
-    void parseCcliveHostsOutput();
-    bool checkCclivePath();
+    bool parseCcliveHostsOutput();
+    void parseCcliveVersionOutput();
 protected:
     void closeEvent(QCloseEvent *event);
 };

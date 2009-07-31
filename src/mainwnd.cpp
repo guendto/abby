@@ -34,20 +34,36 @@
 #include "formatdlg.h"
 #include "aboutdlg.h"
 
-MainWindow::MainWindow():
-    cancelled(false)
+#define critCcliveNotFound \
+    do { \
+    QMessageBox::critical(this, QCoreApplication::applicationName(), \
+        QString( tr("c/clive executable not found, please check the path.") )); \
+    } while (0)
+
+MainWindow::MainWindow()
+    : cancelled(false), isCclive(false)
 {
 /*
  The word "English" is not meant to be translated literally.
- Replace the word "English" with target language, e.g. Suomi
- or Deutsch. Note that the only purpose of this string is to
- list it as an available language in the Preferences dialog.
+ Instead, replace "English" with the target translation language,
+ e.g. "Suomi", "Deutch", etc. abby uses this word in the
+ preferences dialog to select current language.
 */
     const QString lang = tr("English");
 
     setupUi(this);
-    readSettings();
 
+    // Dialogs. Be extravagant about system memory.
+    prefs   = new PreferencesDialog (this);
+    rss     = new RSSDialog         (this);
+    scan    = new ScanDialog        (this);
+    format  = new FormatDialog      (this);
+
+    // Settings.
+    readSettings();
+    setProxy();
+
+    // Process.
     connect(&process, SIGNAL( started() ),
         this, SLOT( onProcStarted() ));
 
@@ -64,18 +80,16 @@ MainWindow::MainWindow():
     connect(&process, SIGNAL( finished(int, QProcess::ExitStatus) ),
         this, SLOT( onProcFinished(int, QProcess::ExitStatus) ));
 
-    prefs   = new PreferencesDialog (this);
-    rss     = new RSSDialog         (this);
-    scan    = new ScanDialog        (this);
-    format  = new FormatDialog      (this);
-
-    checkCclivePath       ();
-    updateWidgets         (true);
-    parseCcliveHostsOutput();
-    setProxy              ();
-
+    // Misc.
     connect(linksList, SIGNAL( itemDoubleClicked(QListWidgetItem *) ),
         this, SLOT( onItemDoubleClicked(QListWidgetItem *) ));
+
+    // Parse.
+    if (parseCcliveHostsOutput())
+        parseCcliveVersionOutput();
+
+    // Widget voodoo.
+    updateWidgets           (true);
 
 #ifdef WIN32
     streamBox ->setHidden(true);
@@ -84,8 +98,12 @@ MainWindow::MainWindow():
 }
 
 bool
-MainWindow::checkCclivePath() {
-    if (prefs->ccliveEdit->text().isEmpty()) {
+MainWindow::parseCcliveHostsOutput() {
+    hosts.clear();
+
+    QString path = prefs->ccliveEdit->text();
+
+    if (path.isEmpty()) {
 
         QMessageBox::information(
             this,
@@ -98,65 +116,25 @@ MainWindow::checkCclivePath() {
 
         return false;
     }
-    return true;
-}
-
-bool
-MainWindow::isCclive(QString& output) {
-
-    QString path = prefs->ccliveEdit->text();
-
-    ccliveVersion.clear();
-    curlVersion.clear();
-
-    if (path.isEmpty())
-        return false;
-
-    QProcess proc;
-
-    proc.setProcessChannelMode(QProcess::MergedChannels);
-    proc.start(path, QStringList() << "--version");
-
-    bool state = false;
-
-    if (!proc.waitForFinished())
-        qDebug() << path << ": " << proc.errorString();
-    else {
-        output = QString::fromLocal8Bit(proc.readAll());
-
-        QStringList tmp = output.split("\n", QString::SkipEmptyParts);
-        QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
-
-        state = lst[0] == "cclive";
-
-        ccliveVersion = lst[2];
-        curlVersion   = lst[6];
-    }
-    return state;
-}
-
-void
-MainWindow::parseCcliveHostsOutput() {
-    QString path = prefs->ccliveEdit->text();
-
-    if (path.isEmpty())
-        return;
 
     QProcess proc;
 
     proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start(path, QStringList() << "--hosts");
 
-    if (!proc.waitForFinished())
+    if (!proc.waitForFinished()) {
         qDebug() << path << ": " << proc.errorString();
+        critCcliveNotFound;
+        return false;
+    }
     else {
-        hosts.clear();
-
-        QString output = QString::fromLocal8Bit(proc.readAll());
+        QString output  = QString::fromLocal8Bit(proc.readAll());
         QStringList lst = output.split("\n", QString::SkipEmptyParts);
+
         lst.removeLast(); // Note line.
 
-        for (register int i=0; i<lst.size(); ++i) {
+        const int size = lst.size();
+        for (register int i=0; i<size; ++i) {
 
             QString ln      = lst[i].remove("\r");
             QStringList tmp = ln.split("\t");
@@ -167,18 +145,43 @@ MainWindow::parseCcliveHostsOutput() {
 
         format->parseHosts(hosts);
     }
+
+    return true;
+}
+
+void
+MainWindow::parseCcliveVersionOutput() {
+
+    versionOutput.clear();
+    ccliveVersion.clear();
+    curlVersion.clear();
+
+    QString path = prefs->ccliveEdit->text();
+
+    QProcess proc;
+    proc.setProcessChannelMode(QProcess::MergedChannels);
+    proc.start(path, QStringList() << "--version");
+
+    isCclive = false;
+
+    if (!proc.waitForFinished())
+        qDebug() << path << ": " << proc.errorString();
+    else {
+        versionOutput = QString::fromLocal8Bit(proc.readAll());
+
+        QStringList tmp = versionOutput.split("\n", QString::SkipEmptyParts);
+        QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
+
+        isCclive = (lst[0] == "cclive");
+
+        ccliveVersion = lst[2];
+        curlVersion   = lst[6];
+    }
 }
 
 bool
 MainWindow::ccliveSupportsFeature(const QString& buildOption) {
-
-    QString output;
-    const bool _isCclive = isCclive(output);
-
-    if (!_isCclive && buildOption == "--with-perl")
-        return false; // To keep the titleBox hidden always 
-
-    return output.contains(buildOption);
+    return versionOutput.contains(buildOption);
 }
 
 bool
@@ -272,15 +275,12 @@ MainWindow::onPreferences() {
 
     QString _new = prefs->ccliveEdit->text();
 
-    updateWidgets(old != _new);
-
     if (old != _new) {
-
-        QString output;
-        isCclive(output);
-
         parseCcliveHostsOutput();
+        parseCcliveVersionOutput();
     }
+
+    updateWidgets(old != _new);
 
     setProxy();
 }
@@ -317,16 +317,12 @@ MainWindow::onStart() {
         return;
     }
 
-    // Check cclive
-    if (!checkCclivePath())
-        return;
-
     QString path = prefs->ccliveEdit->text();
 
     // Check video save directory
 
-    // cclive does not support this concept at command line option level.
-    // We work around this by changing the working directory instead.
+    // cclive has no option for this but we can work around it by
+    // changing the current working directory.
 
     QString savedir = prefs->savedirEdit->text();
     if (savedir.isEmpty()) {
@@ -338,15 +334,12 @@ MainWindow::onStart() {
 
     process.setWorkingDirectory(savedir);
 
-    QString output;
-    const bool _isCclive = isCclive(output);
-
     // Construct cclive/clive args
 
     QStringList args;
     QStringList env;
 
-    if (_isCclive) {
+    if (isCclive) {
         args << "--print-fname";
     } else {
         args << "--stderr";
@@ -392,7 +385,7 @@ MainWindow::onStart() {
 
     args << "--continue"; // default to continue
 
-    if (_isCclive) { // clive defaults to this
+    if (isCclive) { // clive defaults to this
         if (titleBox->isChecked()) {
             args << "--title";
             s = prefs->cclassEdit->text();
@@ -408,9 +401,14 @@ MainWindow::onStart() {
     // Check if all video page links are of the same host.
 
     QUrl first(linksList->item(0)->text());
-    bool allSame = true;
-    for (register int i=0; i<linksList->count(); ++i) {
+
+    bool allSame    = true;
+    const int count = linksList->count();
+
+    for (register int i=0; i<count; ++i) {
+
         QUrl url(linksList->item(i)->text());
+
         if (url.host() != first.host()) {
             allSame = false;
             break;
@@ -425,7 +423,7 @@ MainWindow::onStart() {
 
     args << QString("--format=%1").arg(s);
 
-    for (register int i=0; i<linksList->count(); ++i)
+    for (register int i=0; i<count; ++i)
         args << QString("%1").arg(linksList->item(i)->text());
 
     totalProgressbar->setMaximum(linksList->count());
@@ -482,9 +480,12 @@ MainWindow::onScan() {
 
 void
 MainWindow::onPasteURL() {
-    QClipboard *cb = QApplication::clipboard();
+
+    QClipboard *cb  = QApplication::clipboard();
     QStringList lst = cb->text().split("\n");
-    for (register int i=0; i<lst.size(); ++i)
+    const int size  = lst.size();
+
+    for (register int i=0; i<size; ++i)
         addPageLink(lst[i]);
 }
 
@@ -510,7 +511,9 @@ MainWindow::onRemove() {
         return;
     }
 
-    for (register int i=0; i<sel.size(); ++i) {
+    const int size = sel.size();
+
+    for (register int i=0; i<size; ++i) {
         const int row = linksList->row(sel[i]);
         delete linksList->takeItem(row);
     }
@@ -546,7 +549,7 @@ MainWindow::addPageLink(QString lnk) {
 
     if (!ccliveSupportsHost(lnk)) {
         QMessageBox::critical(this, QCoreApplication::applicationName(),
-            QString(tr("%1: unsupported")).arg(QUrl(lnk).host()));
+            QString(tr("%1: unsupported website")).arg(QUrl(lnk).host()));
         return;
     }
 
@@ -559,6 +562,11 @@ MainWindow::addPageLink(QString lnk) {
 
 void
 MainWindow::onFormats() {
+    if (hosts.isEmpty()) {
+        critCcliveNotFound;
+        onPreferences();
+        return;
+    }
     format->exec();
     format->saveCurrent();
     format->writeSettings();
