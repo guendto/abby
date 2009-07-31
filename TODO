@@ -9,7 +9,5 @@ web : http://repo.or.cz/w/abby.git
 * clean up: remove excess code
   - common code -> src/util.(cpp|h)
   - e.g. HTTP redirect code (rss/scan)
-
-Dear Santa, bring us...
-  * a proper application icon to replace the current "TODO" icon
-    - 32x32 or higher (24bit preferably)
+* a proper application icon to replace the current "TODO" icon
+  - 32x32 or higher (24bit preferably)
