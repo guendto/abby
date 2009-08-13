@@ -224,14 +224,14 @@ MainWindow::updateWidgets(const bool updateCcliveDepends) {
         if (isCclive) {
             regexpLabel ->show();
             regexpEdit  ->show();
-            findAllBox  ->show();
+            findallBox  ->show();
             cclassLabel ->hide();
             cclassEdit  ->hide();
         }
         else {
             regexpLabel ->hide();
             regexpEdit  ->hide();
-            findAllBox  ->hide();
+            findallBox  ->hide();
             cclassLabel ->show();
             cclassEdit  ->show();
         }
@@ -251,7 +251,7 @@ MainWindow::writeSettings() {
     s.setValue("size", size());
     s.setValue("pos", pos());
     s.setValue("regexpEdit", regexpEdit->text());
-    s.setValue("findAllBox", findAllBox->checkState());
+    s.setValue("findallBox", findallBox->checkState());
     s.setValue("cclassEdit", cclassEdit->text());
     s.endGroup();
 }
@@ -263,8 +263,8 @@ MainWindow::readSettings() {
     resize( s.value("size", QSize(525,265)).toSize() );
     move( s.value("pos", QPoint(200,200)).toPoint() );
     regexpEdit->setText( s.value("regexpEdit").toString() );
-    findAllBox->setCheckState(
-        s.value("findAllBox").toBool()
+    findallBox->setCheckState(
+        s.value("findallBox").toBool()
         ? Qt::Checked
         : Qt::Unchecked);
     cclassEdit->setText( s.value("cclassEdit").toString() );
@@ -404,7 +404,7 @@ MainWindow::onStart() {
         s = regexpEdit->text();
         if (!s.isEmpty())
             args << QString("--regexp=%1").arg(s);
-        if (findAllBox->checkState())
+        if (findallBox->checkState())
             args << QString("--find-all");
     } else {
         s = cclassEdit->text();

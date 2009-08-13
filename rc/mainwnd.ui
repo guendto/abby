@@ -539,7 +539,7 @@
               <widget class="QLineEdit" name="regexpEdit"/>
              </item>
              <item>
-              <widget class="QCheckBox" name="findAllBox">
+              <widget class="QCheckBox" name="findallBox">
                <property name="text">
                 <string>Re&amp;peat</string>
                </property>
@@ -875,7 +875,7 @@ the download reches the specified percent complete</string>
   <tabstop>tabWidget</tabstop>
   <tabstop>formatsButton</tabstop>
   <tabstop>regexpEdit</tabstop>
-  <tabstop>findAllBox</tabstop>
+  <tabstop>findallBox</tabstop>
   <tabstop>cclassEdit</tabstop>
   <tabstop>commandBox</tabstop>
   <tabstop>streamBox</tabstop>
