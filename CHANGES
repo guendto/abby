@@ -1,6 +1,8 @@
 Version 0.4.3
 
   User-visible changes:
+   * Remove: --title support
+     # No longer supported by cclive as of 0.5.0
    * Fix: filename not shown when download starts
 
   Developer-visible changes:

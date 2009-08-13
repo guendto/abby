@@ -221,11 +221,19 @@ MainWindow::updateWidgets(const bool updateCcliveDepends) {
     if (updateCcliveDepends) {
         // The most time consuming check is to run (c)clive.
         // Run it only when we cannot work around it.
-        if (ccliveSupportsFeature("--with-perl"))
-            titleBox->show();
+        if (isCclive) {
+            regexpLabel ->show();
+            regexpEdit  ->show();
+            findAllBox  ->show();
+            cclassLabel ->hide();
+            cclassEdit  ->hide();
+        }
         else {
-            titleBox->setCheckState(Qt::Unchecked);
-            titleBox->hide();
+            regexpLabel ->hide();
+            regexpEdit  ->hide();
+            findAllBox  ->hide();
+            cclassLabel ->show();
+            cclassEdit  ->show();
         }
     }
 }
@@ -242,7 +250,6 @@ MainWindow::writeSettings() {
     s.beginGroup("MainWindow");
     s.setValue("size", size());
     s.setValue("pos", pos());
-    s.setValue("titleBox", titleBox->checkState());
     s.endGroup();
 }
 
@@ -252,10 +259,6 @@ MainWindow::readSettings() {
     s.beginGroup("MainWindow");
     resize( s.value("size", QSize(525,265)).toSize() );
     move( s.value("pos", QPoint(200,200)).toPoint() );
-    titleBox->setCheckState(
-        s.value("titleBox").toBool()
-        ? Qt::Checked
-        : Qt::Unchecked);
     s.endGroup();
 }
 
@@ -387,15 +390,10 @@ MainWindow::onStart() {
 
     args << "--continue"; // default to continue
 
-    if (isCclive) { // clive defaults to this
-        if (titleBox->isChecked()) {
-            args << "--title";
-            s = prefs->cclassEdit->text();
-                if (!s.isEmpty())
-            args << QString("--cclass=%1").arg(s);
-        }
-    } else { // clive can use this
-        s = prefs->cclassEdit->text();
+    if (isCclive) {
+        // TODO: --regexp, --find-all
+    } else {
+        s = cclassEdit->text();
         if (!s.isEmpty())
             args << QString("--cclass=%1").arg(s);
     }

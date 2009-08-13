@@ -1,8 +1,9 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Toni Gundogdu</author>
  <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow" >
-  <property name="geometry" >
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -10,50 +11,50 @@
     <height>373</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>abby</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="abby.qrc" >
+  <property name="windowIcon">
+   <iconset resource="abby.qrc">
     <normaloff>:/abby.png</normaloff>:/abby.png</iconset>
   </property>
-  <widget class="QWidget" name="centralwidget" >
-   <layout class="QGridLayout" name="gridLayout_5" >
-    <item row="0" column="0" >
-     <widget class="QTabWidget" name="tabWidget" >
-      <property name="currentIndex" >
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_5">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="tab" >
-       <attribute name="title" >
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
         <string>&amp;Video</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_3" >
-        <item row="0" column="0" >
-         <widget class="QSplitter" name="splitter" >
-          <property name="orientation" >
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QSplitter" name="splitter">
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <widget class="QWidget" name="layoutWidget" >
-           <layout class="QHBoxLayout" name="horizontalLayout" >
+          <widget class="QWidget" name="layoutWidget">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_3" >
+             <layout class="QVBoxLayout" name="verticalLayout_3">
               <item>
-               <widget class="QPushButton" name="addButton" >
-                <property name="toolTip" >
+               <widget class="QPushButton" name="addButton">
+                <property name="toolTip">
                  <string/>
                 </property>
-                <property name="statusTip" >
+                <property name="statusTip">
                  <string>Add link</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -62,21 +63,21 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="pasteButton" >
-                <property name="toolTip" >
+               <widget class="QPushButton" name="pasteButton">
+                <property name="toolTip">
                  <string/>
                 </property>
-                <property name="statusTip" >
+                <property name="statusTip">
                  <string>Paste from clipboard</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -85,21 +86,21 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="removeButton" >
-                <property name="toolTip" >
+               <widget class="QPushButton" name="removeButton">
+                <property name="toolTip">
                  <string/>
                 </property>
-                <property name="statusTip" >
+                <property name="statusTip">
                  <string>Remove from list</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -108,18 +109,18 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="clearButton" >
-                <property name="statusTip" >
+               <widget class="QPushButton" name="clearButton">
+                <property name="statusTip">
                  <string>Clear list</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -130,30 +131,30 @@
              </layout>
             </item>
             <item>
-             <widget class="QListWidget" name="linksList" >
-              <property name="selectionMode" >
+             <widget class="QListWidget" name="linksList">
+              <property name="selectionMode">
                <enum>QAbstractItemView::ExtendedSelection</enum>
               </property>
              </widget>
             </item>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout" >
+             <layout class="QVBoxLayout" name="verticalLayout">
               <item>
-               <widget class="QPushButton" name="rssButton" >
-                <property name="toolTip" >
+               <widget class="QPushButton" name="rssButton">
+                <property name="toolTip">
                  <string/>
                 </property>
-                <property name="statusTip" >
+                <property name="statusTip">
                  <string>Add from RSS feeds</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -162,21 +163,21 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="scanButton" >
-                <property name="toolTip" >
+               <widget class="QPushButton" name="scanButton">
+                <property name="toolTip">
                  <string/>
                 </property>
-                <property name="statusTip" >
+                <property name="statusTip">
                  <string>Scan for video links</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -185,11 +186,11 @@
                </widget>
               </item>
               <item>
-               <spacer name="verticalSpacer_2" >
-                <property name="orientation" >
+               <spacer name="verticalSpacer_2">
+                <property name="orientation">
                  <enum>Qt::Vertical</enum>
                 </property>
-                <property name="sizeHint" stdset="0" >
+                <property name="sizeHint" stdset="0">
                  <size>
                   <width>20</width>
                   <height>40</height>
@@ -198,21 +199,21 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="startButton" >
-                <property name="toolTip" >
+               <widget class="QPushButton" name="startButton">
+                <property name="toolTip">
                  <string/>
                 </property>
-                <property name="statusTip" >
+                <property name="statusTip">
                  <string>Download videos</string>
                 </property>
-                <property name="text" >
+                <property name="text">
                  <string/>
                 </property>
-                <property name="icon" >
-                 <iconset resource="abby.qrc" >
+                <property name="icon">
+                 <iconset resource="abby.qrc">
                   <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
                 </property>
-                <property name="iconSize" >
+                <property name="iconSize">
                  <size>
                   <width>16</width>
                   <height>16</height>
@@ -224,79 +225,79 @@
             </item>
            </layout>
           </widget>
-          <widget class="QTabWidget" name="tabWidget_2" >
-           <property name="tabPosition" >
+          <widget class="QTabWidget" name="tabWidget_2">
+           <property name="tabPosition">
             <enum>QTabWidget::South</enum>
            </property>
-           <property name="currentIndex" >
+           <property name="currentIndex">
             <number>0</number>
            </property>
-           <widget class="QWidget" name="tab_3" >
-            <attribute name="title" >
+           <widget class="QWidget" name="tab_3">
+            <attribute name="title">
              <string>Pro&amp;gress</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout" >
-             <item row="0" column="0" >
-              <layout class="QHBoxLayout" name="horizontalLayout_2" >
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_2">
                <item>
-                <widget class="QLabel" name="label_2" >
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                <widget class="QLabel" name="label_2">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>File:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="fileLabel" >
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+                <widget class="QLabel" name="fileLabel">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>-</string>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="1" column="0" >
-              <layout class="QHBoxLayout" name="horizontalLayout_3" >
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
                <item>
-                <widget class="QLabel" name="label_3" >
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                <widget class="QLabel" name="label_3">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>Size:</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="sizeLabel" >
-                 <property name="enabled" >
+                <widget class="QLabel" name="sizeLabel">
+                 <property name="enabled">
                   <bool>true</bool>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>-- / --</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_3" >
-                 <property name="orientation" >
+                <spacer name="horizontalSpacer_3">
+                 <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" stdset="0">
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -305,37 +306,37 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="label_4" >
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                <widget class="QLabel" name="label_4">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>Rate:</string>
                  </property>
-                 <property name="alignment" >
+                 <property name="alignment">
                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="rateLabel" >
-                 <property name="enabled" >
+                <widget class="QLabel" name="rateLabel">
+                 <property name="enabled">
                   <bool>true</bool>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>--.-</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_2" >
-                 <property name="orientation" >
+                <spacer name="horizontalSpacer_2">
+                 <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0" >
+                 <property name="sizeHint" stdset="0">
                   <size>
                    <width>40</width>
                    <height>20</height>
@@ -344,104 +345,104 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLabel" name="label_5" >
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
+                <widget class="QLabel" name="label_5">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>ETA:</string>
                  </property>
-                 <property name="alignment" >
+                 <property name="alignment">
                   <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="etaLabel" >
-                 <property name="enabled" >
+                <widget class="QLabel" name="etaLabel">
+                 <property name="enabled">
                   <bool>true</bool>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>--:--</string>
                  </property>
-                 <property name="alignment" >
+                 <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                 </widget>
                </item>
               </layout>
              </item>
-             <item row="2" column="0" >
-              <layout class="QHBoxLayout" name="horizontalLayout_4" >
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
-                <widget class="QProgressBar" name="progressBar" >
-                 <property name="enabled" >
+                <widget class="QProgressBar" name="progressBar">
+                 <property name="enabled">
                   <bool>true</bool>
                  </property>
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="toolTip" >
+                 <property name="toolTip">
                   <string>Current video progress</string>
                  </property>
-                 <property name="value" >
+                 <property name="value">
                   <number>0</number>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QProgressBar" name="totalProgressbar" >
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+                <widget class="QProgressBar" name="totalProgressbar">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="toolTip" >
+                 <property name="toolTip">
                   <string>Batch progress</string>
                  </property>
-                 <property name="maximum" >
+                 <property name="maximum">
                   <number>1</number>
                  </property>
-                 <property name="value" >
+                 <property name="value">
                   <number>0</number>
                  </property>
-                 <property name="format" >
+                 <property name="format">
                   <string>%v / %m</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="cancelButton" >
-                 <property name="enabled" >
+                <widget class="QPushButton" name="cancelButton">
+                 <property name="enabled">
                   <bool>false</bool>
                  </property>
-                 <property name="sizePolicy" >
-                  <sizepolicy vsizetype="Maximum" hsizetype="Maximum" >
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                    <horstretch>0</horstretch>
                    <verstretch>0</verstretch>
                   </sizepolicy>
                  </property>
-                 <property name="toolTip" >
+                 <property name="toolTip">
                   <string/>
                  </property>
-                 <property name="statusTip" >
+                 <property name="statusTip">
                   <string>Abort download</string>
                  </property>
-                 <property name="text" >
+                 <property name="text">
                   <string>&amp;Abort</string>
                  </property>
-                 <property name="icon" >
-                  <iconset resource="abby.qrc" >
+                 <property name="icon">
+                  <iconset resource="abby.qrc">
                    <normaloff>:/process-stop.png</normaloff>:/process-stop.png</iconset>
                  </property>
-                 <property name="iconSize" >
+                 <property name="iconSize">
                   <size>
                    <width>16</width>
                    <height>16</height>
@@ -453,23 +454,23 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="tab_4" >
-            <attribute name="title" >
+           <widget class="QWidget" name="tab_4">
+            <attribute name="title">
              <string>&amp;Log</string>
             </attribute>
-            <layout class="QGridLayout" name="gridLayout_2" >
-             <item row="0" column="0" >
-              <widget class="QTextEdit" name="logEdit" >
-               <property name="enabled" >
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QTextEdit" name="logEdit">
+               <property name="enabled">
                 <bool>true</bool>
                </property>
-               <property name="acceptDrops" >
+               <property name="acceptDrops">
                 <bool>false</bool>
                </property>
-               <property name="toolTip" >
+               <property name="toolTip">
                 <string>Log containing the output generated by c/clive process</string>
                </property>
-               <property name="readOnly" >
+               <property name="readOnly">
                 <bool>true</bool>
                </property>
               </widget>
@@ -481,38 +482,38 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_2" >
-       <attribute name="title" >
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
         <string>&amp;Options</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_6" >
-        <item row="0" column="0" >
-         <widget class="QGroupBox" name="groupBox" >
-          <property name="title" >
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
            <string/>
           </property>
-          <property name="flat" >
+          <property name="flat">
            <bool>false</bool>
           </property>
-          <layout class="QGridLayout" name="gridLayout_4" >
-           <item row="0" column="0" >
-            <layout class="QHBoxLayout" name="horizontalLayout_5" >
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
-              <widget class="QPushButton" name="formatsButton" >
-               <property name="toolTip" >
+              <widget class="QPushButton" name="formatsButton">
+               <property name="toolTip">
                 <string/>
                </property>
-               <property name="text" >
+               <property name="text">
                 <string>V&amp;ideo formats...</string>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_5" >
-               <property name="orientation" >
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeHint" stdset="0" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
                  <height>20</height>
@@ -522,76 +523,107 @@
              </item>
             </layout>
            </item>
-           <item row="1" column="0" >
-            <widget class="QCheckBox" name="titleBox" >
-             <property name="toolTip" >
-              <string/>
-             </property>
-             <property name="text" >
-              <string>&amp;Use video page title for filename</string>
-             </property>
-            </widget>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_6">
+             <item>
+              <widget class="QLabel" name="regexpLabel">
+               <property name="text">
+                <string>Re&amp;gular expression:</string>
+               </property>
+               <property name="buddy">
+                <cstring>regexpEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="regexpEdit"/>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="findAllBox">
+               <property name="text">
+                <string>Re&amp;peat</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_7">
+             <item>
+              <widget class="QLabel" name="cclassLabel">
+               <property name="text">
+                <string>Title &amp;character-class</string>
+               </property>
+               <property name="buddy">
+                <cstring>cclassEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="cclassEdit"/>
+             </item>
+            </layout>
            </item>
           </layout>
          </widget>
         </item>
-        <item row="1" column="0" >
-         <widget class="QGroupBox" name="groupBox_2" >
-          <property name="title" >
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
            <string>Advanced</string>
           </property>
-          <layout class="QFormLayout" name="formLayout" >
-           <property name="fieldGrowthPolicy" >
+          <layout class="QFormLayout" name="formLayout">
+           <property name="fieldGrowthPolicy">
             <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
            </property>
-           <item row="0" column="0" >
-            <widget class="QCheckBox" name="commandBox" >
-             <property name="toolTip" >
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="commandBox">
+             <property name="toolTip">
               <string>Invoke the command defined in the preferences when download finishes</string>
              </property>
-             <property name="text" >
+             <property name="text">
               <string>I&amp;nvoke external command when download finishes</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0" >
-            <layout class="QHBoxLayout" name="horizontalLayout_9" >
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_9">
              <item>
-              <widget class="QCheckBox" name="streamBox" >
-               <property name="toolTip" >
+              <widget class="QCheckBox" name="streamBox">
+               <property name="toolTip">
                 <string>Invoke the stream command defined in the preferences when
 the download reches the specified percent complete</string>
                </property>
-               <property name="text" >
+               <property name="text">
                 <string>S&amp;tart streaming at:</string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QSpinBox" name="streamSpin" >
-               <property name="enabled" >
+              <widget class="QSpinBox" name="streamSpin">
+               <property name="enabled">
                 <bool>false</bool>
                </property>
-               <property name="sizePolicy" >
-                <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
                  <horstretch>0</horstretch>
                  <verstretch>0</verstretch>
                 </sizepolicy>
                </property>
-               <property name="suffix" >
+               <property name="suffix">
                 <string>%</string>
                </property>
-               <property name="minimum" >
+               <property name="minimum">
                 <number>1</number>
                </property>
               </widget>
              </item>
              <item>
-              <spacer name="horizontalSpacer_4" >
-               <property name="orientation" >
+              <spacer name="horizontalSpacer_4">
+               <property name="orientation">
                 <enum>Qt::Horizontal</enum>
                </property>
-               <property name="sizeHint" stdset="0" >
+               <property name="sizeHint" stdset="0">
                 <size>
                  <width>40</width>
                  <height>20</height>
@@ -604,12 +636,12 @@ the download reches the specified percent complete</string>
           </layout>
          </widget>
         </item>
-        <item row="2" column="0" >
-         <spacer name="verticalSpacer" >
-          <property name="orientation" >
+        <item row="2" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
-          <property name="sizeHint" stdset="0" >
+          <property name="sizeHint" stdset="0">
            <size>
             <width>502</width>
             <height>46</height>
@@ -623,207 +655,207 @@ the download reches the specified percent complete</string>
     </item>
    </layout>
   </widget>
-  <widget class="QMenuBar" name="menubar" >
-   <property name="geometry" >
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>545</width>
-     <height>25</height>
+     <height>24</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menu_File" >
-    <property name="title" >
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="action_Download" />
-    <addaction name="separator" />
-    <addaction name="action_Quit" />
+    <addaction name="action_Download"/>
+    <addaction name="separator"/>
+    <addaction name="action_Quit"/>
    </widget>
-   <widget class="QMenu" name="menu_Edit" >
-    <property name="title" >
+   <widget class="QMenu" name="menu_Edit">
+    <property name="title">
      <string>&amp;Edit</string>
     </property>
-    <widget class="QMenu" name="menu_Add" >
-     <property name="title" >
+    <widget class="QMenu" name="menu_Add">
+     <property name="title">
       <string>&amp;Add</string>
      </property>
-     <addaction name="action_Link" />
-     <addaction name="action_RSS" />
-     <addaction name="action_Scan" />
-     <addaction name="action_Paste" />
+     <addaction name="action_Link"/>
+     <addaction name="action_RSS"/>
+     <addaction name="action_Scan"/>
+     <addaction name="action_Paste"/>
     </widget>
-    <addaction name="menu_Add" />
-    <addaction name="separator" />
-    <addaction name="action_Remove" />
-    <addaction name="action_Clear" />
-    <addaction name="separator" />
-    <addaction name="action_Preferences" />
+    <addaction name="menu_Add"/>
+    <addaction name="separator"/>
+    <addaction name="action_Remove"/>
+    <addaction name="action_Clear"/>
+    <addaction name="separator"/>
+    <addaction name="action_Preferences"/>
    </widget>
-   <widget class="QMenu" name="menuHelp" >
-    <property name="title" >
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
      <string>&amp;Help</string>
     </property>
-    <addaction name="action_About" />
+    <addaction name="action_About"/>
    </widget>
-   <addaction name="menu_File" />
-   <addaction name="menu_Edit" />
-   <addaction name="menuHelp" />
+   <addaction name="menu_File"/>
+   <addaction name="menu_Edit"/>
+   <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar" />
-  <action name="action_Quit" >
-   <property name="text" >
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_Quit">
+   <property name="text">
     <string>&amp;Quit</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Quit abby</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="action_Preferences" >
-   <property name="enabled" >
+  <action name="action_Preferences">
+   <property name="enabled">
     <bool>true</bool>
    </property>
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/preferences-desktop.png</normaloff>:/preferences-desktop.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Prefere&amp;nces...</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Edit preferences</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+E</string>
    </property>
   </action>
-  <action name="action_About" >
-   <property name="text" >
+  <action name="action_About">
+   <property name="text">
     <string>&amp;About...</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>About abby</string>
    </property>
   </action>
-  <action name="action_RSS" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_RSS">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;RSS...</string>
    </property>
-   <property name="iconText" >
+   <property name="iconText">
     <string>RSS</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>RSS</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Add from RSS feeds</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Alt+R</string>
    </property>
-   <property name="shortcutContext" >
+   <property name="shortcutContext">
     <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
-  <action name="action_Scan" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_Scan">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;Scan...</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Scan for video linsk</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Alt+S</string>
    </property>
   </action>
-  <action name="action_Link" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_Link">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Link...</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Add link</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Alt+A</string>
    </property>
   </action>
-  <action name="action_Remove" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_Remove">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;Remove</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Remove from list</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+X</string>
    </property>
   </action>
-  <action name="action_Download" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_Download">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>&amp;Download videos</string>
    </property>
-   <property name="toolTip" >
+   <property name="toolTip">
     <string>Download videos</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Download videos</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Alt+D</string>
    </property>
   </action>
-  <action name="action_Paste" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_Paste">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Paste</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Paste from clipboard</string>
    </property>
-   <property name="shortcut" >
+   <property name="shortcut">
     <string>Ctrl+V</string>
    </property>
   </action>
-  <action name="action_Clear" >
-   <property name="icon" >
-    <iconset resource="abby.qrc" >
+  <action name="action_Clear">
+   <property name="icon">
+    <iconset resource="abby.qrc">
      <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
    </property>
-   <property name="text" >
+   <property name="text">
     <string>Clear list</string>
    </property>
-   <property name="statusTip" >
+   <property name="statusTip">
     <string>Clear list</string>
    </property>
   </action>
-  <action name="action_Supported_hosts" >
-   <property name="text" >
+  <action name="action_Supported_hosts">
+   <property name="text">
     <string>&amp;Supported hosts...</string>
    </property>
   </action>
@@ -837,18 +869,20 @@ the download reches the specified percent complete</string>
   <tabstop>rssButton</tabstop>
   <tabstop>scanButton</tabstop>
   <tabstop>startButton</tabstop>
-  <tabstop>logEdit</tabstop>
-  <tabstop>cancelButton</tabstop>
   <tabstop>tabWidget_2</tabstop>
+  <tabstop>cancelButton</tabstop>
+  <tabstop>logEdit</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>formatsButton</tabstop>
-  <tabstop>titleBox</tabstop>
+  <tabstop>regexpEdit</tabstop>
+  <tabstop>findAllBox</tabstop>
+  <tabstop>cclassEdit</tabstop>
   <tabstop>commandBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>
  </tabstops>
  <resources>
-  <include location="abby.qrc" />
+  <include location="abby.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -857,11 +891,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onStart()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>521</x>
      <y>97</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>189</x>
      <y>148</y>
     </hint>
@@ -873,11 +907,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onCancel()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>510</x>
      <y>180</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>189</x>
      <y>148</y>
     </hint>
@@ -889,11 +923,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onAbout()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>189</x>
      <y>151</y>
     </hint>
@@ -905,11 +939,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onStreamStateChanged(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>81</x>
      <y>191</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>253</x>
      <y>139</y>
     </hint>
@@ -921,11 +955,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>189</x>
      <y>148</y>
     </hint>
@@ -937,11 +971,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onPreferences()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>253</x>
      <y>139</y>
     </hint>
@@ -953,11 +987,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onPasteURL()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>416</x>
      <y>84</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>271</x>
      <y>141</y>
     </hint>
@@ -969,11 +1003,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onRSS()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>392</x>
      <y>89</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>271</x>
      <y>164</y>
     </hint>
@@ -985,11 +1019,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onScan()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>480</x>
      <y>89</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>271</x>
      <y>164</y>
     </hint>
@@ -1001,11 +1035,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onAdd()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>36</x>
      <y>82</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>259</x>
      <y>168</y>
     </hint>
@@ -1017,11 +1051,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onRemove()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>36</x>
      <y>146</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>259</x>
      <y>168</y>
     </hint>
@@ -1033,11 +1067,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onRSS()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>259</x>
      <y>168</y>
     </hint>
@@ -1049,11 +1083,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onScan()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>259</x>
      <y>168</y>
     </hint>
@@ -1065,11 +1099,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onRemove()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>259</x>
      <y>168</y>
     </hint>
@@ -1081,11 +1115,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onAdd()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>259</x>
      <y>168</y>
     </hint>
@@ -1097,11 +1131,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onFormats()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>451</x>
      <y>110</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>272</x>
      <y>168</y>
     </hint>
@@ -1113,11 +1147,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onStart()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>272</x>
      <y>168</y>
     </hint>
@@ -1129,11 +1163,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onPasteURL()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>272</x>
      <y>168</y>
     </hint>
@@ -1145,11 +1179,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onClear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>36</x>
      <y>178</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>272</x>
      <y>184</y>
     </hint>
@@ -1161,11 +1195,11 @@ the download reches the specified percent complete</string>
    <receiver>MainWindow</receiver>
    <slot>onClear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>-1</x>
      <y>-1</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>272</x>
      <y>184</y>
     </hint>

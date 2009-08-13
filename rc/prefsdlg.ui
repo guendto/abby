@@ -1,118 +1,109 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Toni Gundogdu</author>
  <class>PreferencesDialog</class>
- <widget class="QDialog" name="PreferencesDialog" >
-  <property name="windowModality" >
+ <widget class="QDialog" name="PreferencesDialog">
+  <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
-  <property name="geometry" >
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>252</height>
+    <height>266</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Preferences</string>
   </property>
-  <property name="sizeGripEnabled" >
+  <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout_5" >
-   <item row="1" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" >
-    <widget class="QTabWidget" name="tabWidget" >
-     <property name="whatsThis" >
+  <layout class="QGridLayout" name="gridLayout_5">
+   <item row="0" column="0">
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="whatsThis">
       <string/>
      </property>
-     <property name="currentIndex" >
+     <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab_4" >
-      <attribute name="title" >
+     <widget class="QWidget" name="tab_4">
+      <attribute name="title">
        <string>&amp;General</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_2" >
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_7" >
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_7">
          <item>
-          <widget class="QLabel" name="label_7" >
-           <property name="text" >
+          <widget class="QLabel" name="label_7">
+           <property name="text">
             <string>&amp;Path to c/clive:</string>
            </property>
-           <property name="buddy" >
+           <property name="buddy">
             <cstring>ccliveEdit</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="ccliveEdit" >
-           <property name="toolTip" >
+          <widget class="QLineEdit" name="ccliveEdit">
+           <property name="toolTip">
             <string>Path to either cclive or clive command</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="ccliveBrowse" >
-           <property name="text" >
+          <widget class="QPushButton" name="ccliveBrowse">
+           <property name="text">
             <string/>
            </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
+           <property name="icon">
+            <iconset resource="abby.qrc">
              <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_6" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
-          <widget class="QLabel" name="label" >
-           <property name="text" >
+          <widget class="QLabel" name="label">
+           <property name="text">
             <string>&amp;Download videos to:</string>
            </property>
-           <property name="buddy" >
+           <property name="buddy">
             <cstring>savedirEdit</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="savedirEdit" >
-           <property name="toolTip" >
+          <widget class="QLineEdit" name="savedirEdit">
+           <property name="toolTip">
             <string>Save downloaded videos to this directory</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="savedirButton" >
-           <property name="text" >
+          <widget class="QPushButton" name="savedirButton">
+           <property name="text">
             <string/>
            </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
+           <property name="icon">
+            <iconset resource="abby.qrc">
              <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="2" column="0" >
-        <spacer name="verticalSpacer_5" >
-         <property name="orientation" >
+       <item row="2" column="0">
+        <spacer name="verticalSpacer_5">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -122,73 +113,73 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2" >
-      <attribute name="title" >
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
        <string>Co&amp;nnection</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout_3" >
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout" >
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout">
          <item>
-          <widget class="QComboBox" name="proxyCombo" >
-           <property name="toolTip" >
+          <widget class="QComboBox" name="proxyCombo">
+           <property name="toolTip">
             <string>Whether a proxy should be used for the HTTP connections</string>
            </property>
            <item>
-            <property name="text" >
+            <property name="text">
              <string>No Proxy</string>
             </property>
            </item>
            <item>
-            <property name="text" >
+            <property name="text">
              <string>Use Proxy</string>
             </property>
            </item>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="proxyEdit" >
-           <property name="enabled" >
+          <widget class="QLineEdit" name="proxyEdit">
+           <property name="enabled">
             <bool>false</bool>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="1" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_3" >
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QCheckBox" name="limitBox" >
-           <property name="toolTip" >
+          <widget class="QCheckBox" name="limitBox">
+           <property name="toolTip">
             <string/>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>&amp;Limit transfer rate:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="limitSpin" >
-           <property name="enabled" >
+          <widget class="QSpinBox" name="limitSpin">
+           <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="suffix" >
+           <property name="suffix">
             <string>KB/s</string>
            </property>
-           <property name="minimum" >
+           <property name="minimum">
             <number>1</number>
            </property>
-           <property name="maximum" >
+           <property name="maximum">
             <number>9999</number>
            </property>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer" >
-           <property name="orientation" >
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -198,60 +189,60 @@
          </item>
         </layout>
        </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_10" >
+       <item row="2" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_10">
          <item>
-          <widget class="QCheckBox" name="timeoutBox" >
-           <property name="minimumSize" >
+          <widget class="QCheckBox" name="timeoutBox">
+           <property name="minimumSize">
             <size>
              <width>80</width>
              <height>0</height>
             </size>
            </property>
-           <property name="toolTip" >
+           <property name="toolTip">
             <string>Maximum time in seconds allowed the connection to the server to take</string>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>&amp;Timeout after:</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QSpinBox" name="timeoutSpin" >
-           <property name="enabled" >
+          <widget class="QSpinBox" name="timeoutSpin">
+           <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="suffix" >
+           <property name="suffix">
             <string>s</string>
            </property>
-           <property name="minimum" >
+           <property name="minimum">
             <number>1</number>
            </property>
-           <property name="maximum" >
+           <property name="maximum">
             <number>9999</number>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="socksBox" >
-           <property name="enabled" >
+          <widget class="QCheckBox" name="socksBox">
+           <property name="enabled">
             <bool>false</bool>
            </property>
-           <property name="toolTip" >
+           <property name="toolTip">
             <string>Workaround the CURL SOCKS proxy bug by using
 CURLOPT_TIMEOUT instead of CURLOPT_CONNECTTIMEOUT</string>
            </property>
-           <property name="text" >
+           <property name="text">
             <string>&amp;Use SOCKS proxy workaround</string>
            </property>
           </widget>
          </item>
          <item>
-          <spacer name="horizontalSpacer_3" >
-           <property name="orientation" >
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -261,12 +252,12 @@ CURLOPT_TIMEOUT instead of CURLOPT_CONNECTTIMEOUT</string>
          </item>
         </layout>
        </item>
-       <item row="3" column="0" >
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
+       <item row="3" column="0">
+        <spacer name="verticalSpacer">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -276,51 +267,26 @@ CURLOPT_TIMEOUT instead of CURLOPT_CONNECTTIMEOUT</string>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab" >
-      <attribute name="title" >
+     <widget class="QWidget" name="tab">
+      <attribute name="title">
        <string>&amp;Misc</string>
       </attribute>
-      <layout class="QGridLayout" name="gridLayout" >
-       <item row="0" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_9" >
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_8">
          <item>
-          <widget class="QLabel" name="label_9" >
-           <property name="text" >
-            <string>&amp;Title character-class:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>cclassEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="cclassEdit" >
-           <property name="toolTip" >
-            <string>Character class for c/clive to use when cleaning up the
-parsed video page titles which are used for filenames.
-
-Example: \w (default)
-</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="2" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_8" >
-         <item>
-          <widget class="QLabel" name="streamLabel" >
-           <property name="text" >
+          <widget class="QLabel" name="streamLabel">
+           <property name="text">
             <string>S&amp;tream command:</string>
            </property>
-           <property name="buddy" >
+           <property name="buddy">
             <cstring>streamEdit</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="streamEdit" >
-           <property name="toolTip" >
+          <widget class="QLineEdit" name="streamEdit">
+           <property name="toolTip">
             <string>Stream command to be invoked when file transfer reaches
 a certain percentage defined in the Options tab.
 
@@ -329,52 +295,78 @@ Example: /usr/local/bin/mplayer -really-quiet %i</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="streamButton" >
-           <property name="text" >
+          <widget class="QPushButton" name="streamButton">
+           <property name="text">
             <string/>
            </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
+           <property name="icon">
+            <iconset resource="abby.qrc">
              <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
            </property>
           </widget>
          </item>
         </layout>
        </item>
-       <item row="6" column="0" >
-        <spacer name="verticalSpacer_3" >
-         <property name="orientation" >
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0" >
-          <size>
-           <width>20</width>
-           <height>99</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item row="4" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_2" >
+       <item row="2" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="langLabel" >
-           <property name="text" >
+          <widget class="QLabel" name="label_4">
+           <property name="text">
+            <string>E&amp;xternal command:</string>
+           </property>
+           <property name="buddy">
+            <cstring>commandEdit</cstring>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="commandEdit">
+           <property name="toolTip">
+            <string>The command to be invoked when download finishes.
+Any &quot;%i&quot; specifiers will be replaced by the name
+of the downloaded video file.
+
+Example: /usr/local/bin/mplayer %i</string>
+           </property>
+           <property name="whatsThis">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="commandButton">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="3" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <widget class="QLabel" name="langLabel">
+           <property name="text">
             <string>&amp;Language:</string>
            </property>
-           <property name="buddy" >
+           <property name="buddy">
             <cstring>langCombo</cstring>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="langCombo" />
+          <widget class="QComboBox" name="langCombo"/>
          </item>
          <item>
-          <spacer name="horizontalSpacer_2" >
-           <property name="orientation" >
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
-           <property name="sizeHint" stdset="0" >
+           <property name="sizeHint" stdset="0">
             <size>
              <width>40</width>
              <height>20</height>
@@ -384,47 +376,31 @@ Example: /usr/local/bin/mplayer -really-quiet %i</string>
          </item>
         </layout>
        </item>
-       <item row="3" column="0" >
-        <layout class="QHBoxLayout" name="horizontalLayout_4" >
-         <item>
-          <widget class="QLabel" name="label_4" >
-           <property name="text" >
-            <string>E&amp;xternal command:</string>
-           </property>
-           <property name="buddy" >
-            <cstring>commandEdit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="commandEdit" >
-           <property name="toolTip" >
-            <string>The command to be invoked when download finishes.
-Any "%i" specifiers will be replaced by the name
-of the downloaded video file.
-
-Example: /usr/local/bin/mplayer %i</string>
-           </property>
-           <property name="whatsThis" >
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QPushButton" name="commandButton" >
-           <property name="text" >
-            <string/>
-           </property>
-           <property name="icon" >
-            <iconset resource="abby.qrc" >
-             <normaloff>:/folder-saved-search.png</normaloff>:/folder-saved-search.png</iconset>
-           </property>
-          </widget>
-         </item>
-        </layout>
+       <item row="5" column="0">
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>99</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
     </widget>
    </item>
   </layout>
@@ -443,7 +419,6 @@ Example: /usr/local/bin/mplayer %i</string>
   <tabstop>timeoutBox</tabstop>
   <tabstop>timeoutSpin</tabstop>
   <tabstop>socksBox</tabstop>
-  <tabstop>cclassEdit</tabstop>
   <tabstop>streamEdit</tabstop>
   <tabstop>streamButton</tabstop>
   <tabstop>commandEdit</tabstop>
@@ -451,7 +426,7 @@ Example: /usr/local/bin/mplayer %i</string>
   <tabstop>langCombo</tabstop>
  </tabstops>
  <resources>
-  <include location="abby.qrc" />
+  <include location="abby.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -460,11 +435,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>257</x>
      <y>188</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -476,11 +451,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>325</x>
      <y>188</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>
@@ -492,11 +467,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onProxyChanged(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>67</x>
      <y>90</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>188</x>
      <y>98</y>
     </hint>
@@ -508,11 +483,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onLimitStateChanged(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>102</x>
      <y>125</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>188</x>
      <y>98</y>
     </hint>
@@ -524,11 +499,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onFinished(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>188</x>
      <y>98</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>188</x>
      <y>98</y>
     </hint>
@@ -540,11 +515,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onBrowseSaveDir()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>319</x>
      <y>57</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>188</x>
      <y>98</y>
     </hint>
@@ -556,11 +531,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onTimeoutStateChanged(int)</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>84</x>
      <y>126</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>258</x>
      <y>111</y>
     </hint>
@@ -572,11 +547,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onBrowseCclive()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>476</x>
      <y>59</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>258</x>
      <y>125</y>
     </hint>
@@ -588,11 +563,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onBrowseStreamCommand()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>476</x>
      <y>128</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>258</x>
      <y>125</y>
     </hint>
@@ -604,11 +579,11 @@ Example: /usr/local/bin/mplayer %i</string>
    <receiver>PreferencesDialog</receiver>
    <slot>onBrowseCommand()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>476</x>
      <y>168</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>258</x>
      <y>125</y>
     </hint>
