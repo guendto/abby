@@ -4,6 +4,7 @@ Version 0.4.3
    * Fix: filename not shown when download starts
 
   Developer-visible changes:
+   * Add INSTALL file
    * Append --print-fname to clive options
      # Fixes "filename not shown when download starts"
      # Bumps clive prerequisite to 2.2.5

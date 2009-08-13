@@ -1,0 +1,23 @@
+
+Prerequisites
+-------------
+
+- Qt 4.4+
+
+  Make sure that the Qt development files can be found
+  if you are trying to build abby from the source code.
+  
+Either:
+  - cclive 0.4.6+
+    http://cclive.googlecode.com/
+
+Or:
+  - clive 2.2.5+
+    http://clive.googlecode.com/
+
+
+Building abby
+-------------
+
+Typically:
+  qmake-qt4 && make
