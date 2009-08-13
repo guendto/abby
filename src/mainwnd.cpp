@@ -707,6 +707,8 @@ MainWindow::onProcStdoutReady() {
                     ETA,
                 };
 
+                progressBar ->setValue( cap[PERCENT].toInt() );
+
                 sizeLabel   ->setText(QString("%1.%2M / %3.%4M")
                     .arg(cap[SIZE_NOW_X])
                     .arg(cap[SIZE_NOW_Y])
