@@ -353,16 +353,8 @@ MainWindow::onStart() {
     // Construct cclive/clive args
 
     QStringList args;
-    QStringList env;
 
-    args << "--print-fname";
-
-    if (!isCclive) {
-        args << "--stderr";
-        // Set environment variables for clive
-        env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
-             << QString("HOME=%1").arg(QDir::homePath()); // $env{HOME}
-    }
+    args << "--print-fname" << "--continue";
 
     QString s = prefs->streamEdit->text();
     if (!s.isEmpty() && streamBox->isChecked()) {
@@ -399,16 +391,22 @@ MainWindow::onStart() {
             args << QString("--connect-timeout-socks=%1").arg(n);
     }
 
-    args << "--continue"; // default to continue
+    QStringList env;
 
     if (isCclive) {
-        // TODO: --regexp, --find-all
         s = regexpEdit->text();
         if (!s.isEmpty())
             args << QString("--regexp=%1").arg(s);
         if (findallBox->checkState())
             args << QString("--find-all");
     } else {
+
+        args << "--stderr";
+
+        // Set environment variables for clive
+        env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
+             << QString("HOME=%1").arg(QDir::homePath()); // $env{HOME}
+
         s = cclassEdit->text();
         if (!s.isEmpty())
             args << QString("--cclass=%1").arg(s);
