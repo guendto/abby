@@ -59,9 +59,9 @@ private:
     ScanDialog *scan;
     FormatDialog *format;
     QProcess process;
-    bool cancelled;
-    bool errorOccurred;
-    bool isCclive;
+    bool cancelledFlag;
+    bool isCcliveFlag;
+    bool errorFlag;
     QString versionOutput;
     QString ccliveVersion;
     QString curlVersion;

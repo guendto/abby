@@ -43,7 +43,7 @@
 typedef unsigned int _uint;
 
 MainWindow::MainWindow()
-    : cancelled(false), isCclive(false)
+    : cancelledFlag(false), isCcliveFlag(false)
 {
 /*
  The word "English" is not meant to be translated literally.
@@ -164,7 +164,7 @@ MainWindow::parseCcliveVersionOutput() {
     proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start(path, QStringList() << "--version");
 
-    isCclive = false;
+    isCcliveFlag = false;
 
     if (!proc.waitForFinished())
         qDebug() << path << ": " << proc.errorString();
@@ -174,7 +174,7 @@ MainWindow::parseCcliveVersionOutput() {
         QStringList tmp = versionOutput.split("\n", QString::SkipEmptyParts);
         QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
 
-        isCclive = (lst[0] == "cclive");
+        isCcliveFlag = (lst[0] == "cclive");
 
         ccliveVersion = lst[2];
         curlVersion   = lst[6];
@@ -221,7 +221,7 @@ MainWindow::updateWidgets(const bool updateCcliveDepends) {
     if (updateCcliveDepends) {
         // The most time consuming check is to run (c)clive.
         // Run it only when we cannot work around it.
-        if (isCclive) {
+        if (isCcliveFlag) {
             regexpLabel ->show();
             regexpEdit  ->show();
             findallBox  ->show();
@@ -393,7 +393,7 @@ MainWindow::onStart() {
 
     QStringList env;
 
-    if (isCclive) {
+    if (isCcliveFlag) {
         s = regexpEdit->text();
         if (!s.isEmpty())
             args << QString("--regexp=%1").arg(s);
@@ -453,7 +453,7 @@ MainWindow::onStart() {
 
     // And finally start the process
 
-    cancelled = false;
+    cancelledFlag = false;
     process.setEnvironment(env);
     process.setProcessChannelMode(QProcess::MergedChannels);
     process.start(path,args);
@@ -461,7 +461,7 @@ MainWindow::onStart() {
 
 void
 MainWindow::onCancel() {
-    cancelled = true;
+    cancelledFlag = true;
     process.kill();
 }
 
@@ -623,7 +623,7 @@ MainWindow::onProcStarted() {
 
     tabWidget->setTabEnabled(1, false);
 
-    errorOccurred = false;
+    errorFlag = false;
 }
 
 void
@@ -637,63 +637,107 @@ MainWindow::onProcError(QProcess::ProcessError err) {
 
 void
 MainWindow::onProcStdoutReady() {
+
     // NOTE: We read both channels stdout and stderr.
-    QString newText =
-        QString::fromLocal8Bit(process.readAll());
 
-    QStringList tmp = newText.split("\n", QString::SkipEmptyParts);
-    if (tmp.isEmpty())
-        return;
+    char data[1024];
+    memset(&data, 0, sizeof(data));
 
-    QString status, last = tmp.last();
+    QStatusBar *sb = statusBar();
+    bool appendLogFlag = true;
 
-    if (last.startsWith("fetch http://")) {
-        status = tr("Fetching link...");
-        totalProgressbar->setValue(totalProgressbar->value()+1);
+    while (process.readLine(data, sizeof(data))) {
+
+        appendLogFlag = true;
+        
+        QString ln = QString::fromLocal8Bit(data);
+        ln.remove("\n");
+
+        if (ln.startsWith("fetch http://")) {
+            sb->showMessage( tr("Fetching ...") );
+            totalProgressbar->setValue( totalProgressbar->value()+1 );
+        }
+
+        else if (ln.startsWith("verify"))
+            sb->showMessage( tr("Verifying link ...") );
+
+        else if (ln.startsWith("file:")) {
+            QRegExp re("file: (.*)(\\d+.\\d+)M");
+            re.indexIn(ln);
+            fileLabel->setText( re.capturedTexts()[1].simplified() );
+            sb->showMessage( tr("Downloading video ...") );
+        }
+
+        else if (ln.startsWith("error:"))
+            errorFlag = true;
+
+        else {
+
+            appendLogFlag = false;
+
+            // In an parallel world I have written a cleaner regexp.
+            static const char progress_re[] =
+                "(\\d+)%" // percent 
+                "\\s+(\\d+)\\.(\\d+)M\\s+\\/\\s+(\\d+)\\.(\\d+)M" // xxM / yyM
+                "\\s+(\\d+)\\.(\\d+)(\\w)\\/\\w" // speed
+                "\\s+(.*)"; // eta
+
+            QRegExp re(progress_re);
+
+            if (re.indexIn(ln)) {
+                QStringList cap = re.capturedTexts();
+
+                cap.removeFirst();
+
+                if (cap[0].isEmpty())
+                    continue;
+
+                //qDebug() << cap;
+
+                enum {
+                    PERCENT = 0,
+                    SIZE_NOW_X,
+                    SIZE_NOW_Y,
+                    SIZE_EXPECTED_X,
+                    SIZE_EXPECTED_Y,
+                    SPEED_X,
+                    SPEED_Y,
+                    SPEED_TYPE,
+                    ETA,
+                };
+
+                sizeLabel   ->setText(QString("%1.%2M / %3.%4M")
+                    .arg(cap[SIZE_NOW_X])
+                    .arg(cap[SIZE_NOW_Y])
+                    .arg(cap[SIZE_EXPECTED_X])
+                    .arg(cap[SIZE_EXPECTED_Y]));
+
+                rateLabel   ->setText(QString("%1.%2%3/s")
+                    .arg(cap[SPEED_X])
+                    .arg(cap[SPEED_Y])
+                    .arg(cap[SPEED_TYPE]));
+
+                etaLabel    ->setText(cap[ETA].simplified());
+            }
+        }
+
+        if (appendLogFlag)
+            updateLog(ln + "\n");
+
+        memset(&data, 0, sizeof(data));
     }
-    else if (last.startsWith("verify") || last.startsWith("query length") )
-        status = tr("Verifying video link...");
-    else if (last.startsWith("error:"))
-        errorOccurred = true;
-
-    if (newText.contains("file:")) {
-        QStringList tmp = newText.split(" ", QString::SkipEmptyParts);
-        fileLabel->setText(tmp[1].remove("\n"));
-        status = tr("Extracting video...");
-    }
-
-    if (!status.isEmpty())
-        statusBar()->showMessage(status.remove("\n"));
-
-    if (last.contains("%")) {
-        newText.replace("\n", " ");
-
-        QStringList tmp = newText.split(" ", QString::SkipEmptyParts);
-        QString percent = tmp[1].remove(QChar('%'));
-        QString now     = tmp[2];
-        QString expected= tmp[4];
-        QString rate    = tmp[5];
-        QString eta     = tmp[6];
-
-        sizeLabel->setText(now +" / "+ expected);
-        progressBar->setValue(percent.toInt());
-        rateLabel->setText(rate);
-        etaLabel->setText(eta);
-    }
-    else
-        updateLog(newText);
 }
 
 void
 MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
     QString status;
-    if (!errorOccurred) {
+    if (!errorFlag) {
         if (exitStatus == QProcess::NormalExit) {
             status = exitCode != 0
                 ? tr("Process exited with an error. See Log for details")
                 : tr("Process exited normally");
         } else {
-            status = cancelled
+            status = cancelledFlag
                 ? tr("Process terminated")
                 : tr("Process crashed. See Log for details");
         }

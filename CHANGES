@@ -8,8 +8,11 @@ Version 0.4.3
      # No longer supported by cclive as of 0.5.0
    * Fix: filename not shown when download starts
    * Fix: typo in statustip "scan for video links"
+   * Fix: filename parsing when it contains whitespace
 
   Developer-visible changes:
+   * Rewrite QProcess output parsing
+     # Fixes "filename parsing when it contains whitespace"
    * Add INSTALL file
    * Append --print-fname to clive options
      # Fixes "filename not shown when download starts"
