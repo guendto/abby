@@ -253,6 +253,7 @@ MainWindow::writeSettings() {
     s.setValue("regexpEdit", regexpEdit->text());
     s.setValue("findallBox", findallBox->checkState());
     s.setValue("cclassEdit", cclassEdit->text());
+    s.setValue("fnamefmtEdit", fnamefmtEdit->text());
     s.endGroup();
 }
 
@@ -268,6 +269,7 @@ MainWindow::readSettings() {
         ? Qt::Checked
         : Qt::Unchecked);
     cclassEdit->setText( s.value("cclassEdit").toString() );
+    fnamefmtEdit->setText( s.value("fnamefmtEdit").toString() );
     s.endGroup();
 }
 
@@ -411,6 +413,10 @@ MainWindow::onStart() {
         if (!s.isEmpty())
             args << QString("--cclass=%1").arg(s);
     }
+
+    s = fnamefmtEdit->text();
+    if (!s.isEmpty())
+        args << QString("--filename-format=%1").arg(s);
 
     // Check if all video page links are of the same host.
 

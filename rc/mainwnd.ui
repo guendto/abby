@@ -564,6 +564,23 @@
              </item>
             </layout>
            </item>
+           <item row="3" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Filena&amp;me format:</string>
+               </property>
+               <property name="buddy">
+                <cstring>fnamefmtEdit</cstring>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="fnamefmtEdit"/>
+             </item>
+            </layout>
+           </item>
           </layout>
          </widget>
         </item>
