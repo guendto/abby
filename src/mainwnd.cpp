@@ -250,6 +250,9 @@ MainWindow::writeSettings() {
     s.beginGroup("MainWindow");
     s.setValue("size", size());
     s.setValue("pos", pos());
+    s.setValue("regexpEdit", regexpEdit->text());
+    s.setValue("findAllBox", findAllBox->checkState());
+    s.setValue("cclassEdit", cclassEdit->text());
     s.endGroup();
 }
 
@@ -259,6 +262,12 @@ MainWindow::readSettings() {
     s.beginGroup("MainWindow");
     resize( s.value("size", QSize(525,265)).toSize() );
     move( s.value("pos", QPoint(200,200)).toPoint() );
+    regexpEdit->setText( s.value("regexpEdit").toString() );
+    findAllBox->setCheckState(
+        s.value("findAllBox").toBool()
+        ? Qt::Checked
+        : Qt::Unchecked);
+    cclassEdit->setText( s.value("cclassEdit").toString() );
     s.endGroup();
 }
 
