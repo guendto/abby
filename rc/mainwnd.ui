@@ -536,10 +536,17 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="regexpEdit"/>
+              <widget class="QLineEdit" name="regexpEdit">
+               <property name="toolTip">
+                <string>Regular expression to filter video title. Example: &quot;(\w|\s)&quot;</string>
+               </property>
+              </widget>
              </item>
              <item>
               <widget class="QCheckBox" name="findallBox">
+               <property name="toolTip">
+                <string>Use repeated matching to find all occurences, similar to Perl's /g.</string>
+               </property>
                <property name="text">
                 <string>Re&amp;peat</string>
                </property>
@@ -560,7 +567,11 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="cclassEdit"/>
+              <widget class="QLineEdit" name="cclassEdit">
+               <property name="toolTip">
+                <string>Character class to filter video title, e.g. &quot;[A-Za-z0-9]&quot;.</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
@@ -577,7 +588,21 @@
               </widget>
              </item>
              <item>
-              <widget class="QLineEdit" name="fnamefmtEdit"/>
+              <widget class="QLineEdit" name="fnamefmtEdit">
+               <property name="toolTip">
+                <string>Use the specified format string to format the output filenames.
+cclive defaults to &quot;%h_%i.%s&quot;, whereas clive defaults to &quot;%t.%s.&quot;.
+
+Any of the following specifiers appearing in the format string will
+be replaced accordingly:
+
+  %t = video title
+  %i = video id
+  %h = website id
+  %s = file suffix
+</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
