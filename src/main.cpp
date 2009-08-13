@@ -25,10 +25,12 @@ int
 main (int argc, char *argv[]) {
     QApplication app(argc,argv);
 
-    QCoreApplication::setOrganizationName("abby");
-    QCoreApplication::setApplicationName("abby");
-    //QCoreApplication::setApplicationVersion("0.1.0"); // 4.4+
-    QCoreApplication::setOrganizationDomain("code.google.com/p/abby");
+    #define APPNAME "abby"
+
+    QCoreApplication::setOrganizationName  (APPNAME);
+    QCoreApplication::setApplicationName   (APPNAME);
+    QCoreApplication::setApplicationVersion("0.4.3"); // req. qt4.4+
+    QCoreApplication::setOrganizationDomain("abby.googlecode.com");
 
     QSettings settings;
     settings.beginGroup("PreferencesDialog");
