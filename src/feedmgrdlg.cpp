@@ -23,6 +23,8 @@
 
 #include "feedmgrdlg.h"
 
+typedef unsigned int _uint;
+
 FeedMgrDialog::FeedMgrDialog(QWidget *parent)
     : QDialog(parent)
 {
@@ -62,7 +64,8 @@ FeedMgrDialog::onRemove() {
         return;
     }
 
-    for (register int i=0; i<sel.size(); ++i) {
+    const register _uint size = sel.size();
+    for (register _uint i=0; i<size; ++i) {
         const int row = feedsList->row(sel[i]);
         delete feedsList->takeItem(row);
     }
@@ -91,7 +94,8 @@ FeedMgrDialog::writeSettings() {
     s.setValue("size", size());
 
     s.beginWriteArray("feeds");
-    for (register int i=0; i<feedsList->count(); ++i) {
+    const register _uint count = feedsList->count();
+    for (register _uint i=0; i<count; ++i) {
         s.setArrayIndex(i);
         QListWidgetItem *item = feedsList->item(i);
         s.setValue("link",item->text());
@@ -107,8 +111,8 @@ FeedMgrDialog::readSettings() {
 
     s.beginGroup("FeedMgrDialog");
     resize( s.value("size", QSize(505,255)).toSize() );
-    const int size = s.beginReadArray("feeds");
-    for (register int i=0; i<size; ++i) {
+    const register _uint size = s.beginReadArray("feeds");
+    for (register _uint i=0; i<size; ++i) {
         s.setArrayIndex(i);
         feedsList->addItem(s.value("link").toString());
     }

@@ -64,10 +64,13 @@ FormatDialog::updateFormats() {
     QString curr        = hostBox->currentText();
     QStringList formats = hosts[curr].split("|");
 
-    for (register int i=0; i<formats.size(); ++i)
+    typedef unsigned int _uint;
+    const register _uint size = formats.size();
+
+    for (register _uint i=0; i<size; ++i)
         formatBox->addItem(formats[i]);
 
-    if (formats.size() > 1)
+    if (size > 1)
         formatBox->addItem("best");
 
     if (!sel[curr].isEmpty()) {

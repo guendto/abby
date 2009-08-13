@@ -112,10 +112,13 @@ matchScanContent (const QStringList& lst, QRegExp& re, const QString& content) {
     return matches;
 }
 
+typedef unsigned int _uint;
+
 #ifdef _1_
 static void
 dumpScanMatches (const QStringList& lst) {
-    for (register int i=0; i<lst.size(); ++i)
+    const register _uint size = lst.size();
+    for (register _uint i=0; i<size; ++i)
         qDebug() << lst[i];
     qDebug() << "total: " << lst.size();
 }
@@ -147,17 +150,21 @@ ScanDialog::scanContent(QNetworkReply *reply) {
     scanYoutubeEmbed    (IDs, content);
     scanYoutubeRegular  (IDs, content);
 
-    register int i;
-    for (i=0; i<IDs.size(); ++i)
+    const register _uint ids_size = IDs.size();
+    register _uint i;
+
+    for (i=0; i<ids_size; ++i)
         links << "http://www.youtube.com/watch?v="+IDs[i];
+
+    const register _uint links_size = links.size();
 
     if (titlesBox->checkState()) {
         titleMode = true;
-        for (i=0; i<links.size(); ++i)
+        for (i=0; i<links_size; ++i)
             mgr->get( QNetworkRequest(links[i]) );
     }
     else {
-        for (i=0; i<links.size(); ++i) {
+        for (i=0; i<links_size; ++i) {
             QTreeWidgetItem *item = new QTreeWidgetItem;
             item->setCheckState(0, Qt::Unchecked);
             item->setText(0, links[i]);

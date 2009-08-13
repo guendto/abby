@@ -33,7 +33,8 @@ PreferencesDialog::PreferencesDialog(QWidget *parent)
 
     int sel = 0;
     qmFiles = findQmFiles();
-    for (register int i=0; i<qmFiles.size(); ++i) {
+    typedef unsigned int _uint;
+    for (register _uint i=0; i<qmFiles.size(); ++i) {
         langCombo->addItem(langName(qmFiles[i]));
         if (qmFile == qmFiles[i])
             sel = i+1;
