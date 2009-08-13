@@ -790,7 +790,7 @@ the download reches the specified percent complete</string>
     <string>&amp;Scan...</string>
    </property>
    <property name="statusTip">
-    <string>Scan for video linsk</string>
+    <string>Scan for video links</string>
    </property>
    <property name="shortcut">
     <string>Alt+S</string>
