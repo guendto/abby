@@ -392,6 +392,11 @@ MainWindow::onStart() {
 
     if (isCclive) {
         // TODO: --regexp, --find-all
+        s = regexpEdit->text();
+        if (!s.isEmpty())
+            args << QString("--regexp=%1").arg(s);
+        if (findAllBox->checkState())
+            args << QString("--find-all");
     } else {
         s = cclassEdit->text();
         if (!s.isEmpty())
