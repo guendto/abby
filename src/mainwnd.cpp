@@ -341,9 +341,9 @@ MainWindow::onStart() {
     QStringList args;
     QStringList env;
 
-    if (isCclive) {
-        args << "--print-fname";
-    } else {
+    args << "--print-fname";
+
+    if (!isCclive) {
         args << "--stderr";
         // Set environment variables for clive
         env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
