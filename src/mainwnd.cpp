@@ -40,6 +40,8 @@
         QString( tr("c/clive executable not found, please check the path.") )); \
     } while (0)
 
+typedef unsigned int _uint;
+
 MainWindow::MainWindow()
     : cancelled(false), isCclive(false)
 {
@@ -133,8 +135,8 @@ MainWindow::parseCcliveHostsOutput() {
 
         lst.removeLast(); // Note line.
 
-        const int size = lst.size();
-        for (register int i=0; i<size; ++i) {
+        const register _uint size = lst.size();
+        for (register _uint i=0; i<size; ++i) {
 
             QString ln      = lst[i].remove("\r");
             QStringList tmp = ln.split("\t");
@@ -403,9 +405,9 @@ MainWindow::onStart() {
     QUrl first(linksList->item(0)->text());
 
     bool allSame    = true;
-    const int count = linksList->count();
+    const register _uint count = linksList->count();
 
-    for (register int i=0; i<count; ++i) {
+    for (register _uint i=0; i<count; ++i) {
 
         QUrl url(linksList->item(i)->text());
 
@@ -423,7 +425,7 @@ MainWindow::onStart() {
 
     args << QString("--format=%1").arg(s);
 
-    for (register int i=0; i<count; ++i)
+    for (register _uint i=0; i<count; ++i)
         args << QString("%1").arg(linksList->item(i)->text());
 
     totalProgressbar->setMaximum(linksList->count());
@@ -483,9 +485,9 @@ MainWindow::onPasteURL() {
 
     QClipboard *cb  = QApplication::clipboard();
     QStringList lst = cb->text().split("\n");
-    const int size  = lst.size();
+    const register _uint size  = lst.size();
 
-    for (register int i=0; i<size; ++i)
+    for (register _uint i=0; i<size; ++i)
         addPageLink(lst[i]);
 }
 
@@ -511,9 +513,9 @@ MainWindow::onRemove() {
         return;
     }
 
-    const int size = sel.size();
+    const register _uint size = sel.size();
 
-    for (register int i=0; i<size; ++i) {
+    for (register _uint i=0; i<size; ++i) {
         const int row = linksList->row(sel[i]);
         delete linksList->takeItem(row);
     }
