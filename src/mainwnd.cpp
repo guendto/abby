@@ -330,7 +330,8 @@ MainWindow::onStart() {
 
     if (linksList->count() == 0) {
         onAdd();
-        return;
+        if (linksList->count() == 0)
+            return;
     }
 
     QString path = prefs->ccliveEdit->text();
