@@ -25,11 +25,15 @@ AboutDialog::AboutDialog(QWidget *parent,
 {
     setupUi(this);
 
-    abbyVersionLabel->setText(
+    abbyVersionLabel    ->setText(
         QCoreApplication::applicationVersion()); // set in src/main.cpp
 
-    qtVersionLabel->setText(qVersion());
+    qtVersionLabel      ->setText(qVersion());
+    ccliveVersionLabel  ->setText(ccliveVersion);
+    curlVersionLabel    ->setText(curlVersion);
 
-    ccliveVersionLabel->setText(ccliveVersion);
-    curlVersionLabel->setText(curlVersion);
+    const char *locale = getenv("LANG");
+
+    if (locale)
+        localeLabel     ->setText(locale);
 }
