@@ -3,11 +3,15 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* add: support for --stream-pass
-* allow use of link "titles/names" in feedmgr
-* add: support for dropping links to list
-* clean up: remove excess code
+* allow use of link "titles/names" in feedmgr (split with "||")
+
+0.5.0
+-----
+* cleanup: remove excess code
   - common code -> src/util.(cpp|h)
   - e.g. HTTP redirect code (rss/scan)
-* a proper application icon to replace the current "TODO" icon
+
+Unspecified
+-----------
+* proper application icon to replace the current "TODO" icon
   - 32x32 or higher (24bit preferably)
