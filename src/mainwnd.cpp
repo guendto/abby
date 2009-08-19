@@ -733,22 +733,30 @@ MainWindow::onProcStdoutReady() {
 
 void
 MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
-    QString status;
-    if (!errorFlag) {
-        if (exitStatus == QProcess::NormalExit) {
-            status = exitCode != 0
-                ? tr("Process exited with an error. See Log for details")
-                : tr("Process exited normally");
-        } else {
-            status = cancelledFlag
-                ? tr("Process terminated")
-                : tr("Process crashed. See Log for details");
-        }
-        updateLog(status + ".");
-    }
-    else
-        status = tr("Error(s) occurred. See Log for details.");
 
+    QString status;
+
+    switch (exitStatus) {
+    case QProcess::NormalExit:
+        switch (exitCode) {
+        case 0:
+            status = tr("c/clive exited normally.");
+            break;
+        default:
+            status =
+                QString(tr("c/clive exited with code %1, see log."))
+                    .arg(exitCode);
+            break;
+        }
+        break;
+    default:
+        status = cancelledFlag
+            ? tr("c/clive terminated by user.")
+            : tr("c/clive crashed, see log.");
+        break;
+    }
+
+    updateLog(status);
     statusBar()->showMessage(status);
 
     addButton   ->setEnabled(true);
