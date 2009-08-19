@@ -675,7 +675,7 @@ MainWindow::onProcStdoutReady() {
 
             appendLogFlag = false;
 
-            // In an parallel world I have written a cleaner regexp.
+            // In some parallel world I have written a cleaner regexp.
             static const char progress_re[] =
                 "(\\d+)%" // percent 
                 "\\s+(\\d+)\\.(\\d+)M\\s+\\/\\s+(\\d+)\\.(\\d+)M" // xxM / yyM
