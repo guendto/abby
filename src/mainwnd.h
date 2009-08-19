@@ -61,7 +61,6 @@ private:
     QProcess process;
     bool cancelledFlag;
     bool isCcliveFlag;
-    bool errorFlag;
     QString versionOutput;
     QString ccliveVersion;
     QString curlVersion;

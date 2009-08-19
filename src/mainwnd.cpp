@@ -623,8 +623,6 @@ MainWindow::onProcStarted() {
     linksList   ->setEnabled(false);
 
     tabWidget->setTabEnabled(1, false);
-
-    errorFlag = false;
 }
 
 void
@@ -669,8 +667,9 @@ MainWindow::onProcStdoutReady() {
             sb->showMessage( tr("Downloading video ...") );
         }
 
-        else if (ln.startsWith("error:"))
-            errorFlag = true;
+        else if (ln.startsWith("error:")) {
+            // Log it.
+        }
 
         else {
 
