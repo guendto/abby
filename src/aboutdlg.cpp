@@ -32,8 +32,8 @@ AboutDialog::AboutDialog(QWidget *parent,
     ccliveVersionLabel  ->setText(ccliveVersion);
     curlVersionLabel    ->setText(curlVersion);
 
+    // TODO: Improve. Relies on LANG setting only.
     const char *locale = getenv("LANG");
-
     if (locale)
         localeLabel     ->setText(locale);
 }
