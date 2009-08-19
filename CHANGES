@@ -15,6 +15,7 @@ Version 0.4.3
   Developer-visible changes:
    * Rewrite QProcess output parsing
      # Fixes "filename parsing when it contains whitespace"
+     # Process exit code instead of parsing output
    * Add INSTALL file
    * Append --print-fname to clive options
      # Fixes "filename not shown when download starts"
