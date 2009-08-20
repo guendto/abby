@@ -20,7 +20,9 @@
 #include "aboutdlg.h"
 
 AboutDialog::AboutDialog(QWidget *parent,
-    const QString& ccliveVersion, const QString& curlVersion)
+    const QString& ccliveVersion,
+    const QString& curlMod,
+    const QString& curlVersion)
     : QDialog(parent)
 {
     setupUi(this);
@@ -30,6 +32,7 @@ AboutDialog::AboutDialog(QWidget *parent,
 
     qtVersionLabel      ->setText(qVersion());
     ccliveVersionLabel  ->setText(ccliveVersion);
+    curlModLabel        ->setText(curlMod+":");
     curlVersionLabel    ->setText(curlVersion);
 
     // TODO: Improve. Relies on LANG setting only.

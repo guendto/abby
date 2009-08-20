@@ -26,6 +26,7 @@ class AboutDialog : public QDialog, private Ui::AboutDialog {
     Q_OBJECT
 public:
     AboutDialog(QWidget *parent,
-        const QString& ccliveVersion, const QString& curlVersion);
+        const QString& ccliveVersion, const QString& curlMod,
+            const QString& curlVersion);
 };
 #endif
