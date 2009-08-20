@@ -20,17 +20,17 @@
 
 #include "formatdlg.h"
 
-/* The contents of this dialog changes dynamically based
- * on c/clive --hosts output. abby tries to make switching
- * between cclive and clive as transparent as possible
- * as there are some differences in supported websites. */
+/* The contents of this dialog changes dynamically based on
+ * c/clive --hosts output. abby tries to make switching
+ * between cclive and clive as transparent as possible as
+ * there may be differences in supported websites. */
  
-/* Because QComboBox does not have setCurrentText in Qt 4.4
- * we have to use two maps to keep track of the selections
- * instead of only one. See sel and selN. The former stores
- * selected "format ID", and the latter the matching QComboBox
- * index for that ID -- currently only needed for setCurrentIndex,
- * since setCurrentText is missing. */
+/* Because QComboBox does not have setCurrentText we have to
+ * use two maps to keep track of the selections instead of
+ * only one. See sel and selN. The former stores selected
+ * "format ID", and the latter the matching QComboBox index
+ * to that ID (needed for setCurrentIndex, due to lack of
+ * setCurrentText) since setCurrentText is missing. */
 
 FormatDialog::FormatDialog(QWidget *parent)
     : QDialog(parent)
