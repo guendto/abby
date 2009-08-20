@@ -34,10 +34,23 @@
 #include "formatdlg.h"
 #include "aboutdlg.h"
 
-#define critCcliveNotFound \
+#define critCcliveProcessFailed(msg) \
     do { \
     QMessageBox::critical(this, QCoreApplication::applicationName(), \
-        QString( tr("c/clive executable not found, please check the path.") )); \
+        QString( tr("Error while trying to run c/clive:\n%1") ).arg(msg)); \
+    } while (0)
+
+#define critCcliveNotSpecified \
+    do { \
+    QMessageBox::critical(this, QCoreApplication::applicationName(), \
+      QString( tr("c/clive executable not found, please check the path.") )); \
+    } while (0)
+
+#define critCcliveExitedWithError(code,msg) \
+    do { \
+    QMessageBox::critical(this, QCoreApplication::applicationName(), \
+        QString( tr("c/clive exited with error code %1:\n%2") ) \
+            .arg(code).arg(msg)); \
     } while (0)
 
 typedef unsigned int _uint;
@@ -120,32 +133,46 @@ MainWindow::parseCcliveHostsOutput() {
     }
 
     QProcess proc;
-
+    proc.setEnvironment(QStringList() << "CCLIVE_NO_CONFIG=1");
     proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start(path, QStringList() << "--hosts");
 
+    format->resetHosts();
+
     if (!proc.waitForFinished()) {
-        qDebug() << path << ": " << proc.errorString();
-        critCcliveNotFound;
+        critCcliveProcessFailed( proc.errorString() );
         return false;
     }
     else {
-        QString output  = QString::fromLocal8Bit(proc.readAll());
-        QStringList lst = output.split("\n", QString::SkipEmptyParts);
+        const QString output =
+            QString::fromLocal8Bit( proc.readAll() );
 
-        lst.removeLast(); // Note line.
+        const int exitCode =
+            proc.exitCode();
 
-        const register _uint size = lst.size();
-        for (register _uint i=0; i<size; ++i) {
+        if (exitCode == 0) {
 
-            QString ln      = lst[i].remove("\r");
-            QStringList tmp = ln.split("\t");
+            QStringList lst =
+                output.split("\n", QString::SkipEmptyParts);
 
-            if (!tmp[0].isEmpty() && !tmp[1].isEmpty())
-                hosts[tmp[0]]   = tmp[1];
+            lst.removeLast(); // The note line.
+
+            const register _uint size = lst.size();
+            for (register _uint i=0; i<size; ++i) {
+
+                QString ln      = lst[i].remove("\r");
+                QStringList tmp = ln.split("\t");
+
+                if (!tmp[0].isEmpty() && !tmp[1].isEmpty())
+                    hosts[tmp[0]] = tmp[1];
+            }
+
+            format->parseHosts(hosts);
         }
-
-        format->parseHosts(hosts);
+        else {
+            critCcliveExitedWithError(exitCode, output);
+            return false;
+        }
     }
 
     return true;
@@ -161,23 +188,39 @@ MainWindow::parseCcliveVersionOutput() {
     QString path = prefs->ccliveEdit->text();
 
     QProcess proc;
+    process.setEnvironment( QStringList() << "CCLIVE_NO_CONFIG=1" );
     proc.setProcessChannelMode(QProcess::MergedChannels);
     proc.start(path, QStringList() << "--version");
 
     isCcliveFlag = false;
 
     if (!proc.waitForFinished())
-        qDebug() << path << ": " << proc.errorString();
+        critCcliveProcessFailed(proc.errorString());
     else {
-        versionOutput = QString::fromLocal8Bit(proc.readAll());
 
-        QStringList tmp = versionOutput.split("\n", QString::SkipEmptyParts);
-        QStringList lst = tmp[0].split(" ", QString::SkipEmptyParts);
+        const QString output =
+            QString::fromLocal8Bit( proc.readAll() );
 
-        isCcliveFlag = (lst[0] == "cclive");
+        const int exitCode =
+            proc.exitCode();
 
-        ccliveVersion = lst[2];
-        curlVersion   = lst[6];
+        if (exitCode == 0) {
+            versionOutput = output;
+//            qDebug() << versionOutput;
+
+            QStringList tmp =
+                versionOutput.split("\n", QString::SkipEmptyParts);
+
+            QStringList lst =
+                tmp[0].split(" ", QString::SkipEmptyParts);
+
+            isCcliveFlag  = (lst[0] == "cclive");
+            ccliveVersion = lst[2];
+            curlMod       = lst[4];
+            curlVersion   = lst[6];
+        }
+        else
+            critCcliveExitedWithError(exitCode, output);
     }
 }
 
@@ -292,8 +335,8 @@ MainWindow::onPreferences() {
     QString _new = prefs->ccliveEdit->text();
 
     if (old != _new) {
-        parseCcliveHostsOutput();
-        parseCcliveVersionOutput();
+        if (parseCcliveHostsOutput())
+            parseCcliveVersionOutput();
     }
 
     updateWidgets(old != _new);
@@ -327,6 +370,12 @@ MainWindow::onStreamStateChanged(int state) {
 
 void
 MainWindow::onStart() {
+
+    if ( ccliveVersion.isEmpty() ) {
+        critCcliveNotSpecified;
+        onPreferences();
+        return;
+    }
 
     if (linksList->count() == 0) {
         onAdd();
@@ -405,8 +454,9 @@ MainWindow::onStart() {
         args << "--stderr";
 
         // Set environment variables for clive
-        env  << "COLUMNS=80" << "LINES=24" // Term::ReadKey
-             << QString("HOME=%1").arg(QDir::homePath()); // $env{HOME}
+        env  << "COLUMNS=80" << "LINES=24"               // Term::ReadKey
+             << QString("HOME=%1").arg(QDir::homePath()) // $env{HOME}
+             << "CCLIVE_NO_CONFIG=1";                    // cclive 0.5.0+
 
         s = cclassEdit->text();
         if (!s.isEmpty())
@@ -468,7 +518,7 @@ MainWindow::onCancel() {
 
 void
 MainWindow::onAbout() {
-    AboutDialog(this, ccliveVersion, curlVersion).exec();
+    AboutDialog(this, ccliveVersion, curlMod, curlVersion).exec();
 }
 
 #define fillList(dlg) \
@@ -581,11 +631,12 @@ MainWindow::addPageLink(QString lnk) {
 
 void
 MainWindow::onFormats() {
-    if (hosts.isEmpty()) {
-        critCcliveNotFound;
+    if ( hosts.isEmpty() || ccliveVersion.isEmpty() ) {
+        critCcliveNotSpecified;
         onPreferences();
         return;
     }
+
     format->exec();
     format->saveCurrent();
     format->writeSettings();

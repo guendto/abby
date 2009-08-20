@@ -30,6 +30,7 @@ class FormatDialog : public QDialog, public Ui::formatDialog {
 public:
     FormatDialog(QWidget *parent);
 public:
+    void resetHosts();
     void parseHosts(const QStringMap& hosts);
     void saveCurrent();
     void writeSettings();

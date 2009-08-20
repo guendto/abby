@@ -17,6 +17,7 @@
  */
 #include <QDialog>
 #include <QSettings>
+#include <QDebug>
 
 #include "formatdlg.h"
 
@@ -30,7 +31,7 @@
  * only one. See sel and selN. The former stores selected
  * "format ID", and the latter the matching QComboBox index
  * to that ID (needed for setCurrentIndex, due to lack of
- * setCurrentText) since setCurrentText is missing. */
+ * setCurrentText). */
 
 FormatDialog::FormatDialog(QWidget *parent)
     : QDialog(parent)
@@ -40,18 +41,19 @@ FormatDialog::FormatDialog(QWidget *parent)
 }
 
 void
-FormatDialog::parseHosts(const QStringMap& hosts) {
-
+FormatDialog::resetHosts() {
     hostBox->clear();
-    this->hosts = hosts;
+}
 
+void
+FormatDialog::parseHosts(const QStringMap& hosts) {
+    this->hosts = hosts;
     for (QStringMap::const_iterator iter = hosts.begin();
         iter != hosts.end(); ++iter)
     {
         // Fill host combo with supported hosts.
         hostBox->addItem(iter.key());
     }
-
     readFormatSettings();
     updateFormats();
 }
@@ -61,8 +63,12 @@ FormatDialog::updateFormats() {
 
     formatBox->clear();
 
-    QString curr        = hostBox->currentText();
-    QStringList formats = hosts[curr].split("|");
+    const QString curr = hostBox->currentText();
+
+    if (curr.isEmpty())
+        return;
+
+    const QStringList formats = hosts[curr].split("|");
 
     typedef unsigned int _uint;
     const register _uint size = formats.size();
@@ -168,7 +174,6 @@ FormatDialog::getFormatSetting(const QString& url) const {
         iter != sel.end(); ++iter)
     {
         QRegExp re(iter.key());
-
         if (re.indexIn(url) != -1)
             return sel[iter.key()];
     }
