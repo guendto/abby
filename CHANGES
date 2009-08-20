@@ -11,6 +11,7 @@ Version 0.4.3
    * Fix: filename not shown when download starts
    * Fix: typo in statustip "scan for video links"
    * Fix: filename parsing when it contains whitespace
+   * Fix: switching c/clive executables without restarting
 
   Developer-visible changes:
    * Rewrite QProcess output parsing
