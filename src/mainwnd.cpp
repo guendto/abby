@@ -712,7 +712,7 @@ MainWindow::onProcStdoutReady() {
             sb->showMessage( tr("Verifying link ...") );
 
         else if (ln.startsWith("file:")) {
-            QRegExp re("file: (.*)(\\d+.\\d+)M");
+            QRegExp re("file: (.*)  (\\d+.\\d+)M");
             re.indexIn(ln);
             fileLabel->setText( re.capturedTexts()[1].simplified() );
             sb->showMessage( tr("Downloading video ...") );
