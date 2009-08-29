@@ -15,17 +15,14 @@ Using abby
 ----------
 
 * abby requires path to either clive(1) or cclive(1) command
-
   This is defined in the program preferences (Edit / Preferences).
 
 
 * abby can parse RSS feeds for video links
-
   The links can be tranferred to the download list after this.
 
 
 * abby can scan for video links from any web source
-
   The scan feature currently supports only Youtube links ("regular"
   and embedded). It can be used to scan Youtube playlists, for example.
 
