@@ -143,7 +143,7 @@ scanYoutubeRegular(QStringList& lst, const QString& content) {
 void
 ScanDialog::scanContent(QNetworkReply *reply) {
 
-    const QString content = reply->readAll();
+    const QString content = QString::fromLocal8Bit(reply->readAll());
 
     QStringList IDs, links;
 
@@ -177,7 +177,7 @@ ScanDialog::scanContent(QNetworkReply *reply) {
 void
 ScanDialog::parseHtmlTitle(QNetworkReply *reply) {
 
-    const QString content = reply->readAll();
+    const QString content = QString::fromLocal8Bit(reply->readAll());
     const QString link = reply->url().toString();
 
     QRegExp re("<title>(.*)<\\/title>"); // TODO: improve.

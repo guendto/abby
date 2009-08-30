@@ -1,3 +1,9 @@
+Version 0.4.4
+
+  User-visible changes:
+   * Fix: rss/scan: unicode handling -- should display now correctly
+
+
 Version 0.4.3
 (August 29, 2009)
 

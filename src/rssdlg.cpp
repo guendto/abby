@@ -112,7 +112,7 @@ RSSDialog::parseRSS(QNetworkReply *reply) {
     QString rssTitle, link, tag, title;//, pubdate;
 
     xml.clear();
-    xml.addData(reply->readAll());
+    xml.addData(QString::fromLocal8Bit(reply->readAll()));
 
     while (!xml.atEnd()) {
 
