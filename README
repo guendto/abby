@@ -1,3 +1,4 @@
+U
 
 
 About
@@ -70,13 +71,20 @@ by clicking the button underneath the "RSS" button. The interface is somewhat
 similar to the RSS dialog except that you are presented with the "Fetch video
 title" option box.
 
-If this box is checked, abby will perform the scan in two steps, first it will
-fetch the content from specified link and parses it for video page links, and
-then visits those links for page title information.
+Before you can start the scan, you will need to add a link to the "Link:"
+field. This could be, for example, the front-page of Youtube website
+(http://youtube.com).
 
-The parsed information is added to the list widget from which you can check
-those items that you wish to download. Clicking the "OK" button will then
-transfer the selected items to the download list.
+If the "Fetch video title" is checked, abby will perform the scan in two
+steps, first it will fetch the content from specified link and parses it for
+video page links, and then visits those links for page title information.
+
+Hit the "Scan" button to start the scan process.
+
+Once the process has completed, abby adds the detected video page links
+to the list widget from which you can check those items that you wish to
+download. Clicking the "OK" button will then transfer the selected items to
+the download list.
 
 Note that the scan feature currently supports only Youtube links. This means
 that it only recognizes Youtube video page links from the scanned content.
