@@ -1,7 +1,7 @@
 Version 0.4.4
 
   User-visible changes:
-   * Fix: rss/scan: unicode handling -- should display now correctly
+   * Fix: rss/scan: unicode chars should now display OK
 
 
 Version 0.4.3
