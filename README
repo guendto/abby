@@ -1,7 +1,7 @@
 
 
-README for abby
----------------
+About
+-----
 
 abby is a front-end for cclive and clive which are used to
 download videos from Youtube and other similar video hosts.
@@ -11,29 +11,86 @@ abby is written in C++ and depends on the Qt framework.
     http://abby.googlecode.com/
 
 
-Using abby
-----------
+Configuration
+-------------
 
-* abby requires path to either clive(1) or cclive(1) command
-  This is defined in the program preferences (Edit / Preferences).
+You will need to set the path to either clive(1) or cclive(1) command.
+You can do this by opening the preferences (Edit/Preferences). Note that
+abby will check the path everytime it starts and prompts a notification
+if it cannot run the c/clive command.
+
+You can confirm that c/clive was found by opening the about dialog (Help/
+About).
 
 
-* abby can parse RSS feeds for video links
-  The links can be tranferred to the download list after this.
+First download
+--------------
+
+Once the path is set to c/clive, you can add a new link to the download
+list by clicking the "plus" button left to the list widget. abby will
+prompt for a video page link. Note that before anything gets added to the
+list, abby verifies the c/clive supports the specified video host.
+
+Now that you have added a video page link to the list, you can click the
+download button (bottom-right to the list widget). This starts the c/clive
+process. The download progress is presented using the progressbars and
+various labels but you can also view various process details by opening
+the "Log" tab.
 
 
-* abby can scan for video links from any web source
-  The scan feature currently supports only Youtube links ("regular"
-  and embedded). It can be used to scan Youtube playlists, for example.
+Feature: RSS
+------------
 
-* If you are an avid user of Youtube RSS feeds, see here:
-    http://www.youtube.com/rssls
-
-  And note that the previously supported:
-    http://youtube.com/rss/user/(username)/videos.rss
-
-  No longer work with abby, due to some HTTP redirecting voodoo Google
-  has decided to use. Instead use:
+abby can parse RSS feeds. This feature can be accessed by clicking the
+"RSS". Once the dialog is open, you can enter a RSS feed link, for example:
     http://gdata.youtube.com/feeds/base/users/(username)/uploads?alt=rss
 
-  You may also want to append "&orderby=updated" to the URL.
+You can also append "&orderby=updated" to the URL.
+
+And hit "Fetch". When the parsed items appear in the list, you can select
+each item to the download list by checking the box before the video title.
+By hitting "OK", each selected item will be added to the download list.
+
+Note also the tiny button before the "Fetch" button. This opens another
+dialog (Feed manager) that can be used to save your feed links so that you
+can select them later without having to type them again. To re-use a link
+from "Feed manager", select a link from the list and hit "OK".
+
+Note that this feature is not Youtube specific, although the example link
+above was Youtube specific. You can use the RSS parsing feature ultimately
+with any website that provides RSS content containing video page links to
+the c/clive supported websites.
+
+
+Feature: Scan
+-------------
+
+abby can scan for video page links from any URL. This feature can be accessed
+by clicking the button underneath the "RSS" button. The interface is somewhat
+similar to the RSS dialog except that you are presented with the "Fetch video
+title" option box.
+
+If this box is checked, abby will perform the scan in two steps, first it will
+fetch the content from specified link and parses it for video page links, and
+then visits those links for page title information.
+
+The parsed information is added to the list widget from which you can check
+those items that you wish to download. Clicking the "OK" button will then
+transfer the selected items to the download list.
+
+Note that the scan feature currently supports only Youtube links. This means
+that it only recognizes Youtube video page links from the scanned content.
+
+And yes, it works with Youtube playlists.
+
+
+Notes
+-----
+
+abby supports keyboard shortcuts. These are visible in the menu. For example,
+Alt+A would open the "Add link" dialog.
+
+You can edit list items by double clicking them. This applies to all windows
+and dialogs with list widgets.
+
+
