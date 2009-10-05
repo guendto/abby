@@ -1,6 +1,9 @@
 Version 0.4.4
 
   User-visible changes:
+   * New icons:
+     # File / Quit
+     # Help / About 
    * Fix: rss/scan: unicode chars should now display OK
 
 
