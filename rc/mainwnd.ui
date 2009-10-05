@@ -746,6 +746,10 @@ the download reches the specified percent complete</string>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_Quit">
+   <property name="icon">
+    <iconset resource="abby.qrc">
+     <normaloff>:/system-log-out.png</normaloff>:/system-log-out.png</iconset>
+   </property>
    <property name="text">
     <string>&amp;Quit</string>
    </property>
