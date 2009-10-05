@@ -58,9 +58,9 @@ can select them later without having to type them again. To re-use a link
 from "Feed manager", select a link from the list and hit "OK".
 
 Note that this feature is not Youtube specific, although the example link
-above was Youtube specific. You can use the RSS parsing feature ultimately
-with any website that provides RSS content containing video page links to
-the c/clive supported websites.
+above was for Youtube. You can use the RSS parsing feature ultimately with
+any website that provides RSS content containing video page links to the
+c/clive supported websites.
 
 
 Feature: Scan
