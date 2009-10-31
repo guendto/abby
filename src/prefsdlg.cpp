@@ -22,6 +22,7 @@
 #include <QMessageBox>
 
 #include "prefsdlg.h"
+#include "util.h"
 
 PreferencesDialog::PreferencesDialog(QWidget *parent)
     : QDialog(parent)
@@ -190,6 +191,33 @@ PreferencesDialog::onBrowseCclive() {
 }
 
 void
+PreferencesDialog::onVerifyCclive() {
+    try {
+        QString ccliveVersion, curlVersion, curlMod;
+        bool isCcliveFlag;
+        Util::verifyCclivePath(
+            ccliveEdit->text(),
+            ccliveVersion,
+            curlVersion,
+            curlMod,
+            &isCcliveFlag
+        );
+        QMessageBox::information(
+            this,
+            QCoreApplication::applicationName(),
+            QString( tr("Program: %1\nVersion: %2\n%3: %4") )
+                .arg(isCcliveFlag ? "cclive":"clive")
+                .arg(ccliveVersion)
+                .arg(curlMod)
+                .arg(curlVersion)
+        );
+    }
+    catch (const NoCcliveException& x) {
+        QMessageBox::warning(this, tr("Warning"), x.what());
+    }
+}
+
+void
 PreferencesDialog::onLangChanged(int index) {
     qmFile = "";
     if (index > 0)
@@ -205,3 +233,5 @@ PreferencesDialog::onTimeoutStateChanged(int state) {
     timeoutSpin->setEnabled(state != 0);
     socksBox->setEnabled(state != 0);
 }
+
+

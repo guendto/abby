@@ -15,37 +15,32 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef prefsdlg_h
-#define prefsdlg_h
 
-#include "ui_prefsdlg.h"
+#ifndef util_h
+#define util_h
 
-class QDialog;
-
-class PreferencesDialog : public QDialog, public Ui::PreferencesDialog {
-    Q_OBJECT
+class Util {
 public:
-    PreferencesDialog(QWidget *parent=0);
-private slots:
-    void onProxyChanged(int index);
-    void onLimitStateChanged(int state);
-    void onFinished(int result);
-    void onBrowseSaveDir();
-    void onBrowseStreamCommand();
-    void onBrowseCommand();
-    void onBrowseCclive();
-    void onVerifyCclive();
-    void onLangChanged(int index);
-    void onTimeoutStateChanged(int state);
-private:
-    void readSettings();
-    void writeSettings();
-    QStringList findQmFiles();
-    QString langName(const QString& qmFile);
-private:
-    QStringList qmFiles;
-    QString qmFile;
+    static void verifyCclivePath(
+        const QString& path,
+        QString& ccliveVersion,
+        QString& curlVersion,
+        QString& curlMod,
+        bool *isCcliveFlag=NULL
+    );
 };
+
+class NoCcliveException {
+public:
+    NoCcliveException(const QString& path, const QString& errmsg);
+    NoCcliveException(const QString& path,
+                        const int& exitCode, const QString& output);
+public:
+    const QString& what() const;
+private:
+    QString errmsg;
+};
+
 #endif
 
 

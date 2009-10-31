@@ -1,3 +1,17 @@
+Version 0.4.5
+
+  User-visible changes:
+   * Add "verify path" button (prefs / c/clive path)
+     # Croaks with an error if fails
+     # Or displays the c/clive details
+   * Require absolute path to c/clive command
+   * Clear up c/clive path checking
+
+  Developer-visible changes:
+   * Move cclive detection logic to src/util.(cpp|h) file
+     # Rewrite and cleanup
+
+
 Version 0.4.4
 (October 5, 2009)
 

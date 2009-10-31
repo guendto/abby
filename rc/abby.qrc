@@ -1,5 +1,6 @@
 <RCC>
   <qresource>
+    <file>view-refresh.png</file>
     <file>process-stop.png</file>
     <file>folder-saved-search.png</file>
     <file>go-next.png</file>

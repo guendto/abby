@@ -33,25 +33,27 @@
 #include "scandlg.h"
 #include "formatdlg.h"
 #include "aboutdlg.h"
+#include "util.h"
 
-#define critCcliveProcessFailed(msg) \
+#define critCcliveProcessFailed(parent, msg) \
     do { \
-    QMessageBox::critical(this, QCoreApplication::applicationName(), \
+    QMessageBox::critical(parent, QCoreApplication::applicationName(), \
         QString( tr("Error while trying to run c/clive:\n%1") ).arg(msg)); \
     } while (0)
 
-#define critCcliveNotSpecified \
+#define critCcliveNotSpecified(parent) \
     do { \
-    QMessageBox::critical(this, QCoreApplication::applicationName(), \
+    QMessageBox::critical(parent, QCoreApplication::applicationName(), \
       QString( tr("c/clive executable not found, please check the path.") )); \
     } while (0)
 
-#define critCcliveExitedWithError(code,msg) \
+#define critCcliveExitedWithError(parent,code,msg) \
     do { \
-    QMessageBox::critical(this, QCoreApplication::applicationName(), \
+    QMessageBox::critical(parent, QCoreApplication::applicationName(), \
         QString( tr("c/clive exited with error code %1:\n%2") ) \
             .arg(code).arg(msg)); \
     } while (0)
+
 
 typedef unsigned int _uint;
 
@@ -100,8 +102,8 @@ MainWindow::MainWindow()
         this, SLOT( onItemDoubleClicked(QListWidgetItem *) ));
 
     // Parse.
-    if (parseCcliveHostsOutput())
-        parseCcliveVersionOutput();
+    if (parseCcliveVersionOutput())
+        parseCcliveHostsOutput();
 
     // Widget voodoo.
     updateWidgets           (true);
@@ -140,7 +142,7 @@ MainWindow::parseCcliveHostsOutput() {
     format->resetHosts();
 
     if (!proc.waitForFinished()) {
-        critCcliveProcessFailed( proc.errorString() );
+        critCcliveProcessFailed(this, proc.errorString() );
         return false;
     }
     else {
@@ -170,7 +172,7 @@ MainWindow::parseCcliveHostsOutput() {
             format->parseHosts(hosts);
         }
         else {
-            critCcliveExitedWithError(exitCode, output);
+            critCcliveExitedWithError(this, exitCode, output);
             return false;
         }
     }
@@ -178,55 +180,26 @@ MainWindow::parseCcliveHostsOutput() {
     return true;
 }
 
-void
+bool
 MainWindow::parseCcliveVersionOutput() {
 
-    versionOutput.clear();
-    ccliveVersion.clear();
-    curlVersion.clear();
+    const QString path =
+        prefs->ccliveEdit->text();
 
-    QString path = prefs->ccliveEdit->text();
-
-    QProcess proc;
-    process.setEnvironment( QStringList() << "CCLIVE_NO_CONFIG=1" );
-    proc.setProcessChannelMode(QProcess::MergedChannels);
-    proc.start(path, QStringList() << "--version");
-
-    isCcliveFlag = false;
-
-    if (!proc.waitForFinished())
-        critCcliveProcessFailed(proc.errorString());
-    else {
-
-        const QString output =
-            QString::fromLocal8Bit( proc.readAll() );
-
-        const int exitCode =
-            proc.exitCode();
-
-        if (exitCode == 0) {
-            versionOutput = output;
-//            qDebug() << versionOutput;
-
-            QStringList tmp =
-                versionOutput.split("\n", QString::SkipEmptyParts);
-
-            QStringList lst =
-                tmp[0].split(" ", QString::SkipEmptyParts);
-
-            isCcliveFlag  = (lst[0] == "cclive");
-            ccliveVersion = lst[2];
-            curlMod       = lst[4];
-            curlVersion   = lst[6];
-        }
-        else
-            critCcliveExitedWithError(exitCode, output);
+    try {
+        Util::verifyCclivePath(
+            path,
+            ccliveVersion,
+            curlVersion,
+            curlMod,
+            &isCcliveFlag
+        );
     }
-}
-
-bool
-MainWindow::ccliveSupportsFeature(const QString& buildOption) {
-    return versionOutput.contains(buildOption);
+    catch (const NoCcliveException& x) {
+        QMessageBox::warning(this, tr("Warning"), x.what());
+        return false;
+    }
+    return true;
 }
 
 bool
@@ -335,8 +308,8 @@ MainWindow::onPreferences() {
     QString _new = prefs->ccliveEdit->text();
 
     if (old != _new) {
-        if (parseCcliveHostsOutput())
-            parseCcliveVersionOutput();
+        if (parseCcliveVersionOutput())
+            parseCcliveHostsOutput();
     }
 
     updateWidgets(old != _new);
@@ -372,7 +345,7 @@ void
 MainWindow::onStart() {
 
     if ( ccliveVersion.isEmpty() ) {
-        critCcliveNotSpecified;
+        critCcliveNotSpecified(this);
         onPreferences();
         return;
     }
@@ -632,7 +605,7 @@ MainWindow::addPageLink(QString lnk) {
 void
 MainWindow::onFormats() {
     if ( hosts.isEmpty() || ccliveVersion.isEmpty() ) {
-        critCcliveNotSpecified;
+        critCcliveNotSpecified(this);
         onPreferences();
         return;
     }
@@ -844,3 +817,5 @@ MainWindow::onItemDoubleClicked(QListWidgetItem *item) {
     if (ok && !lnk.isEmpty())
         item->setText(lnk);
 }
+
+
