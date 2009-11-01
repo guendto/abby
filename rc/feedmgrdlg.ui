@@ -107,7 +107,7 @@
      <item row="0" column="0">
       <widget class="QTreeWidget" name="itemsTree">
        <property name="selectionMode">
-        <enum>QAbstractItemView::ExtendedSelection</enum>
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
        <property name="rootIsDecorated">
         <bool>false</bool>
