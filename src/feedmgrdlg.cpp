@@ -45,30 +45,40 @@ FeedMgrDialog::onAdd() {
         addLink(dlg.nameEdit->text(), dlg.linkEdit->text());
 }
 
+static int
+confirm_remove(QWidget *parent) {
+    return QMessageBox::warning(
+        parent,
+        QObject::tr("Warning"),
+        QObject::tr("Really remove the selected links?"),
+        QMessageBox::Yes|QMessageBox::No,
+        QMessageBox::No
+    );
+}
+
 void
 FeedMgrDialog::onRemove() {
 
-    QList<QTreeWidgetItem*> sel =
-        itemsTree->selectedItems();
+    bool ok = false;
 
-    if (sel.size() == 0)
-        return;
- 
-    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
-        tr("Really remove the selected links?"),
-        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
-        == QMessageBox::No)
-    {
-        return;
+    QTreeWidgetItemIterator iter(itemsTree);
+    QList<QTreeWidgetItem*> lst;
+    while (*iter) {
+        if ((*iter)->checkState(0) == Qt::Checked) {
+            if (!ok) {
+                if (confirm_remove(this) == QMessageBox::No)
+                    return;
+                ok = true;
+            }
+            lst << (*iter);
+        }
+        ++iter;
     }
 
-    QList<QTreeWidgetItem*>::const_iterator iter;
-    for (iter = sel.constBegin();
-         iter != sel.constEnd();
-         ++iter)
-    {
-        itemsTree->removeItemWidget((*iter),0);
-        delete (*iter);
+    QList<QTreeWidgetItem*>::const_iterator i;
+    for (i=lst.constBegin(); i!=lst.constEnd(); ++i) {
+        itemsTree->removeItemWidget((*i), 0);
+        delete (*i);
     }
 }
 
