@@ -19,8 +19,9 @@
 #include <QSettings>
 #include <QInputDialog>
 #include <QMessageBox>
-#include <QClipboard>
+#include <QDebug>
 
+#include "feededitdlg.h"
 #include "feedmgrdlg.h"
 
 typedef unsigned int _uint;
@@ -31,27 +32,24 @@ FeedMgrDialog::FeedMgrDialog(QWidget *parent)
     setupUi(this);
     readSettings();
 
-    connect(feedsList, SIGNAL(itemDoubleClicked(QListWidgetItem*)),
-        this, SLOT(onItemDoubleClicked(QListWidgetItem*)));
+    connect(itemsTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)),
+        this, SLOT(onItemDoubleClicked(QTreeWidgetItem*,int)));
+
+    itemsTree->setColumnHidden(1, true);
 }
 
 void
 FeedMgrDialog::onAdd() {
-    QString lnk = QInputDialog::getText(this,
-        QCoreApplication::applicationName(), tr("Add link:"));
-    addLink(lnk);
-}
-
-void
-FeedMgrDialog::onPaste() {
-    QClipboard *cb = QApplication::clipboard();
-    addLink( cb->text().split("\n")[0] );
+    FeedEditDialog dlg(this);
+    if (dlg.exec() == QDialog::Accepted)
+        addLink(dlg.nameEdit->text(), dlg.linkEdit->text());
 }
 
 void
 FeedMgrDialog::onRemove() {
 
-    QList<QListWidgetItem*> sel = feedsList->selectedItems();
+    QList<QTreeWidgetItem*> sel =
+        itemsTree->selectedItems();
 
     if (sel.size() == 0)
         return;
@@ -64,17 +62,20 @@ FeedMgrDialog::onRemove() {
         return;
     }
 
-    const register _uint size = sel.size();
-    for (register _uint i=0; i<size; ++i) {
-        const int row = feedsList->row(sel[i]);
-        delete feedsList->takeItem(row);
+    QList<QTreeWidgetItem*>::const_iterator iter;
+    for (iter = sel.constBegin();
+         iter != sel.constEnd();
+         ++iter)
+    {
+        itemsTree->removeItemWidget((*iter),0);
+        delete (*iter);
     }
 }
 
 void
 FeedMgrDialog::onClear() {
 
-    if (feedsList->count() == 0)
+    if (itemsTree->topLevelItemCount() == 0)
         return;
 
     if (QMessageBox::warning(this, QCoreApplication::applicationName(),
@@ -84,6 +85,8 @@ FeedMgrDialog::onClear() {
     {
         return;
     }
+
+    itemsTree->clear();
 }
 
 void
@@ -94,11 +97,14 @@ FeedMgrDialog::writeSettings() {
     s.setValue("size", size());
 
     s.beginWriteArray("feeds");
-    const register _uint count = feedsList->count();
-    for (register _uint i=0; i<count; ++i) {
+    QTreeWidgetItemIterator iter(itemsTree);
+    for (register _uint i=0; (*iter); ++iter, ++i) {
         s.setArrayIndex(i);
-        QListWidgetItem *item = feedsList->item(i);
-        s.setValue("link",item->text());
+        s.setValue("link",
+            QString("%1||%2") // Note: replaces "||" which we'll use as delim
+                .arg((*iter)->text(0).replace("||","|"))
+                .arg((*iter)->text(1).replace("||","|"))
+        );
     }
     s.endArray();
 
@@ -107,33 +113,55 @@ FeedMgrDialog::writeSettings() {
 
 void
 FeedMgrDialog::readSettings() {
-    QSettings s;
 
+    QSettings s;
     s.beginGroup("FeedMgrDialog");
     resize( s.value("size", QSize(505,255)).toSize() );
+
     const register _uint size = s.beginReadArray("feeds");
+    register _uint unnamed_count = 1;
+
     for (register _uint i=0; i<size; ++i) {
         s.setArrayIndex(i);
-        feedsList->addItem(s.value("link").toString());
+
+        const QString entry =
+            s.value("link").toString();
+
+        QStringList tmp = entry.split("||");
+
+        if (tmp.size() < 2) {
+            tmp.prepend( // Name column was added in 0.4.5.
+                QString( tr("Unnamed feed #%1") )
+                    .arg(unnamed_count++)
+            );
+        }
+
+        addLink(tmp[0], tmp[1]);
     }
     s.endArray();
+
     s.endGroup();
 }
 
 void
-FeedMgrDialog::onItemDoubleClicked(QListWidgetItem *item) {
-    bool ok;
-
-    QString lnk = QInputDialog::getText(this,
-        QCoreApplication::applicationName(), tr("Edit link:"),
-        QLineEdit::Normal, item->text(), &ok);
-
-    if (ok && !lnk.isEmpty())
-        item->setText(lnk);
+FeedMgrDialog::onItemDoubleClicked(
+    QTreeWidgetItem *item,
+    int /*column*/)
+{
+    FeedEditDialog dlg(this, item->text(0), item->text(1));
+    if (dlg.exec() == QDialog::Accepted) {
+        item->setText(0, dlg.nameEdit->text());
+        item->setText(1, dlg.linkEdit->text());
+    }
 }
 
 void
-FeedMgrDialog::addLink(QString& lnk) {
+FeedMgrDialog::addLink(QString name, QString lnk) {
+
+    if (name.isEmpty())
+        return;
+
+    name = name.trimmed();
 
     if (lnk.isEmpty())
         return;
@@ -143,9 +171,16 @@ FeedMgrDialog::addLink(QString& lnk) {
     if (!lnk.startsWith("http://",Qt::CaseInsensitive))
         lnk.insert(0,"http://");
 
-    QList<QListWidgetItem *> found
-        = feedsList->findItems(lnk, Qt::MatchExactly);
+    QList<QTreeWidgetItem *> found =
+        itemsTree->findItems(lnk, Qt::MatchExactly, 1); // 1=url column
 
-    if (found.size() == 0)
-        feedsList->addItem(lnk);
+    if (found.size() == 0) {
+        QTreeWidgetItem *item = new QTreeWidgetItem;
+        item->setCheckState(0, Qt::Unchecked);
+        item->setText(0, name);
+        item->setText(1, lnk);
+        itemsTree->addTopLevelItem(item);
+    }
 }
+
+

@@ -15,29 +15,20 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef feedmgrdlg_h
-#define feedmgrdlg_h
+#include <QDialog>
 
-#include "ui_feedmgrdlg.h"
+#include "feededitdlg.h"
 
-class QDialog;
+FeedEditDialog::FeedEditDialog(
+    QWidget *parent,
+    const QString& name /*=""*/,
+    const QString& url /*=""*/)
+    : QDialog(parent)
+{
+    setupUi(this);
 
-class FeedMgrDialog : public QDialog, public Ui::FeedMgrDialog {
-    Q_OBJECT
-public:
-    FeedMgrDialog(QWidget *parent);
-private slots:
-    void onItemDoubleClicked(QTreeWidgetItem *item, int column);
-    void onAdd();
-    void onRemove();
-    void onClear();
-public:
-    void writeSettings();
-    void readSettings();
-private:
-    void addLink(QString name, QString lnk);
-};
-
-#endif
+    nameEdit->setText(name);
+    linkEdit->setText(url);
+}
 
 

@@ -5,6 +5,11 @@ Version 0.4.5
      # Croaks with an error if fails
      # Or displays the c/clive details
    * Confirm exit if c/clive is still active
+   * Feed manager:
+     # Allow use of feed names
+     # Fix defunct "clear list"
+     # Remove "paste link"
+     # Use checkboxes for selection
    * Require absolute path to c/clive command
    * Clear up c/clive path checking
 

@@ -59,17 +59,17 @@ RSSDialog::onFetch() {
 
 void
 RSSDialog::onFeedMgr() {
-    FeedMgrDialog *p = new FeedMgrDialog(this);
-
-    if (p->exec() == QDialog::Accepted) {
-
-        QList<QListWidgetItem*> sel =
-            p->feedsList->selectedItems();
-
-        if (sel.size() > 0)
-            linkEdit->setText(sel[0]->text());
-
-        p->writeSettings();
+    FeedMgrDialog dlg(this);
+    if (dlg.exec() == QDialog::Accepted) {
+        QTreeWidgetItemIterator iter(dlg.itemsTree);
+        while (*iter) {
+            if ((*iter)->checkState(0) == Qt::Checked) {
+                linkEdit->setText((*iter)->text(1)); // 1=url
+                break;
+            }
+            ++iter;
+        }
+        dlg.writeSettings();
     }
 }
 

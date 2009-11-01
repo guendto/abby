@@ -1,11 +1,12 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Toni Gundogdu</author>
  <class>FeedMgrDialog</class>
- <widget class="QDialog" name="FeedMgrDialog" >
-  <property name="windowModality" >
+ <widget class="QDialog" name="FeedMgrDialog">
+  <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
-  <property name="geometry" >
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -13,41 +14,34 @@
     <height>252</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Feed manager</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="abby.qrc" >
+  <property name="windowIcon">
+   <iconset resource="abby.qrc">
     <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
   </property>
-  <property name="sizeGripEnabled" >
+  <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2" >
-   <item row="0" column="0" >
-    <layout class="QGridLayout" name="gridLayout" >
-     <item row="0" column="0" >
-      <widget class="QListWidget" name="feedsList" >
-       <property name="selectionMode" >
-        <enum>QAbstractItemView::ExtendedSelection</enum>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1" >
-      <layout class="QVBoxLayout" name="verticalLayout" >
+  <layout class="QGridLayout" name="gridLayout_2">
+   <item row="0" column="0">
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="1">
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QPushButton" name="addButton" >
-         <property name="toolTip" >
+        <widget class="QPushButton" name="addButton">
+         <property name="toolTip">
           <string>Add new</string>
          </property>
-         <property name="text" >
+         <property name="text">
           <string/>
          </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
+         <property name="icon">
+          <iconset resource="abby.qrc">
            <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
          </property>
-         <property name="iconSize" >
+         <property name="iconSize">
           <size>
            <width>16</width>
            <height>16</height>
@@ -56,31 +50,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pasteButton" >
-         <property name="toolTip" >
-          <string>Paste from clipboard</string>
-         </property>
-         <property name="text" >
-          <string/>
-         </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
-           <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
-         </property>
-         <property name="iconSize" >
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer" >
-         <property name="orientation" >
+        <spacer name="verticalSpacer">
+         <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
-         <property name="sizeHint" stdset="0" >
+         <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
            <height>40</height>
@@ -89,18 +63,18 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="removeButton" >
-         <property name="toolTip" >
+        <widget class="QPushButton" name="removeButton">
+         <property name="toolTip">
           <string>Remove selected</string>
          </property>
-         <property name="text" >
+         <property name="text">
           <string/>
          </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
+         <property name="icon">
+          <iconset resource="abby.qrc">
            <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
          </property>
-         <property name="iconSize" >
+         <property name="iconSize">
           <size>
            <width>16</width>
            <height>16</height>
@@ -109,18 +83,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="clearButton" >
-         <property name="toolTip" >
+        <widget class="QPushButton" name="clearButton">
+         <property name="toolTip">
           <string>Clear list</string>
          </property>
-         <property name="text" >
+         <property name="text">
           <string/>
          </property>
-         <property name="icon" >
-          <iconset resource="abby.qrc" >
+         <property name="icon">
+          <iconset resource="abby.qrc">
            <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
          </property>
-         <property name="iconSize" >
+         <property name="iconSize">
           <size>
            <width>16</width>
            <height>16</height>
@@ -130,21 +104,41 @@
        </item>
       </layout>
      </item>
+     <item row="0" column="0">
+      <widget class="QTreeWidget" name="itemsTree">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::ExtendedSelection</enum>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>URL</string>
+        </property>
+       </column>
+      </widget>
+     </item>
     </layout>
    </item>
-   <item row="1" column="0" >
-    <widget class="QLabel" name="label" >
-     <property name="text" >
-      <string>Tip: Select a link from list and click OK.</string>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Tip: Double-click to edit</string>
      </property>
     </widget>
    </item>
-   <item row="2" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
+     <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
@@ -152,12 +146,11 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>feedsList</tabstop>
   <tabstop>addButton</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="abby.qrc" />
+  <include location="abby.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -166,11 +159,11 @@
    <receiver>FeedMgrDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>257</x>
      <y>242</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>251</y>
     </hint>
@@ -182,11 +175,11 @@
    <receiver>FeedMgrDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>325</x>
      <y>242</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>251</y>
     </hint>
@@ -198,11 +191,11 @@
    <receiver>FeedMgrDialog</receiver>
    <slot>onAdd()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>470</x>
      <y>26</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>250</x>
      <y>114</y>
     </hint>
@@ -214,29 +207,13 @@
    <receiver>FeedMgrDialog</receiver>
    <slot>onRemove()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>489</x>
      <y>147</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>250</x>
      <y>114</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pasteButton</sender>
-   <signal>clicked()</signal>
-   <receiver>FeedMgrDialog</receiver>
-   <slot>onPaste()</slot>
-   <hints>
-    <hint type="sourcelabel" >
-     <x>474</x>
-     <y>55</y>
-    </hint>
-    <hint type="destinationlabel" >
-     <x>250</x>
-     <y>125</y>
     </hint>
    </hints>
   </connection>
@@ -246,11 +223,11 @@
    <receiver>FeedMgrDialog</receiver>
    <slot>onClear()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>474</x>
      <y>166</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>250</x>
      <y>125</y>
     </hint>

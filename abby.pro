@@ -16,6 +16,7 @@ HEADERS += src/aboutdlg.h \
            src/prefsdlg.h \
            src/rssdlg.h \
            src/scandlg.h \
+           src/feededitdlg.h \
            src/util.h
 FORMS += rc/aboutdlg.ui \
          rc/feedmgrdlg.ui \
@@ -23,7 +24,8 @@ FORMS += rc/aboutdlg.ui \
          rc/mainwnd.ui \
          rc/prefsdlg.ui \
          rc/rssdlg.ui \
-         rc/scandlg.ui
+         rc/scandlg.ui \
+         rc/feededitdlg.ui
 SOURCES += src/aboutdlg.cpp \
            src/feedmgrdlg.cpp \
            src/formatdlg.cpp \
@@ -32,5 +34,6 @@ SOURCES += src/aboutdlg.cpp \
            src/prefsdlg.cpp \
            src/rssdlg.cpp \
            src/scandlg.cpp \
+           src/feededitdlg.cpp \
            src/util.cpp
 RESOURCES += rc/abby.qrc
