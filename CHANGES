@@ -4,6 +4,7 @@ Version 0.4.5
    * Add "verify path" button (prefs / c/clive path)
      # Croaks with an error if fails
      # Or displays the c/clive details
+   * Confirm exit if c/clive is still active
    * Require absolute path to c/clive command
    * Clear up c/clive path checking
 

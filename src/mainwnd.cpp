@@ -256,8 +256,23 @@ MainWindow::updateWidgets(const bool updateCcliveDepends) {
 
 void
 MainWindow::closeEvent(QCloseEvent *event) {
-    writeSettings();
-    event->accept();
+    int rc = QMessageBox::Yes;
+    if (process.state() != QProcess::NotRunning) {
+        rc = QMessageBox::warning(
+            this,
+            tr("Warning"),
+            tr("c/clive process is still active, really close abby?"),
+            QMessageBox::Yes|QMessageBox::No
+        );
+    }
+
+    if (rc == QMessageBox::Yes) {
+        process.kill();
+        writeSettings();
+        event->accept();
+    }
+    else
+        event->ignore();
 }
 
 void
