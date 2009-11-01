@@ -19,7 +19,7 @@
 #include <QSettings>
 #include <QInputDialog>
 #include <QMessageBox>
-#include <QDebug>
+//#include <QDebug>
 
 #include "feededitdlg.h"
 #include "feedmgrdlg.h"

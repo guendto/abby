@@ -21,7 +21,7 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QClipboard>
-#include <QDebug>
+//#include <QDebug>
 #include <QInputDialog>
 #include <QNetworkProxy>
 #include <QRegExp>

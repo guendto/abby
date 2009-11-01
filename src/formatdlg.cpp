@@ -17,7 +17,7 @@
  */
 #include <QDialog>
 #include <QSettings>
-#include <QDebug>
+//#include <QDebug>
 
 #include "formatdlg.h"
 
