@@ -159,14 +159,15 @@ PreferencesDialog::onLimitStateChanged(int state) {
 
 void
 PreferencesDialog::onBrowseSaveDir() {
-    QFileDialog dlg(this);
+    QString path =
+        QFileDialog::getExistingDirectory(
+            this,
+            tr("Directory for saved videos"),
+            QDir::currentPath()
+        );
 
-    dlg.setFileMode(QFileDialog::Directory);
-    dlg.setViewMode(QFileDialog::Detail);
-    dlg.setDirectory(savedirEdit->text());
-
-    if (dlg.exec())
-        savedirEdit->setText(dlg.selectedFiles()[0]);
+    if (!path.isEmpty())
+        savedirEdit->setText(path);
 }
 
 void
