@@ -22,7 +22,7 @@
 #include <QFile>
 #include <QTranslator>
 #include <QDir>
-#include <QDebug>
+//#include <QDebug>
 
 #include "util.h"
 
