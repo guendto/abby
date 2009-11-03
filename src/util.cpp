@@ -21,23 +21,43 @@
 #include <QMessageBox>
 #include <QFile>
 #include <QTranslator>
+#include <QDir>
+#include <QDebug>
 
 #include "util.h"
 
-void
-Util::verifyCclivePath(
+static QString
+check_path(const QStringList& paths, const QString& exec) {
+    QList<QString>::const_iterator iter;
+    QString path;
+
+    for (iter=paths.constBegin();
+         iter!=paths.constEnd();
+         ++iter)
+    {
+        QString tmp =
+            QString( "%1/%2" )
+                .arg(QDir::fromNativeSeparators(*iter))
+                .arg(exec);
+
+        tmp = QDir::toNativeSeparators(tmp);
+
+        if (QFile::exists(tmp)) {
+            path = tmp;
+            break;
+        }
+    }
+    return path;
+}
+
+static void
+verify_version_output(
     const QString& path,
     QString& ccliveVersion,
     QString& curlVersion,
     QString& curlMod,
-    bool *isCcliveFlag/*=NULL*/)
+    bool *isCcliveFlag)
 {
-    // Parses the c/clive --version output.
-
-    if (!QFile::exists(path)) {
-        throw NoCcliveException(path,
-            QObject::tr("Invalid path to c/clive") );
-    }
 
     ccliveVersion.clear();
     curlVersion.clear();
@@ -51,7 +71,8 @@ Util::verifyCclivePath(
         *isCcliveFlag = false;
 
     if (!proc.waitForFinished()) {
-        throw NoCcliveException(path, proc.errorString());
+        throw NoCcliveException(path,
+            proc.exitCode(), proc.errorString());
     }
     else {
         const QString output =
@@ -87,12 +108,87 @@ Util::verifyCclivePath(
 
             if (!enoughOutputFlag) {
                 throw NoCcliveException(path,
-                    QObject::tr("Not c/clive or an unsupported version of it"));
+                    QObject::
+                        tr("Not c/clive or it is an unsupported "
+                            "version of it"));
             }
         }
         else
             throw NoCcliveException(path, exitCode, output);
     }
+}
+
+void
+Util::detectCclive(
+    QString& path,
+    QString& ccliveVersion,
+    QString& curlVersion,
+    QString& curlMod,
+    bool *isCcliveFlag)
+{
+
+    const QStringList env =
+        QProcess::systemEnvironment();
+
+    QRegExp re("^PATH=(.*)", Qt::CaseInsensitive);
+    env.indexOf(re);
+
+    const QString capt = re.capturedTexts()[1].simplified();
+    QStringList paths  = capt.split(":");
+
+    if (paths.size() < 2) // w32
+        paths = capt.split(";");
+
+    if (paths.size() < 2)
+        return;
+
+    path = check_path(paths, "cclive");
+    if (path.isEmpty())
+        path = check_path(paths, "clive");
+
+    if (path.isEmpty()) {
+        // Detection from $PATH failed. Prompt user
+        // to specify the path in preferences manually.
+        throw NoCcliveException(
+            QObject::tr(
+                "Neither cclive or clive not was found in the path.\n"
+                "Please specify the path to either command in the abby\n"
+                "preferences."
+            )
+        );
+    }
+    else {
+        // Check --version output.
+        verify_version_output(
+            path,
+            ccliveVersion,
+            curlVersion,
+            curlMod,
+            isCcliveFlag
+        );
+    }
+}
+
+void
+Util::verifyCclivePath(
+    const QString& path,
+    QString& ccliveVersion,
+    QString& curlVersion,
+    QString& curlMod,
+    bool *isCcliveFlag/*=NULL*/)
+{
+    verify_version_output(
+        path,
+        ccliveVersion,
+        curlVersion,
+        curlMod,
+        isCcliveFlag
+    );
+}
+
+NoCcliveException::NoCcliveException(const QString& errmsg)
+    : errmsg(errmsg)
+{
 }
 
 static const QString defmsg =
@@ -105,7 +201,7 @@ NoCcliveException::NoCcliveException(
 {
     if (!path.isEmpty()) {
         this->errmsg =
-            QString("%1:\n%2").arg(path).arg(errmsg);
+            QString("error: %1:\n%2").arg(path).arg(errmsg);
     }
 }
 
@@ -117,9 +213,8 @@ NoCcliveException::NoCcliveException(
 {
     if (!path.isEmpty()) {
         this->errmsg = QString(
-            QObject::tr(
-                "%1 exited with %2 and the following"
-                "output:\n%3")
+            QObject::
+                tr("%1 exited with %2:\n%3")
                     .arg(path)
                     .arg(exitCode)
                     .arg(output)

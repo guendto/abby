@@ -21,6 +21,13 @@
 
 class Util {
 public:
+    static void detectCclive(
+        QString& path,
+        QString& ccliveVersion,
+        QString& curlVersion,
+        QString& curlMod,
+        bool *isCcliveFlag
+    );
     static void verifyCclivePath(
         const QString& path,
         QString& ccliveVersion,
@@ -32,6 +39,7 @@ public:
 
 class NoCcliveException {
 public:
+    NoCcliveException(const QString& errmsg);
     NoCcliveException(const QString& path, const QString& errmsg);
     NoCcliveException(const QString& path,
                         const int& exitCode, const QString& output);

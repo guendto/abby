@@ -183,10 +183,24 @@ MainWindow::parseCcliveHostsOutput() {
 bool
 MainWindow::parseCcliveVersionOutput() {
 
-    const QString path =
+    QString path =
         prefs->ccliveEdit->text();
 
     try {
+        if (path.isEmpty()) {
+            Util::detectCclive(
+                path,
+                ccliveVersion,
+                curlVersion,
+                curlMod,
+                &isCcliveFlag
+            );
+            if (!path.isEmpty()) {
+                prefs->ccliveEdit->setText(path);
+                return true;
+            }
+        }
+
         Util::verifyCclivePath(
             path,
             ccliveVersion,
