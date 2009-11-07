@@ -2,16 +2,20 @@
 Version 0.4.5
 --------------
 
-This release addresses c/clive detection and adds a button to
-verify the path to the command. Previously the user had to first
-specify the path to the command in the preferences, close the
-window and then open the about window.
+This release addresses c/clive detection and makes minor
+enhancements to the preferences dialog allowing immediate
+c/clive path verification. Users previously had to specify
+the path to the c/clive command, close the dialog and then
+open the about dialog to check if the path was valid.
 
 As of this release, abby will attempt to autodetect the
-c/clive command from the path. For example:
+c/clive command from the path if the field is empty in
+the preferences.
+
+For example:
   PATH=$PATH:/my/bin/dir ./abby
 
 If the detection fails, abby prompts the user to specify the
-path manually. Note that the detection only occurs if the
-path is empty (in the preferences). This feature was added 
-to help the new users to get started with abby.
+path manually.
+
+
