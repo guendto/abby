@@ -154,7 +154,7 @@ Util::detectCclive(
         throw NoCcliveException(
             QObject::tr(
                 "Neither cclive or clive not was found in the path.\n"
-                "Please specify the path to either command in the abby\n"
+                "Please specify the path to either command in the\n"
                 "preferences."
             )
         );
