@@ -194,38 +194,50 @@ PreferencesDialog::onBrowseCclive() {
 static void
 dump_detection_results(
     QWidget *parent,
+    const QString& path,
     const QString& version,
     const QString& libVersion,
     const QString& libName,
-    const bool isCcliveFlag)
+    const bool isCcliveFlag,
+    const bool showPathFlag=false)
 {
+    QString msg = QString(
+        QObject::tr("Detected: %1 version %2 with %3 %4")
+        .arg(isCcliveFlag ? "cclive" : "clive")
+        .arg(version)
+        .arg(libName)
+        .arg(libVersion)
+    );
+
+    if (showPathFlag)
+        msg += QString(QObject::tr("\nPath: %1")).arg(path);
+
     QMessageBox::information(
         parent,
         QCoreApplication::applicationName(),
-        QString(
-            QObject::tr("Detected: %1 version %2 with %3 %4")
-        )
-            .arg(isCcliveFlag ? "cclive" : "clive")
-            .arg(version)
-            .arg(libName)
-            .arg(libVersion)
+        msg
     );
 }
 
 void
 PreferencesDialog::onVerifyCclive() {
     try {
-        QString version, libVersion, libName;
+        QString path, version, libVersion, libName;
         bool isCcliveFlag;
+
+        path = ccliveEdit->text();
+
         Util::verifyCclivePath(
-            ccliveEdit->text(),
+            path,
             version,
             libVersion,
             libName,
             &isCcliveFlag
         );
+
         dump_detection_results(
             this,
+            path,
             version,
             libVersion,
             libName,
@@ -242,6 +254,7 @@ PreferencesDialog::onAutodetectCclive() {
     try {
         QString path, version, libVersion, libName;
         bool isCcliveFlag = false;
+
         Util::detectCclive(
             path,
             version,
@@ -249,7 +262,18 @@ PreferencesDialog::onAutodetectCclive() {
             libName,
             &isCcliveFlag
         );
+
         ccliveEdit->setText(path);
+
+        dump_detection_results(
+            this,
+            path,
+            version,
+            libVersion,
+            libName,
+            isCcliveFlag,
+            true
+        );
     }
     catch (const NoCcliveException& x) {
         QMessageBox::warning(this, tr("Warning"), x.what());
