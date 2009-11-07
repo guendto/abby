@@ -62,8 +62,8 @@ private:
     bool cancelledFlag;
     bool isCcliveFlag;
     QString ccliveVersion;
-    QString curlMod;
-    QString curlVersion;
+    QString libVersion;
+    QString libName;
 private:
     void addPageLink(QString lnk);
     void writeSettings();

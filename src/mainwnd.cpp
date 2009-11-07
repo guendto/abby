@@ -191,8 +191,8 @@ MainWindow::parseCcliveVersionOutput() {
             Util::detectCclive(
                 path,
                 ccliveVersion,
-                curlVersion,
-                curlMod,
+                libVersion,
+                libName,
                 &isCcliveFlag
             );
             if (!path.isEmpty()) {
@@ -204,8 +204,8 @@ MainWindow::parseCcliveVersionOutput() {
         Util::verifyCclivePath(
             path,
             ccliveVersion,
-            curlVersion,
-            curlMod,
+            libVersion,
+            libName,
             &isCcliveFlag
         );
     }
@@ -520,7 +520,7 @@ MainWindow::onCancel() {
 
 void
 MainWindow::onAbout() {
-    AboutDialog(this, ccliveVersion, curlMod, curlVersion).exec();
+    AboutDialog(this, ccliveVersion, libName, libVersion).exec();
 }
 
 #define fillList(dlg) \

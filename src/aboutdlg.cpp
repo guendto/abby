@@ -19,10 +19,11 @@
 
 #include "aboutdlg.h"
 
-AboutDialog::AboutDialog(QWidget *parent,
+AboutDialog::AboutDialog(
+    QWidget *parent,
     const QString& ccliveVersion,
-    const QString& curlMod,
-    const QString& curlVersion)
+    const QString& libName,
+    const QString& libVersion)
     : QDialog(parent)
 {
     setupUi(this);
@@ -32,8 +33,8 @@ AboutDialog::AboutDialog(QWidget *parent,
 
     qtVersionLabel      ->setText(qVersion());
     ccliveVersionLabel  ->setText(ccliveVersion);
-    curlModLabel        ->setText(curlMod+":");
-    curlVersionLabel    ->setText(curlVersion);
+    libNameLabel        ->setText(libName+":");
+    libVersionLabel     ->setText(libVersion);
 
     // TODO: Improve. Relies on LANG setting only.
     const char *locale = getenv("LANG");

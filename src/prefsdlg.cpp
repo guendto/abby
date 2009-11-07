@@ -191,27 +191,65 @@ PreferencesDialog::onBrowseCclive() {
         ccliveEdit->setText(fname);
 }
 
+static void
+dump_detection_results(
+    QWidget *parent,
+    const QString& version,
+    const QString& libVersion,
+    const QString& libName,
+    const bool isCcliveFlag)
+{
+    QMessageBox::information(
+        parent,
+        QCoreApplication::applicationName(),
+        QString(
+            QObject::tr("Detected: %1 version %2 with %3 %4")
+        )
+            .arg(isCcliveFlag ? "cclive" : "clive")
+            .arg(version)
+            .arg(libName)
+            .arg(libVersion)
+    );
+}
+
 void
 PreferencesDialog::onVerifyCclive() {
     try {
-        QString ccliveVersion, curlVersion, curlMod;
+        QString version, libVersion, libName;
         bool isCcliveFlag;
         Util::verifyCclivePath(
             ccliveEdit->text(),
-            ccliveVersion,
-            curlVersion,
-            curlMod,
+            version,
+            libVersion,
+            libName,
             &isCcliveFlag
         );
-        QMessageBox::information(
+        dump_detection_results(
             this,
-            QCoreApplication::applicationName(),
-            QString( tr("Program: %1\nVersion: %2\n%3: %4") )
-                .arg(isCcliveFlag ? "cclive":"clive")
-                .arg(ccliveVersion)
-                .arg(curlMod)
-                .arg(curlVersion)
+            version,
+            libVersion,
+            libName,
+            isCcliveFlag
         );
+    }
+    catch (const NoCcliveException& x) {
+        QMessageBox::warning(this, tr("Warning"), x.what());
+    }
+}
+
+void
+PreferencesDialog::onAutodetectCclive() {
+    try {
+        QString path, version, libVersion, libName;
+        bool isCcliveFlag = false;
+        Util::detectCclive(
+            path,
+            version,
+            libVersion,
+            libName,
+            &isCcliveFlag
+        );
+        ccliveEdit->setText(path);
     }
     catch (const NoCcliveException& x) {
         QMessageBox::warning(this, tr("Warning"), x.what());

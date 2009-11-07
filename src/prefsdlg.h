@@ -35,6 +35,7 @@ private slots:
     void onBrowseCommand();
     void onBrowseCclive();
     void onVerifyCclive();
+    void onAutodetectCclive();
     void onLangChanged(int index);
     void onTimeoutStateChanged(int state);
 private:

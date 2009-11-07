@@ -53,14 +53,15 @@ check_path(const QStringList& paths, const QString& exec) {
 static void
 verify_version_output(
     const QString& path,
-    QString& ccliveVersion,
-    QString& curlVersion,
-    QString& curlMod,
+    QString& version,
+    QString& libVersion,
+    QString& libName,
     bool *isCcliveFlag)
 {
 
-    ccliveVersion.clear();
-    curlVersion.clear();
+    version.clear();
+    libVersion.clear();
+    libName.clear();
 
     QProcess proc;
     proc.setEnvironment(QStringList() << "CCLIVE_NO_CONFIG=1");
@@ -98,9 +99,10 @@ verify_version_output(
                 if (lst.size() >= 6) {
                     if (isCcliveFlag)
                         *isCcliveFlag  = (lst[0] == "cclive");
-                    ccliveVersion = lst[2];
-                    curlMod       = lst[4];
-                    curlVersion   = lst[6];
+
+                    version    = lst[2];
+                    libName    = lst[4];
+                    libVersion = lst[6];
 
                     enoughOutputFlag  = true;
                 }
@@ -121,9 +123,9 @@ verify_version_output(
 void
 Util::detectCclive(
     QString& path,
-    QString& ccliveVersion,
-    QString& curlVersion,
-    QString& curlMod,
+    QString& version,
+    QString& libVersion,
+    QString& libName,
     bool *isCcliveFlag)
 {
 
@@ -161,9 +163,9 @@ Util::detectCclive(
         // Check --version output.
         verify_version_output(
             path,
-            ccliveVersion,
-            curlVersion,
-            curlMod,
+            version,
+            libVersion,
+            libName,
             isCcliveFlag
         );
     }
@@ -172,16 +174,16 @@ Util::detectCclive(
 void
 Util::verifyCclivePath(
     const QString& path,
-    QString& ccliveVersion,
-    QString& curlVersion,
-    QString& curlMod,
+    QString& version,
+    QString& libVersion,
+    QString& libName,
     bool *isCcliveFlag/*=NULL*/)
 {
     verify_version_output(
         path,
-        ccliveVersion,
-        curlVersion,
-        curlMod,
+        version,
+        libVersion,
+        libName,
         isCcliveFlag
     );
 }

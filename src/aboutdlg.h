@@ -25,8 +25,12 @@ class QDialog;
 class AboutDialog : public QDialog, private Ui::AboutDialog {
     Q_OBJECT
 public:
-    AboutDialog(QWidget *parent,
-        const QString& ccliveVersion, const QString& curlMod,
-            const QString& curlVersion);
+    AboutDialog(
+        QWidget *parent,
+        const QString& ccliveVersion,
+        const QString& libName,
+        const QString& libVersion);
 };
 #endif
+
+

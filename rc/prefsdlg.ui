@@ -11,7 +11,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>235</height>
+    <height>229</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,6 +21,16 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout_5">
+   <item row="1" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QTabWidget" name="tabWidget">
      <property name="whatsThis">
@@ -70,17 +80,17 @@
            </property>
           </widget>
          </item>
+        </layout>
+       </item>
+       <item row="1" column="0">
+        <layout class="QHBoxLayout" name="horizontalLayout_5">
          <item>
-          <widget class="QPushButton" name="verifyCcliveButton">
+          <widget class="QPushButton" name="autodetectCcliveButton">
            <property name="toolTip">
-            <string>Verify path</string>
+            <string>Autodetect c/clive from the path</string>
            </property>
            <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset resource="abby.qrc">
-             <normaloff>:/view-refresh.png</normaloff>:/view-refresh.png</iconset>
+            <string>&amp;Autodetect</string>
            </property>
            <property name="iconSize">
             <size>
@@ -90,9 +100,32 @@
            </property>
           </widget>
          </item>
+         <item>
+          <spacer name="horizontalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="verifyCcliveButton">
+           <property name="toolTip">
+            <string>Verify path to c/clive</string>
+           </property>
+           <property name="text">
+            <string>&amp;Verify</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
-       <item row="1" column="0">
+       <item row="2" column="0">
         <layout class="QHBoxLayout" name="horizontalLayout_6">
          <item>
           <widget class="QLabel" name="label">
@@ -130,7 +163,7 @@
          </item>
         </layout>
        </item>
-       <item row="2" column="0">
+       <item row="3" column="0">
         <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -437,21 +470,12 @@ Example: /usr/local/bin/mplayer %i</string>
      </widget>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
   <tabstop>ccliveEdit</tabstop>
   <tabstop>ccliveBrowse</tabstop>
+  <tabstop>autodetectCcliveButton</tabstop>
   <tabstop>verifyCcliveButton</tabstop>
   <tabstop>savedirEdit</tabstop>
   <tabstop>savedirButton</tabstop>
@@ -641,12 +665,28 @@ Example: /usr/local/bin/mplayer %i</string>
    <slot>onVerifyCclive()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>476</x>
-     <y>60</y>
+     <x>455</x>
+     <y>94</y>
     </hint>
     <hint type="destinationlabel">
      <x>258</x>
      <y>132</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>autodetectCcliveButton</sender>
+   <signal>clicked()</signal>
+   <receiver>PreferencesDialog</receiver>
+   <slot>onAutodetectCclive()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>63</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>258</x>
+     <y>114</y>
     </hint>
    </hints>
   </connection>
@@ -663,5 +703,6 @@ Example: /usr/local/bin/mplayer %i</string>
   <slot>onBrowseStreamCommand()</slot>
   <slot>onTimeoutStateChanged(int)</slot>
   <slot>onVerifyCclive()</slot>
+  <slot>onAutodetectCclive()</slot>
  </slots>
 </ui>

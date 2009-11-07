@@ -23,16 +23,16 @@ class Util {
 public:
     static void detectCclive(
         QString& path,
-        QString& ccliveVersion,
-        QString& curlVersion,
-        QString& curlMod,
+        QString& version,
+        QString& libVersion,
+        QString& libName,
         bool *isCcliveFlag
     );
     static void verifyCclivePath(
         const QString& path,
-        QString& ccliveVersion,
-        QString& curlVersion,
-        QString& curlMod,
+        QString& version,
+        QString& libVersion,
+        QString& libName,
         bool *isCcliveFlag=NULL
     );
 };
