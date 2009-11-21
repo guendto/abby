@@ -10,6 +10,10 @@ web : http://repo.or.cz/w/abby.git
   - common code -> src/util.(cpp|h)
   - e.g. HTTP redirect code (rss/scan)
 
+0.6.0
+-----
+* integrate with libquvi?
+
 Unspecified
 -----------
 * proper application icon to replace the current "TODO" icon
