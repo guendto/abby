@@ -2,21 +2,18 @@ Version 0.4.5
 
   User-visible changes:
    * Confirm exit if c/clive is still active
-   * Autodetect c/clive from the path
-     # Triggered by empty path in the preferences
-   * Preferences:
-     # Verify path to c/clive button
+   * c/clive autodetect, verify buttons (preferences)
+   * Autodetect c/clive from the path (if empty path)
    * Feed manager:
      # Allow use of feed names instead of links
      # Use checkboxes for selection instead
      # Fix defunct "clear list" button
      # Remove "paste link" button
-   * Fix crashing with non-c/clive commands
-     # Should someone try that one day
+   * Fix segfault when verifying path with non-c/clive commands
 
   Developer-visible changes:
    * Move cclive detection logic to src/util.(cpp|h) file
-   * Add NEWS file to cover significant changes
+   * Add NEWS file
 
 
 Version 0.4.4
