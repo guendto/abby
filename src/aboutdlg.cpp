@@ -22,11 +22,14 @@
 AboutDialog::AboutDialog(
     QWidget *parent,
     const QString& ccliveVersion,
+    const bool& isCcliveFlag,
     const QString& libName,
     const QString& libVersion)
     : QDialog(parent)
 {
     setupUi(this);
+
+    ccliveGBox->setTitle(isCcliveFlag ? "cclive" : "clive");
 
     abbyVersionLabel    ->setText(
         QCoreApplication::applicationVersion()); // set in src/main.cpp
@@ -41,3 +44,5 @@ AboutDialog::AboutDialog(
     if (locale)
         localeLabel     ->setText(locale);
 }
+
+

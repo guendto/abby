@@ -1,6 +1,7 @@
 Version 0.4.6
 
   User-visible changes:
+   * About dialog: change c/clive box title dynamically
    * Adapt to cclive 0.5.6 changes
      # --regexp
        * Update the label

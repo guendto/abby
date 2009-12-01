@@ -28,6 +28,7 @@ public:
     AboutDialog(
         QWidget *parent,
         const QString& ccliveVersion,
+        const bool& isCcliveFlag,
         const QString& libName,
         const QString& libVersion);
 };

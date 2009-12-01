@@ -518,7 +518,7 @@ MainWindow::onCancel() {
 
 void
 MainWindow::onAbout() {
-    AboutDialog(this, ccliveVersion, libName, libVersion).exec();
+    AboutDialog(this, ccliveVersion, isCcliveFlag, libName, libVersion).exec();
 }
 
 #define fillList(dlg) \
