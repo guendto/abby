@@ -254,14 +254,14 @@ MainWindow::updateWidgets(const bool updateCcliveDepends) {
         if (isCcliveFlag) {
             regexpLabel ->show();
             regexpEdit  ->show();
-            findallBox  ->show();
+            substEdit   ->show();
             cclassLabel ->hide();
             cclassEdit  ->hide();
         }
         else {
             regexpLabel ->hide();
             regexpEdit  ->hide();
-            findallBox  ->hide();
+            substEdit   ->hide();
             cclassLabel ->show();
             cclassEdit  ->show();
         }
@@ -296,7 +296,7 @@ MainWindow::writeSettings() {
     s.setValue("size", size());
     s.setValue("pos", pos());
     s.setValue("regexpEdit", regexpEdit->text());
-    s.setValue("findallBox", findallBox->checkState());
+    s.setValue("substEdit", substEdit->text());
     s.setValue("cclassEdit", cclassEdit->text());
     s.setValue("fnamefmtEdit", fnamefmtEdit->text());
     s.endGroup();
@@ -309,10 +309,7 @@ MainWindow::readSettings() {
     resize( s.value("size", QSize(525,265)).toSize() );
     move( s.value("pos", QPoint(200,200)).toPoint() );
     regexpEdit->setText( s.value("regexpEdit").toString() );
-    findallBox->setCheckState(
-        s.value("findallBox").toBool()
-        ? Qt::Checked
-        : Qt::Unchecked);
+    substEdit->setText( s.value("substEdit").toString() );
     cclassEdit->setText( s.value("cclassEdit").toString() );
     fnamefmtEdit->setText( s.value("fnamefmtEdit").toString() );
     s.endGroup();
@@ -449,8 +446,9 @@ MainWindow::onStart() {
         s = regexpEdit->text();
         if (!s.isEmpty())
             args << QString("--regexp=%1").arg(s);
-        if (findallBox->checkState())
-            args << QString("--find-all");
+        s = substEdit->text();
+        if (!s.isEmpty())
+            args << QString("--substitute=%1").arg(s);
     } else {
 
         args << "--stderr";

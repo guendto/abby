@@ -1,3 +1,14 @@
+Version 0.4.6
+
+  User-visible changes:
+   * Adapt to cclive 0.5.6 changes
+     # --regexp
+       * Update the label
+       * Update editbox tooltip
+     # --substitute
+       * Add label + editbox
+
+
 Version 0.4.5
 (November 21, 2009)
 

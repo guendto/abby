@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>545</width>
-    <height>373</height>
+    <height>423</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -528,7 +528,7 @@
              <item>
               <widget class="QLabel" name="regexpLabel">
                <property name="text">
-                <string>Re&amp;gular expression:</string>
+                <string>Title cleanup re&amp;gular expression:</string>
                </property>
                <property name="buddy">
                 <cstring>regexpEdit</cstring>
@@ -538,23 +538,39 @@
              <item>
               <widget class="QLineEdit" name="regexpEdit">
                <property name="toolTip">
-                <string>Regular expression to filter video title. Example: &quot;(\w|\s)&quot;</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="findallBox">
-               <property name="toolTip">
-                <string>Use repeated matching to find all occurences, similar to Perl's /g.</string>
-               </property>
-               <property name="text">
-                <string>Re&amp;peat</string>
+                <string>Regular expression used to clean up video titles before they are used for
+output filenames. Supports (and mimics) Perl's /g (global, find all) and /i
+(case-insensitive).
+
+Example: /(\w|\pL)/g</string>
                </property>
               </widget>
              </item>
             </layout>
            </item>
            <item row="2" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_10">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Substitute in filename regexp.:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="substEdit">
+               <property name="toolTip">
+                <string>Mimics Perl's s/old/new/(gi) substitution. This option can be used to
+replace occurences in output filenames. Supports /g (global, find all
+occurences) and /i (case-insensitive).
+
+Example: s/[-:]/_/g</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="3" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_7">
              <item>
               <widget class="QLabel" name="cclassLabel">
@@ -575,7 +591,7 @@
              </item>
             </layout>
            </item>
-           <item row="3" column="0">
+           <item row="4" column="0">
             <layout class="QHBoxLayout" name="horizontalLayout_8">
              <item>
               <widget class="QLabel" name="label">
@@ -921,15 +937,16 @@ the download reches the specified percent complete</string>
   <tabstop>startButton</tabstop>
   <tabstop>tabWidget_2</tabstop>
   <tabstop>cancelButton</tabstop>
-  <tabstop>logEdit</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>formatsButton</tabstop>
   <tabstop>regexpEdit</tabstop>
-  <tabstop>findallBox</tabstop>
+  <tabstop>substEdit</tabstop>
   <tabstop>cclassEdit</tabstop>
+  <tabstop>fnamefmtEdit</tabstop>
   <tabstop>commandBox</tabstop>
   <tabstop>streamBox</tabstop>
   <tabstop>streamSpin</tabstop>
+  <tabstop>logEdit</tabstop>
  </tabstops>
  <resources>
   <include location="abby.qrc"/>
