@@ -5,6 +5,7 @@ Version 0.4.6
      # --regexp
        * Update the label
        * Update editbox tooltip
+       * Remove "find all" checkbox
      # --substitute
        * Add label + editbox
 
