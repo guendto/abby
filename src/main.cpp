@@ -29,7 +29,7 @@ main (int argc, char *argv[]) {
 
     QCoreApplication::setOrganizationName  (APPNAME);
     QCoreApplication::setApplicationName   (APPNAME);
-    QCoreApplication::setApplicationVersion("0.4.5");
+    QCoreApplication::setApplicationVersion("0.4.7");
     QCoreApplication::setOrganizationDomain("abby.googlecode.com");
 
     QSettings settings;
