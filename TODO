@@ -3,10 +3,7 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* adapt to cclive 0.5.6 changes
-  - --substitute
-  - --regexp, --find-all
-* change aboutbox c/clive label accordingly
+* add size grip to all dialogs
 
 0.5.0
 -----
