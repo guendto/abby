@@ -1,7 +1,7 @@
 Version 0.4.7
 
   User-visible changes:
-   * Handle dropped links
+   * Handle dropped links (closes issue #3)
 
 
 Version 0.4.6.1
