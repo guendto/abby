@@ -112,6 +112,9 @@ MainWindow::MainWindow()
     streamBox ->setHidden(true);
     streamSpin->setHidden(true);
 #endif
+
+    // Enable drops.
+    setAcceptDrops(true);
 }
 
 bool
@@ -843,6 +846,23 @@ MainWindow::onItemDoubleClicked(QListWidgetItem *item) {
 
     if (ok && !lnk.isEmpty())
         item->setText(lnk);
+}
+
+void
+MainWindow::dragEnterEvent(QDragEnterEvent *event) {
+    if (event->mimeData()->hasText())
+        event->acceptProposedAction();
+}
+
+void
+MainWindow::dropEvent(QDropEvent *event) {
+    QStringList lst = event->mimeData()->text().split("\n");
+    const register _uint size  = lst.size();
+
+    for (register _uint i=0; i<size; ++i)
+        addPageLink(lst[i]);
+
+    event->acceptProposedAction();
 }
 
 
