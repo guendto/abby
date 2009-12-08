@@ -126,7 +126,7 @@ dumpScanMatches (const QStringList& lst) {
 
 static void
 scanYoutubeEmbed(QStringList& lst, const QString& content) {
-    QRegExp re("\\/v\\/(.*)[\"&]");
+    QRegExp re("\\/v\\/(.*)[\"&\n]");
     QStringList matches = matchScanContent(lst, re, content);
     //dumpScanMatches(matches);
     lst << matches;
@@ -134,7 +134,7 @@ scanYoutubeEmbed(QStringList& lst, const QString& content) {
 
 static void
 scanYoutubeRegular(QStringList& lst, const QString& content) {
-    QRegExp re("\\/watch\\?v=(.*)[\"&]");
+    QRegExp re("\\/watch\\?v=(.*)[\"&\n]");
     QStringList matches = matchScanContent(lst, re, content);
     //dumpScanMatches(matches);
     lst << matches;

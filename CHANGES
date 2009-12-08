@@ -1,6 +1,8 @@
 Version 0.4.7
 
   User-visible changes:
+   * Fix scan pattern to terminate at \n if found
+     # Mangled data seen when youtube front page was scanned
    * Handle dropped links (closes issue #3)
 
 
