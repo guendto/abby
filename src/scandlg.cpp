@@ -25,7 +25,8 @@
 #include "scandlg.h"
 
 ScanDialog::ScanDialog(QWidget *parent)
-    : QDialog(parent), titleMode(false)
+    : QDialog(parent), mgr(0), titleMode(false),
+      scannedPages(0), expectedScans(0)
 {
     setupUi(this);
 
@@ -36,8 +37,19 @@ ScanDialog::ScanDialog(QWidget *parent)
     itemsTree->setColumnHidden(1, true);
 }
 
+static void
+enable_widgets(ScanDialog *d, const bool state=true) {
+    d->linkEdit->setEnabled    (state);
+    d->scanButton->setEnabled  (state);
+    d->titlesBox->setEnabled   (state);
+    d->selectallButton->setEnabled(state);
+    d->invertButton->setEnabled(state);
+    d->buttonBox->setEnabled   (state);
+}
+
 void
 ScanDialog::onScan() {
+
     QString lnk = linkEdit->text();
 
     lnk = lnk.trimmed();
@@ -49,45 +61,61 @@ ScanDialog::onScan() {
         lnk.insert(0,"http://");
 
     itemsTree->clear();
+    logEdit->clear();
 
-    titleMode = false;
+    scannedPages    = 0;
+    expectedScans   = 0;
+    titleMode       = false;
 
-    linkEdit->setEnabled    (false);
-    scanButton->setEnabled  (false);
-    titlesBox->setEnabled   (false);
-    buttonBox->setEnabled   (false);
-    selectallButton->setEnabled(false);
-    invertButton->setEnabled(false);
+    enable_widgets(this, false);
 
-    mgr->get(QNetworkRequest(lnk));
+    Util::appendLog(logEdit, QString(tr("Scan ... %1")).arg(lnk));
+
+    mgr->get( QNetworkRequest(lnk) );
 }
 
 void
 ScanDialog::replyFinished(QNetworkReply* reply) {
 
-    bool state = false;
-
     if (reply->error() == QNetworkReply::NoError) {
 
         handleRedirect(reply);
 
-        if (!redirectedToURL.isEmpty())
+        if (!redirectedToURL.isEmpty()) {
+            Util::appendLog(
+                logEdit,
+                QString(tr("Fetch ... %1"))
+                    .arg(redirectedToURL.toString())
+            );
             mgr->get( QNetworkRequest(redirectedToURL) );
+        }
         else {
-            if (!titleMode)
+            if (!titleMode) {
+                Util::appendLog(logEdit, tr("Scan contents for video links."));
                 scanContent(reply);
-            else
+            }
+            else {
+                Util::appendLog(
+                    logEdit,
+                    QString(tr("Parse video title ... %1 [%2/%3]"))
+                        .arg(reply->url().toString())
+                        .arg(++scannedPages)
+                        .arg(expectedScans)
+                );
                 parseHtmlTitle(reply);
+                if (scannedPages == expectedScans)
+                    emit scanComplete();
+            }
             redirectedToURL.clear();
-            state = true;
         }
     }
     else {
+        Util::appendLog(logEdit, tr("Error occurred."));
         QMessageBox::critical(this, QCoreApplication::applicationName(),
             QString(tr("Network error: %1")).arg(reply->errorString()));
-        state = true;
     }
 
+#ifdef _1_
     if (state) {
         linkEdit->setEnabled    (state);
         scanButton->setEnabled  (state);
@@ -96,6 +124,7 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         selectallButton->setEnabled(state);
         invertButton->setEnabled(state);
     }
+#endif
 
     reply->deleteLater();
 }
@@ -110,8 +139,13 @@ matchScanContent (const QStringList& lst, QRegExp& re, const QString& content) {
 
     int pos = 0;
     while ((pos = re.indexIn(content, pos)) != -1) {
-        if (!matches.contains(re.cap(1)) && !lst.contains(re.cap(1)))
-            matches << re.cap(1);
+        const QString cap = re.cap(1).simplified();
+        if (!matches.contains(cap)
+            && !lst.contains(cap)
+            && !cap.isEmpty())
+        {
+            matches << cap;
+        }
         pos += re.matchedLength();
     }
     return matches;
@@ -131,7 +165,7 @@ dumpScanMatches (const QStringList& lst) {
 
 static void
 scanYoutubeEmbed(QStringList& lst, const QString& content) {
-    QRegExp re("\\/v\\/(.*)[\"&\n]");
+    QRegExp re("\\/v\\/(.*)[\"&\n<]");
     QStringList matches = matchScanContent(lst, re, content);
     //dumpScanMatches(matches);
     lst << matches;
@@ -139,7 +173,7 @@ scanYoutubeEmbed(QStringList& lst, const QString& content) {
 
 static void
 scanYoutubeRegular(QStringList& lst, const QString& content) {
-    QRegExp re("\\/watch\\?v=(.*)[\"&\n]");
+    QRegExp re("\\/watch\\?v=(.*)[\"&\n<]");
     QStringList matches = matchScanContent(lst, re, content);
     //dumpScanMatches(matches);
     lst << matches;
@@ -163,12 +197,18 @@ ScanDialog::scanContent(QNetworkReply *reply) {
 
     const register _uint links_size = links.size();
 
+    Util::appendLog(
+        logEdit,
+        QString(tr("Found %1 video links.")).arg(links_size)
+    );
+
     if (titlesBox->checkState()) {
         titleMode = true;
-        for (i=0; i<links_size; ++i)
+        for (i=0, expectedScans=links_size; i<links_size; ++i)
             mgr->get( QNetworkRequest(links[i]) );
     }
     else {
+
         for (i=0; i<links_size; ++i) {
             QTreeWidgetItem *item = new QTreeWidgetItem;
             item->setCheckState(0, Qt::Unchecked);
@@ -176,6 +216,8 @@ ScanDialog::scanContent(QNetworkReply *reply) {
             item->setText(1, links[i]);
             itemsTree->addTopLevelItem(item);
         }
+
+        emit scanComplete();
     }
 }
 
@@ -246,6 +288,12 @@ ScanDialog::onSelectAll() {
 void
 ScanDialog::onInvert() {
     Util::invertAllCheckableItems(itemsTree);
+}
+
+void
+ScanDialog::scanComplete() {
+    enable_widgets(this);
+    Util::appendLog(logEdit, tr("Scan complete."));
 }
 
 

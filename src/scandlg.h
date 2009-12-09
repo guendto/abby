@@ -37,6 +37,7 @@ private slots:
     void onSelectAll();
     void onInvert();
     void replyFinished(QNetworkReply*);
+    void scanComplete();
 public:
     void writeSettings();
 private:
@@ -51,6 +52,9 @@ private:
     QPointer<QNetworkAccessManager> mgr;
     QUrl redirectedToURL;
     bool titleMode;
+    bool scanFlag;
+    int scannedPages;
+    int expectedScans;
 };
 
 #endif
