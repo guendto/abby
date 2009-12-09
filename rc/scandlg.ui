@@ -133,6 +133,13 @@ to take more time and bandwidth. </string>
            </property>
           </spacer>
          </item>
+         <item>
+          <widget class="QLabel" name="totalLabel">
+           <property name="text">
+            <string>Total: 0</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>

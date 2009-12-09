@@ -38,13 +38,25 @@ ScanDialog::ScanDialog(QWidget *parent)
 }
 
 static void
-enable_widgets(ScanDialog *d, const bool state=true) {
+enable_widgets(const ScanDialog *d, const bool state=true) {
     d->linkEdit->setEnabled    (state);
     d->scanButton->setEnabled  (state);
     d->titlesBox->setEnabled   (state);
     d->selectallButton->setEnabled(state);
     d->invertButton->setEnabled(state);
     d->buttonBox->setEnabled   (state);
+}
+
+#include <QDebug>
+static void
+update_item_count(const ScanDialog *d) {
+    int count = 0;
+    QTreeWidgetItemIterator iter(d->itemsTree);
+    while (*iter) {
+        ++count;
+        ++iter;
+    }
+    d->totalLabel->setText( QString("Total: %1").arg(count) );
 }
 
 void
@@ -61,6 +73,8 @@ ScanDialog::onScan() {
         lnk.insert(0,"http://");
 
     itemsTree->clear();
+    update_item_count(this);
+
     logEdit->clear();
 
     scannedPages    = 0;
@@ -114,17 +128,6 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         QMessageBox::critical(this, QCoreApplication::applicationName(),
             QString(tr("Network error: %1")).arg(reply->errorString()));
     }
-
-#ifdef _1_
-    if (state) {
-        linkEdit->setEnabled    (state);
-        scanButton->setEnabled  (state);
-        titlesBox->setEnabled   (state);
-        buttonBox->setEnabled   (state);
-        selectallButton->setEnabled(state);
-        invertButton->setEnabled(state);
-    }
-#endif
 
     reply->deleteLater();
 }
@@ -237,6 +240,8 @@ ScanDialog::parseHtmlTitle(QNetworkReply *reply) {
     item->setText(0, re.cap(1).simplified()); 
     item->setText(1, link);
     itemsTree->addTopLevelItem(item);
+
+    update_item_count(this);
 }
 
 QNetworkAccessManager*
@@ -292,6 +297,7 @@ ScanDialog::onInvert() {
 
 void
 ScanDialog::scanComplete() {
+    update_item_count(this);
     enable_widgets(this);
     Util::appendLog(logEdit, tr("Scan complete."));
 }
