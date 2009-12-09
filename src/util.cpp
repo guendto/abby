@@ -22,6 +22,7 @@
 #include <QFile>
 #include <QTranslator>
 #include <QDir>
+#include <QTreeWidget>
 //#include <QDebug>
 
 #include "util.h"
@@ -186,6 +187,35 @@ Util::verifyCclivePath(
         libName,
         isCcliveFlag
     );
+}
+
+void
+Util::checkAllItems(
+    const QTreeWidget *w,
+    const Qt::CheckState& st,
+    const int column/*=0*/)
+{
+    QTreeWidgetItemIterator iter(const_cast<QTreeWidget*>(w));
+    while (*iter) {
+        (*iter)->setCheckState(column, st);
+        ++iter;
+    }
+}
+
+void
+Util::invertAllCheckableItems(
+    const QTreeWidget *w,
+    const int column/*=0*/)
+{
+    QTreeWidgetItemIterator iter(const_cast<QTreeWidget*>(w));
+    while (*iter) {
+        (*iter)->setCheckState(column,
+            (*iter)->checkState(column) == Qt::Checked
+            ? Qt::Unchecked
+            : Qt::Checked
+        );
+        ++iter;
+    }
 }
 
 NoCcliveException::NoCcliveException(const QString& errmsg)

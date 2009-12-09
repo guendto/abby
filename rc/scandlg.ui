@@ -1,11 +1,12 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Toni Gundogdu</author>
  <class>scanDialog</class>
- <widget class="QDialog" name="scanDialog" >
-  <property name="windowModality" >
+ <widget class="QDialog" name="scanDialog">
+  <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
-  <property name="geometry" >
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -13,42 +14,122 @@
     <height>279</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>Scan</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="abby.qrc" >
+  <property name="windowIcon">
+   <iconset resource="abby.qrc">
     <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
   </property>
-  <property name="sizeGripEnabled" >
+  <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="1" column="0" >
-    <layout class="QHBoxLayout" name="horizontalLayout" >
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="2" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="label" >
-       <property name="text" >
+      <widget class="QTreeWidget" name="itemsTree">
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Found</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Link</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="selectallButton">
+         <property name="text">
+          <string>S&amp;elect all</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="invertButton">
+         <property name="text">
+          <string>&amp;Invert</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
         <string>&amp;Link:</string>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>linkEdit</cstring>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="linkEdit" />
+      <widget class="QLineEdit" name="linkEdit"/>
      </item>
      <item>
-      <widget class="QPushButton" name="scanButton" >
-       <property name="text" >
+      <widget class="QCheckBox" name="titlesBox">
+       <property name="toolTip">
+        <string>Have abby fetch video page titles for the found
+video page links. This will cause the scan process
+to take more time and bandwidth. </string>
+       </property>
+       <property name="text">
+        <string>&amp;Fetch video title</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="scanButton">
+       <property name="text">
         <string>&amp;Scan</string>
        </property>
-       <property name="icon" >
-        <iconset resource="abby.qrc" >
+       <property name="icon">
+        <iconset resource="abby.qrc">
          <normaloff>:/edit-find.png</normaloff>:/edit-find.png</iconset>
        </property>
-       <property name="iconSize" >
+       <property name="iconSize">
         <size>
          <width>16</width>
          <height>16</height>
@@ -58,60 +139,6 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="0" >
-    <widget class="QTreeWidget" name="itemsTree" >
-     <property name="rootIsDecorated" >
-      <bool>false</bool>
-     </property>
-     <property name="headerHidden" >
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text" >
-       <string>Found</string>
-      </property>
-     </column>
-     <column>
-      <property name="text" >
-       <string>Link</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="4" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="standardButtons" >
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" >
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
-      <string>Options</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout" >
-      <item row="0" column="0" >
-       <widget class="QCheckBox" name="titlesBox" >
-        <property name="toolTip" >
-         <string>Have abby fetch video page titles for the found
-video page links. This will cause the scan process
-to take more time and bandwidth. </string>
-        </property>
-        <property name="text" >
-         <string>&amp;Fetch video title</string>
-        </property>
-        <property name="checked" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
@@ -119,10 +146,12 @@ to take more time and bandwidth. </string>
   <tabstop>titlesBox</tabstop>
   <tabstop>scanButton</tabstop>
   <tabstop>itemsTree</tabstop>
+  <tabstop>selectallButton</tabstop>
+  <tabstop>invertButton</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="abby.qrc" />
+  <include location="abby.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -131,11 +160,11 @@ to take more time and bandwidth. </string>
    <receiver>scanDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -147,11 +176,11 @@ to take more time and bandwidth. </string>
    <receiver>scanDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>
@@ -163,18 +192,52 @@ to take more time and bandwidth. </string>
    <receiver>scanDialog</receiver>
    <slot>onScan()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>462</x>
      <y>23</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>256</x>
      <y>119</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>selectallButton</sender>
+   <signal>clicked()</signal>
+   <receiver>scanDialog</receiver>
+   <slot>onSelectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>461</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>139</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>invertButton</sender>
+   <signal>clicked()</signal>
+   <receiver>scanDialog</receiver>
+   <slot>onInvert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>461</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>256</x>
+     <y>139</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
   <slot>onScan()</slot>
+  <slot>onSelectAll()</slot>
+  <slot>onInvert()</slot>
  </slots>
 </ui>

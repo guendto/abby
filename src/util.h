@@ -19,6 +19,8 @@
 #ifndef util_h
 #define util_h
 
+class QTreeWidget;
+
 class Util {
 public:
     static void detectCclive(
@@ -34,6 +36,15 @@ public:
         QString& libVersion,
         QString& libName,
         bool *isCcliveFlag=NULL
+    );
+    static void checkAllItems(
+        const QTreeWidget *w,
+        const Qt::CheckState& st,
+        const int column=0
+    );
+    static void invertAllCheckableItems(
+        const QTreeWidget *w,
+        const int column=0
     );
 };
 

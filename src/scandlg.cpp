@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QRegExp>
 
+#include "util.h"
 #include "scandlg.h"
 
 ScanDialog::ScanDialog(QWidget *parent)
@@ -55,6 +56,8 @@ ScanDialog::onScan() {
     scanButton->setEnabled  (false);
     titlesBox->setEnabled   (false);
     buttonBox->setEnabled   (false);
+    selectallButton->setEnabled(false);
+    invertButton->setEnabled(false);
 
     mgr->get(QNetworkRequest(lnk));
 }
@@ -90,6 +93,8 @@ ScanDialog::replyFinished(QNetworkReply* reply) {
         scanButton->setEnabled  (state);
         titlesBox->setEnabled   (state);
         buttonBox->setEnabled   (state);
+        selectallButton->setEnabled(state);
+        invertButton->setEnabled(state);
     }
 
     reply->deleteLater();
@@ -232,3 +237,15 @@ ScanDialog::readSettings() {
     resize( s.value("size", QSize(514,295)).toSize() );
     s.endGroup();
 }
+
+void
+ScanDialog::onSelectAll() {
+    Util::checkAllItems(itemsTree, Qt::Checked);
+}
+
+void
+ScanDialog::onInvert() {
+    Util::invertAllCheckableItems(itemsTree);
+}
+
+

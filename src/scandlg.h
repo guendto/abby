@@ -34,6 +34,8 @@ public:
     ScanDialog(QWidget *parent);
 private slots:
     void onScan();
+    void onSelectAll();
+    void onInvert();
     void replyFinished(QNetworkReply*);
 public:
     void writeSettings();
