@@ -1,11 +1,12 @@
-<ui version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <author>Toni Gundogdu</author>
  <class>rssDialog</class>
- <widget class="QDialog" name="rssDialog" >
-  <property name="windowModality" >
+ <widget class="QDialog" name="rssDialog">
+  <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
-  <property name="geometry" >
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
@@ -13,45 +14,45 @@
     <height>270</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>RSS</string>
   </property>
-  <property name="windowIcon" >
-   <iconset resource="abby.qrc" >
+  <property name="windowIcon">
+   <iconset resource="abby.qrc">
     <normaloff>:/feed-icon-14x14.png</normaloff>:/feed-icon-14x14.png</iconset>
   </property>
-  <property name="sizeGripEnabled" >
+  <property name="sizeGripEnabled">
    <bool>true</bool>
   </property>
-  <layout class="QGridLayout" name="gridLayout" >
-   <item row="0" column="0" >
-    <layout class="QHBoxLayout" name="horizontalLayout_2" >
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QLabel" name="label" >
-       <property name="text" >
+      <widget class="QLabel" name="label">
+       <property name="text">
         <string>&amp;Link:</string>
        </property>
-       <property name="buddy" >
+       <property name="buddy">
         <cstring>linkEdit</cstring>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="linkEdit" />
+      <widget class="QLineEdit" name="linkEdit"/>
      </item>
      <item>
-      <widget class="QPushButton" name="feedmgrButton" >
-       <property name="toolTip" >
+      <widget class="QPushButton" name="feedmgrButton">
+       <property name="toolTip">
         <string>Saved feeds</string>
        </property>
-       <property name="text" >
+       <property name="text">
         <string/>
        </property>
-       <property name="icon" >
-        <iconset resource="abby.qrc" >
+       <property name="icon">
+        <iconset resource="abby.qrc">
          <normaloff>:/document-open.png</normaloff>:/document-open.png</iconset>
        </property>
-       <property name="iconSize" >
+       <property name="iconSize">
         <size>
          <width>16</width>
          <height>16</height>
@@ -60,15 +61,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="fetchButton" >
-       <property name="text" >
+      <widget class="QPushButton" name="fetchButton">
+       <property name="text">
         <string>&amp;Fetch</string>
        </property>
-       <property name="icon" >
-        <iconset resource="abby.qrc" >
+       <property name="icon">
+        <iconset resource="abby.qrc">
          <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
        </property>
-       <property name="iconSize" >
+       <property name="iconSize">
         <size>
          <width>16</width>
          <height>16</height>
@@ -78,47 +79,82 @@
      </item>
     </layout>
    </item>
-   <item row="1" column="0" >
-    <widget class="QTreeWidget" name="itemsTree" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Expanding" hsizetype="Minimum" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="autoExpandDelay" >
-      <number>-1</number>
-     </property>
-     <property name="rootIsDecorated" >
-      <bool>false</bool>
-     </property>
-     <property name="uniformRowHeights" >
-      <bool>false</bool>
-     </property>
-     <property name="sortingEnabled" >
-      <bool>false</bool>
-     </property>
-     <property name="headerHidden" >
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text" >
-       <string>Title</string>
-      </property>
-     </column>
-     <column>
-      <property name="text" >
-       <string>Link</string>
-      </property>
-     </column>
-    </widget>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QTreeWidget" name="itemsTree">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="autoExpandDelay">
+        <number>-1</number>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <property name="uniformRowHeights">
+        <bool>false</bool>
+       </property>
+       <property name="sortingEnabled">
+        <bool>false</bool>
+       </property>
+       <property name="headerHidden">
+        <bool>true</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Title</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Link</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="selectallButton">
+         <property name="text">
+          <string>S&amp;elect all</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="invertButton">
+         <property name="text">
+          <string>&amp;Invert</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
-   <item row="2" column="0" >
-    <widget class="QDialogButtonBox" name="buttonBox" >
-     <property name="orientation" >
+   <item row="2" column="0">
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <property name="standardButtons" >
+     <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
     </widget>
@@ -130,10 +166,12 @@
   <tabstop>feedmgrButton</tabstop>
   <tabstop>fetchButton</tabstop>
   <tabstop>itemsTree</tabstop>
+  <tabstop>selectallButton</tabstop>
+  <tabstop>invertButton</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
-  <include location="abby.qrc" />
+  <include location="abby.qrc"/>
  </resources>
  <connections>
   <connection>
@@ -142,11 +180,11 @@
    <receiver>rssDialog</receiver>
    <slot>accept()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>248</x>
      <y>254</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>157</x>
      <y>274</y>
     </hint>
@@ -158,11 +196,11 @@
    <receiver>rssDialog</receiver>
    <slot>reject()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>316</x>
      <y>260</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
     </hint>
@@ -174,11 +212,11 @@
    <receiver>rssDialog</receiver>
    <slot>onFetch()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>431</x>
      <y>57</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
      <x>254</x>
      <y>119</y>
     </hint>
@@ -190,11 +228,43 @@
    <receiver>rssDialog</receiver>
    <slot>onFeedMgr()</slot>
    <hints>
-    <hint type="sourcelabel" >
+    <hint type="sourcelabel">
      <x>24</x>
      <y>22</y>
     </hint>
-    <hint type="destinationlabel" >
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>134</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>selectallButton</sender>
+   <signal>clicked()</signal>
+   <receiver>rssDialog</receiver>
+   <slot>onSelectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>458</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>134</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>invertButton</sender>
+   <signal>clicked()</signal>
+   <receiver>rssDialog</receiver>
+   <slot>onInvert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>458</x>
+     <y>94</y>
+    </hint>
+    <hint type="destinationlabel">
      <x>254</x>
      <y>134</y>
     </hint>
@@ -205,5 +275,7 @@
   <slot>onFetch()</slot>
   <slot>onAbort()</slot>
   <slot>onFeedMgr()</slot>
+  <slot>onSelectAll()</slot>
+  <slot>onInvert()</slot>
  </slots>
 </ui>

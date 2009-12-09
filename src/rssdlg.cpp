@@ -20,6 +20,7 @@
 #include <QMessageBox>
 #include <QSettings>
 
+#include "util.h"
 #include "rssdlg.h"
 #include "feedmgrdlg.h"
 
@@ -52,6 +53,8 @@ RSSDialog::onFetch() {
     linkEdit->setEnabled     (false);
     feedmgrButton->setEnabled(false);
     fetchButton->setEnabled  (false);
+    selectallButton->setEnabled(false);
+    invertButton->setEnabled (false);
     buttonBox->setEnabled    (false);
 
     mgr->get(QNetworkRequest(lnk));
@@ -100,6 +103,8 @@ RSSDialog::replyFinished(QNetworkReply* reply) {
         linkEdit->setEnabled     (state);
         feedmgrButton->setEnabled(state);
         fetchButton->setEnabled  (state);
+        selectallButton->setEnabled(state);
+        invertButton->setEnabled (state);
         buttonBox->setEnabled    (state);
     }
     
@@ -206,3 +211,15 @@ RSSDialog::readSettings() {
     resize( s.value("size", QSize(514,295)).toSize() );
     s.endGroup();
 }
+
+void
+RSSDialog::onSelectAll() {
+    Util::checkAllItems(itemsTree, Qt::Checked);
+}
+
+void
+RSSDialog::onInvert() {
+    Util::invertAllCheckableItems(itemsTree);
+}
+
+

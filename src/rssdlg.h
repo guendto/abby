@@ -35,6 +35,8 @@ public:
 private slots:
     void onFetch();
     void onFeedMgr();
+    void onSelectAll();
+    void onInvert();
     void replyFinished(QNetworkReply*);
 public:
     void writeSettings();
