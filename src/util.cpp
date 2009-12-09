@@ -23,6 +23,8 @@
 #include <QTranslator>
 #include <QDir>
 #include <QTreeWidget>
+#include <QTextEdit>
+#include <QDateTime>
 //#include <QDebug>
 
 #include "util.h"
@@ -216,6 +218,13 @@ Util::invertAllCheckableItems(
         );
         ++iter;
     }
+}
+
+void
+Util::appendLog(const QTextEdit* w, const QString& s) {
+    QDateTime now = QDateTime::currentDateTime();
+    QString dt = now.toString(Qt::ISODate);
+    const_cast<QTextEdit*>(w)->append(dt+": "+s);
 }
 
 NoCcliveException::NoCcliveException(const QString& errmsg)

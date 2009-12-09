@@ -68,7 +68,6 @@ private:
     void addPageLink(QString lnk);
     void writeSettings();
     void readSettings();
-    void updateLog(const QString& text);
     void updateWidgets(const bool updateCcliveDepends);
     void setProxy();
     bool ccliveSupportsHost(const QString &lnk);

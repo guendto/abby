@@ -20,6 +20,7 @@
 #define util_h
 
 class QTreeWidget;
+class QTextEdit;
 
 class Util {
 public:
@@ -46,6 +47,7 @@ public:
         const QTreeWidget *w,
         const int column=0
     );
+    static void appendLog(const QTextEdit* w, const QString& s);
 };
 
 class NoCcliveException {

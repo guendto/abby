@@ -318,12 +318,6 @@ MainWindow::readSettings() {
     s.endGroup();
 }
 
-void
-MainWindow::updateLog(const QString& newText) {
-    QString text = logEdit->toPlainText() + newText;
-    logEdit->setPlainText(text);
-}
-
 
 // Slots
 
@@ -503,7 +497,7 @@ MainWindow::onStart() {
     // Prepare log
 
     logEdit->clear();
-    updateLog("% " +path+ " " +args.join(" ")+ "\n");
+    Util::appendLog(logEdit, "% " +path+ " " +args.join(" "));
 
     // And finally start the process
 
@@ -684,7 +678,7 @@ MainWindow::onProcError(QProcess::ProcessError err) {
     if (err == QProcess::FailedToStart) {
         QString msg = tr("Error: Failed to start the process.");
         statusBar()->showMessage(msg);
-        updateLog(msg);
+        Util::appendLog(logEdit, msg);
     }
 }
 
@@ -778,7 +772,7 @@ MainWindow::onProcStdoutReady() {
         }
 
         if (appendLogFlag)
-            updateLog(ln + "\n");
+            Util::appendLog(logEdit, ln);
 
         memset(&data, 0, sizeof(data));
     }
@@ -809,7 +803,7 @@ MainWindow::onProcFinished(int exitCode, QProcess::ExitStatus exitStatus) {
         break;
     }
 
-    updateLog(status);
+    Util::appendLog(logEdit, status);
     statusBar()->showMessage(status);
 
     addButton   ->setEnabled(true);
