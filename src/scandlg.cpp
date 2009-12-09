@@ -185,14 +185,14 @@ ScanDialog::parseHtmlTitle(QNetworkReply *reply) {
     const QString content = QString::fromLocal8Bit(reply->readAll());
     const QString link = reply->url().toString();
 
-    QRegExp re("<title>(.*)<\\/title>"); // TODO: improve.
+    QRegExp re("<title>(.*)<"); // TODO: improve.
     re.setCaseSensitivity(Qt::CaseInsensitive);
     re.setMinimal(true);
     re.indexIn(content);
 
     QTreeWidgetItem *item = new QTreeWidgetItem;
     item->setCheckState(0, Qt::Unchecked);
-    item->setText(0, re.cap(1));
+    item->setText(0, re.cap(1).simplified()); 
     item->setText(1, link);
     itemsTree->addTopLevelItem(item);
 }
