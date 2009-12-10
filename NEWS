@@ -1,4 +1,11 @@
 
+Version 0.4.7
+-------------
+
+Scan overhaul adds progressbar, log view and abort functionality.
+Scan patterns were also fixed.
+
+
 Version 0.4.5
 --------------
 

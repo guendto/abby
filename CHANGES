@@ -1,7 +1,10 @@
 Version 0.4.7
 
   User-visible changes:
-   * Add log view to scan dialog
+   * Scan overhaul:
+     # Add progressbar
+     # Add log view
+     # Add abort functionality
    * Log now includes (ISO) date/time stamp
    * Add select all/invert selection buttons to:
      # RSS dialog
@@ -9,7 +12,7 @@ Version 0.4.7
    * Remove unnecessary whitespace from scanned video titles
    * Fix scan pattern to terminate at \n if found
      # Mangled data seen when youtube front page was scanned
-   * Handle dropped links (closes issue #3)
+   * Mainwindow: add (drag 'n) drop support (closes issue #3)
 
 
 Version 0.4.6.1
