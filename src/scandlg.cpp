@@ -15,6 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #include <QDialog>
 #include <QSettings>
 //#include <QDebug>
@@ -22,32 +23,31 @@
 #include <QRegExp>
 
 #include "util.h"
+#include "scan.h"
 #include "scandlg.h"
 
 ScanDialog::ScanDialog(QWidget *parent)
-    : QDialog(parent), mgr(0), titleMode(false),
-      scannedPages(0), expectedScans(0)
+    : QDialog(parent), errorOccurred(false)
 {
     setupUi(this);
 
+    itemsTree->setColumnHidden(1, true);
+
     readSettings();
 
-    mgr = createManager();
+    mgr= new QHttpManager(this);
+    mgr->setProgressBar(progressBar);
 
-    itemsTree->setColumnHidden(1, true);
+    connect(mgr, SIGNAL(fetchLink(QString)),
+        this, SLOT(onFetchLink(QString)));
+
+    connect(mgr, SIGNAL(fetchFinished()),
+        this, SLOT(onFetchFinished()));
+
+    connect(mgr, SIGNAL(fetchError(QString)),
+        this, SLOT(onFetchError(QString)));
 }
 
-static void
-enable_widgets(const ScanDialog *d, const bool state=true) {
-    d->linkEdit->setEnabled    (state);
-    d->scanButton->setEnabled  (state);
-    d->titlesBox->setEnabled   (state);
-    d->selectallButton->setEnabled(state);
-    d->invertButton->setEnabled(state);
-    d->buttonBox->setEnabled   (state);
-}
-
-#include <QDebug>
 static void
 update_item_count(const ScanDialog *d) {
     int count = 0;
@@ -60,11 +60,24 @@ update_item_count(const ScanDialog *d) {
 }
 
 void
+ScanDialog::enableWidgets(const bool state/*=true*/) {
+    linkEdit->setEnabled (state);
+    titlesBox->setEnabled(state);
+}
+
+void
 ScanDialog::onScan() {
 
-    QString lnk = linkEdit->text();
+    if (!linkEdit->isEnabled()) {
+        // Assumes it is disabled when we're scanning.
+        if (mgr)
+            mgr->abort();
+        if (mgrt)
+            mgrt->abort();
+        return;
+    }
 
-    lnk = lnk.trimmed();
+    QString lnk = linkEdit->text().simplified();
 
     if (lnk.isEmpty())
         return;
@@ -77,196 +90,13 @@ ScanDialog::onScan() {
 
     logEdit->clear();
 
-    scannedPages    = 0;
-    expectedScans   = 0;
-    titleMode       = false;
+    enableWidgets(false);
+    progressBar->setTextVisible(false);
+    scanButton->setText(tr("&Abort"));
 
-    enable_widgets(this, false);
+    errorOccurred = false;
 
-    Util::appendLog(logEdit, QString(tr("Scan ... %1")).arg(lnk));
-
-    mgr->get( QNetworkRequest(lnk) );
-}
-
-void
-ScanDialog::replyFinished(QNetworkReply* reply) {
-
-    if (reply->error() == QNetworkReply::NoError) {
-
-        handleRedirect(reply);
-
-        if (!redirectedToURL.isEmpty()) {
-            Util::appendLog(
-                logEdit,
-                QString(tr("Fetch ... %1"))
-                    .arg(redirectedToURL.toString())
-            );
-            mgr->get( QNetworkRequest(redirectedToURL) );
-        }
-        else {
-            if (!titleMode) {
-                Util::appendLog(logEdit, tr("Scan contents for video links."));
-                scanContent(reply);
-            }
-            else {
-                Util::appendLog(
-                    logEdit,
-                    QString(tr("Parse video title ... %1 [%2/%3]"))
-                        .arg(reply->url().toString())
-                        .arg(++scannedPages)
-                        .arg(expectedScans)
-                );
-                parseHtmlTitle(reply);
-                if (scannedPages == expectedScans)
-                    emit scanComplete();
-            }
-            redirectedToURL.clear();
-        }
-    }
-    else {
-        Util::appendLog(logEdit, tr("Error occurred."));
-        QMessageBox::critical(this, QCoreApplication::applicationName(),
-            QString(tr("Network error: %1")).arg(reply->errorString()));
-    }
-
-    reply->deleteLater();
-}
-
-static QStringList
-matchScanContent (const QStringList& lst, QRegExp& re, const QString& content) {
-
-    re.setCaseSensitivity(Qt::CaseInsensitive);
-    re.setMinimal(true);
-
-    QStringList matches;
-
-    int pos = 0;
-    while ((pos = re.indexIn(content, pos)) != -1) {
-        const QString cap = re.cap(1).simplified();
-        if (!matches.contains(cap)
-            && !lst.contains(cap)
-            && !cap.isEmpty())
-        {
-            matches << cap;
-        }
-        pos += re.matchedLength();
-    }
-    return matches;
-}
-
-typedef unsigned int _uint;
-
-#ifdef _1_
-static void
-dumpScanMatches (const QStringList& lst) {
-    const register _uint size = lst.size();
-    for (register _uint i=0; i<size; ++i)
-        qDebug() << lst[i];
-    qDebug() << "total: " << lst.size();
-}
-#endif
-
-static void
-scanYoutubeEmbed(QStringList& lst, const QString& content) {
-    QRegExp re("\\/v\\/(.*)[\"&\n<]");
-    QStringList matches = matchScanContent(lst, re, content);
-    //dumpScanMatches(matches);
-    lst << matches;
-}
-
-static void
-scanYoutubeRegular(QStringList& lst, const QString& content) {
-    QRegExp re("\\/watch\\?v=(.*)[\"&\n<]");
-    QStringList matches = matchScanContent(lst, re, content);
-    //dumpScanMatches(matches);
-    lst << matches;
-}
-
-void
-ScanDialog::scanContent(QNetworkReply *reply) {
-
-    const QString content = QString::fromLocal8Bit(reply->readAll());
-
-    QStringList IDs, links;
-
-    scanYoutubeEmbed    (IDs, content);
-    scanYoutubeRegular  (IDs, content);
-
-    const register _uint ids_size = IDs.size();
-    register _uint i;
-
-    for (i=0; i<ids_size; ++i)
-        links << "http://www.youtube.com/watch?v="+IDs[i];
-
-    const register _uint links_size = links.size();
-
-    Util::appendLog(
-        logEdit,
-        QString(tr("Found %1 video links.")).arg(links_size)
-    );
-
-    if (titlesBox->checkState()) {
-        titleMode = true;
-        for (i=0, expectedScans=links_size; i<links_size; ++i)
-            mgr->get( QNetworkRequest(links[i]) );
-    }
-    else {
-
-        for (i=0; i<links_size; ++i) {
-            QTreeWidgetItem *item = new QTreeWidgetItem;
-            item->setCheckState(0, Qt::Unchecked);
-            item->setText(0, links[i]);
-            item->setText(1, links[i]);
-            itemsTree->addTopLevelItem(item);
-        }
-
-        emit scanComplete();
-    }
-}
-
-void
-ScanDialog::parseHtmlTitle(QNetworkReply *reply) {
-
-    const QString content = QString::fromLocal8Bit(reply->readAll());
-    const QString link = reply->url().toString();
-
-    QRegExp re("<title>(.*)<"); // TODO: improve.
-    re.setCaseSensitivity(Qt::CaseInsensitive);
-    re.setMinimal(true);
-    re.indexIn(content);
-
-    QTreeWidgetItem *item = new QTreeWidgetItem;
-    item->setCheckState(0, Qt::Unchecked);
-    item->setText(0, re.cap(1).simplified()); 
-    item->setText(1, link);
-    itemsTree->addTopLevelItem(item);
-
-    update_item_count(this);
-}
-
-QNetworkAccessManager*
-ScanDialog::createManager() {
-    QNetworkAccessManager *p = new QNetworkAccessManager(this);
-
-    connect(p, SIGNAL(finished(QNetworkReply*)),
-        this, SLOT(replyFinished(QNetworkReply*)));
-
-    return p;
-}
-
-void
-ScanDialog::handleRedirect(const QNetworkReply *reply) {
-
-//    QUrl location =
-//      reply->header(QNetworkRequest::LocationHeader).toUrl();
-
-    QUrl location =
-        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-
-    if (!location.isEmpty() && location != redirectedToURL)
-        redirectedToURL = location;
-    else
-        redirectedToURL.clear();
+    mgr->fetch(lnk);
 }
 
 void
@@ -286,6 +116,13 @@ ScanDialog::readSettings() {
 }
 
 void
+ScanDialog::resetUI() {
+    enableWidgets(true);
+    scanButton->setText(tr("&Scan"));
+    update_item_count(this);
+}
+
+void
 ScanDialog::onSelectAll() {
     Util::checkAllItems(itemsTree, Qt::Checked);
 }
@@ -296,10 +133,113 @@ ScanDialog::onInvert() {
 }
 
 void
-ScanDialog::scanComplete() {
-    update_item_count(this);
-    enable_widgets(this);
-    Util::appendLog(logEdit, tr("Scan complete."));
+ScanDialog::onFetchFinished() {
+
+    if (errorOccurred) {
+        resetUI();
+        return;
+    }
+
+    QStringList found;
+    Scan::youtube(mgr->getData(), found);
+
+    const int size = found.size();
+
+    Util::appendLog(logEdit,
+        QString(tr("Found %1 video links.")).arg(size));
+
+    if ( !titlesBox->checkState() ) {
+
+        for (int i=0; i<size; ++i) {
+            QTreeWidgetItem *item = new QTreeWidgetItem;
+            item->setCheckState(0, Qt::Unchecked);
+            for (int j=0; j<2; ++j)
+                item->setText(j, found[i]);
+            itemsTree->addTopLevelItem(item);
+        }
+
+        resetUI();
+        Util::appendLog(logEdit, tr("Done."));
+    }
+    else {
+        Util::appendLog(logEdit,
+            tr("Fetch titles for the found videos."));
+
+        mgrt = new QHttpManager(this);
+
+        connect(mgrt, SIGNAL(fetchLink(QString)),
+            this, SLOT(onFetchLink(QString)));
+
+        connect(mgrt, SIGNAL(fetchError(QString)),
+            this, SLOT(onFetchError(QString)));
+
+        // Note the use of different slot here.
+
+        connect(mgrt, SIGNAL(fetchFinished()),
+            this, SLOT(onFetchTitlesFinished()));
+
+        // Do not set progressbar for this manager.
+        // We'll use fetched/expected for that instead.
+
+        fetchedTitles   = -1;
+        expectedTitles  = size;
+
+        progressBar->setValue(fetchedTitles);
+        progressBar->setMaximum(expectedTitles);
+
+        videoLinks = found;
+
+        progressBar->setTextVisible(true);
+
+        emit onFetchTitlesFinished(); // Start iteration.
+    }
+}
+
+void
+ScanDialog::onFetchTitlesFinished() {
+
+    if (errorOccurred) {
+        resetUI();
+        return;
+    }
+
+    if (fetchedTitles >= 0) {
+        QString title;
+        if (!Scan::title(mgrt->getData(), title))
+            title = videoLinks[fetchedTitles]; // Fallback to link.
+
+        QTreeWidgetItem *item = new QTreeWidgetItem;
+        item->setCheckState(0, Qt::Unchecked);
+        item->setText(0, title);
+        item->setText(1, videoLinks[fetchedTitles]);
+        itemsTree->addTopLevelItem(item);
+
+        update_item_count(this);
+        progressBar->setValue(++fetchedTitles);
+
+        if (fetchedTitles == expectedTitles) {
+            resetUI();
+            videoLinks.clear();
+            mgrt->deleteLater();
+            Util::appendLog(logEdit, tr("Done."));
+            return;
+        }
+    }
+    else
+        fetchedTitles++;
+
+    mgrt->fetch(videoLinks[fetchedTitles]);
+}
+
+void
+ScanDialog::onFetchError(QString errorString) {
+    errorOccurred = true;
+    Util::appendLog(logEdit, errorString);
+}
+
+void
+ScanDialog::onFetchLink(QString url) {
+    Util::appendLog(logEdit, tr("Fetch ... ")+url);
 }
 
 

@@ -19,12 +19,7 @@
 #define scandlg_h
 
 #include "ui_scandlg.h"
-
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-
-#include <QPointer>
+#include "httpmgr.h"
 
 class QDialog;
 
@@ -36,25 +31,23 @@ private slots:
     void onScan();
     void onSelectAll();
     void onInvert();
-    void replyFinished(QNetworkReply*);
-    void scanComplete();
+    void onFetchFinished();
+    void onFetchTitlesFinished();
+    void onFetchError(QString);
+    void onFetchLink(QString);
 public:
     void writeSettings();
 private:
     void readSettings();
-
-    QNetworkAccessManager *createManager();
-    void handleRedirect(const QNetworkReply *reply);
-
-    void parseHtmlTitle(QNetworkReply *reply);
-    void scanContent(QNetworkReply *reply);
+    void enableWidgets(const bool state=true);
+    void resetUI();
 private:
-    QPointer<QNetworkAccessManager> mgr;
-    QUrl redirectedToURL;
-    bool titleMode;
-    bool scanFlag;
-    int scannedPages;
-    int expectedScans;
+    QPointer<QHttpManager> mgr;
+    QPointer<QHttpManager> mgrt; // for fetching titles
+    int fetchedTitles;
+    int expectedTitles;
+    QStringList videoLinks;
+    bool errorOccurred;
 };
 
 #endif
