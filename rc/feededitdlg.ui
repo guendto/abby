@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Edit Feed</string>
+   <string>abby: Edit feed</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>

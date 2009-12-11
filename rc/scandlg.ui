@@ -15,7 +15,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Scan</string>
+   <string>abby: Scan</string>
   </property>
   <property name="windowIcon">
    <iconset resource="abby.qrc">

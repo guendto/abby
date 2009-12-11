@@ -15,7 +15,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>About</string>
+   <string>abby: About</string>
   </property>
   <property name="sizeGripEnabled">
    <bool>true</bool>

@@ -15,7 +15,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Feed manager</string>
+   <string>abby: Feed manager</string>
   </property>
   <property name="windowIcon">
    <iconset resource="abby.qrc">
