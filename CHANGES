@@ -1,7 +1,7 @@
 Version 0.4.7
 
   User-visible changes:
-   * Scan overhaul:
+   * Scan and RSS overhaul:
      # Add progressbar
      # Add log view
      # Add abort functionality
