@@ -99,6 +99,7 @@ QHttpManager::onReadyRead() {
                     .arg(re->errorString())
             );
             re->deleteLater();
+            emit fetchFinished();
 //            qDebug() << __func__ << "httpcode:" << httpcode;
         }
     }
