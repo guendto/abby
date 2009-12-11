@@ -140,6 +140,12 @@ ScanDialog::onFetchFinished() {
 
     const int size = found.size();
 
+    if (size == 0) {
+        Util::appendLog(logEdit, tr("Nothing found."));
+        resetUI();
+        return;
+    }
+
     Util::appendLog(logEdit,
         QString(tr("Found %1 video links.")).arg(size));
 
@@ -168,7 +174,7 @@ ScanDialog::onFetchFinished() {
         connect(mgrt, SIGNAL(fetchError(QString)),
             this, SLOT(onFetchError(QString)));
 
-        // Note the use of different slot here.
+        // Note the use of a different slot here.
 
         connect(mgrt, SIGNAL(fetchFinished()),
             this, SLOT(onFetchTitlesFinished()));
@@ -193,7 +199,7 @@ ScanDialog::onFetchFinished() {
 void
 ScanDialog::onFetchTitlesFinished() {
 
-    if (mgr->errorOccurred()) {
+    if (mgrt->errorOccurred()) {
         resetUI();
         return;
     }
