@@ -25,22 +25,38 @@
 #include "feedmgrdlg.h"
 
 RSSDialog::RSSDialog(QWidget *parent)
-    : QDialog(parent)
+    : QDialog(parent), errorOccurred(false)
 {
     setupUi(this);
 
     readSettings();
 
-    mgr = createManager();
-
     itemsTree->setColumnHidden(1, true);
+
+    mgr = new QHttpManager(this);
+    mgr->setProgressBar(progressBar);
+
+    connect(mgr, SIGNAL(fetchLink(QString)),
+        this, SLOT(onFetchLink(QString)));
+
+    connect(mgr, SIGNAL(fetchFinished()),
+        this, SLOT(onFetchFinished()));
+
+    connect(mgr, SIGNAL(fetchError(QString)),
+        this, SLOT(onFetchError(QString)));
 }
 
 void
 RSSDialog::onFetch() {
-    QString lnk = linkEdit->text();
 
-    lnk = lnk.trimmed();
+    if (!linkEdit->isEnabled()) {
+        // Assumes it is disabled when we're fetching xml.
+        if (mgr)
+            mgr->abort();
+        return;
+    }
+
+    QString lnk = linkEdit->text().simplified();
 
     if (lnk.isEmpty())
         return;
@@ -49,15 +65,16 @@ RSSDialog::onFetch() {
         lnk.insert(0,"http://");
 
     itemsTree->clear();
+    updateCount();
 
-    linkEdit->setEnabled     (false);
-    feedmgrButton->setEnabled(false);
-    fetchButton->setEnabled  (false);
-    selectallButton->setEnabled(false);
-    invertButton->setEnabled (false);
-    buttonBox->setEnabled    (false);
+    logEdit->clear();
 
-    mgr->get(QNetworkRequest(lnk));
+    enableWidgets(false);
+    fetchButton->setText(tr("&Abort"));
+
+    errorOccurred = false;
+
+    mgr->fetch(lnk);
 }
 
 void
@@ -74,126 +91,6 @@ RSSDialog::onFeedMgr() {
         }
         dlg.writeSettings();
     }
-}
-
-void
-RSSDialog::replyFinished(QNetworkReply* reply) {
-
-    bool state = false;
-
-    if (reply->error() == QNetworkReply::NoError) {
-
-        handleRedirect(reply);
-
-        if (!redirectedToURL.isEmpty())
-            mgr->get( QNetworkRequest(redirectedToURL) );
-        else {
-            parseRSS(reply);
-            redirectedToURL.clear();
-            state = true;
-        }
-    }
-    else {
-        QMessageBox::critical(this, QCoreApplication::applicationName(),
-            QString(tr("Network error: %1")).arg(reply->errorString()));
-        state = true;
-    }
-
-    if (state) {
-        linkEdit->setEnabled     (state);
-        feedmgrButton->setEnabled(state);
-        fetchButton->setEnabled  (state);
-        selectallButton->setEnabled(state);
-        invertButton->setEnabled (state);
-        buttonBox->setEnabled    (state);
-    }
-    
-    reply->deleteLater();
-}
-
-void
-RSSDialog::parseRSS(QNetworkReply *reply) {
-
-    QString rssTitle, link, tag, title;//, pubdate;
-
-    xml.clear();
-    xml.addData(QString::fromLocal8Bit(reply->readAll()));
-
-    while (!xml.atEnd()) {
-
-        xml.readNext();
-
-        if (xml.isStartElement()) {
-
-            if (xml.name() == "item")
-                link = xml.attributes().value("rss::about").toString();
-
-            tag = xml.name().toString();
-
-        } else if (xml.isEndElement()) {
-
-            if (xml.name() == "item") {
-
-                if (!rssTitle.isEmpty()) {
-                    QTreeWidgetItem *item = new QTreeWidgetItem;
-                    item->setCheckState(0, Qt::Unchecked);
-                    item->setText(0, title);
-                    item->setText(1, link);
-                    itemsTree->addTopLevelItem(item);
-                }
-                else
-                    rssTitle = title;
-
-                title  .clear();
-                link   .clear();
-                //pubdate.clear();
-            }
-        } else if (xml.isCharacters() && !xml.isWhitespace()) {
-
-            if (tag == "title")
-                title += xml.text().toString();
-
-            else if (tag == "link") 
-                link += xml.text().toString();
-/*
-            else if (tag == "pubDate")
-                pubdate += xml.text().toString();*/
-        }
-    }
-
-    if (xml.error()
-        && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
-    {
-        QMessageBox::critical(this, QCoreApplication::applicationName(),
-            QString(tr("XML parsing error:%1:%1"))
-                .arg(xml.lineNumber())
-                .arg(xml.errorString()));
-    }
-}
-
-QNetworkAccessManager*
-RSSDialog::createManager() {
-    QNetworkAccessManager *p = new QNetworkAccessManager(this);
-
-    connect(p, SIGNAL(finished(QNetworkReply *)),
-        this, SLOT(replyFinished(QNetworkReply *)));
-
-    return p;
-}
-
-void
-RSSDialog::handleRedirect(QNetworkReply *reply) {
-
-//    QUrl location =
-//      reply->header(QNetworkRequest::LocationHeader).toUrl();
-
-    QUrl location =
-        reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
-
-    if (!location.isEmpty() && location != redirectedToURL)
-        redirectedToURL = location;
-    else
-        redirectedToURL.clear();
 }
 
 void
@@ -220,6 +117,113 @@ RSSDialog::onSelectAll() {
 void
 RSSDialog::onInvert() {
     Util::invertAllCheckableItems(itemsTree);
+}
+
+void
+RSSDialog::onFetchFinished() {
+
+    resetUI();
+
+    if (errorOccurred)
+        return;
+
+    parseRSS(mgr->getData());
+    updateCount();
+
+    Util::appendLog(logEdit, tr("Done."));
+}
+
+void
+RSSDialog::onFetchError(QString errorString) {
+    errorOccurred = true;
+    Util::appendLog(logEdit, errorString);
+}
+
+void
+RSSDialog::onFetchLink(QString url) {
+    Util::appendLog(logEdit, tr("Fetch ... ")+url);
+}
+
+void
+RSSDialog::parseRSS(const QString& rss) {
+    xml.clear();
+
+    QString feedTitle, lnk, tag, itemTitle;
+#ifdef _1_
+    QString pubDate;
+#endif
+
+    xml.addData(rss);
+
+    while (!xml.atEnd()) {
+        xml.readNext();
+        if (xml.isStartElement()) {
+            if (xml.name() == "item")
+                lnk = xml.attributes().value("rss::about").toString();
+            tag = xml.name().toString();
+        }
+        else if (xml.isEndElement()) {
+            if (xml.name() == "item") {
+                if (!feedTitle.isEmpty()) {
+                    QTreeWidgetItem *item = new QTreeWidgetItem;
+                    item->setCheckState(0, Qt::Unchecked);
+                    item->setText(0, itemTitle);
+                    item->setText(1, lnk);
+                    itemsTree->addTopLevelItem(item);
+                }
+                else
+                    feedTitle = itemTitle;
+
+                itemTitle.clear();
+                lnk.clear();
+#ifdef _1_
+                pubDate.clear();
+#endif
+            }
+        }
+        else if (xml.isCharacters() && !xml.isWhitespace()) {
+            const QString tmp = xml.text().toString();
+            if (tag == "title")
+                itemTitle += tmp;
+            else if (tag == "link")
+                lnk += tmp;
+#ifdef _1_
+            else if (tag == "pubDate")
+                pubDate += tmp;
+#endif
+        }
+    }
+
+    if (xml.error()
+        && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError)
+    {
+        Util::appendLog(logEdit,
+            QString(tr("XML parsing error: %1: %2"))
+                .arg(xml.lineNumber())
+                .arg(xml.errorString())
+        );
+    }
+}
+
+void
+RSSDialog::enableWidgets(const bool state/*=true*/) {
+    linkEdit->setEnabled     (state);
+    feedmgrButton->setEnabled(state);
+}
+
+void
+RSSDialog::resetUI() {
+    enableWidgets(true);
+    fetchButton->setText(tr("&Fetch"));
+    updateCount();
+}
+
+void
+RSSDialog::updateCount() {
+    totalLabel->setText(
+        QString(tr("Total: %1"))
+            .arg(Util::countItems(itemsTree))
+    );
 }
 
 

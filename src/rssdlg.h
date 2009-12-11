@@ -20,13 +20,9 @@
 
 #include "ui_rssdlg.h"
 
+#include "httpmgr.h"
+
 #include <QXmlStreamReader>
-
-#include <QNetworkAccessManager>
-#include <QNetworkRequest>
-#include <QNetworkReply>
-
-#include <QPointer>
 
 class RSSDialog : public QDialog, public Ui::rssDialog {
     Q_OBJECT
@@ -37,17 +33,22 @@ private slots:
     void onFeedMgr();
     void onSelectAll();
     void onInvert();
-    void replyFinished(QNetworkReply*);
+    void onFetchFinished();
+    void onFetchError(QString);
+    void onFetchLink(QString);
 public:
     void writeSettings();
 private:
-    QNetworkAccessManager *createManager();
-    void handleRedirect(QNetworkReply *reply);
     void readSettings();
-    void parseRSS(QNetworkReply *reply);
+    void parseRSS(const QString& rss);
+    void enableWidgets(const bool state=true);
+    void resetUI();
+    void updateCount();
 private:
+    QPointer<QHttpManager> mgr;
     QXmlStreamReader xml;
-    QPointer<QNetworkAccessManager> mgr;
-    QUrl redirectedToURL;
+    bool errorOccurred;
 };
 #endif
+
+
