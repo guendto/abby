@@ -27,7 +27,7 @@
 #include "scandlg.h"
 
 ScanDialog::ScanDialog(QWidget *parent)
-    : QDialog(parent), errorOccurred(false)
+    : QDialog(parent)
 {
     setupUi(this);
 
@@ -91,8 +91,6 @@ ScanDialog::onScan() {
     progressBar->setTextVisible(false);
     scanButton->setText(tr("&Abort"));
 
-    errorOccurred = false;
-
     mgr->fetch(lnk);
 }
 
@@ -132,7 +130,7 @@ ScanDialog::onInvert() {
 void
 ScanDialog::onFetchFinished() {
 
-    if (errorOccurred) {
+    if (mgr->errorOccurred()) {
         resetUI();
         return;
     }
@@ -195,7 +193,7 @@ ScanDialog::onFetchFinished() {
 void
 ScanDialog::onFetchTitlesFinished() {
 
-    if (errorOccurred) {
+    if (mgr->errorOccurred()) {
         resetUI();
         return;
     }
@@ -230,7 +228,6 @@ ScanDialog::onFetchTitlesFinished() {
 
 void
 ScanDialog::onFetchError(QString errorString) {
-    errorOccurred = true;
     Util::appendLog(logEdit, errorString);
 }
 

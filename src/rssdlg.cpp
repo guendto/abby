@@ -25,7 +25,7 @@
 #include "feedmgrdlg.h"
 
 RSSDialog::RSSDialog(QWidget *parent)
-    : QDialog(parent), errorOccurred(false)
+    : QDialog(parent)
 {
     setupUi(this);
 
@@ -71,8 +71,6 @@ RSSDialog::onFetch() {
 
     enableWidgets(false);
     fetchButton->setText(tr("&Abort"));
-
-    errorOccurred = false;
 
     mgr->fetch(lnk);
 }
@@ -124,7 +122,7 @@ RSSDialog::onFetchFinished() {
 
     resetUI();
 
-    if (errorOccurred)
+    if (mgr->errorOccurred())
         return;
 
     parseRSS(mgr->getData());
@@ -135,7 +133,6 @@ RSSDialog::onFetchFinished() {
 
 void
 RSSDialog::onFetchError(QString errorString) {
-    errorOccurred = true;
     Util::appendLog(logEdit, errorString);
 }
 

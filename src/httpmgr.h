@@ -32,8 +32,10 @@ public:
     void fetch(const QString& url);
     void abort();
     QString getData() const;
+    const bool& errorOccurred() const;
 private:
     QPointer<QNetworkReply> re;
+    bool errorFlag;
     QProgressBar *pb;
     QString data;
 private slots:
@@ -49,8 +51,6 @@ signals:
     void fetchFinished();
     void fetchError(QString errorString);
 };
-
-
 #endif
 
 

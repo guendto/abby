@@ -21,7 +21,7 @@
 #include "httpmgr.h"
 
 QHttpManager::QHttpManager(QObject *parent)
-    : QNetworkAccessManager(parent), pb(0)
+    : QNetworkAccessManager(parent), errorFlag(false), pb(0)
 {
     connect(this, SIGNAL(finished(QNetworkReply*)),
         this, SLOT(onFinished(QNetworkReply*)));
@@ -35,6 +35,7 @@ QHttpManager::setProgressBar(QProgressBar *pb) {
 void
 QHttpManager::fetch(const QString& url) {
     data.clear();
+    errorFlag = false;
     emit fetchLink(url);
     re = get( QNetworkRequest(url) );
     connectReplySignals();
@@ -49,6 +50,11 @@ QHttpManager::abort() {
 QString
 QHttpManager::getData() const {
     return data;
+}
+
+const bool&
+QHttpManager::errorOccurred() const {
+    return errorFlag;
 }
 
 void
@@ -93,6 +99,7 @@ QHttpManager::onReadyRead() {
         if (httpcode == 200)
             data += QString::fromLocal8Bit(re->readAll());
         else {
+            errorFlag = true;
             emit fetchError(
                 QString("httpcode %1: %2")
                     .arg(httpcode)
@@ -115,6 +122,7 @@ QHttpManager::onReadyRead() {
 
 void
 QHttpManager::onError(QNetworkReply::NetworkError) {
+    errorFlag = true;
     emit fetchError(re->errorString());
 }
 

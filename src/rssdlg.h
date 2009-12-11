@@ -47,7 +47,6 @@ private:
 private:
     QPointer<QHttpManager> mgr;
     QXmlStreamReader xml;
-    bool errorOccurred;
 };
 #endif
 

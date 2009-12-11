@@ -48,7 +48,6 @@ private:
     int fetchedTitles;
     int expectedTitles;
     QStringList videoLinks;
-    bool errorOccurred;
 };
 
 #endif
