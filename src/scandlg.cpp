@@ -48,15 +48,12 @@ ScanDialog::ScanDialog(QWidget *parent)
         this, SLOT(onFetchError(QString)));
 }
 
-static void
-update_item_count(const ScanDialog *d) {
-    int count = 0;
-    QTreeWidgetItemIterator iter(d->itemsTree);
-    while (*iter) {
-        ++count;
-        ++iter;
-    }
-    d->totalLabel->setText( QString("Total: %1").arg(count) );
+void
+ScanDialog::updateCount() {
+    totalLabel->setText(
+        QString(tr("Total: %1"))
+            .arg(Util::countItems(itemsTree))
+    );
 }
 
 void
@@ -86,7 +83,7 @@ ScanDialog::onScan() {
         lnk.insert(0,"http://");
 
     itemsTree->clear();
-    update_item_count(this);
+    updateCount();
 
     logEdit->clear();
 
@@ -119,7 +116,7 @@ void
 ScanDialog::resetUI() {
     enableWidgets(true);
     scanButton->setText(tr("&Scan"));
-    update_item_count(this);
+    updateCount();
 }
 
 void
@@ -214,7 +211,7 @@ ScanDialog::onFetchTitlesFinished() {
         item->setText(1, videoLinks[fetchedTitles]);
         itemsTree->addTopLevelItem(item);
 
-        update_item_count(this);
+        updateCount();
         progressBar->setValue(++fetchedTitles);
 
         if (fetchedTitles == expectedTitles) {

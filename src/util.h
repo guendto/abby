@@ -47,7 +47,8 @@ public:
         const QTreeWidget *w,
         const int column=0
     );
-    static void appendLog(const QTextEdit* w, const QString& s);
+    static void appendLog(const QTextEdit *w, const QString& s);
+    static int countItems(const QTreeWidget *w);
 };
 
 class NoCcliveException {

@@ -41,6 +41,7 @@ private:
     void readSettings();
     void enableWidgets(const bool state=true);
     void resetUI();
+    void updateCount();
 private:
     QPointer<QHttpManager> mgr;
     QPointer<QHttpManager> mgrt; // for fetching titles

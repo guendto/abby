@@ -227,6 +227,17 @@ Util::appendLog(const QTextEdit* w, const QString& s) {
     const_cast<QTextEdit*>(w)->append(dt+": "+s);
 }
 
+int
+Util::countItems(const QTreeWidget *w) {
+    int count = 0;
+    QTreeWidgetItemIterator iter(const_cast<QTreeWidget*>(w));
+    while (*iter) {
+        ++count;
+        ++iter;
+    }
+    return count;
+}
+
 NoCcliveException::NoCcliveException(const QString& errmsg)
     : errmsg(errmsg)
 {
