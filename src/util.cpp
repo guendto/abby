@@ -25,6 +25,10 @@
 #include <QTreeWidget>
 #include <QTextEdit>
 #include <QDateTime>
+#include <QListWidget>
+#include <QClipboard>
+#include <QCoreApplication>
+#include <QApplication>
 //#include <QDebug>
 
 #include "util.h"
@@ -197,9 +201,14 @@ Util::checkAllItems(
     const Qt::CheckState& st,
     const int column/*=0*/)
 {
-    QTreeWidgetItemIterator iter(const_cast<QTreeWidget*>(w));
+    QTreeWidgetItemIterator iter(
+        const_cast<QTreeWidget*>(w),
+        QTreeWidgetItemIterator::NotChecked
+    );
+
     while (*iter) {
-        (*iter)->setCheckState(column, st);
+        if ((*iter)->childCount() == 0)
+            (*iter)->setCheckState(column, st);
         ++iter;
     }
 }
@@ -211,11 +220,13 @@ Util::invertAllCheckableItems(
 {
     QTreeWidgetItemIterator iter(const_cast<QTreeWidget*>(w));
     while (*iter) {
-        (*iter)->setCheckState(column,
-            (*iter)->checkState(column) == Qt::Checked
-            ? Qt::Unchecked
-            : Qt::Checked
-        );
+        if ((*iter)->childCount() == 0) {
+            (*iter)->setCheckState(column,
+                (*iter)->checkState(column) == Qt::Checked
+                ? Qt::Unchecked
+                : Qt::Checked
+            );
+        }
         ++iter;
     }
 }
@@ -236,6 +247,74 @@ Util::countItems(const QTreeWidget *w) {
         ++iter;
     }
     return count;
+}
+
+void
+Util::addItem(const QListWidget *w, QString lnk) {
+    lnk = lnk.simplified();
+
+    if (lnk.isEmpty())
+        return;
+
+    if (!lnk.startsWith("http://", Qt::CaseInsensitive))
+        lnk.insert(0, "http://");
+
+    QList<QListWidgetItem *> matched =
+        w->findItems(lnk, Qt::MatchExactly);
+
+    if (matched.size() == 0)
+        const_cast<QListWidget*>(w)->addItem(lnk);
+}
+
+void
+Util::removeSelectedItems(const QWidget *parent, const QListWidget *w) {
+    QList<QListWidgetItem *> s = w->selectedItems();
+
+    const int size = s.size();
+
+    if (!size)
+        return;
+
+    if (QMessageBox::warning(
+        const_cast<QWidget*>(parent),
+        QCoreApplication::applicationName(),
+        QObject::tr("Really remove the selected links?"),
+        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
+        == QMessageBox::No)
+    {
+        return;
+    }
+
+    for (int i=0; i<size; ++i)
+        delete const_cast<QListWidget*>(w)->takeItem( w->row(s[i]) );
+}
+
+void
+Util::clearItems(const QWidget *parent, const QListWidget *w) {
+    if (w->count() == 0)
+        return;
+
+    if (QMessageBox::warning(
+        const_cast<QWidget*>(parent),
+        QCoreApplication::applicationName(),
+        QObject::tr("Really clear list?"),
+        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
+        == QMessageBox::No)
+    {
+        return;
+    }
+
+    const_cast<QListWidget*>(w)->clear();
+}
+
+void
+Util::paste(const QListWidget *w) {
+    QClipboard *cb  = QApplication::clipboard();
+    QStringList lst = cb->text().split("\n");
+    const int size  = lst.size();
+
+    for (int i=0; i<size; ++i)
+        Util::addItem(w, lst[i]);
 }
 
 NoCcliveException::NoCcliveException(const QString& errmsg)

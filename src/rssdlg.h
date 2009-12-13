@@ -29,6 +29,10 @@ class RSSDialog : public QDialog, public Ui::rssDialog {
 public:
     RSSDialog(QWidget *parent=0);
 private slots:
+    void onAdd();
+    void onRemove();
+    void onPaste();
+    void onClear();
     void onFetch();
     void onFeedMgr();
     void onSelectAll();
@@ -43,10 +47,12 @@ private:
     void parseRSS(const QString& rss);
     void enableWidgets(const bool state=true);
     void resetUI();
-    void updateCount();
+    void addRSSLink(QString lnk);
 private:
     QPointer<QHttpManager> mgr;
     QXmlStreamReader xml;
+    int currentFeed;
+    int expectedFeeds;
 };
 #endif
 

@@ -19,6 +19,7 @@
 //#include <QDebug>
 #include <QMessageBox>
 #include <QSettings>
+#include <QInputDialog>
 
 #include "util.h"
 #include "rssdlg.h"
@@ -49,30 +50,26 @@ RSSDialog::RSSDialog(QWidget *parent)
 void
 RSSDialog::onFetch() {
 
-    if (!linkEdit->isEnabled()) {
+    if (!itemsList->isEnabled()) {
         // Assumes it is disabled when we're fetching xml.
         if (mgr)
             mgr->abort();
         return;
     }
 
-    QString lnk = linkEdit->text().simplified();
+    currentFeed = -1;
+    expectedFeeds = itemsList->count();
 
-    if (lnk.isEmpty())
+    if (!expectedFeeds)
         return;
 
-    if (!lnk.startsWith("http://", Qt::CaseInsensitive))
-        lnk.insert(0,"http://");
-
     itemsTree->clear();
-    updateCount();
-
     logEdit->clear();
 
     enableWidgets(false);
     fetchButton->setText(tr("&Abort"));
 
-    mgr->fetch(lnk);
+    emit onFetchFinished();
 }
 
 void
@@ -81,10 +78,8 @@ RSSDialog::onFeedMgr() {
     if (dlg.exec() == QDialog::Accepted) {
         QTreeWidgetItemIterator iter(dlg.itemsTree);
         while (*iter) {
-            if ((*iter)->checkState(0) == Qt::Checked) {
-                linkEdit->setText((*iter)->text(1)); // 1=url
-                break;
-            }
+            if ((*iter)->checkState(0) == Qt::Checked)
+                Util::addItem(itemsList, (*iter)->text(1)); // 1=url
             ++iter;
         }
         dlg.writeSettings();
@@ -120,15 +115,26 @@ RSSDialog::onInvert() {
 void
 RSSDialog::onFetchFinished() {
 
-    resetUI();
-
-    if (mgr->errorOccurred())
+    if (mgr->errorOccurred()) {
+        resetUI();
         return;
+    }
 
-    parseRSS(mgr->getData());
-    updateCount();
+    if (currentFeed >= 0) {
+        parseRSS(mgr->getData());
 
-    Util::appendLog(logEdit, tr("Done."));
+        if (++currentFeed == expectedFeeds) {
+            resetUI();
+            mgr->deleteLater();
+            Util::appendLog(logEdit, tr("Done."));
+            return;
+        }
+    }
+    else
+        ++currentFeed;
+
+    QListWidgetItem *item = itemsList->item(currentFeed);
+    mgr->fetch(item->text());
 }
 
 void
@@ -145,6 +151,7 @@ void
 RSSDialog::parseRSS(const QString& rss) {
     xml.clear();
 
+    QTreeWidgetItem *parent = 0;
     QString feedTitle, lnk, tag, itemTitle;
 #ifdef _1_
     QString pubDate;
@@ -162,11 +169,22 @@ RSSDialog::parseRSS(const QString& rss) {
         else if (xml.isEndElement()) {
             if (xml.name() == "item") {
                 if (!feedTitle.isEmpty()) {
-                    QTreeWidgetItem *item = new QTreeWidgetItem;
-                    item->setCheckState(0, Qt::Unchecked);
-                    item->setText(0, itemTitle);
-                    item->setText(1, lnk);
-                    itemsTree->addTopLevelItem(item);
+                    // Add parent:
+                    if (!parent) {
+                        parent = new QTreeWidgetItem(
+                            itemsTree,
+                            itemsTree->currentItem()
+                        );
+                        parent->setText(0, feedTitle);
+                    }
+                    // Add child:
+                    QTreeWidgetItem *c = new QTreeWidgetItem(
+                        parent,
+                        itemsTree->currentItem()
+                    );
+                    c->setCheckState(0, Qt::Unchecked);
+                    c->setText(0, itemTitle);
+                    c->setText(1, lnk);
                 }
                 else
                     feedTitle = itemTitle;
@@ -204,7 +222,7 @@ RSSDialog::parseRSS(const QString& rss) {
 
 void
 RSSDialog::enableWidgets(const bool state/*=true*/) {
-    linkEdit->setEnabled     (state);
+    itemsList->setEnabled    (state);
     feedmgrButton->setEnabled(state);
 }
 
@@ -212,15 +230,31 @@ void
 RSSDialog::resetUI() {
     enableWidgets(true);
     fetchButton->setText(tr("&Fetch"));
-    updateCount();
 }
 
 void
-RSSDialog::updateCount() {
-    totalLabel->setText(
-        QString(tr("Total: %1"))
-            .arg(Util::countItems(itemsTree))
+RSSDialog::onAdd() {
+    Util::addItem(
+        itemsList,
+        QInputDialog::getText(this,
+            QCoreApplication::applicationName(), tr("Add link:"))
     );
 }
+
+void
+RSSDialog::onRemove() {
+    Util::removeSelectedItems(this, itemsList);
+}
+
+void
+RSSDialog::onPaste() {
+    Util::paste(itemsList);
+}
+
+void
+RSSDialog::onClear() {
+    Util::clearItems(this, itemsList);
+}
+
 
 

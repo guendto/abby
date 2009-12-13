@@ -11,7 +11,7 @@
     <x>0</x>
     <y>0</y>
     <width>510</width>
-    <height>298</height>
+    <height>376</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,168 +26,315 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>&amp;Link:</string>
-       </property>
-       <property name="buddy">
-        <cstring>linkEdit</cstring>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="linkEdit"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="feedmgrButton">
-       <property name="toolTip">
-        <string>Saved feeds</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="abby.qrc">
-         <normaloff>:/document-open.png</normaloff>:/document-open.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="fetchButton">
-       <property name="text">
-        <string>&amp;Fetch</string>
-       </property>
-       <property name="icon">
-        <iconset resource="abby.qrc">
-         <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item row="1" column="0">
-    <widget class="QTabWidget" name="tabWidget">
-     <property name="currentIndex">
-      <number>0</number>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <widget class="QWidget" name="tab">
-      <attribute name="title">
-       <string>&amp;Videos</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
-        <layout class="QHBoxLayout" name="horizontalLayout">
+     <widget class="QWidget" name="layoutWidget">
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QTreeWidget" name="itemsTree">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <spacer name="verticalSpacer_6">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-           <property name="autoExpandDelay">
-            <number>-1</number>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
            </property>
-           <property name="rootIsDecorated">
-            <bool>false</bool>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="addButton">
+           <property name="toolTip">
+            <string/>
            </property>
-           <property name="uniformRowHeights">
-            <bool>false</bool>
+           <property name="statusTip">
+            <string>Add link</string>
            </property>
-           <property name="sortingEnabled">
-            <bool>false</bool>
+           <property name="text">
+            <string/>
            </property>
-           <property name="headerHidden">
-            <bool>true</bool>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
            </property>
-           <column>
-            <property name="text">
-             <string>Title</string>
-            </property>
-           </column>
-           <column>
-            <property name="text">
-             <string>Link</string>
-            </property>
-           </column>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <item>
-            <widget class="QPushButton" name="selectallButton">
-             <property name="text">
-              <string>S&amp;elect all</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="invertButton">
-             <property name="text">
-              <string>&amp;Invert</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item>
-            <widget class="QLabel" name="totalLabel">
-             <property name="text">
-              <string>Total: 0</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QPushButton" name="removeButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="statusTip">
+            <string>Remove from list</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pasteButton">
+           <property name="toolTip">
+            <string/>
+           </property>
+           <property name="statusTip">
+            <string>Paste from clipboard</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/edit-paste.png</normaloff>:/edit-paste.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="clearButton">
+           <property name="statusTip">
+            <string>Clear list</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/edit-clear.png</normaloff>:/edit-clear.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_7">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QListWidget" name="itemsList"/>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QPushButton" name="feedmgrButton">
+           <property name="toolTip">
+            <string>Saved feed links</string>
+           </property>
+           <property name="text">
+            <string>Fee&amp;ds...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/document-open.png</normaloff>:/document-open.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QPushButton" name="fetchButton">
+           <property name="text">
+            <string>&amp;Fetch</string>
+           </property>
+           <property name="icon">
+            <iconset resource="abby.qrc">
+             <normaloff>:/go-next.png</normaloff>:/go-next.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>16</width>
+             <height>16</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>L&amp;og</string>
-      </attribute>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0">
-        <widget class="QTextEdit" name="logEdit">
-         <property name="undoRedoEnabled">
-          <bool>false</bool>
-         </property>
-         <property name="readOnly">
-          <bool>true</bool>
-         </property>
-         <property name="acceptRichText">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>&amp;Videos</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QTreeWidget" name="itemsTree">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="autoExpandDelay">
+             <number>-1</number>
+            </property>
+            <property name="rootIsDecorated">
+             <bool>true</bool>
+            </property>
+            <property name="uniformRowHeights">
+             <bool>false</bool>
+            </property>
+            <property name="sortingEnabled">
+             <bool>true</bool>
+            </property>
+            <property name="headerHidden">
+             <bool>true</bool>
+            </property>
+            <column>
+             <property name="text">
+              <string>Title</string>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Link</string>
+             </property>
+            </column>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <spacer name="verticalSpacer_2">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="selectallButton">
+              <property name="text">
+               <string>S&amp;elect all</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="invertButton">
+              <property name="text">
+               <string>&amp;Invert</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>L&amp;og</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="logEdit">
+          <property name="undoRedoEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+          <property name="acceptRichText">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>0</number>
+     </property>
+     <property name="textVisible">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
    <item row="3" column="0">
@@ -200,22 +347,9 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QProgressBar" name="progressBar">
-     <property name="value">
-      <number>0</number>
-     </property>
-     <property name="textVisible">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>linkEdit</tabstop>
-  <tabstop>feedmgrButton</tabstop>
-  <tabstop>fetchButton</tabstop>
   <tabstop>itemsTree</tabstop>
   <tabstop>selectallButton</tabstop>
   <tabstop>invertButton</tabstop>
@@ -321,6 +455,70 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>addButton</sender>
+   <signal>clicked()</signal>
+   <receiver>rssDialog</receiver>
+   <slot>onAdd()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>23</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>removeButton</sender>
+   <signal>clicked()</signal>
+   <receiver>rssDialog</receiver>
+   <slot>onRemove()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>55</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pasteButton</sender>
+   <signal>clicked()</signal>
+   <receiver>rssDialog</receiver>
+   <slot>onPaste()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>87</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearButton</sender>
+   <signal>clicked()</signal>
+   <receiver>rssDialog</receiver>
+   <slot>onClear()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>25</x>
+     <y>130</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>200</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onFetch()</slot>
@@ -328,5 +526,9 @@
   <slot>onFeedMgr()</slot>
   <slot>onSelectAll()</slot>
   <slot>onInvert()</slot>
+  <slot>onAdd()</slot>
+  <slot>onRemove()</slot>
+  <slot>onPaste()</slot>
+  <slot>onClear()</slot>
  </slots>
 </ui>

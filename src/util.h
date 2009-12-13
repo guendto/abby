@@ -21,6 +21,7 @@
 
 class QTreeWidget;
 class QTextEdit;
+class QListWidget;
 
 class Util {
 public:
@@ -49,6 +50,10 @@ public:
     );
     static void appendLog(const QTextEdit *w, const QString& s);
     static int countItems(const QTreeWidget *w);
+    static void addItem(const QListWidget *w, QString lnk);
+    static void removeSelectedItems(const QWidget *parent, const QListWidget *w);
+    static void clearItems(const QWidget *parent, const QListWidget *w);
+    static void paste(const QListWidget *w);
 };
 
 class NoCcliveException {
