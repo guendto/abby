@@ -3,7 +3,8 @@ Version 0.4.7
 -------------
 
 Scan and RSS overhaul adds progressbar, log view and abort
-functionality. Scan patterns were also fixed.
+functionality. Scan patterns have also fixed. RSS overhaul
+includes adding support for multiple feeds.
 
 
 Version 0.4.5

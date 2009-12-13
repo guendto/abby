@@ -1,6 +1,7 @@
 Version 0.4.7
 
   User-visible changes:
+   * RSS add support for multiple feeds using treeview
    * Scan and RSS overhaul:
      # Add progressbar
      # Add log view
