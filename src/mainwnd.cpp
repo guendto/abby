@@ -546,13 +546,7 @@ MainWindow::onScan() {
 
 void
 MainWindow::onPasteURL() {
-
-    QClipboard *cb  = QApplication::clipboard();
-    QStringList lst = cb->text().split("\n");
-    const register _uint size  = lst.size();
-
-    for (register _uint i=0; i<size; ++i)
-        addPageLink(lst[i]);
+    Util::paste(linksList);
 }
 
 void
@@ -563,43 +557,12 @@ MainWindow::onAdd() {
 
 void
 MainWindow::onRemove() {
-
-    QList<QListWidgetItem*> sel = linksList->selectedItems();
-
-    if (sel.size() == 0)
-        return;
- 
-    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
-        tr("Really remove the selected links?"),
-        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
-        == QMessageBox::No)
-    {
-        return;
-    }
-
-    const register _uint size = sel.size();
-
-    for (register _uint i=0; i<size; ++i) {
-        const int row = linksList->row(sel[i]);
-        delete linksList->takeItem(row);
-    }
+    Util::removeSelectedItems(this, linksList);
 }
 
 void
 MainWindow::onClear() {
-
-    if (linksList->count() == 0)
-        return;
-
-    if (QMessageBox::warning(this, QCoreApplication::applicationName(),
-        tr("Really clear list?"),
-        QMessageBox::Yes|QMessageBox::No, QMessageBox::No)
-        == QMessageBox::No)
-    {
-        return;
-    }
-
-    linksList->clear();
+    Util::clearItems(this, linksList);
 }
 
 void
@@ -619,11 +582,7 @@ MainWindow::addPageLink(QString lnk) {
         return;
     }
 
-    QList<QListWidgetItem *> found
-        = linksList->findItems(lnk, Qt::MatchExactly);
-
-    if (found.size() == 0)
-        linksList->addItem(lnk);
+    Util::addItem(linksList, lnk);
 }
 
 void
