@@ -605,7 +605,7 @@ MainWindow::onClear() {
 void
 MainWindow::addPageLink(QString lnk) {
 
-    lnk = lnk.trimmed();
+    lnk = lnk.simplified();
 
     if (lnk.isEmpty())
         return;
