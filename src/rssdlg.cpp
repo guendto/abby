@@ -222,6 +222,10 @@ RSSDialog::parseRSS(const QString& rss) {
 
 void
 RSSDialog::enableWidgets(const bool state/*=true*/) {
+    addButton->setEnabled    (state);
+    removeButton->setEnabled (state);
+    pasteButton->setEnabled  (state);
+    clearButton->setEnabled  (state);
     itemsList->setEnabled    (state);
     feedmgrButton->setEnabled(state);
 }
