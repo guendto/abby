@@ -201,10 +201,7 @@ Util::checkAllItems(
     const Qt::CheckState& st,
     const int column/*=0*/)
 {
-    QTreeWidgetItemIterator iter(
-        const_cast<QTreeWidget*>(w),
-        QTreeWidgetItemIterator::NotChecked
-    );
+    QTreeWidgetItemIterator iter(const_cast<QTreeWidget*>(w));
 
     while (*iter) {
         if ((*iter)->childCount() == 0)
