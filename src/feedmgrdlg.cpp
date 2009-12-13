@@ -21,6 +21,7 @@
 #include <QMessageBox>
 //#include <QDebug>
 
+#include "util.h"
 #include "feededitdlg.h"
 #include "feedmgrdlg.h"
 
@@ -168,29 +169,34 @@ FeedMgrDialog::onItemDoubleClicked(
 void
 FeedMgrDialog::addLink(QString name, QString lnk) {
 
+    name = name.simplified();
     if (name.isEmpty())
         return;
 
-    name = name.trimmed();
-
+    lnk = lnk.simplified();
     if (lnk.isEmpty())
         return;
-
-    lnk = lnk.trimmed();
 
     if (!lnk.startsWith("http://",Qt::CaseInsensitive))
         lnk.insert(0,"http://");
 
-    QList<QTreeWidgetItem *> found =
-        itemsTree->findItems(lnk, Qt::MatchExactly, 1); // 1=url column
-
-    if (found.size() == 0) {
-        QTreeWidgetItem *item = new QTreeWidgetItem;
+    // 1=url
+    if (itemsTree->findItems(lnk, Qt::MatchExactly, 1).size() == 0) {
+        QTreeWidgetItem *item = new QTreeWidgetItem(itemsTree);
         item->setCheckState(0, Qt::Unchecked);
         item->setText(0, name);
         item->setText(1, lnk);
-        itemsTree->addTopLevelItem(item);
     }
+}
+
+void
+FeedMgrDialog::onSelectAll() {
+    Util::checkAllItems(itemsTree, Qt::Checked);
+}
+
+void
+FeedMgrDialog::onInvert() {
+    Util::invertAllCheckableItems(itemsTree);
 }
 
 

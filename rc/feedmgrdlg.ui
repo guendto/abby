@@ -11,7 +11,7 @@
     <x>0</x>
     <y>0</y>
     <width>501</width>
-    <height>252</height>
+    <height>248</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,6 +28,26 @@
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
+      <widget class="QTreeWidget" name="itemsTree">
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="rootIsDecorated">
+        <bool>false</bool>
+       </property>
+       <column>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>URL</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+     <item row="0" column="0">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QPushButton" name="addButton">
@@ -40,6 +60,26 @@
          <property name="icon">
           <iconset resource="abby.qrc">
            <normaloff>:/list-add.png</normaloff>:/list-add.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="removeButton">
+         <property name="toolTip">
+          <string>Remove selected</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="abby.qrc">
+           <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
          </property>
          <property name="iconSize">
           <size>
@@ -63,26 +103,6 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="removeButton">
-         <property name="toolTip">
-          <string>Remove selected</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="icon">
-          <iconset resource="abby.qrc">
-           <normaloff>:/list-remove.png</normaloff>:/list-remove.png</iconset>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>16</width>
-           <height>16</height>
-          </size>
-         </property>
-        </widget>
-       </item>
-       <item>
         <widget class="QPushButton" name="clearButton">
          <property name="toolTip">
           <string>Clear list</string>
@@ -104,25 +124,49 @@
        </item>
       </layout>
      </item>
-     <item row="0" column="0">
-      <widget class="QTreeWidget" name="itemsTree">
-       <property name="selectionMode">
-        <enum>QAbstractItemView::SingleSelection</enum>
-       </property>
-       <property name="rootIsDecorated">
-        <bool>false</bool>
-       </property>
-       <column>
-        <property name="text">
-         <string>Name</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>URL</string>
-        </property>
-       </column>
-      </widget>
+     <item row="0" column="2">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="selectallButton">
+         <property name="text">
+          <string>S&amp;elect all</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="invertButton">
+         <property name="text">
+          <string>&amp;Invert</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
@@ -146,10 +190,12 @@
   </layout>
  </widget>
  <tabstops>
-  <tabstop>itemsTree</tabstop>
   <tabstop>addButton</tabstop>
   <tabstop>removeButton</tabstop>
   <tabstop>clearButton</tabstop>
+  <tabstop>itemsTree</tabstop>
+  <tabstop>selectallButton</tabstop>
+  <tabstop>invertButton</tabstop>
   <tabstop>buttonBox</tabstop>
  </tabstops>
  <resources>
@@ -236,11 +282,45 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>selectallButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FeedMgrDialog</receiver>
+   <slot>onSelectAll()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>75</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>250</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>invertButton</sender>
+   <signal>clicked()</signal>
+   <receiver>FeedMgrDialog</receiver>
+   <slot>onInvert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>449</x>
+     <y>109</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>250</x>
+     <y>123</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onAdd()</slot>
   <slot>onRemove()</slot>
   <slot>onPaste()</slot>
   <slot>onClear()</slot>
+  <slot>onSelectAll()</slot>
+  <slot>onInvert()</slot>
  </slots>
 </ui>

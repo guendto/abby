@@ -31,6 +31,8 @@ private slots:
     void onAdd();
     void onRemove();
     void onClear();
+    void onSelectAll();
+    void onInvert();
 public:
     void writeSettings();
     void readSettings();
