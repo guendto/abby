@@ -1,6 +1,7 @@
 Version 0.4.7
 
   User-visible changes:
+   * Feed manager: add select/invert buttons
    * RSS add support for multiple feeds using treeview
    * Scan and RSS overhaul:
      # Add progressbar
