@@ -69,6 +69,7 @@ RSSDialog::onFetch() {
     enableWidgets(false);
     fetchButton->setText(tr("&Abort"));
 
+    mgr->clearErrors();
     emit onFetchFinished();
 }
 

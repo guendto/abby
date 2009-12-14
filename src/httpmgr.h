@@ -33,6 +33,7 @@ public:
     void abort();
     QString getData() const;
     const bool& errorOccurred() const;
+    void clearErrors();
 private:
     QPointer<QNetworkReply> re;
     bool errorFlag;

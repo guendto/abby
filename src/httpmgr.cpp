@@ -58,6 +58,11 @@ QHttpManager::errorOccurred() const {
 }
 
 void
+QHttpManager::clearErrors() {
+    errorFlag = false;
+}
+
+void
 QHttpManager::connectReplySignals() {
 
     connect(re, SIGNAL(readyRead()),
