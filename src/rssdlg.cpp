@@ -25,7 +25,6 @@
 #include "rssdlg.h"
 #include "feedmgrdlg.h"
 
-#include <QDebug>
 RSSDialog::RSSDialog(QWidget *parent)
     : QDialog(parent)
 {
