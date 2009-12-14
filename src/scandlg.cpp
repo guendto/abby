@@ -152,11 +152,10 @@ ScanDialog::onFetchFinished() {
     if ( !titlesBox->checkState() ) {
 
         for (int i=0; i<size; ++i) {
-            QTreeWidgetItem *item = new QTreeWidgetItem;
+            QTreeWidgetItem *item = new QTreeWidgetItem(itemsTree);
             item->setCheckState(0, Qt::Unchecked);
             for (int j=0; j<2; ++j)
                 item->setText(j, found[i]);
-            itemsTree->addTopLevelItem(item);
         }
 
         resetUI();
