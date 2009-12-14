@@ -25,6 +25,7 @@
 #include "rssdlg.h"
 #include "feedmgrdlg.h"
 
+#include <QDebug>
 RSSDialog::RSSDialog(QWidget *parent)
     : QDialog(parent)
 {
@@ -45,6 +46,17 @@ RSSDialog::RSSDialog(QWidget *parent)
 
     connect(mgr, SIGNAL(fetchError(QString)),
         this, SLOT(onFetchError(QString)));
+
+#ifdef _1_
+    for (int i=0; i<5; ++i) {
+        QTreeWidgetItem *p = new QTreeWidgetItem(itemsTree);
+        p->setText(0, QString("Parent %1").arg(i+1));
+        for (int j=0; j<5; ++j) {
+            QTreeWidgetItem *item = new QTreeWidgetItem(p);
+            item->setText(0, QString("Child %1").arg(j+1));
+        }
+    }
+#endif
 }
 
 void
@@ -171,17 +183,11 @@ RSSDialog::parseRSS(const QString& rss) {
                 if (!feedTitle.isEmpty()) {
                     // Add parent:
                     if (!parent) {
-                        parent = new QTreeWidgetItem(
-                            itemsTree,
-                            itemsTree->currentItem()
-                        );
+                        parent = new QTreeWidgetItem(itemsTree);
                         parent->setText(0, feedTitle);
                     }
                     // Add child:
-                    QTreeWidgetItem *c = new QTreeWidgetItem(
-                        parent,
-                        itemsTree->currentItem()
-                    );
+                    QTreeWidgetItem *c = new QTreeWidgetItem(parent);
                     c->setCheckState(0, Qt::Unchecked);
                     c->setText(0, itemTitle);
                     c->setText(1, lnk);
