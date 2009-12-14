@@ -60,6 +60,7 @@ void
 ScanDialog::enableWidgets(const bool state/*=true*/) {
     linkEdit->setEnabled (state);
     titlesBox->setEnabled(state);
+    buttonBox->setEnabled(state);
 }
 
 void

@@ -224,6 +224,7 @@ RSSDialog::enableWidgets(const bool state/*=true*/) {
     clearButton->setEnabled  (state);
     itemsList->setEnabled    (state);
     feedmgrButton->setEnabled(state);
+    buttonBox->setEnabled    (state);
 }
 
 void
