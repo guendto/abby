@@ -45,17 +45,6 @@ RSSDialog::RSSDialog(QWidget *parent)
 
     connect(mgr, SIGNAL(fetchError(QString)),
         this, SLOT(onFetchError(QString)));
-
-#ifdef _1_
-    for (int i=0; i<5; ++i) {
-        QTreeWidgetItem *p = new QTreeWidgetItem(itemsTree);
-        p->setText(0, QString("Parent %1").arg(i+1));
-        for (int j=0; j<5; ++j) {
-            QTreeWidgetItem *item = new QTreeWidgetItem(p);
-            item->setText(0, QString("Child %1").arg(j+1));
-        }
-    }
-#endif
 }
 
 void
