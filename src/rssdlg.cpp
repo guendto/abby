@@ -68,6 +68,7 @@ RSSDialog::onFetch() {
 
     enableWidgets(false);
     fetchButton->setText(tr("&Abort"));
+    fetchButton->setIcon(QIcon(":process-stop.png"));
 
     mgr->clearErrors();
     emit onFetchFinished();
@@ -229,6 +230,7 @@ void
 RSSDialog::resetUI() {
     enableWidgets(true);
     fetchButton->setText(tr("&Fetch"));
+    fetchButton->setIcon(QIcon(":edit-find.png"));
 }
 
 void

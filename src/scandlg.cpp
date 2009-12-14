@@ -90,6 +90,7 @@ ScanDialog::onScan() {
     enableWidgets(false);
     progressBar->setTextVisible(false);
     scanButton->setText(tr("&Abort"));
+    scanButton->setIcon(QIcon(":process-stop.png"));
 
     mgr->fetch(lnk);
 }
@@ -114,6 +115,7 @@ void
 ScanDialog::resetUI() {
     enableWidgets(true);
     scanButton->setText(tr("&Scan"));
+    scanButton->setIcon(QIcon(":edit-find.png"));
     updateCount();
 }
 
