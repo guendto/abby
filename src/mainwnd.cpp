@@ -310,7 +310,12 @@ MainWindow::readSettings() {
     QSettings s;
     s.beginGroup("MainWindow");
     resize( s.value("size", QSize(525,265)).toSize() );
-    move( s.value("pos", QPoint(200,200)).toPoint() );
+
+    QPoint pos = s.value("pos", QPoint(200,200)).toPoint();
+    if (pos.x() < 0) pos.setX(0);
+    if (pos.y() < 0) pos.setY(0);
+    move(pos);
+
     regexpEdit->setText( s.value("regexpEdit").toString() );
     substEdit->setText( s.value("substEdit").toString() );
     cclassEdit->setText( s.value("cclassEdit").toString() );
