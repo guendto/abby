@@ -21,6 +21,7 @@
 //#include <QDebug>
 #include <QMessageBox>
 #include <QRegExp>
+#include <QDragEnterEvent>
 
 #include "util.h"
 #include "scan.h"
@@ -46,6 +47,9 @@ ScanDialog::ScanDialog(QWidget *parent)
 
     connect(mgr, SIGNAL(fetchError(QString)),
         this, SLOT(onFetchError(QString)));
+
+    // Enable drops.
+    setAcceptDrops(true);
 }
 
 void
@@ -242,6 +246,23 @@ ScanDialog::onFetchError(QString errorString) {
 void
 ScanDialog::onFetchLink(QString url) {
     Util::appendLog(logEdit, tr("Fetch ... ")+url);
+}
+
+void
+ScanDialog::dragEnterEvent(QDragEnterEvent *event) {
+    if (event->mimeData()->hasText())
+        event->acceptProposedAction();
+}
+
+void
+ScanDialog::dropEvent(QDropEvent *event) {
+    QStringList lst = event->mimeData()->text().split("\n");
+    const int size = lst.size();
+
+    for (int i=0; i<size; ++i)
+        linkEdit->setText(lst[i]);
+
+    event->acceptProposedAction();
 }
 
 

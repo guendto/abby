@@ -53,6 +53,9 @@ private:
     QXmlStreamReader xml;
     int currentFeed;
     int expectedFeeds;
+protected:
+    void dragEnterEvent(QDragEnterEvent *event);
+    void dropEvent(QDropEvent *event);
 };
 #endif
 

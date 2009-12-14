@@ -20,6 +20,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QInputDialog>
+#include <QDragEnterEvent>
 
 #include "util.h"
 #include "rssdlg.h"
@@ -45,6 +46,9 @@ RSSDialog::RSSDialog(QWidget *parent)
 
     connect(mgr, SIGNAL(fetchError(QString)),
         this, SLOT(onFetchError(QString)));
+
+    // Enable drops.
+    setAcceptDrops(true);
 }
 
 void
@@ -258,5 +262,25 @@ RSSDialog::onClear() {
     Util::clearItems(this, itemsList);
 }
 
+void
+RSSDialog::dragEnterEvent(QDragEnterEvent *event) {
+    if (event->mimeData()->hasText())
+        event->acceptProposedAction();
+}
+
+void
+RSSDialog::dropEvent(QDropEvent *event) {
+    QStringList lst = event->mimeData()->text().split("\n");
+    const int size = lst.size();
+
+    for (int i=0; i<size; ++i) {
+        Util::addItem(
+            itemsList,
+            lst[i]
+        );
+    }
+
+    event->acceptProposedAction();
+}
 
 

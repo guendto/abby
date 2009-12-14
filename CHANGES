@@ -7,6 +7,7 @@ Version 0.4.7
      # Add progressbar
      # Add log view
      # Add abort functionality
+     # Links can now be dropped to the dialogs
    * Log now includes (ISO) date/time stamp
    * Add select all/invert selection buttons to:
      # RSS dialog
