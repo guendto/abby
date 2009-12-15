@@ -6,6 +6,13 @@ Scan and RSS overhaul adds progressbar, log view and abort
 functionality. Scan patterns have also fixed. RSS overhaul
 includes adding support for multiple feeds.
 
+Minimize to system tray. Double-click restores. Right-click
+opens the context menu. Added "Minimize to system tray"
+checkbox to the program preferences dialog.
+
+Links can now be dropped to the main window, rss dialog
+and scan dialog.
+
 
 Version 0.4.5
 --------------
