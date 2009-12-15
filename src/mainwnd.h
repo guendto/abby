@@ -19,6 +19,7 @@
 #define mainwnd_h
 
 #include <QProcess>
+#include <QSystemTrayIcon>
 
 #include "ui_mainwnd.h"
 
@@ -52,6 +53,7 @@ private slots:
     void onProcStdoutReady();
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
     void onItemDoubleClicked(QListWidgetItem *item);
+    void iconActivated(QSystemTrayIcon::ActivationReason);
 private:
     QStringMap hosts;
     PreferencesDialog *prefs;
@@ -64,6 +66,9 @@ private:
     QString ccliveVersion;
     QString libVersion;
     QString libName;
+    QSystemTrayIcon *trayIcon;
+    QMenu *trayIconMenu;
+    QAction *restoreAction;
 private:
     void addPageLink(QString lnk);
     void writeSettings();
@@ -73,10 +78,13 @@ private:
     bool ccliveSupportsHost(const QString &lnk);
     bool parseCcliveHostsOutput();
     bool parseCcliveVersionOutput();
+    void createTrayIcon();
 protected:
     void closeEvent(QCloseEvent *event);
     void dragEnterEvent(QDragEnterEvent *event);
     void dropEvent(QDropEvent *event);
+    void showEvent(QShowEvent *event);
+    void hideEvent(QHideEvent *event);
 };
 #endif
 

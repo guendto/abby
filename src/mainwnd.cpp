@@ -58,7 +58,11 @@
 typedef unsigned int _uint;
 
 MainWindow::MainWindow()
-    : cancelledFlag(false), isCcliveFlag(false)
+    : cancelledFlag(false),
+      isCcliveFlag(false),
+      trayIcon(0),
+      trayIconMenu(0),
+      restoreAction(0)
 {
 /*
  The word "English" is not meant to be translated literally.
@@ -113,8 +117,8 @@ MainWindow::MainWindow()
     streamSpin->setHidden(true);
 #endif
 
-    // Enable drops.
     setAcceptDrops(true);
+    createTrayIcon();
 }
 
 bool
@@ -821,6 +825,74 @@ MainWindow::dropEvent(QDropEvent *event) {
         addPageLink(lst[i]);
 
     event->acceptProposedAction();
+}
+
+void
+MainWindow::iconActivated(QSystemTrayIcon::ActivationReason reason) {
+    switch (reason) {
+#ifdef _1_
+    case QSystemTrayIcon::Trigger:
+        trayIcon->showMessage(
+            "text",
+            statusBar()->currentMessage()
+        );
+        break;
+#endif
+    case QSystemTrayIcon::DoubleClick:
+        showNormal();
+        break;
+#ifdef _1_
+    case QSystemTrayIcon::MiddleClick:
+        break;
+#endif
+    default:
+        break;
+    }
+}
+
+void
+MainWindow::showEvent(QShowEvent*) {
+    trayIcon->hide();
+}
+
+void
+MainWindow::hideEvent(QHideEvent*) {
+#ifdef Q_OS_WIN32
+#endif
+    if (QSystemTrayIcon::isSystemTrayAvailable()) {
+
+        if (!prefs->mintrayBox->checkState())
+            return;
+
+        trayIcon->show();
+
+        if (!isMinimized()) // w32 only, returns false by default
+            hide();
+    }
+}
+
+void
+MainWindow::createTrayIcon() {
+
+    restoreAction = new QAction(tr("&Restore"), this);
+    connect(restoreAction, SIGNAL(triggered()),
+        this, SLOT(showNormal()));
+
+    trayIconMenu = new QMenu(this);
+    trayIconMenu->addAction(restoreAction);
+
+    trayIcon = new QSystemTrayIcon(this);
+    trayIcon->setContextMenu(trayIconMenu);
+
+    trayIcon->setIcon(QIcon(":abby.png"));
+    trayIcon->setToolTip(
+        QString("abby %1").arg(QCoreApplication::applicationVersion())
+    );
+
+    connect(trayIcon,
+        SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
+        this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason))
+    );
 }
 
 

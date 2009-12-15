@@ -84,6 +84,8 @@ PreferencesDialog::writeSettings() {
 
     s.setValue("qmFile", qmFile);
 
+    s.setValue("mintrayBox", mintrayBox->checkState());
+
     s.endGroup();
 }
 
@@ -118,6 +120,12 @@ PreferencesDialog::readSettings() {
         : Qt::Unchecked);
 
     qmFile = s.value("qmFile").toString();
+
+    mintrayBox->setCheckState(
+        s.value("mintrayBox").toBool()
+        ? Qt::Checked
+        : Qt::Unchecked
+    );
 
     s.endGroup();
 }
