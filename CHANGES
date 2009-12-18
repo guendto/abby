@@ -19,6 +19,9 @@ Version 0.4.7
      # Mangled data seen when youtube front page was scanned
    * Mainwindow: add (drag 'n) drop support (closes issue #3)
 
+  Known issues:
+   * w32: minimize to tray does not hide abby from the taskbar
+
 
 Version 0.4.6.1
 (December 3, 2009)
