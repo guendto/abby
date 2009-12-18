@@ -10,6 +10,9 @@ Minimize to system tray. Double-click restores. Right-click
 opens the context menu. Added "Minimize to system tray"
 checkbox to the program preferences dialog.
 
+w32 users: Minimize to system tray does not hide abby
+from the taskbar. This is a known bug.
+
 Links can now be dropped to the main window, rss dialog
 and scan dialog.
 
