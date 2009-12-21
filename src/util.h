@@ -54,6 +54,10 @@ public:
     static void removeSelectedItems(const QWidget *parent, const QListWidget *w);
     static void clearItems(const QWidget *parent, const QListWidget *w);
     static void paste(const QListWidget *w);
+    static bool importItems(const QWidget *parent,
+        QStringList& lst, const QString& path);
+    static bool exportItems(const QWidget *parent,
+        const QListWidget *w, const QString& path, const bool& append);
 };
 
 class NoCcliveException {

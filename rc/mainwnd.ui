@@ -8,7 +8,7 @@
     <x>0</x>
     <y>0</y>
     <width>545</width>
-    <height>389</height>
+    <height>391</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -741,6 +741,9 @@ the download reches the specified percent complete</string>
     <addaction name="action_Remove"/>
     <addaction name="action_Clear"/>
     <addaction name="separator"/>
+    <addaction name="action_Import"/>
+    <addaction name="action_Export"/>
+    <addaction name="separator"/>
     <addaction name="action_Preferences"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -916,6 +919,24 @@ the download reches the specified percent complete</string>
   <action name="action_Supported_hosts">
    <property name="text">
     <string>&amp;Supported hosts...</string>
+   </property>
+  </action>
+  <action name="action_Import">
+   <property name="icon">
+    <iconset resource="abby.qrc">
+     <normaloff>:/document-open.png</normaloff>:/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Import...</string>
+   </property>
+  </action>
+  <action name="action_Export">
+   <property name="icon">
+    <iconset resource="abby.qrc">
+     <normaloff>:/document-save.png</normaloff>:/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Export...</string>
    </property>
   </action>
  </widget>
@@ -1265,6 +1286,38 @@ the download reches the specified percent complete</string>
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>action_Import</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onImport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>action_Export</sender>
+   <signal>activated()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>onExport()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>272</x>
+     <y>195</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>onStart()</slot>
@@ -1284,5 +1337,7 @@ the download reches the specified percent complete</string>
   <slot>onRemove()</slot>
   <slot>onFormats()</slot>
   <slot>onClear()</slot>
+  <slot>onImport()</slot>
+  <slot>onExport()</slot>
  </slots>
 </ui>

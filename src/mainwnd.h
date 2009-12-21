@@ -54,6 +54,8 @@ private slots:
     void onProcFinished(int exitCode, QProcess::ExitStatus exitStatus);
     void onItemDoubleClicked(QListWidgetItem *item);
     void iconActivated(QSystemTrayIcon::ActivationReason);
+    void onImport();
+    void onExport();
 private:
     QStringMap hosts;
     PreferencesDialog *prefs;

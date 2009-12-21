@@ -29,6 +29,8 @@
 #include <QClipboard>
 #include <QCoreApplication>
 #include <QApplication>
+#include <QMessageBox>
+#include <QTextStream>
 //#include <QDebug>
 
 #include "util.h"
@@ -312,6 +314,71 @@ Util::paste(const QListWidget *w) {
 
     for (int i=0; i<size; ++i)
         Util::addItem(w, lst[i]);
+}
+
+static void
+msgbox_crit(
+    const QWidget *parent,
+    const QString msg)
+{
+    QMessageBox::critical(
+        const_cast<QWidget*>(parent),
+        QCoreApplication::applicationName(),
+        msg);
+}
+
+bool
+Util::importItems(
+    const QWidget *parent,
+    QStringList& lst,
+    const QString& path)
+{
+    QFile file(path);
+
+    if (!file.open(QFile::ReadOnly | QIODevice::Text)) {
+        msgbox_crit(parent,
+            QString( QObject::tr("File open error %1") ).arg( file.error() ));
+        return false;
+    }
+
+    QTextStream f(&file);
+
+    while (!f.atEnd())
+        lst.append(f.readLine().simplified());
+
+    return !lst.empty();
+}
+
+bool
+Util::exportItems(
+    const QWidget *parent,
+    const QListWidget *w,
+    const QString& path,
+    const bool& append)
+{
+    QFile file(path);
+
+    QFlags<QIODevice::OpenModeFlag> flags =
+        (QFile::WriteOnly | QIODevice::Text);
+
+    flags |=
+        append
+        ? QIODevice::Append
+        : QIODevice::Truncate;
+
+    if (!file.open(flags)) {
+        msgbox_crit(parent,
+            QString( QObject::tr("File open error %1") ).arg( file.error() ));
+        return false;
+    }
+
+    QTextStream out(&file);
+
+    const int size = w->count();
+    for (int i=0; i<size; ++i)
+        out << w->item(i)->text() << "\n";
+
+    return true;
 }
 
 NoCcliveException::NoCcliveException(const QString& errmsg)

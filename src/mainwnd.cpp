@@ -33,6 +33,7 @@
 #include "scandlg.h"
 #include "formatdlg.h"
 #include "aboutdlg.h"
+#include "exportdlg.h"
 #include "util.h"
 
 #define critCcliveProcessFailed(parent, msg) \
@@ -893,6 +894,50 @@ MainWindow::createTrayIcon() {
         SIGNAL(activated(QSystemTrayIcon::ActivationReason)),
         this, SLOT(iconActivated(QSystemTrayIcon::ActivationReason))
     );
+}
+
+void
+MainWindow::onImport() {
+    QString fname =
+        QFileDialog::getOpenFileName(this, tr("Choose file"));
+
+    if (!fname.isEmpty()) {
+
+        QStringList lst;
+        if (!Util::importItems(this, lst, fname))
+            return;
+
+        for (QStringList::const_iterator iter = lst.begin();
+            iter != lst.end();
+            ++iter)
+        {
+            addPageLink(*iter);
+        }
+    }
+}
+
+void
+MainWindow::onExport() {
+
+    if (!linksList->count())
+        return;
+
+    ExportDialog dlg(this);
+    if (dlg.exec() == QDialog::Rejected)
+        return;
+
+    const QString path = dlg.fileEdit->text();
+
+    if (path.isEmpty()) {
+        QMessageBox::critical(
+            this,
+            QCoreApplication::applicationName(),
+            tr("Specify file name for the saved data")
+        );
+        return;
+    }
+
+    Util::exportItems(this, linksList, path, dlg.appendBox->isChecked());
 }
 
 
