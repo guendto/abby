@@ -1,5 +1,3 @@
-U
-
 
 About
 -----
@@ -15,90 +13,127 @@ abby is written in C++ and depends on the Qt framework.
 Configuration
 -------------
 
-You will need to set the path to either clive(1) or cclive(1) command.
-You can do this by opening the preferences (Edit/Preferences). Note that
-abby will check the path everytime it starts and prompts a notification
-if it cannot run the c/clive command.
+* abby will require path to either cclive or clive command
 
-You can confirm that c/clive was found by opening the about dialog (Help/
-About).
+* The path is detected from the $PATH by default
 
+* If the above fails, you are required to enter it manually by opening
+the program preferences (Edit / Preferences or ctrl-e).
 
-First download
---------------
+* Use the "Verify" button to verify the path to c/clive
 
-Once the path is set to c/clive, you can add a new link to the download
-list by clicking the "plus" button left to the list widget. abby will
-prompt for a video page link. Note that before anything gets added to the
-list, abby verifies the c/clive supports the specified video host.
-
-Now that you have added a video page link to the list, you can click the
-download button (bottom-right to the list widget). This starts the c/clive
-process. The download progress is presented using the progressbars and
-various labels but you can also view various process details by opening
-the "Log" tab.
+* abby uses Qt's QSettings class for storing the program settings
+  - on Linux/FreeBSD these settings are typically found under .config/abby/
+  - the location may vary for each platform, refer to the Qt documentation
 
 
-Feature: RSS
-------------
+The essentials to get started with abby
+---------------------------------------
 
-abby can parse RSS feeds. This feature can be accessed by clicking the
-"RSS". Once the dialog is open, you can enter a RSS feed link, for example:
-    http://gdata.youtube.com/feeds/base/users/(username)/uploads?alt=rss
+If you have not configured abby already, then see the "Configuration"
+section above.
 
-You can also append "&orderby=updated" to the URL.
+* You can add video page links by:
 
-And hit "Fetch". When the parsed items appear in the list, you can select
-each item to the download list by checking the box before the video title.
-By hitting "OK", each selected item will be added to the download list.
+  - Hitting the "+" button
 
-Note also the tiny button before the "Fetch" button. This opens another
-dialog (Feed manager) that can be used to save your feed links so that you
-can select them later without having to type them again. To re-use a link
-from "Feed manager", select a link from the list and hit "OK".
+  - Dropping them onto the window
 
-Note that this feature is not Youtube specific, although the example link
-above was for Youtube. You can use the RSS parsing feature ultimately with
-any website that provides RSS content containing video page links to the
-c/clive supported websites.
+  - Pasting them from the system clipboard
+
+  - Parsing RSS feeds (covered further below)
+
+  - Scanning video pages (covered further below)
+
+  - Importing them from files
+
+* Each time a new link is added to the list
+
+  - abby verifies that the c/clive supports the website
+
+  - abby ignores any duplicate links
+
+* Start the download by hitting the download button (or ctrl+d)
 
 
-Feature: Scan
--------------
+Parsing RSS feeds
+-----------------
 
-abby can scan for video page links from any URL. This feature can be accessed
-by clicking the button underneath the "RSS" button. The interface is somewhat
-similar to the RSS dialog except that you are presented with the "Fetch video
-title" option box.
+You can access this feature by clicking the button with the RSS icon
+on it or by hitting ctrl+r. Some websites like youtube.com and
+video.google.com provide RSS feeds that can be parsed in abby.
 
-Before you can start the scan, you will need to add a link to the "Link:"
-field. This could be, for example, the front-page of Youtube website
-(http://youtube.com).
+Example:
+  http://gdata.youtube.com/feeds/base/users/communitychannel/uploads?alt=rss
+
+Once the RSS dialog is open, you can add RSS feed links to the top list.
+As with the main window's video page link list (or download list), hit
+the "+" button, paste a link from the clipboard or drop links onto the
+dialog.
+
+It's also worth noting that you can access the "Feed manager" by hitting
+the "Feeds..." button. The manager can be used to save frequently visited
+RSS feeds.
+
+Hit "Fetch" to continue. Once the parsing is complete, a list of found
+items are displayed in the bottom list, each feed item under appropriate
+feed channel.
+
+Check each item you want to add to the download list and hit "OK".
+
+
+Scanning for video page links
+-----------------------------
+
+The scan feature originates from the early days of clive and the clivescan
+program. It can be used to scan for "regular" Youtube video page links or
+embedded ones. The found links can then be added to the download list in
+the main window and downloaded.
+
+You can access the scan dialog by hitting either the scan button in the
+main window. Ctrl-s also opens the same dialog.
+
+Once the dialog is open, enter the URL you want to scan for video page
+links. For example: http://youtube.com
 
 If the "Fetch video title" is checked, abby will perform the scan in two
-steps, first it will fetch the content from specified link and parses it for
-video page links, and then visits those links for page title information.
+steps:
 
-Hit the "Scan" button to start the scan process.
+  1) First fetches the content from specified link and scans it for
+     video page links
 
-Once the process has completed, abby adds the detected video page links
-to the list widget from which you can check those items that you wish to
-download. Clicking the "OK" button will then transfer the selected items to
-the download list.
+  2) It then visits (fetches and parses) each found link for the page title
 
-Note that the scan feature currently supports only Youtube links. This means
-that it only recognizes Youtube video page links from the scanned content.
+Hit the "Scan" button to start the scan process. Depending on the "Fetch
+video title" state, abby will either add the parsed video page title or
+the link itself to the list.
 
-And yes, it works with Youtube playlists.
+Once the process is complete, you can check each video from the list
+and hit "OK" to add them to the download list.
+
+To those wondering if you can use this feature to scan Youtube playlists,
+the answer is yes. Note however that you have to scan each page manually
+because abby is currently unable go over the playlist pages automatically.
 
 
-Notes
------
+Misc. notes
+-----------
 
-abby supports keyboard shortcuts. These are visible in the menu. For example,
+* abby supports keyboard shortcuts. These are visible in the menus. For example,
 Alt+A would open the "Add link" dialog.
 
-You can edit list items by double clicking them. This applies to all windows
+* You can edit list items by double clicking them. This applies to all windows
 and dialogs with list widgets.
+
+* You can paste multiple links by separating each link with a newline
+
+* Export saves all of the items in the list to a specified text file.
+Each link is separated with a newline.
+
+* Import parses text files line by line and expects each link to be
+separated with a newline.
+
+* Because c/clive parses input in a similar fashion, you can use the
+exported exported lists with c/clive, e.g.: cclive < exported.list
 
 

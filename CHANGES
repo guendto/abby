@@ -3,6 +3,9 @@ Version 0.4.8
   User-visible changes:
    * Add import/export list items under Edit menu
 
+  Developer-visible changes:
+   * Rewrite README
+
 
 Version 0.4.7
 (December 18, 2009)
