@@ -4,6 +4,7 @@ Version 0.4.8
    * Add import/export list items under Edit menu
    * Replace buggy RSS parser
      # e.g. feed items appeared in channel titles
+     # fix segfault when fetch is called again
 
   Developer-visible changes:
    * Rewrite README

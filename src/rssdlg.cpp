@@ -161,7 +161,6 @@ RSSDialog::onFetchFinished() {
 
         if (++currentFeed == expectedFeeds) {
             resetUI();
-            mgr->deleteLater();
             Util::appendLog(logEdit, tr("Done."));
             return;
         }
