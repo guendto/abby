@@ -2,9 +2,12 @@ Version 0.4.8
 
   User-visible changes:
    * Add import/export list items under Edit menu
+   * Replace buggy RSS parser
+     # e.g. feed items appeared in channel titles
 
   Developer-visible changes:
    * Rewrite README
+   * Add src/rssparser(.cpp|.h)
 
 
 Version 0.4.7

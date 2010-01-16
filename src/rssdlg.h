@@ -1,5 +1,5 @@
 /*
- * abby Copyright (C) 2009 Toni Gundogdu.
+ * abby Copyright (C) 2009,2010 Toni Gundogdu.
  * This file is part of abby.
  *
  * abby is free software: you can redistribute it and/or modify
@@ -22,8 +22,6 @@
 
 #include "httpmgr.h"
 
-#include <QXmlStreamReader>
-
 class RSSDialog : public QDialog, public Ui::rssDialog {
     Q_OBJECT
 public:
@@ -44,13 +42,11 @@ public:
     void writeSettings();
 private:
     void readSettings();
-    void parseRSS(const QString& rss);
     void enableWidgets(const bool state=true);
     void resetUI();
     void addRSSLink(QString lnk);
 private:
     QPointer<QHttpManager> mgr;
-    QXmlStreamReader xml;
     int currentFeed;
     int expectedFeeds;
 protected:

@@ -1,5 +1,5 @@
 /*
- * abby Copyright (C) 2009 Toni Gundogdu.
+ * abby Copyright (C) 2009,2010 Toni Gundogdu.
  * This file is part of abby.
  *
  * abby is free software: you can redistribute it and/or modify
@@ -23,6 +23,7 @@
 #include <QDragEnterEvent>
 
 #include "util.h"
+#include "rssparser.h"
 #include "rssdlg.h"
 #include "feedmgrdlg.h"
 
@@ -127,7 +128,36 @@ RSSDialog::onFetchFinished() {
     }
 
     if (currentFeed >= 0) {
-        parseRSS(mgr->getData());
+
+        RSSParser rss;
+
+        try {
+            rss.parse( mgr->getData() );
+
+            const RSSFeed *feed = rss.getFeed();
+
+            // Populate the tree.
+
+            QTreeWidgetItem *parent = new QTreeWidgetItem(itemsTree);
+            parent->setText(0, feed->title);
+
+            QLinkedListIterator<RSSItem*> iter(feed->items);
+
+            while (iter.hasNext()) {
+                RSSItem *item = iter.next();
+                QTreeWidgetItem *child = new QTreeWidgetItem(parent);
+                child->setCheckState(0, Qt::Unchecked);
+                child->setText(0, item->title);
+                child->setText(1, item->link);
+            }
+        }
+        catch (const RSSParserException& x) {
+            Util::appendLog(logEdit,
+                QString(tr("XML parsing error: %1: %2"))
+                    .arg(x.lineNumber)
+                    .arg(x.what)
+            );
+        }
 
         if (++currentFeed == expectedFeeds) {
             resetUI();
@@ -153,15 +183,14 @@ RSSDialog::onFetchLink(QString url) {
     Util::appendLog(logEdit, tr("Fetch ... ")+url);
 }
 
+#ifdef _1_
 void
 RSSDialog::parseRSS(const QString& rss) {
     xml.clear();
 
     QTreeWidgetItem *parent = 0;
     QString feedTitle, lnk, tag, itemTitle;
-#ifdef _1_
     QString pubDate;
-#endif
 
     xml.addData(rss);
 
@@ -191,9 +220,7 @@ RSSDialog::parseRSS(const QString& rss) {
 
                 itemTitle.clear();
                 lnk.clear();
-#ifdef _1_
                 pubDate.clear();
-#endif
             }
         }
         else if (xml.isCharacters() && !xml.isWhitespace()) {
@@ -202,10 +229,8 @@ RSSDialog::parseRSS(const QString& rss) {
                 itemTitle += tmp;
             else if (tag == "link")
                 lnk += tmp;
-#ifdef _1_
             else if (tag == "pubDate")
                 pubDate += tmp;
-#endif
         }
     }
 
@@ -219,6 +244,7 @@ RSSDialog::parseRSS(const QString& rss) {
         );
     }
 }
+#endif
 
 void
 RSSDialog::enableWidgets(const bool state/*=true*/) {
