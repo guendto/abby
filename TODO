@@ -3,19 +3,25 @@ web : http://repo.or.cz/w/abby.git
 
 0.4.x
 -----
-* w32: minimize to tray does not hide abby from taskbar
+
 
 0.5.0
 -----
-* cleanup: remove excess code
-  - common code -> src/util.(cpp|h)
-  - e.g. HTTP redirect code (rss/scan)
+* add support for multi-segment videos (will appear in cclive 0.6.0)
+  - clive is not planned to port these changes from cclive
 
-0.6.0
------
-* integrate with libquvi?
 
-Unspecified
------------
+Postponed: volunteers needed
+----------------------------
+
+This section lists items that will be postponed until a volunteer
+stands up to assist.
+
+* w32: minimize to tray does not hide abby from taskbar
+  - No idea how to fix this
+
 * proper application icon to replace the current "TODO" icon
   - 32x32 or higher (24bit preferably)
+  - There is a reason I'm a programmer
+
+
