@@ -8,6 +8,7 @@ Version 0.4.8
   Developer-visible changes:
    * Rewrite README
    * Add src/rssparser(.cpp|.h)
+   * Rename CHANGES -> ChangeLog
 
 
 Version 0.4.7
