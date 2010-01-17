@@ -2,7 +2,8 @@
 Version 0.4.8
 -------------
 
-Replaced buggy RSS feed parser. Feeds should be parsed properly now.
+Replaced buggy RSS feed parser. Feeds should be parsed
+properly now. Added import and export URL list functionality.
 
 
 Version 0.4.7
