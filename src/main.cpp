@@ -1,5 +1,5 @@
 /*
- * abby Copyright (C) 2009 Toni Gundogdu.
+ * Copyright (C) 2009,2010 Toni Gundogdu.
  * This file is part of abby.
  *
  * abby is free software: you can redistribute it and/or modify
@@ -29,7 +29,7 @@ main (int argc, char *argv[]) {
 
     QCoreApplication::setOrganizationName  (APPNAME);
     QCoreApplication::setApplicationName   (APPNAME);
-    QCoreApplication::setApplicationVersion("0.4.8");
+    QCoreApplication::setApplicationVersion("0.4.9");
     QCoreApplication::setOrganizationDomain("abby.googlecode.com");
 
     QSettings settings;
