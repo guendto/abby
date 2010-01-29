@@ -10,6 +10,12 @@ web : http://repo.or.cz/w/abby.git
 * add support for multi-segment videos (will appear in cclive 0.6.0)
   - clive is not planned to port these changes from cclive
 
+Undecided
+---------
+* rewrite?
+  - use libquvi instead of cclive(1)
+  - new interface (e.g. better queue control)
+
 
 Postponed: volunteers needed
 ----------------------------
