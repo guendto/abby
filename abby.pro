@@ -3,6 +3,7 @@
 ######################################################################
 
 QT+=xml network
+CONFIG+=debug_and_release
 TEMPLATE = app
 TARGET = 
 DEPENDPATH += . rc src
